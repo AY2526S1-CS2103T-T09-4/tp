@@ -23,9 +23,6 @@ public class RemarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "r/ Likes to swim.";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "Remark command not implemented yet";
-
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
 
     private final Index index;
@@ -35,17 +32,25 @@ public class RemarkCommand extends Command {
      * @param index index of the person in the filtered person list to edit the remark
      * @param remark remark of the person to be updated to
      */
-    public RemarkCommand(Index index, String remark) {
+    public RemarkCommand(Index index, Remark remark) {
         requireAllNonNull(index, remark);
 
         this.index = index;
-        this.remark = new Remark(remark);
+        this.remark = remark;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         throw new CommandException(
                 String.format(MESSAGE_ARGUMENTS, index.getOneBased(), remark));
+    }
+
+    public Remark getRemark() {
+        return remark;
+    }
+
+    public Index getIndex() {
+        return index;
     }
 
     @Override
