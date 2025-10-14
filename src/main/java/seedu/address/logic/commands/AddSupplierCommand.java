@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.AddStaffCommand.ROLE_KEYWORD;
 import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.model.person.supplier.Supplier;
@@ -26,7 +24,7 @@ public class AddSupplierCommand extends AddCommand {
             + PREFIX_ITEMS + "item1[,item2,...] "
             + PREFIX_DAYS + "MON[,TUE,...] "
             + "[" + PREFIX_NOTES + "NOTES]\n"
-            + "Example: " + COMMAND_WORD + " " + ROLE_KEYWORD + " "
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_ITEMS + "Flour,Eggs "
