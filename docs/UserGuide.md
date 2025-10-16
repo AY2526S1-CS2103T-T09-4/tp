@@ -59,9 +59,9 @@ BrewBook is a **desktop app to help managers of small cafe to manage different c
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `list`<!--, `help`, `exit` and `clear`-->) will be ignored.<br>
-  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
+<!--
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `help`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `list 123`, it will be interpreted as `list`.-->
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -92,7 +92,7 @@ Examples:
 
 Adds a staff to the address book.
 
-Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS shifts/SHIFT [t/TAG]…​`
+Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS shifts/SHIFT[, SHIFT,...][t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
 A staff can have more than 1 shift(s)
@@ -106,7 +106,7 @@ Examples:
 
 Adds a supplier to the address book.
 
-Format: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS days/DAYS [t/TAG]…​`
+Format: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS[, ITEMS,...] days/DAYS[, DAYS,...] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
 A supplier can have more than 1 item(s) and day(s) supplied
@@ -168,7 +168,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list all` followed by `delete 2` deletes the 2nd person in the address book.
 <!--* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
@@ -201,7 +201,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
-\
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -221,8 +221,8 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add customer** | `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS shifts/SHIFTS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 shifts/2025-09-10 t/intern`
-**Add suppplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS days/DAYS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/2025-10-30`
+**Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS shifts/SHIFTS[, SHIFTS,...] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 shifts/2025-09-10 t/intern`
+**Add suppplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS[, ITEMS,...] days/DAYS[, DAYS,...] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/2025-10-30`
 **List** | `list [all/customer/staff/supplier]`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 <!--
