@@ -28,7 +28,7 @@ class JsonAdaptedDays {
      * Converts a given {@code Days} into this class for Jackson use.
      */
     public JsonAdaptedDays(Days source) {
-        this.day = source.toString(); 
+        this.day = source.toString();
     }
 
     @JsonValue

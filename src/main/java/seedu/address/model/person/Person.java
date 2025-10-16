@@ -88,9 +88,13 @@ public abstract class Person {
         return null;
     }
 
-    public List<Days> getDays() { return null; }
+    public List<Days> getDays() {
+        return null;
+    }
 
-    public List<Items> getItems() { return null; }
+    public List<Items> getItems() {
+        return null;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

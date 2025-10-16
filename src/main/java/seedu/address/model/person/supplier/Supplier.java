@@ -37,10 +37,12 @@ public class Supplier extends Person {
         this.days = new ArrayList<>(days);
     }
 
+    @Override
     public List<Items> getItems() {
         return items;
     }
 
+    @Override
     public List<Days> getDays() {
 
         return days;

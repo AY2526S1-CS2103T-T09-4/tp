@@ -20,8 +20,8 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.staff.Shift;
-import seedu.address.model.person.supplier.Items;
 import seedu.address.model.person.supplier.Days;
+import seedu.address.model.person.supplier.Items;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";

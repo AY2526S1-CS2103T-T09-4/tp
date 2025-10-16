@@ -59,6 +59,13 @@ public class PersonCard extends UiPart<Region> {
         type.setText(person.getDisplayType().toString());
         note.setText(person.getNote().value);
 
+        switch (person.getDisplayType()) {
+        case CUSTOMER -> type.getStyleClass().add("type_customer");
+        case STAFF -> type.getStyleClass().add("type_staff");
+        case SUPPLIER -> type.getStyleClass().add("type_supplier");
+        default -> throw new IllegalStateException("Unexpected type: " + person.getDisplayType());
+        }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
