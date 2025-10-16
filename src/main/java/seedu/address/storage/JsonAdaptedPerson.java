@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -38,8 +39,14 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String note;
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final List<JsonAdaptedShift> shifts = new ArrayList<>();
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final List<JsonAdaptedItems> items = new ArrayList<>();
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final List<JsonAdaptedDays> days = new ArrayList<>();
 
 
@@ -88,15 +95,27 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        shifts.addAll(source.getShifts().stream()
-                .map(JsonAdaptedShift::new)
-                .collect(Collectors.toList()));
-        items.addAll(source.getItems().stream()
-                .map(JsonAdaptedItems::new)
-                .collect(Collectors.toList()));
-        days.addAll(source.getDays().stream()
-                .map(JsonAdaptedDays::new)
-                .collect(Collectors.toList()));
+
+        List<Shift> personShift = source.getShifts();
+        if (personShift != null)  {
+            shifts.addAll(personShift.stream()
+                    .map(JsonAdaptedShift::new)
+                    .collect(Collectors.toList()));
+        }
+
+        List<Items> personItems = source.getItems();
+        if (personItems != null) {
+            items.addAll(personItems.stream()
+                    .map(JsonAdaptedItems::new)
+                    .collect(Collectors.toList()));
+        }
+
+        List<Days> personDays = source.getDays();
+        if (personDays != null) {
+            days.addAll(personDays.stream()
+                    .map(JsonAdaptedDays::new)
+                    .collect(Collectors.toList()));
+        }
     }
 
     /**
