@@ -7,16 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.STAFF_TYPE;
 import static seedu.address.logic.parser.CliSyntax.SUPPLIER_TYPE;
 
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -54,7 +51,6 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         String[] words = args.trim().split(" ", 2);
         String preamble = words[0].trim();
-        System.out.println(preamble);
 
         if (!isValidType(preamble)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -80,13 +76,21 @@ public class AddCommandParser implements Parser<AddCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Checks whether the given command input is one of the three valid types.
+     * @param input The command input after "add"
+     */
     private boolean isValidType(String input) {
         return input.equals(CUSTOMER_TYPE) || input.equals(STAFF_TYPE) || input.equals(SUPPLIER_TYPE);
     }
 
+    /**
+     * Parses the add customer command input according to the given arguments.
+     */
     private AddCustomerCommand parseAddCustomerCommand(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_NOTE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCustomerCommand.MESSAGE_USAGE));
@@ -98,7 +102,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Note note = new Note(argMultimap.getValue(PREFIX_NOTES).orElseGet(() -> "EMPTY"));
+        Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
 
         Customer customer = new Customer(name, phone, email, address, tagList, note);
         return new AddCustomerCommand(customer);
@@ -107,10 +111,9 @@ public class AddCommandParser implements Parser<AddCommand> {
     private AddStaffCommand parseAddStaffCommand(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_TAG, PREFIX_SHIFTS, PREFIX_NOTES);
+                PREFIX_TAG, PREFIX_SHIFTS, PREFIX_NOTE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_SHIFTS)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_SHIFTS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStaffCommand.MESSAGE_USAGE));
         }
 
@@ -122,7 +125,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         List<Shift> shifts = ParserUtil.parseShifts(argMultimap.getAllValues(PREFIX_SHIFTS));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Note note = new Note(argMultimap.getValue(PREFIX_NOTES).orElseGet(() -> "EMPTY"));
+        Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
         Staff staff = new Staff(name, phone, email, address, tagList, shifts, note);
 
         return new AddStaffCommand(staff);
@@ -131,10 +134,11 @@ public class AddCommandParser implements Parser<AddCommand> {
     private AddSupplierCommand parseAddSupplierCommand(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_TAG, PREFIX_ITEMS, PREFIX_DAYS, PREFIX_NOTES);
+                PREFIX_TAG, PREFIX_ITEMS, PREFIX_DAYS, PREFIX_NOTE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ITEMS, PREFIX_DAYS)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS,
+                PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ITEMS, PREFIX_DAYS)) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddSupplierCommand.MESSAGE_USAGE));
         }
@@ -148,7 +152,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         List<Items> items = ParserUtil.parseItems(argMultimap.getAllValues(PREFIX_ITEMS));
         List<Days> days = ParserUtil.parseDays(argMultimap.getAllValues(PREFIX_DAYS));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Note note = new Note(argMultimap.getValue(PREFIX_NOTES).orElse(""));
+        Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
         Supplier supplier = new Supplier(name, phone, email, address, tagList, items, days, note);
 
         return new AddSupplierCommand(supplier);

@@ -1,8 +1,11 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -10,6 +13,11 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
+import seedu.address.model.person.staff.Shift;
+import seedu.address.model.person.staff.Staff;
+import seedu.address.model.person.supplier.Days;
+import seedu.address.model.person.supplier.Items;
+import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -18,18 +26,27 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_NOTE = "Test note";
+    public static final String DEFAULT_NAME = CommandTestUtil.VALID_NAME_AMY;
+    public static final String DEFAULT_PHONE = CommandTestUtil.VALID_PHONE_AMY;
+    public static final String DEFAULT_EMAIL = CommandTestUtil.VALID_EMAIL_AMY;
+    public static final String DEFAULT_ADDRESS = CommandTestUtil.VALID_ADDRESS_AMY;
+    public static final String DEFAULT_TAG = CommandTestUtil.VALID_TAG_AMY;
+    public static final String DEFAULT_NOTE = CommandTestUtil.VALID_NOTE_AMY;
 
+    // Default fields
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
     private Note note;
+
+    // Fields for staff
+    private List<Shift> shifts;
+
+    // Fields for suppliers
+    private Days days;
+    private Items items;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,7 +57,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        note = new Note(DEFAULT_NOTE);
+        note = new Note("");
     }
 
     /**
@@ -95,7 +112,58 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Note} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNote(String note) {
+        this.note = new Note(note);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Shift} of the {@code Person} that we are building (for staff).
+     */
+    public PersonBuilder withShifts(List<Shift> shifts) {
+        // TODO
+        return this;
+    }
+
+    /**
+     * Sets the {@code Days} of the {@code Person} that we are building (for supplier).
+     */
+    public PersonBuilder withDays(LocalDate days) {
+        // TODO
+        return this;
+    }
+
+    /**
+     * Sets the {@code Items} of the {@code Person} that we are building (for supplier).
+     */
+    public PersonBuilder withItems(String items) {
+        // TODO
+        return this;
+    }
+
+    /**
+     * Builds a new {@code Customer} by taking in the relevant fields and outputting an object.
+     */
     public Customer buildCustomer() {
         return new Customer(name, phone, email, address, tags, note);
+    }
+
+    /**
+     * Builds a new {@code Staff} by taking in the relevant fields and outputting an object.
+     */
+    public Staff buildStaff() {
+        // TODO
+        return null;
+    }
+
+    /**
+     * Builds a new {@code Supplier} by taking in the relevant fields and outputting an object.
+     */
+    public Supplier buildSupplier() {
+        // TODO
+        return null;
     }
 }

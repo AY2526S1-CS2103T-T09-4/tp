@@ -17,6 +17,11 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
+import seedu.address.model.person.staff.Shift;
+import seedu.address.model.person.staff.Staff;
+import seedu.address.model.person.supplier.Supplier;
+import seedu.address.model.person.supplier.Items;
+import seedu.address.model.person.supplier.Days;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +38,10 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String note;
+    private final List<JsonAdaptedShift> shifts = new ArrayList<>();
+    private final List<JsonAdaptedItems> items = new ArrayList<>();
+    private final List<JsonAdaptedDays> days = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -42,6 +51,9 @@ class JsonAdaptedPerson {
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("shifts") List<JsonAdaptedShift> shifts,
+                             @JsonProperty("items") List<JsonAdaptedItems> items,
+                             @JsonProperty("days") List<JsonAdaptedDays> days,
                              @JsonProperty("note") String note) {
         this.type = type;
         this.name = name;
@@ -52,6 +64,15 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.note = note;
+        if (shifts != null) {
+            this.shifts.addAll(shifts);
+        }
+        if (items != null) {
+            this.items.addAll(items);
+        }
+        if (days != null) {
+            this.days.addAll(days);
+        }
     }
 
     /**
@@ -67,6 +88,15 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        shifts.addAll(source.getShifts().stream()
+                .map(JsonAdaptedShift::new)
+                .collect(Collectors.toList()));
+        items.addAll(source.getItems().stream()
+                .map(JsonAdaptedItems::new)
+                .collect(Collectors.toList()));
+        days.addAll(source.getDays().stream()
+                .map(JsonAdaptedDays::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -76,8 +106,23 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
+        final List<Shift> modelShifts = new ArrayList<>();
+        final List<Items> modelItems = new ArrayList<>();
+        final List<Days> modelDays = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        for (JsonAdaptedShift shift : shifts) {
+            modelShifts.add(shift.toModelType());
+        }
+
+        for (JsonAdaptedDays day : days) {
+            modelDays.add(day.toModelType());
+        }
+
+        for (JsonAdaptedItems item : items) {
+            modelItems.add(item.toModelType());
         }
 
         if (name == null) {
@@ -123,13 +168,15 @@ class JsonAdaptedPerson {
 
         final Note modelNote = new Note(note);
 
-
         switch (type) {
-        case CUSTOMER:
-            return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNote);
-        // TODO: cases for staff and supplier
-        default:
-            throw new IllegalValueException("Unexpected contact type: " + type);
+            case CUSTOMER:
+                return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNote);
+            case STAFF:
+                return new Staff(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelShifts, modelNote);
+            case SUPPLIER:
+                return new Supplier(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelItems, modelDays, modelNote);
+            default:
+                throw new IllegalValueException("Unexpected contact type: " + type);
         }
     }
 

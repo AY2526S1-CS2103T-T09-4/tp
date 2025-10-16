@@ -1,7 +1,5 @@
 package seedu.address.model.person.supplier;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -12,8 +10,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.supplier.Days;
-import seedu.address.model.person.supplier.Items;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,7 +33,7 @@ public class Supplier extends Person {
                     List<Days> days,
                     Note note) {
         super(name, phone, email, address, tags, note);
-        this.items = new ArrayList<Items>();
+        this.items = new ArrayList<>(items);
         this.days = new ArrayList<>(days);
     }
 
@@ -46,6 +42,7 @@ public class Supplier extends Person {
     }
 
     public List<Days> getDays() {
+
         return days;
     }
 

@@ -15,7 +15,7 @@ public class Shift {
     private final LocalDate shiftDate;
 
     /**
-     * Constructor that creates Shift class with startTime and endTime.
+     * Constructor that creates Shift class with shiftDate.
      */
     public Shift(LocalDate shiftDate) {
         requireAllNonNull(shiftDate);

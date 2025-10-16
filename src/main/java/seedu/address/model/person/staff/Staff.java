@@ -29,6 +29,7 @@ public class Staff extends Person {
         this.shifts = new ArrayList<>(shifts);
     }
 
+    @Override
     public List<Shift> getShifts() {
         return shifts;
     }

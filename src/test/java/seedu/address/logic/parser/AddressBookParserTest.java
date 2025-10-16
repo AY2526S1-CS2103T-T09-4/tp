@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddCustomerCommand;
+import seedu.address.logic.commands.AddStaffCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -24,6 +27,9 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.customer.Customer;
+import seedu.address.model.person.staff.Staff;
+import seedu.address.model.person.supplier.Supplier;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -31,14 +37,28 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
-    /*
     @Test
-    public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().buildCustomer();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+    public void parseCommand_addCustomer() throws Exception {
+        Customer customer = new PersonBuilder().buildCustomer();
+        AddCustomerCommand command = (AddCustomerCommand) parser.parseCommand(
+                PersonUtil.getAddCustomerCommand(customer));
+        assertEquals(new AddCustomerCommand(customer), command);
     }
-    */
+
+    @Test
+    public void parseCommand_addStaff() throws Exception {
+        Staff staff = new PersonBuilder().buildStaff();
+        AddStaffCommand command = (AddStaffCommand) parser.parseCommand(PersonUtil.getAddStaffCommand(staff));
+        assertEquals(new AddStaffCommand(staff), command);
+    }
+
+    @Test
+    public void parseCommand_addSupplier() throws Exception {
+        Supplier supplier = new PersonBuilder().buildSupplier();
+        AddSupplierCommand command = (AddSupplierCommand) parser.parseCommand(
+                PersonUtil.getAddSupplierCommand(supplier));
+        assertEquals(new AddSupplierCommand(supplier), command);
+    }
 
     @Test
     public void parseCommand_clear() throws Exception {

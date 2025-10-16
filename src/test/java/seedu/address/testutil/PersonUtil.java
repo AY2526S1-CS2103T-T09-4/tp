@@ -8,7 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddCustomerCommand;
+import seedu.address.logic.commands.AddStaffCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -19,10 +21,24 @@ import seedu.address.model.tag.Tag;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add customer command string for adding the {@code person}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCustomerCommand(Person person) {
+        return AddCustomerCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    }
+
+    /**
+     * Returns an add staff command string for adding the {@code person}.
+     */
+    public static String getAddStaffCommand(Person person) {
+        return AddStaffCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    }
+
+    /**
+     * Returns an add supplier command string for adding the {@code person}.
+     */
+    public static String getAddSupplierCommand(Person person) {
+        return AddSupplierCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**

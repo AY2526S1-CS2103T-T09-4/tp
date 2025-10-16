@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -29,7 +29,7 @@ public class AddStaffCommand extends AddCommand {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_SHIFTS + "SHIFT[, SHIFT,...] "
-            + "[" + PREFIX_NOTES + "NOTES]\n"
+            + "[" + PREFIX_NOTE + "NOTES]\n"
             + "[" + PREFIX_TAG + "TAG]... "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Ah Hock "
@@ -37,7 +37,7 @@ public class AddStaffCommand extends AddCommand {
             + PREFIX_EMAIL + "ahhock@example.com "
             + PREFIX_ADDRESS + "123 Clementi Ave 3 "
             + PREFIX_SHIFTS + "2025-12-04 "
-            + PREFIX_NOTES + "can only do weekdays"
+            + PREFIX_NOTE + "can only do weekdays"
             + PREFIX_TAG + "preferred ";
 
     /**
