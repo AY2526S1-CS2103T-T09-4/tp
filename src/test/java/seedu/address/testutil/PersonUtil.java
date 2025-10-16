@@ -13,7 +13,6 @@ import seedu.address.logic.commands.AddCustomerCommand;
 import seedu.address.logic.commands.AddStaffCommand;
 import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.staff.Staff;

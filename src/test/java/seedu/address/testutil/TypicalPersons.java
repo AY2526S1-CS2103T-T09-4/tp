@@ -1,5 +1,21 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DAYS_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEMS_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTS_CARL;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,8 +25,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.staff.Staff;
 import seedu.address.model.person.supplier.Supplier;
-
-import static seedu.address.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -38,7 +52,7 @@ public class TypicalPersons {
                     .withEmail(VALID_EMAIL_ELLE).withAddress(VALID_ADDRESS_ELLE).withItems(VALID_ITEMS_ELLE)
                     .withDays(VALID_DAYS_ELLE).build();
     public static final Supplier FIONA = new SupplierBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").build();;
+            .withEmail("lydia@example.com").withAddress("little tokyo").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -56,6 +70,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, AMY, CARL, DANIEL, ELLE, FIONA));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA));
     }
 }

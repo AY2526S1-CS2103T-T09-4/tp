@@ -1,11 +1,9 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.CommandTestUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -16,7 +14,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * An abstract utility class to help with building Person objects.
  */
 public abstract class PersonBuilder<T extends Person> {
 
@@ -107,11 +105,17 @@ public abstract class PersonBuilder<T extends Person> {
         return this;
     }
 
-    public abstract  T build();
+    public abstract T build();
 
-    public PersonBuilder<T> withShifts(String ... shifts) { return this; }
+    public PersonBuilder<T> withShifts(String ... shifts) {
+        return this;
+    }
 
-    public PersonBuilder<T> withItems(String ... items) { return this; }
+    public PersonBuilder<T> withItems(String ... items) {
+        return this;
+    }
 
-    public PersonBuilder<T> withDays(String ... days) { return this; }
+    public PersonBuilder<T> withDays(String ... days) {
+        return this;
+    }
 }
