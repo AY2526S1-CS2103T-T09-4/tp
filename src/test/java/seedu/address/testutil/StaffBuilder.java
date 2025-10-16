@@ -8,9 +8,10 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.staff.Staff;
-import seedu.address.model.person.supplier.Supplier;
-import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * A utility class to help with building Staff objects.
+ */
 public class StaffBuilder extends PersonBuilder<Staff> {
     public static final String DEFAULT_SHIFTS = CommandTestUtil.VALID_SHIFTS_CARL;
 
