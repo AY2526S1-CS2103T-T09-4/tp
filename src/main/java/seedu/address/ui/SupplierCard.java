@@ -3,8 +3,10 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.supplier.Supplier;
 
+/**
+ * A UI component that displays information of a {@code Supplier}.
+ */
 public class SupplierCard extends PersonCard {
 
     private static final String FXML = "SupplierListCard.fxml";
