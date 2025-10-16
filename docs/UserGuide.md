@@ -26,7 +26,7 @@ BrewBook is a **desktop app to help managers of small cafe to manage different c
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list [all/customer/staff/supplier]` : Lists all contacts based on type.
 
    * `add customer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a customer contact named `John Doe` to the Address Book.
 
@@ -118,9 +118,9 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in the given contact `TYPE`.
 
-Format: `list`
+Format: `list TYPE`
 <!--
 ### Editing a person : `edit`
 
@@ -201,7 +201,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
-
+\
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -223,7 +223,7 @@ Action | Format, Examples
 **Add customer** | `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS shifts/SHIFTS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 shifts/2025-09-10 t/intern`
 **Add suppplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS days/DAYS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/2025-10-30`
-**List** | `list`
+**List** | `list [all/customer/staff/supplier]`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 <!--
 **Clear** | `clear` 
