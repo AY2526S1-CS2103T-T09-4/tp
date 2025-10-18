@@ -4,24 +4,19 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.ListCommand.Category;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.supplier.Days;
 import seedu.address.model.person.supplier.Items;
+import seedu.address.model.sort.AlphanumericNameComparator;
+import seedu.address.model.sort.CompareType;
+import seedu.address.model.sort.ContactTypeComparator;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -240,5 +235,17 @@ public class ParserUtil {
         }
 
         return category;
+    }
+
+    public static Comparator<Person> parseComparator(String compareTypeString, boolean isAsc) throws ParseException {
+        String trimmedLowerCaseCompareType = compareTypeString.trim().toLowerCase();
+
+        if (!CompareType.isValidCompareType(trimmedLowerCaseCompareType)) {
+            throw new ParseException(CompareType.MESSAGE_INVALID_CONTACT_TYPE);
+        }
+
+        CompareType compareType = new CompareType(compareTypeString);
+
+        return compareType.toComparator(isAsc);
     }
 }
