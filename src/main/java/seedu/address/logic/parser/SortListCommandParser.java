@@ -27,13 +27,25 @@ public class SortListCommandParser {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT_TYPE, PREFIX_SORT_ORDER);
         boolean isAsc;
-        if (argMultimap.getValue(PREFIX_SORT_ORDER).isPresent()) {
-            isAsc = argMultimap.getValue(PREFIX_SORT_ORDER).get().equalsIgnoreCase("asc");
-        } else {
+        if (argMultimap.getValue(PREFIX_SORT_ORDER).isEmpty()) {
             isAsc = true;
+        } else {
+            String sortOrder = argMultimap.getValue(PREFIX_SORT_ORDER).get().trim().toLowerCase();
+
+            if (sortOrder.equals("asc")) {
+                isAsc = true;
+            } else if (sortOrder.equals("desc")) {
+                isAsc = false;
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortListCommand.MESSAGE_USAGE));
+            }
         }
 
-        Comparator<Person> comparator = ParserUtil.parseComparator(argMultimap.getValue(PREFIX_SORT_TYPE).get(), isAsc);
+        Comparator<Person> comparator = ParserUtil.parseComparator(argMultimap.getValue(PREFIX_SORT_TYPE).get());
+
+        if (!isAsc) {
+            return new SortListCommand(comparator.reversed());
+        }
 
         return new SortListCommand(comparator);
     }

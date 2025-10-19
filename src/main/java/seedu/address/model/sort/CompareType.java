@@ -15,10 +15,25 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class CompareType {
 
-    public static final String MESSAGE_INVALID_CONTACT_TYPE = "Invalid comparison type. Can only be 'name' or 'type'.";
-    public static final List<String> VALIDATION_LIST = List.of("name", "type");
+    public static final List<String> VALIDATION_LIST = List.of("name", "type", "email", "address", "phone");
+    public static final String MESSAGE_INVALID_CONTACT_TYPE = "Invalid comparison type. Can only be"
+            + formatValidationList();
 
     private final String compareTypeString;
+
+    private static String formatValidationList() {
+        if (CompareType.VALIDATION_LIST.isEmpty()) {
+            return "";
+        }
+        if (CompareType.VALIDATION_LIST.size() == 1) {
+            return CompareType.VALIDATION_LIST.get(0);
+        }
+
+        String allButLast = String.join(", ", CompareType.VALIDATION_LIST.subList(0,
+                CompareType.VALIDATION_LIST.size() - 1));
+
+        return allButLast + ", or " + CompareType.VALIDATION_LIST.get(CompareType.VALIDATION_LIST.size() - 1);
+    }
 
     /**
      * Constructs a {@code CompareType}.
@@ -66,12 +81,18 @@ public class CompareType {
     }
 
 
-    public Comparator<Person> toComparator(boolean isAsc) throws ParseException {
+    public Comparator<Person> toComparator() throws ParseException {
         switch (compareTypeString) {
         case "name":
-            return new AlphanumericNameComparator(isAsc);
+            return new NameComparator();
         case "type":
-            return new ContactTypeComparator(isAsc);
+            return new ContactTypeComparator();
+        case "email":
+            return new EmailComparator();
+        case "address":
+            return new AddressComparator();
+        case "phone":
+            return new PhoneComparator();
         default:
             throw new ParseException(CompareType.MESSAGE_INVALID_CONTACT_TYPE);
         }

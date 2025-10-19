@@ -14,9 +14,7 @@ import seedu.address.model.person.*;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.supplier.Days;
 import seedu.address.model.person.supplier.Items;
-import seedu.address.model.sort.AlphanumericNameComparator;
 import seedu.address.model.sort.CompareType;
-import seedu.address.model.sort.ContactTypeComparator;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -237,7 +235,7 @@ public class ParserUtil {
         return category;
     }
 
-    public static Comparator<Person> parseComparator(String compareTypeString, boolean isAsc) throws ParseException {
+    public static Comparator<Person> parseComparator(String compareTypeString) throws ParseException {
         String trimmedLowerCaseCompareType = compareTypeString.trim().toLowerCase();
 
         if (!CompareType.isValidCompareType(trimmedLowerCaseCompareType)) {
@@ -246,6 +244,6 @@ public class ParserUtil {
 
         CompareType compareType = new CompareType(compareTypeString);
 
-        return compareType.toComparator(isAsc);
+        return compareType.toComparator();
     }
 }
