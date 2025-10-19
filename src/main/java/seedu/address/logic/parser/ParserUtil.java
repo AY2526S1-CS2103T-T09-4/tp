@@ -252,9 +252,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code attributeString} is invalid
      */
     public static Comparator<Person> parseComparator(String attributeString) throws ParseException {
-        String trimmedLowerCaseCompareType = attributeString.trim().toLowerCase();
+        String trimmedLowerCaseAttribute = attributeString.trim().toLowerCase();
 
-        if (!Attribute.isValidCompareType(trimmedLowerCaseCompareType)) {
+        if (!Attribute.isValidAttribute(trimmedLowerCaseAttribute)) {
             throw new ParseException(Attribute.MESSAGE_INVALID_ATTRIBUTE);
         }
 

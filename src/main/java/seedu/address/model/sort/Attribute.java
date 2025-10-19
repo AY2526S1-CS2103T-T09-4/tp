@@ -11,7 +11,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Represents a CompareType to sort address book.
- * Guarantees: immutable; type is valid as declared in {@link #isValidCompareType(String)}
+ * Guarantees: immutable; type is valid as declared in {@link #isValidAttribute(String)}
  */
 public class Attribute {
 
@@ -28,7 +28,7 @@ public class Attribute {
      */
     public Attribute(String attributeString) {
         requireNonNull(attributeString);
-        checkArgument(isValidCompareType(attributeString), MESSAGE_INVALID_ATTRIBUTE);
+        checkArgument(isValidAttribute(attributeString), MESSAGE_INVALID_ATTRIBUTE);
         this.attributeString = attributeString.trim().toLowerCase();;
     }
 
@@ -48,9 +48,9 @@ public class Attribute {
 
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid attribute.
      */
-    public static boolean isValidCompareType(String test) {
+    public static boolean isValidAttribute(String test) {
         return VALIDATION_LIST.contains(test.toLowerCase());
     }
 
