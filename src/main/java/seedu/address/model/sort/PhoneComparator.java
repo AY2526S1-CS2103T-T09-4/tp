@@ -13,4 +13,9 @@ public class PhoneComparator implements Comparator<Person> {
     public int compare(Person person1, Person person2) {
         return person1.getPhone().value.compareTo(person2.getPhone().value);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof PhoneComparator;
+    }
 }

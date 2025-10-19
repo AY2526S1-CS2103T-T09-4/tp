@@ -25,4 +25,9 @@ public class ContactTypeComparator implements Comparator<Person> {
 
         return typeComparison;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof ContactTypeComparator;
+    }
 }

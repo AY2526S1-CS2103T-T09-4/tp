@@ -13,4 +13,9 @@ public class AddressComparator implements Comparator<Person> {
     public int compare(Person person1, Person person2) {
         return person1.getAddress().value.compareTo(person2.getAddress().value);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof AddressComparator;
+    }
 }

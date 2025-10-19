@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 /**
  * Parses input arguments and creates a new SortListCommand object
  */
-public class SortListCommandParser {
+public class SortListCommandParser implements Parser<SortListCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the SortListCommand
      * and returns a SortListCommand object for execution.

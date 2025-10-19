@@ -13,4 +13,9 @@ public class NameComparator implements Comparator<Person> {
     public int compare(Person person1, Person person2) {
         return person1.getName().fullName.compareTo(person2.getName().fullName);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof NameComparator;
+    }
 }
