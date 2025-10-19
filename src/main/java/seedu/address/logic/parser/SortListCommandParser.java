@@ -1,16 +1,19 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddCustomerCommand;
-import seedu.address.logic.commands.SortListCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_TYPE;
 
 import java.util.Comparator;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.logic.commands.SortListCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
+/**
+ * Parses input arguments and creates a new SortListCommand object
+ */
 public class SortListCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the SortListCommand

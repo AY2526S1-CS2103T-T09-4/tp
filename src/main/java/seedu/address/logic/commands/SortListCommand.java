@@ -1,18 +1,22 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-
-import java.util.Comparator;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_TYPE;
 
+import java.util.Comparator;
+
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+
+/**
+ * Sorts persons in displayed person list by the specified attribute.
+ */
 public class SortListCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_SUCCESS = "Displaying sorted list.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of persons by a specified attribute and order.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Sorts the list of persons by a specified attribute and order.\n"
             + "Parameters: "
             + PREFIX_SORT_TYPE + "<ATTRIBUTE> "
             + "[" + PREFIX_SORT_ORDER + "<ORDER>" + "]\n"

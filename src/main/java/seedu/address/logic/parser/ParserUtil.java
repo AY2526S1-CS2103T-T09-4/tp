@@ -4,17 +4,27 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.ListCommand.Category;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.supplier.Days;
 import seedu.address.model.person.supplier.Items;
-import seedu.address.model.sort.CompareType;
+import seedu.address.model.sort.Attribute;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -235,15 +245,21 @@ public class ParserUtil {
         return category;
     }
 
-    public static Comparator<Person> parseComparator(String compareTypeString) throws ParseException {
-        String trimmedLowerCaseCompareType = compareTypeString.trim().toLowerCase();
+    /**
+     * Parses {@code String attributeString} into a {@code Attribute}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code attributeString} is invalid
+     */
+    public static Comparator<Person> parseComparator(String attributeString) throws ParseException {
+        String trimmedLowerCaseCompareType = attributeString.trim().toLowerCase();
 
-        if (!CompareType.isValidCompareType(trimmedLowerCaseCompareType)) {
-            throw new ParseException(CompareType.MESSAGE_INVALID_CONTACT_TYPE);
+        if (!Attribute.isValidCompareType(trimmedLowerCaseCompareType)) {
+            throw new ParseException(Attribute.MESSAGE_INVALID_ATTRIBUTE);
         }
 
-        CompareType compareType = new CompareType(compareTypeString);
+        Attribute attribute = new Attribute(attributeString);
 
-        return compareType.toComparator();
+        return attribute.toComparator();
     }
 }
