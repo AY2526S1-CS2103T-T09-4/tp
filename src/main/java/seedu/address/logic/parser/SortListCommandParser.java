@@ -46,10 +46,6 @@ public class SortListCommandParser {
 
         Comparator<Person> comparator = ParserUtil.parseComparator(argMultimap.getValue(PREFIX_SORT_TYPE).get());
 
-        if (!isAsc) {
-            return new SortListCommand(comparator.reversed());
-        }
-
-        return new SortListCommand(comparator);
+        return new SortListCommand(comparator, isAsc);
     }
 }

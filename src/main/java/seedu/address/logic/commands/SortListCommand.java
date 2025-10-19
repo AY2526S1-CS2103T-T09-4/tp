@@ -28,20 +28,22 @@ public class SortListCommand extends Command {
 
 
     private final Comparator<Person> comparator;
+    private final boolean isAsc;
 
     /**
      * Creates a SortListCommand to sort current displayed list.
      *
      * @param comparator the comparator of persons to list
      */
-    public SortListCommand(Comparator<Person> comparator) {
+    public SortListCommand(Comparator<Person> comparator, boolean isAsc) {
         this.comparator = comparator;
+        this.isAsc = isAsc;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(comparator);
+        model.updateFilteredPersonList(isAsc ? comparator : comparator.reversed());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
