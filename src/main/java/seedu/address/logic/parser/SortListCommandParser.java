@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_TYPE;
+import static seedu.address.model.sort.Attribute.isValidAttribute;
 
 import java.util.Comparator;
 
@@ -22,13 +22,16 @@ public class SortListCommandParser implements Parser<SortListCommand> {
      */
     public SortListCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SORT_TYPE, PREFIX_SORT_ORDER);
+        String[] words = args.trim().split(" ", 2);
+        String preamble = words[0].trim();
 
-        if (argMultimap.getValue(PREFIX_SORT_TYPE).isEmpty()) {
+        if (!isValidAttribute(preamble)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortListCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT_TYPE, PREFIX_SORT_ORDER);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SORT_ORDER);
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT_ORDER);
         boolean isAsc;
         if (argMultimap.getValue(PREFIX_SORT_ORDER).isEmpty()) {
             isAsc = true;
@@ -44,7 +47,7 @@ public class SortListCommandParser implements Parser<SortListCommand> {
             }
         }
 
-        Comparator<Person> comparator = ParserUtil.parseComparator(argMultimap.getValue(PREFIX_SORT_TYPE).get());
+        Comparator<Person> comparator = ParserUtil.parseComparator(preamble);
 
         return new SortListCommand(comparator, isAsc);
     }

@@ -15,7 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DAYS = new Prefix("days/");
     public static final Prefix PREFIX_SHIFTS = new Prefix("shifts/");
     public static final Prefix PREFIX_NOTE = new Prefix("notes/");
-    public static final Prefix PREFIX_SORT_TYPE = new Prefix("by/");
     public static final Prefix PREFIX_SORT_ORDER = new Prefix("o/");
 
     public static final String CUSTOMER_TYPE = "customer";

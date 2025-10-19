@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_TYPE;
 
 import java.util.Comparator;
 
@@ -18,7 +17,7 @@ public class SortListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the list of persons by a specified attribute and order.\n"
             + "Parameters: "
-            + PREFIX_SORT_TYPE + "<ATTRIBUTE> "
+            + "<ATTRIBUTE> "
             + "[" + PREFIX_SORT_ORDER + "<ORDER>" + "]\n"
             + "Accepted values:\n"
             + "  <ATTRIBUTE>: 'name', 'phone', 'email', 'address', or 'type'.\n"
@@ -45,5 +44,20 @@ public class SortListCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(isAsc ? comparator : comparator.reversed());
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortListCommand)) {
+            return false;
+        }
+
+        SortListCommand otherSortListCommand = (SortListCommand) other;
+        return comparator.equals(otherSortListCommand.comparator) && isAsc == otherSortListCommand.isAsc;
     }
 }
