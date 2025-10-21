@@ -24,7 +24,8 @@ public class SummaryCommand extends Command {
         requireNonNull(model);
         StringBuilder staffSummary = new StringBuilder();
         StringBuilder supplierSummary = new StringBuilder();
-        ObservableList<Person> list = model.getFilteredPersonList();
+        ObservableList<Person> list = model.getAddressBook().getPersonList();
+
         for (Person person : list) {
             switch(person.getDisplayType()) {
             case STAFF:
