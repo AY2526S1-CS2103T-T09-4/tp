@@ -15,7 +15,7 @@ public class SummaryCommand extends Command {
 
     public static final String COMMAND_WORD = "summary";
     public static final String MESSAGE_USAGE = COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Important dates summarised:\n";
+    public static final String MESSAGE_SUCCESS = "Important dates summarised:\n\n";
 
 
 
