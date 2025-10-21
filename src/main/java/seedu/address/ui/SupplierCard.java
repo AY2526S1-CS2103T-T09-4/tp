@@ -21,7 +21,6 @@ public class SupplierCard extends PersonCard {
      */
     public SupplierCard(Person person, int displayedIndex) {
         super(person, displayedIndex, FXML);
-        System.out.println(person.getItems().toString());
         type.getStyleClass().add("type_supplier");
         items.setText(person.getItems().toString());
         days.setText(person.getDays().toString());
