@@ -31,6 +31,9 @@ public class DeleteCommand extends Command {
 
     private final List<Index> targetIndices;
 
+    /**
+     * Creates a DeleteCommand to delete the indices stated in targetIndices.
+     */
     public DeleteCommand(List<Index> targetIndices) {
         requireNonNull(targetIndices);
         this.targetIndices = targetIndices;
@@ -57,13 +60,13 @@ public class DeleteCommand extends Command {
             deletedPersons.add(personToDelete);
         }
 
-        if (deletedPersons.size()==1) {
+        if (deletedPersons.size() == 1) {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                     Messages.format(deletedPersons.get(0))));
         } else {
             String names = deletedPersons.stream()
                     .map(Messages::format)
-                    .collect(Collectors.joining(", "));
+                    .collect(Collectors.joining(",\n"));
             return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, names));
         }
     }
