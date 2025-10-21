@@ -1,5 +1,6 @@
 package seedu.address.model.person.customer;
 
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
@@ -15,12 +16,20 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Customer extends Person {
-
+    private Points points;
     /**
-     * Constructor that calls super class constructor
+     * Constructor that calls super class constructor.
      */
-    public Customer(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Note note) {
+    public Customer(Name name, Phone phone, Email email, Address address, Points points,
+                    Set<Tag> tags, Note note) {
         super(name, phone, email, address, tags, note);
+        Objects.requireNonNull(points);
+        this.points = points;
+    }
+
+    @Override
+    public Points getPoints() {
+        return points;
     }
 
     @Override

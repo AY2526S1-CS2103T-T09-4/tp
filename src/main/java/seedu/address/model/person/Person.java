@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.customer.Points;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.supplier.Days;
 import seedu.address.model.person.supplier.Items;
@@ -82,6 +83,10 @@ public abstract class Person {
 
     public Note getNote() {
         return note;
+    }
+
+    public Points getPoints() {
+        return null;
     }
 
     public List<Shift> getShifts() {

@@ -28,6 +28,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
+import seedu.address.model.person.customer.Points;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -104,10 +105,11 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
 
+        // Todo
         return new Customer(updatedName,
                 updatedPhone, updatedEmail,
-                updatedAddress, updatedTags,
-                updatedNote);
+                updatedAddress, new Points(0),
+                updatedTags, updatedNote);
     }
 
     @Override

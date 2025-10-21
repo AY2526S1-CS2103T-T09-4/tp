@@ -19,6 +19,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.customer.Points;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.supplier.Days;
 import seedu.address.model.person.supplier.Items;
@@ -144,6 +145,24 @@ public class ParserUtil {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
         return new Note(trimmedNote);
+    }
+
+    /**
+     * Parses a {@code String points} into an {@code Points}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code points} is invalid.
+     */
+    public static Points parsePoints(String points) throws ParseException {
+        requireNonNull(points);
+
+        String trimmedPoints = points.trim();
+        int numPoints = Points.parsePoints(trimmedPoints);
+
+        if (numPoints == -1) {
+            throw new ParseException(Points.MESSAGE_CONSTRAINTS);
+        }
+        return new Points(numPoints);
     }
 
     /**
