@@ -97,7 +97,7 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
 
         List<Shift> personShift = source.getShifts();
-        if (personShift != null)  {
+        if (personShift != null) {
             shifts.addAll(personShift.stream()
                     .map(JsonAdaptedShift::new)
                     .collect(Collectors.toList()));

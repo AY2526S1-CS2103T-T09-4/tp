@@ -5,12 +5,14 @@ import java.util.List;
 import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.supplier.Days;
 import seedu.address.model.person.supplier.Items;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * A utility class to help with building Supplier objects.
+ */
 public class SupplierBuilder extends PersonBuilder<Supplier> {
     public static final String DEFAULT_ITEMS = CommandTestUtil.VALID_ITEMS_ELLE;
     public static final String DEFAULT_DAYS = CommandTestUtil.VALID_DAYS_ELLE;

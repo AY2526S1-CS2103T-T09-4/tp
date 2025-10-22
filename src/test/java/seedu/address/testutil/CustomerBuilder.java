@@ -2,6 +2,9 @@ package seedu.address.testutil;
 
 import seedu.address.model.person.customer.Customer;
 
+/**
+ * A utility class to help with building Customer objects.
+ */
 public class CustomerBuilder extends PersonBuilder<Customer> {
 
     /**

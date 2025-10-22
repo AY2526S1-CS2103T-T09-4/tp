@@ -6,15 +6,14 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "note": "",
-    "tags" : [ "friends" ],
     "type" : "CUSTOMER"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "note": "",
-    "tags" : [ "owesMoney", "friends" ],
+    "note": "allergic to nuts",
+    "tags" : [ "frequentCustomer" ],
     "type" : "CUSTOMER"
   }, {
     "name" : "Carl Kurz",
@@ -23,7 +22,8 @@
     "address" : "wall street",
     "note":"",
     "tags" : [ ],
-    "type" : "CUSTOMER"
+    "shifts" : [ "2025-10-10" ],
+    "type" : "STAFF"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -31,7 +31,7 @@
     "address" : "10th street",
     "note": "",
     "tags" : [ "friends" ],
-    "type" : "CUSTOMER"
+    "type" : "STAFF"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -39,7 +39,7 @@
     "address" : "michegan ave",
     "note": "",
     "tags" : [ ],
-    "type" : "CUSTOMER"
+    "type" : "SUPPLIER"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -47,14 +47,6 @@
     "address" : "little tokyo",
     "note": "",
     "tags" : [ ],
-    "type" : "CUSTOMER"
-  }, {
-    "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "note": "",
-    "tags" : [ ],
-    "type" : "CUSTOMER"
-  } ]
+    "type" : "SUPPLIER"
+  }]
 }
