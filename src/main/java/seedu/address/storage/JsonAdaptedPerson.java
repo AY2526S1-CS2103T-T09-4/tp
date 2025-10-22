@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -205,9 +207,12 @@ class JsonAdaptedPerson {
         switch (type) {
         case CUSTOMER:
             if (points == null) {
-                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Points.class.getSimpleName()));
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        Points.class.getSimpleName()));
             }
-            if (!Points.isValidPoints(Integer.toString(points))) {
+            try {
+                ParserUtil.parsePoints(Integer.toString(points));
+            } catch (ParseException e) {
                 throw new IllegalValueException(Points.MESSAGE_CONSTRAINTS);
             }
             final Points modelPoints = new Points(points);

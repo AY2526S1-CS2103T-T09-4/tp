@@ -19,27 +19,6 @@ public class Points {
         this.value = points;
     }
 
-    /**
-     * Checks whether a given string is a valid input to parse into a Points.
-     */
-    public static boolean isValidPoints(String points) {
-        int numPoints;
-        try {
-            numPoints = Integer.parseInt(points);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-
-        return numPoints >= 0;
-    }
-
-    public static int parsePoints(String points) {
-        if (!isValidPoints(points)) {
-            return -1;
-        }
-        return Integer.parseInt(points);
-    }
-
     @Override
     public String toString() {
         return Integer.toString(value);

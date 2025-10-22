@@ -157,11 +157,16 @@ public class ParserUtil {
         requireNonNull(points);
 
         String trimmedPoints = points.trim();
-        int numPoints = Points.parsePoints(trimmedPoints);
-
-        if (numPoints == -1) {
+        int numPoints;
+        try {
+            numPoints = Integer.parseInt(trimmedPoints);
+        } catch (NumberFormatException e) {
             throw new ParseException(Points.MESSAGE_CONSTRAINTS);
         }
+        if (numPoints < 0) {
+            throw new ParseException(Points.MESSAGE_CONSTRAINTS);
+        }
+
         return new Points(numPoints);
     }
 

@@ -67,7 +67,7 @@ public class CommandTestUtil {
     public static final String INVALID_DAYS_DESC = " " + PREFIX_DAYS + "10/11/2025"; // invalid date format
     public static final String INVALID_ITEMS_DESC = " " + PREFIX_ITEMS + "?milk";
     public static final String INVALID_POINTS_DESC = " " + PREFIX_POINTS + "-1";
-    public static final String INVALID_NOTES_DESC = " " + PREFIX_NOTE + "x".repeat(201);;
+    public static final String INVALID_NOTES_DESC = " " + PREFIX_NOTE + "x".repeat(201);
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

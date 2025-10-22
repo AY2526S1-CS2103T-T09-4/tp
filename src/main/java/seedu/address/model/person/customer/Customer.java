@@ -36,4 +36,5 @@ public class Customer extends Person {
     public ContactType getDisplayType() {
         return ContactType.CUSTOMER;
     }
+
 }
