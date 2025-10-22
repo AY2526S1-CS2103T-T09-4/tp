@@ -1,19 +1,25 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DAYS_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEMS_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POINTS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTS_CARL;
 
 import java.util.ArrayList;
@@ -31,15 +37,16 @@ import seedu.address.model.person.supplier.Supplier;
  */
 public class TypicalPersons {
     // Customers
-    public static final Customer ALICE = new CustomerBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").build();
+    public static final Customer ALICE = new CustomerBuilder().withName(VALID_NAME_ALICE)
+            .withAddress(VALID_ADDRESS_ALICE).withEmail(VALID_EMAIL_ALICE)
+            .withPhone(VALID_PHONE_ALICE).build();
     public static final Customer BENSON = new CustomerBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("frequentCustomer").withNote("allergic to nuts").build();
+            .withTags("frequentCustomer").withPoints("0").withNote("allergic to nuts").build();
     public static final Customer AMY = new CustomerBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withNote(VALID_NOTE_AMY)
+            .withPoints(VALID_POINTS_AMY).build();
 
     // Staff
     public static final Staff CARL = new StaffBuilder().withName(VALID_NAME_CARL).withPhone(VALID_PHONE_CARL)

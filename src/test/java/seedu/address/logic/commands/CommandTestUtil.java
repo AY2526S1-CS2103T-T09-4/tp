@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -37,6 +38,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_AMY = "frequentCustomer";
     public static final String VALID_TAG_AMY_2 = "prefersDelivery";
     public static final String VALID_NOTE_AMY = "allergic to nuts";
+    public static final String VALID_POINTS_AMY = "3";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -44,6 +46,17 @@ public class CommandTestUtil {
     public static final String TAG_DESC_AMY = " " + PREFIX_TAG + VALID_TAG_AMY;
     public static final String TAG_DESC_AMY_2 = " " + PREFIX_TAG + VALID_TAG_AMY_2;
     public static final String NOTE_DESC_AMY = " " + PREFIX_NOTE + VALID_NOTE_AMY;
+    public static final String POINTS_DESC_AMY = " " + PREFIX_POINTS + VALID_POINTS_AMY;
+
+    public static final String VALID_NAME_ALICE = "Alice Pauline";
+    public static final String VALID_PHONE_ALICE = "94351253";
+    public static final String VALID_EMAIL_ALICE = "alice@example.com";
+    public static final String VALID_ADDRESS_ALICE = "123, Jurong West Ave 6, #08-111";
+    public static final String NAME_DESC_ALICE = " " + PREFIX_NAME + VALID_NAME_ALICE;
+    public static final String PHONE_DESC_ALICE = " " + PREFIX_PHONE + VALID_PHONE_ALICE;
+    public static final String EMAIL_DESC_ALICE = " " + PREFIX_EMAIL + VALID_EMAIL_ALICE;
+    public static final String ADDRESS_DESC_ALICE = " " + PREFIX_ADDRESS + VALID_ADDRESS_ALICE;
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -53,6 +66,8 @@ public class CommandTestUtil {
     public static final String INVALID_SHIFTS_DESC = " " + PREFIX_SHIFTS + "10/10/2025"; // invalid date format
     public static final String INVALID_DAYS_DESC = " " + PREFIX_DAYS + "10/11/2025"; // invalid date format
     public static final String INVALID_ITEMS_DESC = " " + PREFIX_ITEMS + "?milk";
+    public static final String INVALID_POINTS_DESC = " " + PREFIX_POINTS + "-1";
+    public static final String INVALID_NOTES_DESC = " " + PREFIX_NOTE + "x".repeat(201);;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
