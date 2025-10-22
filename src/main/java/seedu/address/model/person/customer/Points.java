@@ -19,6 +19,18 @@ public class Points {
         this.value = points;
     }
 
+    public static boolean isValidPoints(String points) {
+        int numPoints;
+        try {
+            numPoints = Integer.parseInt(points.trim());
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return numPoints >= 0;
+
+    }
+
     @Override
     public String toString() {
         return Integer.toString(value);

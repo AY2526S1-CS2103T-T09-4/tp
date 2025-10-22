@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.time.LocalDate;
@@ -20,6 +20,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.customer.Points;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.supplier.Days;
 import seedu.address.model.person.supplier.Items;
@@ -34,14 +35,14 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_SHIFTS = "10/1/2025";
     private static final String INVALID_DAYS = "10/1/2025";
     private static final String INVALID_ITEMS = "@@@";
-    private static final String INVALID_POINTS = "-1";
+    private static final Integer INVALID_POINTS = -1;
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_NOTE = BENSON.getNote().toString();
-    private static final Integer VALID_POINTS = ALICE.getPoints().value;
+    private static final Integer VALID_POINTS = AMY.getPoints().value;
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -232,6 +233,27 @@ public class JsonAdaptedPersonTest {
                 VALID_ADDRESS, VALID_TAGS, EMPTY_SHIFTS, VALID_ITEMS, invalidDays, VALID_NOTE, null);
 
         String expectedMessage = Days.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_validPoints_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(Person.ContactType.CUSTOMER, VALID_NAME,
+                VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAGS, EMPTY_SHIFTS, EMPTY_ITEMS, EMPTY_DAYS, VALID_NOTE, VALID_POINTS);
+
+        Person modelPerson = person.toModelType();
+
+        assertEquals("3", modelPerson.getPoints().toString());
+    }
+
+    @Test
+    public void toModelType_invalidPoints_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(Person.ContactType.CUSTOMER, VALID_NAME,
+                VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAGS, EMPTY_SHIFTS, EMPTY_ITEMS, EMPTY_DAYS, VALID_NOTE, INVALID_POINTS);
+
+        String expectedMessage = Points.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 }
