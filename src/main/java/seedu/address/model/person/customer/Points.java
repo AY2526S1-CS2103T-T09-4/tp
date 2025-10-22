@@ -19,6 +19,9 @@ public class Points {
         this.value = points;
     }
 
+    /**
+     * Returns true if a given string is a valid points.
+     */
     public static boolean isValidPoints(String points) {
         int numPoints;
         try {
