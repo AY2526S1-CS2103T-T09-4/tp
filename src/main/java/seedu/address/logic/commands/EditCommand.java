@@ -28,6 +28,9 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
+import seedu.address.model.person.staff.Shift;
+import seedu.address.model.person.supplier.Days;
+import seedu.address.model.person.supplier.Items;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -139,12 +142,22 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
+        private Person.ContactType contactType;
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
         private Set<Tag> tags;
         private Note note;
+
+        // Customers
+
+        // Supplier
+        private List<Items> items;
+        private List<Days> days;
+
+        // Staff
+        private List<Shift> shifts;
 
         public EditPersonDescriptor() {}
 
@@ -153,6 +166,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            setContactType(toCopy.contactType);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -166,6 +180,14 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+        }
+
+        public void setContactType(Person.ContactType contactType) {
+            this.contactType = contactType;
+        }
+
+        public Person.ContactType getContactType() {
+            return this.contactType;
         }
 
         public void setName(Name name) {
@@ -237,7 +259,8 @@ public class EditCommand extends Command {
             }
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
+            return Objects.equals(contactType, otherEditPersonDescriptor.contactType)
+                    && Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)

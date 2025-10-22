@@ -33,6 +33,9 @@ public abstract class Person {
         }
     }
 
+    // Contact Type
+    private final ContactType contactType;
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -47,15 +50,17 @@ public abstract class Person {
      * Every field must be present and not null.
      * If note is not provided, assign a blank note.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, tags, new Note(""));
+    public Person(ContactType contactType, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(contactType, name, phone, email, address, tags, new Note(""));
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Note note) {
-        requireAllNonNull(name, phone, email, address, tags, note);
+    public Person(ContactType contactType, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  Note note) {
+        requireAllNonNull(contactType, name, phone, email, address, tags, note);
+        this.contactType = contactType;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -115,6 +120,10 @@ public abstract class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public ContactType getContactType() {
+        return this.contactType;
     }
 
     /**
