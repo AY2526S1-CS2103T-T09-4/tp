@@ -90,15 +90,16 @@ Now you’re ready to start managing your café contacts!
 BrewBook uses a **command box** — just type what you want to do and press **Enter**.  
 Here are a few examples you can try:
 
-| Action | What to Type                                                                                                                                              | What It Does |
-|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
-| Open help window | `help`                                                                                                                                                    | Shows a short guide on using BrewBook |
-| View all contacts | `list all`                                                                                                                                                | Displays every contact saved |
-| Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 notes/allergic to nuts t/frequent`                                          | Adds a new customer |
-| Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/2026-12-04, 2026-12-07 notes/can only do weekdays t/partTime`               | Adds a new staff contact with a shift date |
+| Action | What to Type                                                                                                                                             | What It Does |
+|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| Open help window | `help`                                                                                                                                                   | Shows a short guide on using BrewBook |
+| View all contacts | `list all`                                                                                                                                               | Displays every contact saved |
+| Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                                | Adds a new customer |
+| Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/2026-12-04, 2026-12-07 notes/can only do weekdays t/partTime`              | Adds a new staff contact with a shift date |
 | Add a supplier | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/2026-10-10, 2026-10-20 notes/Halal supplier t/preferred` | Adds a supplier contact |
-| Delete a contact | `delete 3`                                                                                                                                                | Removes the 3rd contact from the current list |
-| Exit the app | `exit`                                                                                                                                                    | Closes BrewBook safely |
+| Edit a contact | `edit 3 n\John Doe` | Edits any field of a contact  
+| Delete a contact | `delete 3`                                                                                                                                               | Removes the 3rd contact from the current list |
+| Exit the app | `exit`                                                                                                                                                   | Closes BrewBook safely |
 
 💡 **Tip:** You can copy and paste commands from here directly into BrewBook.
 
@@ -159,15 +160,16 @@ Format: `help`
 
 Adds a customer to the address book.
 
-Format: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [n/NOTE] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
-A customer can have any number of tags (including 0)
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
+* Points must be a non-negative integer. 
 </div>
 
 Examples:
 * `add customer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add customer n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/allergy`
+* `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`
 
 ### Adding a staff: `add staff`
 
@@ -220,12 +222,12 @@ Examples:
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [n/NOTE] [points/POINTS] [shifts/SHIFTS] [items/ITEMS] [days/DAYS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags / shifts / items  / days, the existing fields of the person will be removed i.e adding is not cumulative. 
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
