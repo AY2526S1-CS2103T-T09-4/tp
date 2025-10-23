@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.stream.Collectors;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.address.model.person.Person;
@@ -20,7 +22,12 @@ public class StaffCard extends PersonCard {
     public StaffCard(Person person, int displayedIndex) {
         super(person, displayedIndex, FXML);
         type.getStyleClass().add("type_staff");
-        shifts.setText(person.getShifts().toString());
+        String formattedShifts = person.getShifts().stream()
+                .map(Object::toString)
+                .sorted()
+                .collect(Collectors.joining(", "));
+
+        shifts.setText("Shifts: " + formattedShifts);
     }
 }
 

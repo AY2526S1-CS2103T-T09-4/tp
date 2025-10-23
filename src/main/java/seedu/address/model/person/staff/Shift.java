@@ -10,7 +10,10 @@ import java.time.LocalDate;
  */
 public class Shift {
     public static final String MESSAGE_COMPULSORY = "At least one shift must be provided";
-    public static final String MESSAGE_CONSTRAINTS = "Invalid date format for shift, Expected format: yyyy-MM-dd";
+    public static final String MESSAGE_FORMAT_CONSTRAINTS = "Invalid date format for shift,"
+            + " Expected format: yyyy-MM-dd";
+    public static final String MESSAGE_DUPLICATE_CONSTRAINTS = "Duplicates dates for shifts are not allowed: ";
+    public static final String MESSAGE_OLD_CONSTRAINTS = "Invalid shift date as this date has passed: ";
 
     private final LocalDate shiftDate;
 
@@ -21,6 +24,21 @@ public class Shift {
         requireAllNonNull(shiftDate);
         this.shiftDate = shiftDate;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof Shift)) {
+            return false;
+        }
+
+        Shift otherShift = (Shift) other;
+        return shiftDate.equals(otherShift.shiftDate);
+    }
+
 
     @Override
     public String toString() {

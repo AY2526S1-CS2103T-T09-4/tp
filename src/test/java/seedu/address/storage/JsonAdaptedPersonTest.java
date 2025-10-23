@@ -48,7 +48,7 @@ public class JsonAdaptedPersonTest {
             .collect(Collectors.toList());
     private static final List<JsonAdaptedShift> EMPTY_SHIFTS = new ArrayList<>();
     private static final List<JsonAdaptedShift> VALID_SHIFTS = new ArrayList<>(List.of(
-            new JsonAdaptedShift(new Shift(LocalDate.parse("2025-10-10")))));
+            new JsonAdaptedShift(new Shift(LocalDate.parse("2030-10-10")))));
     private static final List<JsonAdaptedDays> EMPTY_DAYS = new ArrayList<>();
     private static final List<JsonAdaptedDays> VALID_DAYS = new ArrayList<>(List.of(
             new JsonAdaptedDays(new Days(LocalDate.parse("2025-10-10")))));
@@ -179,7 +179,7 @@ public class JsonAdaptedPersonTest {
         Person modelPerson = person.toModelType();
 
         assertEquals(VALID_SHIFTS.size(), modelPerson.getShifts().size());
-        assertEquals("2025-10-10", modelPerson.getShifts().get(0).toString());
+        assertEquals("2030-10-10", modelPerson.getShifts().get(0).toString());
     }
 
     @Test
@@ -191,7 +191,7 @@ public class JsonAdaptedPersonTest {
                 VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAGS, invalidShifts, EMPTY_ITEMS, EMPTY_DAYS, VALID_NOTE, null);
 
-        String expectedMessage = Shift.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Shift.MESSAGE_FORMAT_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

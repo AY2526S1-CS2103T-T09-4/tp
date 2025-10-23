@@ -1,0 +1,21 @@
+package seedu.address.model.sort;
+
+import java.util.Comparator;
+
+import seedu.address.model.person.Person;
+
+/**
+ * Compares two {@code Person} objects for sorting purposes based on their {@code Name}.
+ * The comparison is done lexicographically based on the string value of the Name.
+ */
+public class NameComparator implements Comparator<Person> {
+    @Override
+    public int compare(Person person1, Person person2) {
+        return person1.getName().fullName.compareTo(person2.getName().fullName);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof NameComparator;
+    }
+}
