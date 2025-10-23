@@ -43,8 +43,31 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
+                .append("; Notes: ")
+                .append(person.getNote())
                 .append("; Tags: ");
+
         person.getTags().forEach(builder::append);
+        switch(person.getContactType()) {
+        case CUSTOMER:
+            builder.append("; Points: ")
+                    .append(person.getPoints());
+            break;
+
+        case STAFF:
+            builder.append("; Shifts: ")
+                    .append(person.getShifts());
+            break;
+        case SUPPLIER:
+            builder.append("; items: ")
+                    .append(person.getItems())
+                    .append("; days: ")
+                    .append(person.getDays());
+            break;
+        default:
+        }
+
+
         return builder.toString();
     }
 

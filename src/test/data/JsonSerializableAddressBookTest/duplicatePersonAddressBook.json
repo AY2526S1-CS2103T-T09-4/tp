@@ -6,13 +6,15 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "note": "",
     "tags": [ "friends" ],
-    "type" : "CUSTOMER"
+    "type" : "CUSTOMER",
+    "points": 3
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
     "note": "",
-    "type" : "CUSTOMER"
+    "type" : "CUSTOMER",
+    "points": 3
   } ]
 }

@@ -25,17 +25,18 @@ public class CustomerTest {
     private Address validAddress = new Address(PersonBuilder.DEFAULT_ADDRESS);
     private Set<Tag> tags = new HashSet<>();
     private Note note = new Note(PersonBuilder.DEFAULT_NOTE);
+    private Points points = new Points(Integer.parseInt(PersonBuilder.DEFAULT_POINTS));
 
     @Test
     public void constructor_validFields_createsCustomer() {
-        Customer customer = new Customer(validName, validPhone, validEmail, validAddress, tags, note);
+        Customer customer = new Customer(validName, validPhone, validEmail, validAddress, points, tags, note);
         assertEquals(validName, customer.getName());
     }
 
     @Test
     void equals_sameFields_returnsTrue() {
-        Customer customer1 = new Customer(validName, validPhone, validEmail, validAddress, tags, note);
-        Customer customer2 = new Customer(validName, validPhone, validEmail, validAddress, tags, note);
+        Customer customer1 = new Customer(validName, validPhone, validEmail, validAddress, points, tags, note);
+        Customer customer2 = new Customer(validName, validPhone, validEmail, validAddress, points, tags, note);
         assertTrue(customer1.equals(customer2));
     }
 

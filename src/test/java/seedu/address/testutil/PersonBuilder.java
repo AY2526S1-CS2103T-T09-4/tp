@@ -24,6 +24,7 @@ public abstract class PersonBuilder<T extends Person> {
     public static final String DEFAULT_ADDRESS = CommandTestUtil.VALID_ADDRESS_AMY;
     public static final String DEFAULT_TAG = CommandTestUtil.VALID_TAG_AMY;
     public static final String DEFAULT_NOTE = CommandTestUtil.VALID_NOTE_AMY;
+    public static final String DEFAULT_POINTS = CommandTestUtil.VALID_POINTS_AMY;
 
     // Default fields
     protected Name name;
@@ -116,6 +117,10 @@ public abstract class PersonBuilder<T extends Person> {
     }
 
     public PersonBuilder<T> withDays(String ... days) {
+        return this;
+    }
+
+    public PersonBuilder<T> withPoints(String points) {
         return this;
     }
 }
