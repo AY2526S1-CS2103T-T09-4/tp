@@ -163,8 +163,7 @@ Adds a customer to the address book.
 Format: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [n/NOTE] [t/TAG]…​`
 
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
-* Points must be a non-negative integer. 
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:** Points must be a non-negative integer.
 </div>
 
 Examples:
