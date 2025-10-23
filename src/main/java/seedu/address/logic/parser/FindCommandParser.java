@@ -1,6 +1,14 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,15 +31,6 @@ import seedu.address.model.person.supplier.Supplier;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-
-    private static final Prefix PREFIX_NAME = new Prefix("n/");
-    private static final Prefix PREFIX_PHONE = new Prefix("p/");
-    private static final Prefix PREFIX_EMAIL = new Prefix("e/");
-    private static final Prefix PREFIX_ADDRESS = new Prefix("a/");
-    private static final Prefix PREFIX_TAG = new Prefix("t/");
-    private static final Prefix PREFIX_SHIFTS = new Prefix("shifts/");
-    private static final Prefix PREFIX_ITEMS = new Prefix("items/");
-    private static final Prefix PREFIX_DAYS = new Prefix("days/");
 
     @Override
     public FindCommand parse(String args) throws ParseException {
@@ -95,10 +94,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Supplier only fields: items, days
         addIfPresent(map, PREFIX_ITEMS, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> {
-                    if (!(p instanceof Supplier s)) {
+                    if (p.getContactType() != Person.ContactType.SUPPLIER) {
                         return "";
                     }
-                    return s.getItems().stream()
+                    return p.getItems().stream()
                             .map(Object::toString)
                             .collect(Collectors.joining(" "));
                 }, kws, false),
@@ -106,10 +105,10 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         addIfPresent(map, PREFIX_DAYS, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> {
-                    if (!(p instanceof Supplier s)) {
+                    if (p.getContactType() != Person.ContactType.SUPPLIER) {
                         return "";
                     }
-                    return s.getDays().stream()
+                    return p.getDays().stream()
                             .map(Object::toString)
                             .collect(Collectors.joining(" "));
                 }, kws, false),
@@ -119,10 +118,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         map.getValue(PREFIX_SHIFTS).map(String::trim).filter(s -> !s.isEmpty()).ifPresent(needleRaw -> {
             final String needle = needleRaw.toLowerCase();
             perField.add(p -> {
-                if (!(p instanceof Staff s)) {
+                if (p.getContactType() != Person.ContactType.STAFF) {
                     return false;
                 }
-                String joined = s.getShifts().stream()
+                String joined = p.getShifts().stream()
                         .map(Object::toString)
                         .collect(Collectors.joining(" "))
                         .toLowerCase();
