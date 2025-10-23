@@ -32,7 +32,7 @@ public class Supplier extends Person {
                     List<Items> items,
                     List<Days> days,
                     Note note) {
-        super(name, phone, email, address, tags, note);
+        super(ContactType.STAFF, name, phone, email, address, tags, note);
         this.items = new ArrayList<>(items);
         this.days = new ArrayList<>(days);
     }

@@ -43,18 +43,22 @@ public abstract class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Note note;
 
+    // Contact Type
+    private final ContactType contactType;
+
     /**
      * Every field must be present and not null.
      * If note is not provided, assign a blank note.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, tags, new Note(""));
+    public Person(ContactType contactType, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(contactType, name, phone, email, address, tags, new Note(""));
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Note note) {
+    public Person(ContactType contactType, Name name, Phone phone, Email email,
+                  Address address, Set<Tag> tags, Note note) {
         requireAllNonNull(name, phone, email, address, tags, note);
         this.name = name;
         this.phone = phone;
@@ -62,6 +66,7 @@ public abstract class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.note = note;
+        this.contactType = contactType;
     }
 
     public Name getName() {
@@ -115,6 +120,13 @@ public abstract class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns contact type of Person class.
+     */
+    public ContactType getContactType() {
+        return this.contactType;
     }
 
     /**
