@@ -12,8 +12,6 @@ import seedu.address.commons.util.StringUtil;
  * Matching is case-insensitive. When {@code wordMatch} is true, whole-word semantics are used;
  * otherwise, substring semantics are used.
  */
-
-
 public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     private final Function<Person, String> extractor;
     private final List<String> keywords;
@@ -31,7 +29,6 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         String field = extractor.apply(person);
         final String text = (field == null) ? "" : field;
-
         if (wordMatch) {
             return keywords.stream()
                     .anyMatch(kw -> StringUtil.containsWordIgnoreCase(text, kw));
@@ -43,7 +40,9 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
 
 
     private static boolean containsIgnoreCase(String text, String query) {
-        if (query == null || query.isBlank()) return false;
+        if (query == null || query.isBlank()) {
+            return false;
+        }
         return text.toLowerCase().contains(query.toLowerCase());
     }
 
