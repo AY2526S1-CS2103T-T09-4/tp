@@ -185,18 +185,10 @@ Examples:
 * `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/2026-11-11 notes/only weekends`
 * `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/2026-11-13, 2026-11-12 notes/only weekends`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
-    <ul>
-        <li>
-           Shift dates must be in the future.
-        </li>
-        <li>
-           Duplicate dates for shifts are not allowed.
-        </li>
-        <li>
-           Dates must follow the format `YYYY-MM-DD`.
-        </li>
-    </ul>
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:** 
+  - Shift dates must be in the future.
+  - Duplicate dates for shifts are not allowed.
+  - Dates must follow the format `YYYY-MM-DD`.
 </div>
 
 ### Adding a supplier: `add supplier`
