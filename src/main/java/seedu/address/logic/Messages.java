@@ -48,7 +48,7 @@ public class Messages {
                 .append("; Tags: ");
 
         person.getTags().forEach(builder::append);
-        switch(person.getDisplayType()) {
+        switch(person.getContactType()) {
         case CUSTOMER:
             builder.append("; Points: ")
                     .append(person.getPoints());

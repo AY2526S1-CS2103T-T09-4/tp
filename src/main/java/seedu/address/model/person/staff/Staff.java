@@ -35,7 +35,7 @@ public class Staff extends Person {
     }
 
     @Override
-    public ContactType getDisplayType() {
+    public ContactType getContactType() {
         return ContactType.STAFF;
     }
 }

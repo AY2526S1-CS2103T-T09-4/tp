@@ -20,7 +20,7 @@ public class SampleDataUtilTest {
     public void getSamplePersons_containsValidPersons() {
         Person[] samplePersons = SampleDataUtil.getSamplePersons();
         for (Person person : samplePersons) {
-            assertTrue(person.getDisplayType().equals(Person.ContactType.CUSTOMER));
+            assertTrue(person.getContactType().equals(Person.ContactType.CUSTOMER));
             assertNotNull(person.getName());
             assertNotNull(person.getPhone());
             assertNotNull(person.getEmail());

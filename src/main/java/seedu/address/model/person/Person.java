@@ -164,5 +164,5 @@ public abstract class Person {
                 .toString();
     }
 
-    public abstract ContactType getDisplayType();
+    public abstract ContactType getContactType();
 }
