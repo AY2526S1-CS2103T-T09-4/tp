@@ -38,7 +38,7 @@ public class AddStaffCommand extends AddCommand {
             + PREFIX_ADDRESS + "123 Clementi Ave 3 "
             + PREFIX_SHIFTS + "2025-12-04, 2025-12-07 "
             + PREFIX_NOTE + "can only do weekdays "
-            + PREFIX_TAG + "preferred ";
+            + PREFIX_TAG + "partTime ";
 
     /**
      * Initialises AddStaffCommand.

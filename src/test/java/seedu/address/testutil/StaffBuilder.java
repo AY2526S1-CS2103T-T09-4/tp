@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.logic.commands.CommandTestUtil;
@@ -7,9 +8,10 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.staff.Staff;
-import seedu.address.model.person.supplier.Supplier;
-import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * A utility class to help with building Staff objects.
+ */
 public class StaffBuilder extends PersonBuilder<Staff> {
     public static final String DEFAULT_SHIFTS = CommandTestUtil.VALID_SHIFTS_CARL;
 
@@ -36,15 +38,15 @@ public class StaffBuilder extends PersonBuilder<Staff> {
     }
 
     @Override
-    public StaffBuilder withShifts(String ... shifts) {
+    public StaffBuilder withShifts(String... shifts) {
         try {
-            this.shifts = SampleDataUtil.getShiftList();
+            this.shifts = ParserUtil.parseShifts(Arrays.asList(shifts));
         } catch (ParseException e) {
-            // Fallthrough
+            throw new IllegalArgumentException("Invalid shift format in StaffBuilder", e);
         }
-
         return this;
     }
+
 
     /**
      * Builds a new {@code Staff} by taking in the relevant fields and outputting an object.

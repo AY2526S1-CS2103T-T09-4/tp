@@ -3,7 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARL;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +21,7 @@ public class EditPersonDescriptorTest {
     public void equals() {
         // same values -> returns true
         EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -27,27 +33,24 @@ public class EditPersonDescriptorTest {
         // different types -> returns false
         assertFalse(DESC_AMY.equals(5));
 
-        // different values -> returns false
-        assertFalse(DESC_AMY.equals(DESC_AMY));
-
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_AMY).build();
+        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_CARL).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_AMY).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_CARL).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_AMY).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_CARL).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different address -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_AMY).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_CARL).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_AMY).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_CARL).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
