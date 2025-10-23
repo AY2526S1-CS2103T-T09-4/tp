@@ -160,11 +160,10 @@ Format: `help`
 
 Adds a customer to the address book.
 
-Format: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [n/NOTE] [t/TAG]…​`
+Format: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…​`
 
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
-* Points must be a non-negative integer. 
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:** Points must be a non-negative integer.
 </div>
 
 Examples:
@@ -175,7 +174,7 @@ Examples:
 
 Adds a staff to the address book.
 
-Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS shifts/SHIFT[, SHIFT,...][t/TAG]…`
+Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] shifts/SHIFT[, SHIFT,...][t/TAG]…`
 
 Examples:
 * `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/2026-11-11 notes/only weekends`
@@ -298,8 +297,8 @@ Clears all entries from the address book.
 Format: `clear`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The clear command deletes all contacts in BrewBook. 
-**There is no undo command** , please use with caution.
+The clear command deletes all contacts in BrewBook.   
+**There is no undo command**, please use with caution.
 </div>
 
 ### Exiting the program : `exit`
@@ -311,7 +310,6 @@ Format: `exit`
 ### Saving the data
 
 BrewBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-<!--
 ### Editing the data file
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
