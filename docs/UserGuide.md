@@ -10,35 +10,116 @@ BrewBook is a **desktop app to help managers of small cafe to manage different c
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+Welcome to **BrewBook** — your café’s one-stop contact manager for customers, staff, and suppliers.  
+Follow these simple steps to get started — no technical experience needed!
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+---
 
-1. Copy the file to the folder you want to use as the _home folder_ for your BrewBook.
+## Step 1: Check that Java 17 is installed
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar brewbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+BrewBook requires **Java 17** to run.  
+Let’s check whether it’s already installed on your computer.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+- **On Windows**
+  1. Click the **Start Menu**, type `cmd`, and open **Command Prompt**.
+  2. In the black window, type: `java -version`
+  3. Press **Enter**.
+- If you see something like:
+  ```
+  java version "17.0.10"
+  ```
+  ✅ Great! You already have Java 17 installed.
+- If you see an older version (e.g. “11” or “8”) or an error saying **“java is not recognized”**, you’ll need to install Java 17.
 
-   * `list [all/customer/staff/supplier]` : Lists all contacts based on type.
+👉 **To install Java 17:**  
+Visit the official Java 17 download page [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
 
-   * `add customer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a customer contact named `John Doe` to the Address Book.
+Download the **Windows x64 Installer (JDK 17)** and follow the instructions on screen.  
+When done, repeat the steps above to confirm it says **version 17**.
 
-   * `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/2030-10-11` : Adds a staff contact named `John Doe` to the Address Book.
+- **On Mac**
 
-   * `add supplier n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 items/flour days/2025-10-10` : Adds a supplier contact named `John Doe` to the Address Book.
+  1. Open **Terminal** (press **Command + Space**, type `Terminal`, and press **Enter**).
+  2. Type: `java -version`
+  3. Press **Enter**.
+- If it shows something like `"17.0.x"`, ✅ you’re ready!
+- If it says **“command not found”** or shows an older version, install Java 17.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+👉 **To install Java 17 on macOS:**  
+Go to [https://www.oracle.com/java/technologies/javase-jdk17-downloads.html](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)  
+Download the **macOS Installer (JDK 17)** and follow the setup instructions.  
+After installation, open Terminal again and run `java -version` to confirm it now shows version 17.
 
-   * `exit` : Exits the app.
+---
 
-1. Refer to the [Features](#features) below for details of each command.
+## Step 2: Download BrewBook
+
+1. Go to the [BrewBook releases page](https://github.com/AY2526S1-CS2103T-T09-4/tp/releases).
+2. Look for the latest version and click to download the file named **`BrewBook.jar`**.  
+   (Think of this as your “BrewBook app.”)
+
+---
+
+## Step 3: Set up your BrewBook folder
+
+1. Create a new folder anywhere you like — for example:
+   - **Windows:** `C:\Users\Jean\Documents\BrewBook`
+   - **macOS:** `/Users/Jean/Documents/BrewBook` or `~/Documents/BrewBook`
+   - **Linux:** `/home/jean/Documents/BrewBook`
+2. Move the downloaded **`BrewBook.jar`** file into that folder.  
+      BrewBook will automatically save your data there each time you use it.
+
+---
+
+## Step 4: Open BrewBook
+
+1. Find the **`BrewBook.jar`** file you downloaded.
+2. **Double-click** it to open BrewBook.
+3. Wait a few seconds — the main screen will appear with some sample contacts.
+
+![Ui](images/Ui.png)
+
+Now you’re ready to start managing your café contacts!
+
+---
+
+## Step 5: Try out a few simple commands
+
+BrewBook uses a **command box** — just type what you want to do and press **Enter**.  
+Here are a few examples you can try:
+
+| Action | What to Type                                                                                                                                              | What It Does |
+|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| Open help window | `help`                                                                                                                                                    | Shows a short guide on using BrewBook |
+| View all contacts | `list all`                                                                                                                                                | Displays every contact saved |
+| Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 notes/allergic to nuts t/frequent`                                          | Adds a new customer |
+| Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/2026-12-04, 2026-12-07 notes/can only do weekdays t/partTime`               | Adds a new staff contact with a shift date |
+| Add a supplier | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/2026-10-10, 2026-10-20 notes/Halal supplier t/preferred` | Adds a supplier contact |
+| Delete a contact | `delete 3`                                                                                                                                                | Removes the 3rd contact from the current list |
+| Exit the app | `exit`                                                                                                                                                    | Closes BrewBook safely |
+
+💡 **Tip:** You can copy and paste commands from here directly into BrewBook.
+
+---
+
+## Step 6: Start using BrewBook for your café
+
+That’s it — you’re ready to go!  
+You can now use BrewBook to keep track of:
+- Your **staff**, along with their shift schedules
+- Your **suppliers**, including what and when they supply
+- Your **customers**, and any notes you want to remember
+
+BrewBook **automatically saves your data**, so there’s no need to click “Save.”  
+When you open it next time, everything will still be there.
+
+---
+
+### Next step
+
+Explore the [Features](#features) section below for a full list of commands and examples to help you manage your café even more efficiently.
 
 --------------------------------------------------------------------------------------------------------------------
 
