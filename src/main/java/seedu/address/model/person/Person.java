@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.customer.Points;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.supplier.Days;
 import seedu.address.model.person.supplier.Items;
@@ -54,8 +55,8 @@ public abstract class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  Note note) {
+    public Person(Name name, Phone phone, Email email,
+                  Address address, Set<Tag> tags, Note note) {
         requireAllNonNull(name, phone, email, address, tags, note);
         this.name = name;
         this.phone = phone;
@@ -83,6 +84,10 @@ public abstract class Person {
 
     public Note getNote() {
         return note;
+    }
+
+    public Points getPoints() {
+        return null;
     }
 
     public List<Shift> getShifts() {
@@ -117,7 +122,6 @@ public abstract class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
-
 
     /**
      * Returns true if both persons have the same identity and data fields.
@@ -161,5 +165,5 @@ public abstract class Person {
                 .toString();
     }
 
-    public abstract ContactType getDisplayType();
+    public abstract ContactType getContactType();
 }

@@ -20,6 +20,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.customer.Points;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -29,6 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_NOTE = "x".repeat(201);
+    private static final String INVALID_POINTS = "-3";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -37,6 +39,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_NOTE = "Valid";
+    private static final String VALID_POINTS = "3";
 
     private static final String VALID_CATEGORY_ALL = "all";
     private static final String VALID_CATEGORY_STAFF = "staff";
@@ -286,5 +289,28 @@ public class ParserUtilTest {
         String noteWithWhitespace = WHITESPACE + VALID_NOTE + WHITESPACE;
         Note expectedNote = new Note(VALID_NOTE);
         assertEquals(expectedNote, ParserUtil.parseNote(noteWithWhitespace));
+    }
+
+    @Test
+    public void parsePoints_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePoints(null));
+    }
+
+    @Test
+    public void parsePoints_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePoints(INVALID_POINTS));
+    }
+
+    @Test
+    public void parsePoints_validValueWithoutWhitespace_returnsNote() throws Exception {
+        Points expectedPoints = new Points(Integer.parseInt(VALID_POINTS));
+        assertEquals(expectedPoints, ParserUtil.parsePoints(VALID_POINTS));
+    }
+
+    @Test
+    public void parsePoints_validValueWithWhitespace_returnsTrimmedNote() throws Exception {
+        String pointsWithWhitespace = WHITESPACE + VALID_POINTS + WHITESPACE;
+        Points expectedPoints = new Points(Integer.parseInt(VALID_POINTS));
+        assertEquals(expectedPoints, ParserUtil.parsePoints(pointsWithWhitespace));
     }
 }

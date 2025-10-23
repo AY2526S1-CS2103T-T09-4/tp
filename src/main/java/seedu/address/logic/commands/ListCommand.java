@@ -52,7 +52,7 @@ public class ListCommand extends Command {
     }
 
     public static final String COMMAND_WORD = "list";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": List <all | staff | customer | supplier> categories";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": List <all | staff | customer | supplier> categories>";
     public static final String MESSAGE_SUCCESS_FORMAT = "Listed %s";
 
     private final Category category;

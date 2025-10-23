@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,10 +19,13 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.customer.Points;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.supplier.Days;
 import seedu.address.model.person.supplier.Items;
+import seedu.address.model.sort.Attribute;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -147,9 +151,28 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String points} into an {@code Points}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code points} is invalid.
+     */
+    public static Points parsePoints(String points) throws ParseException {
+        requireNonNull(points);
+
+        String trimmedPoints = points.trim();
+
+        if (!Points.isValidPoints(trimmedPoints)) {
+            throw new ParseException(Points.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Points(Integer.parseInt(trimmedPoints));
+    }
+
+    /**
      * Parses {@code List<String> shiftStrings} into a {@code List<Shift>}.
      */
     public static List<Shift> parseShifts(List<String> shiftStrings) throws ParseException {
+        requireNonNull(shiftStrings);
         List<Shift> shifts = new ArrayList<>();
         if (shiftStrings.isEmpty()) {
             throw new ParseException(Shift.MESSAGE_COMPULSORY);
@@ -163,13 +186,25 @@ public class ParserUtil {
             }
             try {
                 LocalDate date = LocalDate.parse(trimmed);
+
+                if (date.isBefore(LocalDate.now())) {
+                    throw new ParseException(Shift.MESSAGE_OLD_CONSTRAINTS + date);
+                }
+
+                Shift newShift = new Shift(date);
+
+                if (shifts.contains(newShift)) {
+                    throw new ParseException(Shift.MESSAGE_DUPLICATE_CONSTRAINTS + date);
+                }
+
                 shifts.add(new Shift(date));
             } catch (DateTimeParseException e) {
-                throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Shift.MESSAGE_FORMAT_CONSTRAINTS);
             }
         }
         return shifts;
     }
+
 
     /**
      * Parses {@code List<String> daysString} into a {@code List<Days>}.
@@ -190,7 +225,7 @@ public class ParserUtil {
                 LocalDate date = LocalDate.parse(trimmed);
                 days.add(new Days(date));
             } catch (DateTimeParseException e) {
-                throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Shift.MESSAGE_FORMAT_CONSTRAINTS);
             }
         }
         return days;
@@ -240,5 +275,23 @@ public class ParserUtil {
         }
 
         return category;
+    }
+
+    /**
+     * Parses {@code String attributeString} into a {@code Attribute}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code attributeString} is invalid
+     */
+    public static Comparator<Person> parseComparator(String attributeString) throws ParseException {
+        String trimmedLowerCaseAttribute = attributeString.trim().toLowerCase();
+
+        if (!Attribute.isValidAttribute(trimmedLowerCaseAttribute)) {
+            throw new ParseException(Attribute.MESSAGE_INVALID_ATTRIBUTE);
+        }
+
+        Attribute attribute = new Attribute(attributeString);
+
+        return attribute.toComparator();
     }
 }

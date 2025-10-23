@@ -18,6 +18,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
+import seedu.address.model.person.customer.Points;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.staff.Staff;
 import seedu.address.model.person.supplier.Days;
@@ -49,6 +50,8 @@ class JsonAdaptedPerson {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final List<JsonAdaptedDays> days = new ArrayList<>();
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private final Integer points;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -61,7 +64,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("shifts") List<JsonAdaptedShift> shifts,
                              @JsonProperty("items") List<JsonAdaptedItems> items,
                              @JsonProperty("days") List<JsonAdaptedDays> days,
-                             @JsonProperty("note") String note) {
+                             @JsonProperty("note") String note, @JsonProperty("points") Integer points) {
         this.type = type;
         this.name = name;
         this.phone = phone;
@@ -71,6 +74,11 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.note = note;
+        if (points != null) {
+            this.points = points;
+        } else {
+            this.points = null;
+        }
         if (shifts != null) {
             this.shifts.addAll(shifts);
         }
@@ -80,18 +88,25 @@ class JsonAdaptedPerson {
         if (days != null) {
             this.days.addAll(days);
         }
+
     }
 
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        this.type = source.getDisplayType();
+        this.type = source.getContactType();
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         note = source.getNote().value;
+
+        if (type == Person.ContactType.CUSTOMER) {
+            points = source.getPoints().value;
+        } else {
+            points = null;
+        }
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -100,7 +115,7 @@ class JsonAdaptedPerson {
         if (personShift != null) {
             shifts.addAll(personShift.stream()
                     .map(JsonAdaptedShift::new)
-                    .collect(Collectors.toList()));
+                    .toList());
         }
 
         List<Items> personItems = source.getItems();
@@ -133,6 +148,10 @@ class JsonAdaptedPerson {
         }
 
         for (JsonAdaptedShift shift : shifts) {
+            if (shift.toModelType() == null) {
+                continue;
+            }
+
             modelShifts.add(shift.toModelType());
         }
 
@@ -189,7 +208,16 @@ class JsonAdaptedPerson {
 
         switch (type) {
         case CUSTOMER:
-            return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNote);
+            if (points == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        Points.class.getSimpleName()));
+            }
+            if (!Points.isValidPoints(Integer.toString(points))) {
+                throw new IllegalValueException(Points.MESSAGE_CONSTRAINTS);
+            }
+
+            final Points modelPoints = new Points(points);
+            return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelPoints, modelTags, modelNote);
         case STAFF:
             return new Staff(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelShifts, modelNote);
         case SUPPLIER:
