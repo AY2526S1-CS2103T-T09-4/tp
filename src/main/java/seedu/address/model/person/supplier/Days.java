@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 
 /**
- * Represents a staff's shift in the address book.
+ * Represents a supplier's supplying days in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Days {
@@ -15,7 +15,7 @@ public class Days {
     private final LocalDate daysSupplied;
 
     /**
-     * Constructor that creates Shift class with startTime and endTime.
+     * Constructor that creates Days class.
      */
     public Days(LocalDate daysSupplied) {
         requireAllNonNull(daysSupplied);
