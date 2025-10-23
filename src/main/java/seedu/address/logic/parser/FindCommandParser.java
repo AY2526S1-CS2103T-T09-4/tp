@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -44,6 +45,23 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
                 PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS
         );
+
+        boolean anyPrefixPresent = Stream.of(
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+                PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS
+        ).anyMatch(px -> map.getValue(px).isPresent());
+
+        if (!anyPrefixPresent) {
+            String preamble = map.getPreamble().trim();
+            if (preamble.isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+            List<String> keywords = Arrays.stream(preamble.split("\\s+"))
+                    .filter(s -> !s.isBlank())
+                    .collect(Collectors.toList());
+            // IMPORTANT: return the legacy predicate so equals() in the test passes
+            return new FindCommand(new NameContainsKeywordsPredicate(keywords));
+        }
 
         List<Predicate<Person>> perField = new ArrayList<>();
         Function<String, List<String>> toKeywords = s -> Arrays.stream(s.trim().split("\\s+"))
