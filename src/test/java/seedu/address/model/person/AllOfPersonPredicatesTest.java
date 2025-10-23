@@ -13,7 +13,7 @@ public class AllOfPersonPredicatesTest {
 
     @Test
     public void test_allMustMatch() {
-        Person alice = TypicalPersons.ALICE;   // name: "Alice Pauline", address contains "Jurong"
+        Person alice = TypicalPersons.ALICE;
         Person benson = TypicalPersons.BENSON;
 
         FieldContainsKeywordsPredicate nameIsAlice = new FieldContainsKeywordsPredicate(
@@ -24,7 +24,7 @@ public class AllOfPersonPredicatesTest {
         AllOfPersonPredicates and = new AllOfPersonPredicates(
                 List.of(nameIsAlice, addressHasJurong));
 
-        assertTrue(and.test(alice));    // both true
-        assertFalse(and.test(benson));  // name predicate fails
+        assertTrue(and.test(alice));
+        assertFalse(and.test(benson));
     }
 }

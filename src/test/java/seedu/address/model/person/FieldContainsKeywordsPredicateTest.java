@@ -13,19 +13,19 @@ public class FieldContainsKeywordsPredicateTest {
 
     @Test
     public void test_wordMatch_nameWholeWord() {
-        Person alice = TypicalPersons.ALICE; // "Alice Pauline"
+        Person alice = TypicalPersons.ALICE;
         FieldContainsKeywordsPredicate pred = new FieldContainsKeywordsPredicate(
                 p -> p.getName().fullName, List.of("Alice"), true);
 
-        assertTrue(pred.test(alice));          // whole-word "Alice" matches
+        assertTrue(pred.test(alice));
         FieldContainsKeywordsPredicate no = new FieldContainsKeywordsPredicate(
                 p -> p.getName().fullName, List.of("Ali"), true);
-        assertFalse(no.test(alice));           // not a whole word
+        assertFalse(no.test(alice));
     }
 
     @Test
     public void test_substring_email() {
-        Person alice = TypicalPersons.ALICE;   // "alice@example.com"
+        Person alice = TypicalPersons.ALICE;
         Person benson = TypicalPersons.BENSON;
 
         FieldContainsKeywordsPredicate pred = new FieldContainsKeywordsPredicate(
@@ -37,7 +37,7 @@ public class FieldContainsKeywordsPredicateTest {
 
     @Test
     public void test_substring_address_caseInsensitive() {
-        Person alice = TypicalPersons.ALICE;   // "... Jurong West Ave ..."
+        Person alice = TypicalPersons.ALICE;
         FieldContainsKeywordsPredicate pred = new FieldContainsKeywordsPredicate(
                 p -> p.getAddress().value, List.of("jurong"), false);
 
