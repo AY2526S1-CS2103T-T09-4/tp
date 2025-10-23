@@ -100,7 +100,7 @@ class JsonAdaptedPerson {
         if (personShift != null) {
             shifts.addAll(personShift.stream()
                     .map(JsonAdaptedShift::new)
-                    .collect(Collectors.toList()));
+                    .toList());
         }
 
         List<Items> personItems = source.getItems();
@@ -133,6 +133,10 @@ class JsonAdaptedPerson {
         }
 
         for (JsonAdaptedShift shift : shifts) {
+            if (shift.toModelType() == null) {
+                continue;
+            }
+
             modelShifts.add(shift.toModelType());
         }
 
