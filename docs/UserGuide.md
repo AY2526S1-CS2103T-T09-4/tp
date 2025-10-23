@@ -141,21 +141,21 @@ Explore the [Features](#features) section below for a full list of commands and 
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-<!--
+
 * Extraneous parameters for commands that do not take in parameters (such as `list`, `help`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `list 123`, it will be interpreted as `list`.-->
+  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that 1 multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-<!--### Viewing help : `help`
+### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
--->
+
 ### Adding a customer: `add customer`
 
 Adds a customer to the address book.
@@ -300,8 +300,7 @@ Clears all entries from the address book.
 Format: `clear`
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
-The clear command deletes all contacts in BrewBook.   
-**There is no undo command**, please use with caution.
+The clear command deletes all contacts in BrewBook.
 </div>
 
 ### Exiting the program : `exit`
@@ -318,8 +317,8 @@ BrewBook data are saved in the hard disk automatically after any command that ch
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+- If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+- Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 
