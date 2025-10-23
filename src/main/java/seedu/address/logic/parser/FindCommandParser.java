@@ -35,16 +35,27 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     @Override
     public FindCommand parse(String args) throws ParseException {
-        String raw = args == null ? "" : args.trim();
+        final String raw = args == null ? "" : args.trim();
         if (raw.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         ArgumentMultimap map = ArgumentTokenizer.tokenize(
-                args,
+                raw,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
                 PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS
         );
+
+        List<Prefix> all = List.of(
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+                PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS
+        );
+
+        boolean anyPrefixEmpty = all.stream().anyMatch(px ->
+                map.getAllValues(px).stream().anyMatch(v -> v.trim().isEmpty()));
+        if (anyPrefixEmpty) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
 
         boolean anyPrefixPresent = Stream.of(
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
@@ -59,7 +70,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             List<String> keywords = Arrays.stream(preamble.split("\\s+"))
                     .filter(s -> !s.isBlank())
                     .collect(Collectors.toList());
-            // IMPORTANT: return the legacy predicate so equals() in the test passes
             return new FindCommand(new NameContainsKeywordsPredicate(keywords));
         }
 
@@ -117,13 +127,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                 }, kws, false),
                 perField);
 
-
         if (perField.isEmpty()) {
-            String preamble = map.getPreamble().trim();
-            if (preamble.isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-            perField.add(new NameContainsKeywordsPredicate(toKeywords.apply(preamble)));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         for (Prefix px : List.of(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
