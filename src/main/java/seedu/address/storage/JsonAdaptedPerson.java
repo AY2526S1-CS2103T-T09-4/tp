@@ -95,7 +95,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        this.type = source.getDisplayType();
+        this.type = source.getContactType();
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -115,7 +115,7 @@ class JsonAdaptedPerson {
         if (personShift != null) {
             shifts.addAll(personShift.stream()
                     .map(JsonAdaptedShift::new)
-                    .collect(Collectors.toList()));
+                    .toList());
         }
 
         List<Items> personItems = source.getItems();
@@ -148,6 +148,10 @@ class JsonAdaptedPerson {
         }
 
         for (JsonAdaptedShift shift : shifts) {
+            if (shift.toModelType() == null) {
+                continue;
+            }
+
             modelShifts.add(shift.toModelType());
         }
 

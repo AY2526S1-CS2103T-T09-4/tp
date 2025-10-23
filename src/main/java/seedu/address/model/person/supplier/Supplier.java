@@ -49,7 +49,7 @@ public class Supplier extends Person {
     }
 
     @Override
-    public ContactType getDisplayType() {
+    public ContactType getContactType() {
         return ContactType.SUPPLIER;
     }
 }

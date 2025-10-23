@@ -33,7 +33,7 @@ public class Customer extends Person {
     }
 
     @Override
-    public ContactType getDisplayType() {
+    public ContactType getContactType() {
         return ContactType.CUSTOMER;
     }
 }
