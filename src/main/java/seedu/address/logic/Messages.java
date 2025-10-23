@@ -64,6 +64,7 @@ public class Messages {
                     .append("; days: ")
                     .append(person.getDays());
             break;
+        default:
         }
 
 
