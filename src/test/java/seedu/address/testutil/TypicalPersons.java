@@ -56,8 +56,8 @@ public class TypicalPersons {
 
     // Supplier
     public static final Supplier ELLE = new SupplierBuilder().withName(VALID_NAME_ELLE).withPhone(VALID_PHONE_ELLE)
-                    .withEmail(VALID_EMAIL_ELLE).withAddress(VALID_ADDRESS_ELLE).withItems(VALID_ITEMS_ELLE)
-                    .withDays(VALID_DAYS_ELLE).build();
+            .withEmail(VALID_EMAIL_ELLE).withAddress(VALID_ADDRESS_ELLE).withItems(VALID_ITEMS_ELLE)
+            .withDays(VALID_DAYS_ELLE).build();
     public static final Supplier FIONA = new SupplierBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
 

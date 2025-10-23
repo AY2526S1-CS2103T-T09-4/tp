@@ -34,12 +34,12 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
+import seedu.address.model.person.customer.Points;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.staff.Staff;
 import seedu.address.model.person.supplier.Days;
 import seedu.address.model.person.supplier.Items;
 import seedu.address.model.person.supplier.Supplier;
-import seedu.address.model.person.customer.Points;
 import seedu.address.model.tag.Tag;
 
 /**
