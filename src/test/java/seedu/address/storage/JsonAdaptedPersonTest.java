@@ -187,7 +187,7 @@ public class JsonAdaptedPersonTest {
                 VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAGS, invalidShifts, EMPTY_ITEMS, EMPTY_DAYS, VALID_NOTE);
 
-        String expectedMessage = Shift.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Shift.MESSAGE_FORMAT_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

@@ -50,7 +50,7 @@ class JsonAdaptedShift {
             LocalDate parsedDate = LocalDate.parse(shiftDate);
             return new Shift(parsedDate);
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException(Shift.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Shift.MESSAGE_FORMAT_CONSTRAINTS);
         }
     }
 }

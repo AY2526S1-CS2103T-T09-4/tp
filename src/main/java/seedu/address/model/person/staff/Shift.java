@@ -10,7 +10,9 @@ import java.time.LocalDate;
  */
 public class Shift {
     public static final String MESSAGE_COMPULSORY = "At least one shift must be provided";
-    public static final String MESSAGE_CONSTRAINTS = "Invalid date format for shift, Expected format: yyyy-MM-dd";
+    public static final String MESSAGE_FORMAT_CONSTRAINTS = "Invalid date format for shift,"
+            + " Expected format: yyyy-MM-dd";
+    public static final String MESSAGE_DUPLICATE_CONSTRAINTS = "Duplicates dates for shifts are not allowed";
 
     private final LocalDate shiftDate;
 
