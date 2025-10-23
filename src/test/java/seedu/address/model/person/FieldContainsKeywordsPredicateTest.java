@@ -36,7 +36,7 @@ public class FieldContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_substring_address_caseInsensitive() {
+    public void testsubstringaddresscaseInsensitive() {
         Person alice = TypicalPersons.ALICE;
         FieldContainsKeywordsPredicate pred = new FieldContainsKeywordsPredicate(
                 p -> p.getAddress().value, List.of("jurong"), false);
