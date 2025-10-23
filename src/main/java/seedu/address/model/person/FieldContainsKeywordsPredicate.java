@@ -17,6 +17,13 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
     private final boolean wordMatch;
 
+    /**
+     * Constructs a predicate for case-insensitive matching against an extracted String field.
+     *
+     * @param extractor function to extract the field string from a Person (non-null)
+     * @param keywords  list of keywords; match is OR within this list (non-null)
+     * @param wordMatch if true, use whole-word semantics; otherwise, substring semantics
+     */
     public FieldContainsKeywordsPredicate(Function<Person, String> extractor,
                                           List<String> keywords,
                                           boolean wordMatch) {

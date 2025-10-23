@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -17,7 +18,8 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons by specified fields. (case-insensitive) \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons by specified fields."
+            + " (case-insensitive) \n"
             + "Without prefixes, searches by name. \n"
             + "Parameters: [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGS]"
             + " [shifts/SHIFTS] [items/ITEMS] [days/DAYS] \n"
