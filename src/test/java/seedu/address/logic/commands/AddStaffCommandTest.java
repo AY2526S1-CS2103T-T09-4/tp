@@ -162,6 +162,7 @@ public class AddStaffCommandTest {
 
         @Override
         public void updateFilteredPersonList(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

@@ -64,7 +64,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_CARL = "bestStaff";
     public static final String VALID_TAG_CARL_2 = "morning";
     public static final String VALID_NOTE_CARL = "allergic to work";
-    public static final String VALID_SHIFTS_CARL = "2025-10-10";
+    public static final String VALID_SHIFTS_CARL = "2030-10-10";
     public static final String NAME_DESC_CARL = " " + PREFIX_NAME + VALID_NAME_CARL;
     public static final String PHONE_DESC_CARL = " " + PREFIX_PHONE + VALID_PHONE_CARL;
     public static final String EMAIL_DESC_CARL = " " + PREFIX_EMAIL + VALID_EMAIL_CARL;
