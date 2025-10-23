@@ -173,15 +173,16 @@ Examples:
 
 Adds a staff to the address book.
 
-Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS shifts/SHIFT[, SHIFT,...][t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
-A staff can have more than 1 shift(s)
-</div>
+Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS shifts/SHIFT[, SHIFT,...][t/TAG]…`
 
 Examples:
-* `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/2025-11-11`
-* `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/2025-11-13`
+* `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/2026-11-11 notes/only weekends`
+* `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/2026-11-13, 2026-11-12 notes/only weekends`
+
+> ❗ **Constraints:**
+> - Shift dates must be in the future.
+> - Duplicate dates for shifts are not allowed.
+> - Dates must follow the format `YYYY-MM-DD`.
 
 ### Adding a supplier: `add supplier`
 
@@ -240,17 +241,16 @@ Examples:
 -->
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person or people from the address book.
 
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format: `delete INDEX[, INDEX, ...]`
 
 Examples:
 * `list all` followed by `delete 2` deletes the 2nd person in the address book.
-<!--* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list all` followed by `delete 1, 2` deletes the 1st & 2nd person in the address book.
+
+> ❗ **Constraints:**
+> - The index **must be a positive integer** 
 
 ### Clearing all entries : `clear`
 
