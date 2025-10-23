@@ -11,10 +11,16 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POINTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +28,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -118,6 +125,49 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+
+    @Test
+    public void execute_customerWrongFieldShifts_failure() throws ParseException {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Customer lastPerson = (Customer) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        List<String> shiftsList = new ArrayList<>();
+        shiftsList.add("2025-12-12");
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withShift(shiftsList).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_SHIFTS));
+    }
+
+    @Test
+    public void execute_customerWrongFieldItems_failure() throws ParseException {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Customer lastPerson = (Customer) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        List<String> itemList = new ArrayList<>();
+        itemList.add("Eggs");
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withItems(itemList).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_ITEMS));
+    }
+
+    @Test
+    public void execute_customerWrongFieldDays_failure() throws ParseException {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Customer lastPerson = (Customer) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        List<String> daysList = new ArrayList<>();
+        daysList.add("2025-12-12");
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withDays(daysList).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_DAYS));
+    }
+
     @Test
     public void execute_staffSomeFieldsSpecifiedUnfilteredList_success() {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_STAFFS);
@@ -141,7 +191,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_staffWrongFields_success() {
+    public void execute_staffWrongFieldsPoints_failure() {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_STAFFS);
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Staff lastPerson = (Staff) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
@@ -153,17 +203,32 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_supplierWrongFields_success() {
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
+    public void execute_staffWrongFieldItems_failure() throws ParseException {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_STAFFS);
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Supplier lastPerson = (Supplier) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Staff lastPerson = (Staff) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPoints("3").build();
+        List<String> itemList = new ArrayList<>();
+        itemList.add("Eggs");
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withItems(itemList).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
-        assertCommandFailure(editCommand, model, String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_POINTS));
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_ITEMS));
     }
 
+    @Test
+    public void execute_staffWrongFieldDays_failure() throws ParseException {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_STAFFS);
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Staff lastPerson = (Staff) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        List<String> daysList = new ArrayList<>();
+        daysList.add("2025-12-12");
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withDays(daysList).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_DAYS));
+    }
 
     @Test
     public void execute_supplierSomeFieldsSpecifiedUnfilteredList_success() {
@@ -185,6 +250,32 @@ public class EditCommandTest {
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_supplierWrongFields_failure() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Supplier lastPerson = (Supplier) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPoints("3").build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_POINTS));
+    }
+
+    @Test
+    public void execute_supplierWrongFieldShifts_failure() throws ParseException {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Supplier lastPerson = (Supplier) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        List<String> shiftsList = new ArrayList<>();
+        shiftsList.add("2025-12-12");
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withShift(shiftsList).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_SHIFTS));
     }
 
     @Test
