@@ -198,12 +198,24 @@ Examples:
 * `add supplier n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 items/Coffee days/2025-12-11`
 * `add supplier n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 items/Bread days/2025-12-09`
 
-### Listing all persons : `list`
+### Viewing contacts: `list`
 
-Shows a list of all contacts in the given contact `TYPE`.
+Shows a list of all contacts in BrewBook, filtered by type.
 
 Format: `list TYPE`
-<!--
+
+**Valid options for `TYPE`:**
+- `all` — shows *all* contacts
+- `customer` — shows only customers
+- `staff` — shows only staff members
+- `supplier` — shows only suppliers
+
+Examples:
+- `list all` → displays every contact saved in BrewBook
+- `list customer` → shows only customers
+- `list staff` → shows only your café’s employees
+- `list supplier` → shows only your café’s suppliers
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -238,7 +250,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
--->
+
 ### Deleting a person : `delete`
 
 Deletes the specified person or people from the address book.
@@ -252,18 +264,48 @@ Examples:
 > ❗ **Constraints:**
 > - The index **must be a positive integer** 
 
+### Sorting contacts: `sort`
+
+Sorts your contact list based on a specific field and optional order — for example, by name in ascending order.  
+This helps you quickly organize your list and find what you need.
+
+Format: `sort FIELD`
+
+**Valid options for `FIELD`:**
+- `name` — sorts contacts alphabetically by name
+- `phone` — sorts contacts by phone number
+- `email` — sorts contacts alphabetically by email
+- `address` — sorts contacts alphabetically by address
+- `type` — sorts contacts by their role (customer, staff, or supplier)
+
+Examples:
+- `sort name` → sorts all contacts by name in ascending order (A–Z)
+- `sort phone o/desc` → sorts contacts by phone number in descending order
+- `sort type o/asc` → groups contacts by type (customer → staff → supplier) in ascending order
+
+### Summarising important dates : `summary`
+
+Displays all staff's shift and supplier's days.
+
+Format: `summary`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The clear command deletes all contacts in BrewBook. 
+**There is no undo command** , please use with caution.
+</div>
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
--->
+
 ### Saving the data
 
 BrewBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -277,9 +319,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -287,7 +327,7 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
--->
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
