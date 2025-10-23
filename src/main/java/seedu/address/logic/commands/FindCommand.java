@@ -1,14 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-
-import java.util.function.Predicate;
 
 /**
  * Finds and lists all persons in address book whose fields match the given predicate
@@ -20,7 +19,8 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons by specified fields. (case-insensitive) \n"
             + "Without prefixes, searches by name. \n"
-            + "Parameters: [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGS] [shifts/SHIFTS][items/ITEMS] [days/DAYS] \n"
+            + "Parameters: [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGS]"
+            + " [shifts/SHIFTS] [items/ITEMS] [days/DAYS] \n"
             + "Example: " + COMMAND_WORD + " n/John shifts/2025-10-10";
 
     private final Predicate<Person> predicate;

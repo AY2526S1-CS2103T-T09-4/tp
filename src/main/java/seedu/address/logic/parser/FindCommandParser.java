@@ -2,16 +2,19 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.List;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.AllOfPersonPredicates;
+import seedu.address.model.person.FieldContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.staff.Staff;
 import seedu.address.model.person.supplier.Supplier;
 
@@ -64,16 +67,20 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Supplier only fields: items, days
         addIfPresent(map, PREFIX_ITEMS, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> {
-                    if (!(p instanceof Supplier s)) return "";
+                    if (!(p instanceof Supplier s)) {
+                        return "";
+                    }
                     return s.getItems().stream()
-                            .map(Object::toString)   // change to getName()/value if you have them
+                            .map(Object::toString)
                             .collect(Collectors.joining(" "));
                 }, kws, false),
                 perField);
 
         addIfPresent(map, PREFIX_DAYS, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> {
-                    if (!(p instanceof Supplier s)) return "";
+                    if (!(p instanceof Supplier s)) {
+                        return "";
+                    }
                     return s.getDays().stream()
                             .map(Object::toString)
                             .collect(Collectors.joining(" "));
@@ -83,7 +90,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Staff only field: shifts
         addIfPresent(map, PREFIX_SHIFTS, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> {
-                    if (!(p instanceof Staff s)) return "";
+                    if (!(p instanceof Staff s)) {
+                        return "";
+                    }
                     return s.getShifts().stream()
                             .map(Object::toString)
                             .collect(Collectors.joining(" "));
