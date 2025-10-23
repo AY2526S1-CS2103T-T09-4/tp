@@ -145,7 +145,7 @@ Explore the [Features](#features) section below for a full list of commands and 
 * Extraneous parameters for commands that do not take in parameters (such as `list`, `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.-->
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that 1 multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 <!--### Viewing help : `help`
@@ -163,7 +163,7 @@ Adds a customer to the address book.
 Format: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…​`
 
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
   - Points must be a non-negative integer.
 </div>
 
@@ -181,7 +181,7 @@ Examples:
 * `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/2026-11-11 notes/only weekends`
 * `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/2026-11-13, 2026-11-12 notes/only weekends`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:** 
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:** 
   - Shift dates must be in the future.
   - Duplicate dates for shifts are not allowed.
   - Dates must follow the format `YYYY-MM-DD`.
@@ -191,13 +191,13 @@ Examples:
 
 Adds a supplier to the address book.
 
-Format: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS[, ITEMS,...] days/DAYS[, DAYS,...] [t/TAG] [notes/NOTES]`
+Format: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS[, ITEMS,...] days/DAYS[, DAYS,...] [notes/NOTES] [t/TAG]...`
 
 Examples:
 * `add supplier n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 items/Coffee days/2025-12-11 notes/mainSupplier`
 * `add supplier n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 items/Bread days/2025-12-09`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
   - Days dates must be in the future.
   - Duplicate dates for Days are not allowed.
   - Days must follow the format `YYYY-MM-DD`.
@@ -240,13 +240,13 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds person whose fields contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the field given is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -254,7 +254,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
@@ -266,7 +265,7 @@ Examples:
 * `list all` followed by `delete 2` deletes the 2nd person in the address book.
 * `list all` followed by `delete 1, 2` deletes the 1st & 2nd person in the address book.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
   - The index **must be a positive integer** 
 </div>
 ### Sorting contacts: `sort`
@@ -300,7 +299,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
 The clear command deletes all contacts in BrewBook.   
 **There is no undo command**, please use with caution.
 </div>
@@ -318,7 +317,7 @@ BrewBook data are saved in the hard disk automatically after any command that ch
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
@@ -345,14 +344,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action | Format, Examples
 --------|------------------
-**Add customer** | `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS shifts/SHIFTS[, SHIFTS,...] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 shifts/2025-09-10 t/intern`
-**Add suppplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS[, ITEMS,...] days/DAYS[, DAYS,...] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/2025-10-30`
+**Add customer** | `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…​` <br> e.g., `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`
+**Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] shifts/SHIFT[, SHIFT,...][t/TAG]…` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/2025-12-04, 2025-12-07 notes/can only do weekdays t/partTime`
+**Add suppplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS[, ITEMS,...] days/DAYS[, DAYS,...] [notes/NOTES] [t/TAG]...​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/2025-10-30`
 **List** | `list [all/customer/staff/supplier]`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-<!--
+**Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`
 **Clear** | `clear` 
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [n/NOTE] [points/POINTS] [shifts/SHIFTS] [items/ITEMS] [days/DAYS] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
--->
