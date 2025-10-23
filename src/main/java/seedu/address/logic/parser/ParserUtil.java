@@ -153,6 +153,7 @@ public class ParserUtil {
      * Parses {@code List<String> shiftStrings} into a {@code List<Shift>}.
      */
     public static List<Shift> parseShifts(List<String> shiftStrings) throws ParseException {
+        requireNonNull(shiftStrings);
         List<Shift> shifts = new ArrayList<>();
         if (shiftStrings.isEmpty()) {
             throw new ParseException(Shift.MESSAGE_COMPULSORY);
@@ -166,13 +167,25 @@ public class ParserUtil {
             }
             try {
                 LocalDate date = LocalDate.parse(trimmed);
+
+                if (date.isBefore(LocalDate.now())) {
+                    throw new ParseException(Shift.MESSAGE_OLD_CONSTRAINTS + date);
+                }
+
+                Shift newShift = new Shift(date);
+
+                if (shifts.contains(newShift)) {
+                    throw new ParseException(Shift.MESSAGE_DUPLICATE_CONSTRAINTS + date);
+                }
+
                 shifts.add(new Shift(date));
             } catch (DateTimeParseException e) {
-                throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Shift.MESSAGE_FORMAT_CONSTRAINTS);
             }
         }
         return shifts;
     }
+
 
     /**
      * Parses {@code List<String> daysString} into a {@code List<Days>}.
@@ -193,7 +206,7 @@ public class ParserUtil {
                 LocalDate date = LocalDate.parse(trimmed);
                 days.add(new Days(date));
             } catch (DateTimeParseException e) {
-                throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Shift.MESSAGE_FORMAT_CONSTRAINTS);
             }
         }
         return days;

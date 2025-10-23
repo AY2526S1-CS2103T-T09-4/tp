@@ -49,8 +49,8 @@ public class SummaryCommandTest {
 
         String expected = "Important dates summarised:\n\n"
                 + "Staff's shift:\n"
-                + "Carl Kurz: [2025-10-10]\n"
-                + "Daniel Meier: [2025-10-10]\n\n"
+                + "Carl Kurz: [2030-10-10]\n"
+                + "Daniel Meier: [2030-10-10]\n\n"
                 + "Supplier's day:\n"
                 + "Elle Meyer: [2025-10-10]\n"
                 + "Fiona Kunz: [2025-10-10]";
@@ -78,8 +78,8 @@ public class SummaryCommandTest {
 
         String expectedMessage = "Important dates summarised:\n\n"
                 + "Staff's shift:\n"
-                + "Carl Kurz: [2025-10-10]\n"
-                + "Daniel Meier: [2025-10-10]";
+                + "Carl Kurz: [2030-10-10]\n"
+                + "Daniel Meier: [2030-10-10]";
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertFalse(result.getFeedbackToUser().contains("Supplier"));
