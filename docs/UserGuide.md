@@ -203,7 +203,7 @@ Examples:
 
 Adds a supplier to the address book.
 
-Format: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS[, ITEMS,...] days/DAYS[, DAYS,...] [t/TAG]…​`
+Format: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS[, ITEMS,...] days/DAYS[, DAYS,...] [t/TAG] [notes/NOTES]`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
     <ul>
@@ -220,8 +220,14 @@ Format: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS[, ITEM
 </div>
 
 Examples:
-* `add supplier n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 items/Coffee days/2025-12-11`
+* `add supplier n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 items/Coffee days/2025-12-11 notes/mainSupplier`
 * `add supplier n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 items/Bread days/2025-12-09`
+
+> ❗ **Constraints:**
+> - Days dates must be in the future.
+> - Duplicate dates for Days are not allowed.
+> - Days must follow the format `YYYY-MM-DD`.
+> - Must have at least one day and item.
 
 ### Viewing contacts: `list`
 
