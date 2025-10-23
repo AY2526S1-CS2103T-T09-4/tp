@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -35,10 +36,9 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        // TODO
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_NOTE, PREFIX_SHIFTS, PREFIX_ITEMS, PREFIX_DAYS);
+                        PREFIX_NOTE, PREFIX_POINTS, PREFIX_SHIFTS, PREFIX_ITEMS, PREFIX_DAYS);
 
         Index index;
 
@@ -49,9 +49,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        // TODO
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE,
-                PREFIX_SHIFTS, PREFIX_ITEMS, PREFIX_DAYS);
+                PREFIX_POINTS, PREFIX_SHIFTS, PREFIX_ITEMS, PREFIX_DAYS);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -67,7 +66,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        // TODO
+        if (argMultimap.getValue(PREFIX_POINTS).isPresent()) {
+            editPersonDescriptor.setPoints(ParserUtil.parsePoints(argMultimap.getValue(PREFIX_POINTS).get()));
+        }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
             editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
