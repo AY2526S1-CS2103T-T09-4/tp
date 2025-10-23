@@ -43,9 +43,9 @@ public class TypicalPersons {
 
     // Staff
     public static final Staff CARL = new StaffBuilder().withName(VALID_NAME_CARL).withPhone(VALID_PHONE_CARL)
-            .withEmail(VALID_EMAIL_CARL).withAddress(VALID_ADDRESS_CARL).withShifts(VALID_SHIFTS_CARL).build();;
+            .withEmail(VALID_EMAIL_CARL).withAddress(VALID_ADDRESS_CARL).withShifts(VALID_SHIFTS_CARL).build();
     public static final Staff DANIEL = new StaffBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();;
+            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
 
     // Supplier
     public static final Supplier ELLE = new SupplierBuilder().withName(VALID_NAME_ELLE).withPhone(VALID_PHONE_ELLE)
