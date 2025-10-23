@@ -145,7 +145,7 @@ Explore the [Features](#features) section below for a full list of commands and 
 * Extraneous parameters for commands that do not take in parameters (such as `list`, `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.-->
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that 1 multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 <!--### Viewing help : `help`
@@ -163,7 +163,7 @@ Adds a customer to the address book.
 Format: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…​`
 
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
   - Points must be a non-negative integer.
 </div>
 
@@ -181,7 +181,7 @@ Examples:
 * `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/2026-11-11 notes/only weekends`
 * `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/2026-11-13, 2026-11-12 notes/only weekends`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:** 
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:** 
   - Shift dates must be in the future.
   - Duplicate dates for shifts are not allowed.
   - Dates must follow the format `YYYY-MM-DD`.
@@ -197,7 +197,7 @@ Examples:
 * `add supplier n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 items/Coffee days/2025-12-11 notes/mainSupplier`
 * `add supplier n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 items/Bread days/2025-12-09`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
   - Days dates must be in the future.
   - Duplicate dates for Days are not allowed.
   - Days must follow the format `YYYY-MM-DD`.
@@ -265,7 +265,7 @@ Examples:
 * `list all` followed by `delete 2` deletes the 2nd person in the address book.
 * `list all` followed by `delete 1, 2` deletes the 1st & 2nd person in the address book.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
   - The index **must be a positive integer** 
 </div>
 ### Sorting contacts: `sort`
@@ -299,7 +299,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
 The clear command deletes all contacts in BrewBook.   
 **There is no undo command**, please use with caution.
 </div>
@@ -317,7 +317,7 @@ BrewBook data are saved in the hard disk automatically after any command that ch
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
