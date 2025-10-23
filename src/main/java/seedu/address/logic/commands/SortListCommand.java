@@ -22,8 +22,8 @@ public class SortListCommand extends Command {
             + "Accepted values:\n"
             + "  <ATTRIBUTE>: 'name', 'phone', 'email', 'address', or 'type'.\n"
             + "  <ORDER>: 'asc' (Ascending, default) or 'desc' (Descending).\n"
-            + "Example 1 (Name, Ascending): " + COMMAND_WORD + " by/name\n"
-            + "Example 2 (Email, Descending): " + COMMAND_WORD + " by/email o/desc";
+            + "Example 1 (Name, Ascending): " + COMMAND_WORD + " name\n"
+            + "Example 2 (Email, Descending): " + COMMAND_WORD + " email o/desc";
 
 
     private final Comparator<Person> comparator;
@@ -35,6 +35,7 @@ public class SortListCommand extends Command {
      * @param comparator the comparator of persons to list
      */
     public SortListCommand(Comparator<Person> comparator, boolean isAsc) {
+        requireNonNull(comparator);
         this.comparator = comparator;
         this.isAsc = isAsc;
     }

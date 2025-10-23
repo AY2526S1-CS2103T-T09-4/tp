@@ -24,8 +24,9 @@ public class SortListCommandParser implements Parser<SortListCommand> {
         requireNonNull(args);
         String[] words = args.trim().split(" ", 2);
         String preamble = words[0].trim();
+        String rest = words[1].trim();
 
-        if (!isValidAttribute(preamble)) {
+        if (!isValidAttribute(preamble) || !rest.startsWith(PREFIX_SORT_ORDER.toString())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortListCommand.MESSAGE_USAGE));
         }
 
