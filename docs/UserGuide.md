@@ -203,7 +203,7 @@ Examples:
 Shows a list of all contacts in the given contact `TYPE`.
 
 Format: `list TYPE`
-<!--
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -238,7 +238,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
--->
+
 ### Deleting a person : `delete`
 
 Deletes the specified person or people from the address book.
@@ -263,6 +263,11 @@ Format: `summary`
 Clears all entries from the address book.
 
 Format: `clear`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The clear command deletes all contacts in BrewBook. 
+**There is no undo command** , please use with caution.
+</div>
 
 ### Exiting the program : `exit`
 
