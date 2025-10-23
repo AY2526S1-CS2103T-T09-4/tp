@@ -116,16 +116,18 @@ public class FindCommandParser implements Parser<FindCommand> {
                 perField);
 
         // Staff only field: shifts
-        addIfPresent(map, PREFIX_SHIFTS, toKeywords,
-                kws -> new FieldContainsKeywordsPredicate(p -> {
-                    if (!(p instanceof Staff s)) {
-                        return "";
-                    }
-                    return s.getShifts().stream()
-                            .map(Object::toString)
-                            .collect(Collectors.joining(" "));
-                }, kws, false),
-                perField);
+        map.getValue(PREFIX_SHIFTS).map(String::trim).filter(s -> !s.isEmpty()).ifPresent(needleRaw -> {
+            final String needle = needleRaw.toLowerCase();
+            perField.add(p -> {
+                if (!(p instanceof Staff s)) return false;
+                String joined = s.getShifts().stream()
+                        .map(Object::toString)
+                        .collect(Collectors.joining(" "))
+                        .toLowerCase();
+                return joined.contains(needle);
+            });
+        });
+
 
         if (perField.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));

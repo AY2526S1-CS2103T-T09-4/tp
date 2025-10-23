@@ -13,7 +13,7 @@ public class AllOfPersonPredicates implements Predicate<Person> {
     private final List<Predicate<Person>> predicates;
 
     public AllOfPersonPredicates(List<Predicate<Person>> predicates) {
-        this.predicates = Objects.requireNonNull(predicates);
+        this.predicates = List.copyOf(predicates);
     }
 
     @Override
@@ -22,9 +22,15 @@ public class AllOfPersonPredicates implements Predicate<Person> {
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this
-                || (other instanceof AllOfPersonPredicates o && predicates.equals(o.predicates));
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof AllOfPersonPredicates)) {
+            return false;
+        }
+        AllOfPersonPredicates other = (AllOfPersonPredicates) o;
+        return java.util.Objects.equals(this.predicates, other.predicates);
     }
 
     @Override
