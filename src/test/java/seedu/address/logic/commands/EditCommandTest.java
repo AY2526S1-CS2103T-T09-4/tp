@@ -26,8 +26,12 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.customer.Customer;
+import seedu.address.model.person.staff.Staff;
+import seedu.address.model.person.supplier.Supplier;
 import seedu.address.testutil.CustomerBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.StaffBuilder;
+import seedu.address.testutil.SupplierBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -44,7 +48,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
+    public void execute_customer_someFieldsSpecifiedUnfilteredList_success() {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Customer lastPerson = (Customer) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
@@ -110,6 +114,50 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_staff_someFieldsSpecifiedUnfilteredList_success() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_STAFFS);
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Staff lastPerson = (Staff) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        StaffBuilder personInList = new StaffBuilder(lastPerson);
+        Person editedPerson = personInList.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withTags(VALID_TAG_AMY).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_AMY).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_supplier_someFieldsSpecifiedUnfilteredList_success() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Supplier lastPerson = (Supplier) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        SupplierBuilder personInList = new SupplierBuilder(lastPerson);
+        Person editedPerson = personInList.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withTags(VALID_TAG_AMY).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_AMY).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
