@@ -24,8 +24,6 @@ import seedu.address.model.person.AllOfPersonPredicates;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.staff.Staff;
-import seedu.address.model.person.supplier.Supplier;
 
 /**
  * Parses input arguments and creates a new FindCommand object
