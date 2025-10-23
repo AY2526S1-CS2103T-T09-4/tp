@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ITEMS_DESC_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.POINTS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SHIFTS_DESC_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_AMY_2;
@@ -23,6 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEMS_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POINTS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTS_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -168,6 +170,12 @@ public class EditCommandParserTest {
         // note
         userInput = targetIndex.getOneBased() + NOTE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withNote(VALID_NOTE_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // points
+        userInput = targetIndex.getOneBased() + POINTS_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withNote(VALID_POINTS_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
