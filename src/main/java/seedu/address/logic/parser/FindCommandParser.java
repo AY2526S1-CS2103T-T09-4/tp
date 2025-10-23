@@ -124,7 +124,9 @@ public class FindCommandParser implements Parser<FindCommand> {
                               List<Predicate<Person>> out) {
         map.getValue(prefix).ifPresent(raw -> {
             List<String> kws = toKeywords.apply(raw);
-            if (!kws.isEmpty()) out.add(makePredicate.apply(kws));
+            if (!kws.isEmpty()) {
+                out.add(makePredicate.apply(kws));
+            }
         });
     }
 }
