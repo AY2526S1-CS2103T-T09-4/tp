@@ -24,7 +24,7 @@ public class Staff extends Person {
      * Constructs a Staff by calling super class constructor and initialise other relevant fields
      */
     public Staff(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Shift> shifts, Note note) {
-        super(ContactType.STAFF, name, phone, email, address, tags, note);
+        super(name, phone, email, address, tags, note);
         Objects.requireNonNull(shifts);
         this.shifts = new ArrayList<>(shifts);
     }

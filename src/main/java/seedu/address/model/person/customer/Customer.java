@@ -20,7 +20,7 @@ public class Customer extends Person {
      * Constructor that calls super class constructor
      */
     public Customer(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Note note) {
-        super(ContactType.CUSTOMER, name, phone, email, address, tags, note);
+        super(name, phone, email, address, tags, note);
     }
 
     @Override

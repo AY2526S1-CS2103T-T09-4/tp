@@ -29,8 +29,10 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.staff.Shift;
+import seedu.address.model.person.staff.Staff;
 import seedu.address.model.person.supplier.Days;
 import seedu.address.model.person.supplier.Items;
+import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -97,9 +99,11 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
+    // TODO
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
+        Person.ContactType contactType = personToEdit.getDisplayType();
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -107,10 +111,29 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
 
-        return new Customer(updatedName,
-                updatedPhone, updatedEmail,
-                updatedAddress, updatedTags,
-                updatedNote);
+        switch (contactType) {
+        case CUSTOMER:
+            return new Customer(updatedName,
+                    updatedPhone, updatedEmail,
+                    updatedAddress, updatedTags,
+                    updatedNote);
+        case STAFF:
+            List<Shift> updatedShifts = editPersonDescriptor.getShifts().orElse(personToEdit.getShifts());
+            return new Staff(updatedName,
+                    updatedPhone, updatedEmail,
+                    updatedAddress, updatedTags,
+                    updatedShifts, updatedNote);
+        case SUPPLIER:
+            List<Items> updatedItems = editPersonDescriptor.getItems().orElse(personToEdit.getItems());
+            List<Days> updatedDays = editPersonDescriptor.getDays().orElse(personToEdit.getDays());
+            return new Supplier(updatedName,
+                    updatedPhone, updatedEmail,
+                    updatedAddress, updatedTags,
+                    updatedItems, updatedDays,
+                    updatedNote);
+        default:
+            return personToEdit;
+        }
     }
 
     @Override
@@ -173,13 +196,15 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setNote(toCopy.note);
+
         }
 
         /**
          * Returns true if at least one field is edited.
          */
+        // Todo
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, note, items, days);
         }
 
         public void setContactType(Person.ContactType contactType) {
@@ -245,6 +270,32 @@ public class EditCommand extends Command {
 
         public Optional<Note> getNote() {
             return Optional.ofNullable(note);
+        }
+
+        // TODO
+
+        public void setShifts(List<Shift> shifts) {
+            this.shifts = shifts;
+        }
+
+        public Optional<List<Shift>> getShifts() {
+            return Optional.ofNullable(shifts);
+        }
+
+        public void setItems(List<Items> items) {
+            this.items = items;
+        }
+
+        public Optional<List<Items>> getItems() {
+            return Optional.ofNullable(items);
+        }
+
+        public void setDays(List<Days> days) {
+            this.days = days;
+        }
+
+        public Optional<List<Days>> getDays() {
+            return Optional.ofNullable(days);
         }
 
         @Override
