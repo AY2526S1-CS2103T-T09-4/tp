@@ -119,7 +119,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         map.getValue(PREFIX_SHIFTS).map(String::trim).filter(s -> !s.isEmpty()).ifPresent(needleRaw -> {
             final String needle = needleRaw.toLowerCase();
             perField.add(p -> {
-                if (!(p instanceof Staff s)) return false;
+                if (!(p instanceof Staff s)) {
+                    return false;
+                }
                 String joined = s.getShifts().stream()
                         .map(Object::toString)
                         .collect(Collectors.joining(" "))
