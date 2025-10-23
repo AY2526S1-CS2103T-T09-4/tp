@@ -163,7 +163,8 @@ Adds a customer to the address book.
 Format: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…​`
 
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:** Points must be a non-negative integer.
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
+  - Points must be a non-negative integer.
 </div>
 
 Examples:
@@ -180,10 +181,11 @@ Examples:
 * `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/2026-11-11 notes/only weekends`
 * `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/2026-11-13, 2026-11-12 notes/only weekends`
 
-> ❗ **Constraints:**
-> - Shift dates must be in the future.
-> - Duplicate dates for shifts are not allowed.
-> - Dates must follow the format `YYYY-MM-DD`.
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:** 
+  - Shift dates must be in the future.
+  - Duplicate dates for shifts are not allowed.
+  - Dates must follow the format `YYYY-MM-DD`.
+</div>
 
 ### Adding a supplier: `add supplier`
 
@@ -195,11 +197,11 @@ Examples:
 * `add supplier n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 items/Coffee days/2025-12-11 notes/mainSupplier`
 * `add supplier n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 items/Bread days/2025-12-09`
 
-> ❗ **Constraints:**
-> - Days dates must be in the future.
-> - Duplicate dates for Days are not allowed.
-> - Days must follow the format `YYYY-MM-DD`.
-> - Must have at least one day and item.
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
+  - Days dates must be in the future.
+  - Duplicate dates for Days are not allowed.
+  - Days must follow the format `YYYY-MM-DD`.
+</div>
 
 ### Viewing contacts: `list`
 
@@ -263,9 +265,9 @@ Examples:
 * `list all` followed by `delete 2` deletes the 2nd person in the address book.
 * `list all` followed by `delete 1, 2` deletes the 1st & 2nd person in the address book.
 
-> ❗ **Constraints:**
-> - The index **must be a positive integer** 
-
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**
+  - The index **must be a positive integer** 
+</div>
 ### Sorting contacts: `sort`
 
 Sorts your contact list based on a specific field and optional order — for example, by name in ascending order.  
