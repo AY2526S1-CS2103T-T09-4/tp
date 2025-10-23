@@ -86,7 +86,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        this.type = source.getDisplayType();
+        this.type = source.getContactType();
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;

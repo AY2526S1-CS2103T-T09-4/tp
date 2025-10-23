@@ -27,7 +27,7 @@ public class SummaryCommand extends Command {
         ObservableList<Person> list = model.getAddressBook().getPersonList();
 
         for (Person person : list) {
-            switch(person.getDisplayType()) {
+            switch(person.getContactType()) {
             case STAFF:
                 staffSummary.append(formatStaff(person)).append("\n");
                 break;
