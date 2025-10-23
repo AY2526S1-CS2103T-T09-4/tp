@@ -31,7 +31,6 @@ public class Points {
         }
 
         return numPoints >= 0;
-
     }
 
     @Override
