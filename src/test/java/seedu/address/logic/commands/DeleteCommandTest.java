@@ -50,7 +50,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON));
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PEOPLE_SUCCESS,
-                Messages.format(personToDeleteTwo) + ",\n" + Messages.format(personToDelete));
+                Messages.format(personToDelete) + ",\n" + Messages.format(personToDeleteTwo));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);

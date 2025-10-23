@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +41,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = new ArrayList<>(model.getFilteredPersonList());
 
         for (Index targetIndex : this.targetIndices) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -51,7 +50,6 @@ public class DeleteCommand extends Command {
         }
 
         List<Index> sortedIndices = new ArrayList<>(this.targetIndices);
-        Collections.sort(sortedIndices, (a, b) -> b.getZeroBased() - a.getZeroBased());
 
         List<Person> deletedPersons = new ArrayList<>();
         for (Index idx : sortedIndices) {
