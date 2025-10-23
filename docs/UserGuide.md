@@ -198,11 +198,23 @@ Examples:
 * `add supplier n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 items/Coffee days/2025-12-11`
 * `add supplier n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 items/Bread days/2025-12-09`
 
-### Listing all persons : `list`
+### Viewing contacts: `list`
 
-Shows a list of all contacts in the given contact `TYPE`.
+Shows a list of all contacts in BrewBook, filtered by type.
 
 Format: `list TYPE`
+
+**Valid options for `TYPE`:**
+- `all` — shows *all* contacts
+- `customer` — shows only customers
+- `staff` — shows only staff members
+- `supplier` — shows only suppliers
+
+Examples:
+- `list all` → displays every contact saved in BrewBook
+- `list customer` → shows only customers
+- `list staff` → shows only your café’s employees
+- `list supplier` → shows only your café’s suppliers
 
 ### Editing a person : `edit`
 
@@ -251,6 +263,25 @@ Examples:
 
 > ❗ **Constraints:**
 > - The index **must be a positive integer** 
+
+### Sorting contacts: `sort`
+
+Sorts your contact list based on a specific field and optional order — for example, by name in ascending order.  
+This helps you quickly organize your list and find what you need.
+
+Format: `sort FIELD`
+
+**Valid options for `FIELD`:**
+- `name` — sorts contacts alphabetically by name
+- `phone` — sorts contacts by phone number
+- `email` — sorts contacts alphabetically by email
+- `address` — sorts contacts alphabetically by address
+- `type` — sorts contacts by their role (customer, staff, or supplier)
+
+Examples:
+- `sort name` → sorts all contacts by name in ascending order (A–Z)
+- `sort phone o/desc` → sorts contacts by phone number in descending order
+- `sort type o/asc` → groups contacts by type (customer → staff → supplier) in ascending order
 
 ### Summarising important dates : `summary`
 
