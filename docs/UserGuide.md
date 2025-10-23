@@ -252,6 +252,12 @@ Examples:
 > ❗ **Constraints:**
 > - The index **must be a positive integer** 
 
+### Summarising important dates : `summary`
+
+Displays all staff's shift and supplier's days.
+
+Format: `summary`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -263,7 +269,7 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
--->
+
 ### Saving the data
 
 BrewBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -277,9 +283,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -287,7 +291,7 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
--->
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
