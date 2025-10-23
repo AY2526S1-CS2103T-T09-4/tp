@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_FIELD_ENTERED;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -10,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -45,28 +47,6 @@ public class EditCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-    }
-
-    @Test
-    public void execute_customer_someFieldsSpecifiedUnfilteredList_success() {
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Customer lastPerson = (Customer) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
-
-        CustomerBuilder personInList = new CustomerBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-                .withTags(VALID_TAG_AMY).build();
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_AMY).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(lastPerson, editedPerson);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -117,7 +97,29 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_staff_someFieldsSpecifiedUnfilteredList_success() {
+    public void execute_customerSomeFieldsSpecifiedUnfilteredList_success() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Customer lastPerson = (Customer) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        CustomerBuilder personInList = new CustomerBuilder(lastPerson);
+        Person editedPerson = personInList.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withTags(VALID_TAG_AMY).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_AMY).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_staffSomeFieldsSpecifiedUnfilteredList_success() {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_STAFFS);
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Staff lastPerson = (Staff) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
@@ -139,7 +141,32 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_supplier_someFieldsSpecifiedUnfilteredList_success() {
+    public void execute_staffWrongFields_success() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_STAFFS);
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Staff lastPerson = (Staff) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPoints("3").build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_POINTS));
+    }
+
+    @Test
+    public void execute_supplierWrongFields_success() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Supplier lastPerson = (Supplier) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPoints("3").build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_POINTS));
+    }
+
+
+    @Test
+    public void execute_supplierSomeFieldsSpecifiedUnfilteredList_success() {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Supplier lastPerson = (Supplier) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
