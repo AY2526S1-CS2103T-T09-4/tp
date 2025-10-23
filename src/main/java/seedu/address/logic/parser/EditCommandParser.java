@@ -35,20 +35,23 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        // TODO
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_NOTE, PREFIX_SHIFTS, PREFIX_ITEMS, PREFIX_SHIFTS);
+                        PREFIX_NOTE, PREFIX_SHIFTS, PREFIX_ITEMS, PREFIX_DAYS);
 
         Index index;
 
         try {
+            System.out.println(argMultimap.getPreamble());
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
+        // TODO
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE,
-                PREFIX_SHIFTS, PREFIX_ITEMS, PREFIX_SHIFTS);
+                PREFIX_SHIFTS, PREFIX_ITEMS, PREFIX_DAYS);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 

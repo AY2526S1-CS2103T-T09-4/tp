@@ -48,7 +48,6 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        assert false;
         logger.info("=============================[ Initializing AddressBook ]===========================");
         super.init();
 

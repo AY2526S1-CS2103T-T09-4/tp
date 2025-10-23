@@ -1,10 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_FIELD_ENTERED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -100,7 +105,8 @@ public class EditCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     // TODO
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Person.ContactType contactType = personToEdit.getDisplayType();
@@ -110,22 +116,43 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
+        // TODO
+        List<Shift> updatedShifts = editPersonDescriptor.getShifts().orElse(personToEdit.getShifts());
+        List<Items> updatedItems = editPersonDescriptor.getItems().orElse(personToEdit.getItems());
+        List<Days> updatedDays = editPersonDescriptor.getDays().orElse(personToEdit.getDays());
 
+        // TODO
         switch (contactType) {
         case CUSTOMER:
+            if (!isNull(updatedShifts)) {
+                throw new CommandException(String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_SHIFTS));
+            }
+            if (!isNull(updatedItems)) {
+                throw new CommandException(String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_ITEMS));
+            }
+            if (!isNull(updatedDays)) {
+                throw new CommandException(String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_DAYS));
+            }
             return new Customer(updatedName,
                     updatedPhone, updatedEmail,
                     updatedAddress, updatedTags,
                     updatedNote);
+
         case STAFF:
-            List<Shift> updatedShifts = editPersonDescriptor.getShifts().orElse(personToEdit.getShifts());
+            if (!isNull(updatedItems)) {
+                throw new CommandException(String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_ITEMS));
+            }
+            if (!isNull(updatedDays)) {
+                throw new CommandException(String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_DAYS));
+            }
             return new Staff(updatedName,
                     updatedPhone, updatedEmail,
                     updatedAddress, updatedTags,
                     updatedShifts, updatedNote);
         case SUPPLIER:
-            List<Items> updatedItems = editPersonDescriptor.getItems().orElse(personToEdit.getItems());
-            List<Days> updatedDays = editPersonDescriptor.getDays().orElse(personToEdit.getDays());
+            if (!isNull(updatedShifts)) {
+                throw new CommandException(String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_SHIFTS));
+            }
             return new Supplier(updatedName,
                     updatedPhone, updatedEmail,
                     updatedAddress, updatedTags,
@@ -189,14 +216,16 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setContactType(toCopy.contactType);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setNote(toCopy.note);
-
+            // TODO
+            setShifts(toCopy.shifts);
+            setItems(toCopy.items);
+            setDays(toCopy.days);
         }
 
         /**
@@ -204,7 +233,7 @@ public class EditCommand extends Command {
          */
         // Todo
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, note, items, days);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, note, items, days, shifts);
         }
 
         public void setContactType(Person.ContactType contactType) {
