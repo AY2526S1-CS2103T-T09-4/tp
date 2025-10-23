@@ -50,7 +50,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addStaff() throws Exception {
         Staff staff = new StaffBuilder().build();
-        AddStaffCommand command = (AddStaffCommand) parser.parseCommand(PersonUtil.getAddStaffCommand(staff));
+        String addStaffCommand = PersonUtil.getAddStaffCommand(staff);
+        AddStaffCommand command = (AddStaffCommand) parser.parseCommand(addStaffCommand);
         assertEquals(new AddStaffCommand(staff), command);
     }
 
