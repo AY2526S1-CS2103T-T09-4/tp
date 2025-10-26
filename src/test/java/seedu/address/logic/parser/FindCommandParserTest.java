@@ -60,6 +60,24 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_emptyValue_throwsException() {
+        String msg = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+
+        // name, phone, email, address
+        assertParseFailure(parser, "find n/ p/123", msg);
+        assertParseFailure(parser, "find p/ n/Alice", msg);
+        assertParseFailure(parser, "find e/ n/Alice", msg);
+        assertParseFailure(parser, "find a/ n/Alice", msg);
+
+        // tag, items, days, shifts
+        assertParseFailure(parser, "find t/ n/Alice", msg);
+        assertParseFailure(parser, "find items/ n/Elle", msg);
+        assertParseFailure(parser, "find days/ n/Elle", msg);
+        assertParseFailure(parser, "find shifts/ n/Carl", msg);
+    }
+
+
+    @Test
     public void execute_noMatch_zeroPersonsListed() throws Exception {
         FindCommand cmd = parser.parse("find n/rooney e/rooney@example.zzz");
 
@@ -232,6 +250,45 @@ public class FindCommandParserTest {
         assertCommandSuccess(command, actual, expectedMessage, expected);
         assertEquals(java.util.List.of(seedu.address.testutil.TypicalPersons.ELLE),
                 actual.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_shifts_returnsZero() throws Exception {
+        // Non-staff person with shifts
+        FindCommand cmd = parser.parse("find n/Alice shifts/ 2030-10-10");
+        Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expected.updateFilteredPersonList(p -> false);
+
+        assertCommandSuccess(cmd, actual,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
+        assertEquals(java.util.List.of(), actual.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_items_returnsZero() throws Exception {
+        // Non-supplier person with items
+        FindCommand cmd = parser.parse("find n/Alice items/egg");
+        Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expected.updateFilteredPersonList(p -> false);
+
+        assertCommandSuccess(cmd, actual,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
+        assertEquals(java.util.List.of(), actual.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_days_returnsZero() throws Exception {
+        // Non-supplier person with days
+        FindCommand cmd = parser.parse("find n/Alice days/ 2025-10-20");
+        Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expected.updateFilteredPersonList(p -> false);
+
+        assertCommandSuccess(cmd, actual,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
+        assertEquals(java.util.List.of(), actual.getFilteredPersonList());
     }
 }
 

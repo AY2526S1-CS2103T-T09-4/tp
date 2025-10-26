@@ -107,4 +107,18 @@ public class FieldContainsKeywordsPredicateTest {
         assertTrue(s.contains("wordMatch=true"));
     }
 
+    @Test
+    public void equals_null_returnsFalse() {
+        var extractor = (java.util.function.Function<Person, String>) (p -> p.getPhone().value);
+        var a = new FieldContainsKeywordsPredicate(extractor, java.util.List.of("1", "2"), false);
+        assertFalse(a.equals(null));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        var extractor = (java.util.function.Function<Person, String>) (p -> p.getPhone().value);
+        var a = new FieldContainsKeywordsPredicate(extractor, java.util.List.of("1", "2"), false);
+        assertFalse(a.equals("not a predicate"));
+    }
+
 }
