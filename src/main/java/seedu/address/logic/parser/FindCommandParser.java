@@ -66,14 +66,18 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Supplier only fields: items, days
         addIfPresent(map, PREFIX_ITEMS, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> {
-                    if (p.getContactType() != Person.ContactType.SUPPLIER) return "";
+                    if (p.getContactType() != Person.ContactType.SUPPLIER) {
+                        return "";
+                    }
                     return p.getItems().stream().map(Object::toString).collect(Collectors.joining(" "));
                 }, kws, false),
                 perField);
 
         addIfPresent(map, PREFIX_DAYS, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> {
-                    if (p.getContactType() != Person.ContactType.SUPPLIER) return "";
+                    if (p.getContactType() != Person.ContactType.SUPPLIER) {
+                        return "";
+                    }
                     return p.getDays().stream().map(Object::toString).collect(Collectors.joining(" "));
                 }, kws, false),
                 perField);
@@ -81,7 +85,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Staff only field: shifts
         addIfPresent(map, PREFIX_SHIFTS, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> {
-                    if (p.getContactType() != Person.ContactType.STAFF) return "";
+                    if (p.getContactType() != Person.ContactType.STAFF) {
+                        return "";
+                    }
                     return p.getShifts().stream().map(Objects::toString).collect(Collectors.joining(" "));
                 }, kws, false),
                 perField);
@@ -115,7 +121,9 @@ public class FindCommandParser implements Parser<FindCommand> {
                               List<Predicate<Person>> out) {
         map.getValue(prefix).ifPresent(raw -> {
             List<String> kws = toKeywords.apply(raw);
-            if (!kws.isEmpty()) out.add(makePredicate.apply(kws));
+            if (!kws.isEmpty()) {
+                out.add(makePredicate.apply(kws));
+            }
         });
     }
 }
