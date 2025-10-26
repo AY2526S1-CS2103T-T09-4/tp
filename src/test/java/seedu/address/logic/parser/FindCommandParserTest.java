@@ -6,21 +6,38 @@ import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.AllOfPersonPredicates;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.testutil.TypicalPersons;
 
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
+
+    private Model freshModel() {
+        return new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
+
+    private static List<String> tokenize(String s) {
+        return Arrays.stream(s.split("[^0-9A-Za-z@._:-]+"))
+                .filter(t -> !t.isBlank())
+                .toList();
+    }
+
+    private AddressBook getTypicalAddressBook() {
+        return TypicalPersons.getTypicalAddressBook();
+    }
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -29,9 +46,13 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+        FindCommand expectedFindCommand = new FindCommand(
+                new AllOfPersonPredicates(List.of(
+                        new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"))
+                ))
+        );
+
+        // no leading whitespaces
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -39,9 +60,45 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void execute_noMatch_zeroPersonsListed() throws Exception {
+        FindCommand cmd = parser.parse("find n/rooney e/rooney@example.zzz");
+
+        Model actual = freshModel();
+        Model expected = freshModel();
+
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        expected.updateFilteredPersonList(p -> false);
+
+        assertCommandSuccess(cmd, actual, expectedMessage, expected);
+        assertEquals(List.of(), actual.getFilteredPersonList());
+    }
+
+    @Test
+    public void parse_namePreamble_returnsFindCommand() {
+        // no prefix
+        FindCommand expected = new FindCommand(
+                new AllOfPersonPredicates(List.of(
+                        new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"))
+                ))
+        );
+        assertParseSuccess(parser, "Alice Bob", expected);
+
+        // spacing-insensitive
+        assertParseSuccess(parser, " \n  Alice  \t Bob   ", expected);
+
+        // case-insensitive tokens
+        FindCommand expectedCase = new FindCommand(
+                new AllOfPersonPredicates(List.of(
+                        new NameContainsKeywordsPredicate(Arrays.asList("aLiCe", "bOb"))
+                ))
+        );
+        assertParseSuccess(parser, "aLiCe bOb", expectedCase);
+    }
+
+    @Test
     public void execute_nameAndAddress_singlePersonFound() throws Exception {
         FindCommandParser parser = new FindCommandParser();
-        FindCommand command = parser.parse("n/Benson a/Clementi");
+        FindCommand command = parser.parse("find n/Benson a/Clementi");
 
         Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -75,6 +132,24 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void execute_nameAndPhone_singlePersonFound() throws Exception {
+        FindCommandParser parser = new FindCommandParser();
+        FindCommand command = parser.parse("n/Benson p/98765432");
+
+        Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        expected.updateFilteredPersonList(p ->
+                p.getName().fullName.matches("(?i).*\\bBenson\\b.*")
+                        && p.getPhone().value.contains("98765432"));
+
+        assertCommandSuccess(command, actual, expectedMessage, expected);
+        assertEquals(java.util.List.of(seedu.address.testutil.TypicalPersons.BENSON),
+                actual.getFilteredPersonList());
+    }
+
+    @Test
     public void execute_nameAndTag_singlePersonFound() throws Exception {
         FindCommandParser parser = new FindCommandParser();
         FindCommand command = parser.parse("n/Benson t/frequentCustomer");
@@ -85,11 +160,78 @@ public class FindCommandParserTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         expected.updateFilteredPersonList(p ->
                 p.getName().fullName.matches("(?i).*\\bBenson\\b.*")
-                        && p.getTags().stream()
-                                .anyMatch(tag -> tag.tagName.equalsIgnoreCase("frequentCustomer")));
+                        && p.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase("frequentCustomer")));
 
         assertCommandSuccess(command, actual, expectedMessage, expected);
         assertEquals(java.util.List.of(seedu.address.testutil.TypicalPersons.BENSON),
                 actual.getFilteredPersonList());
     }
+
+    @Test
+    public void execute_nameAndShifts_singleStaffFound() throws Exception {
+        var target = TypicalPersons.CARL;
+        var targetShift = target.getShifts().stream()
+                .findFirst()
+                .map(Object::toString)
+                .orElseThrow(() -> new AssertionError("Target must have at least one shift"));
+
+        FindCommand command = parser.parse("find n/Carl shifts/ " + targetShift);
+
+        Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        expected.updateFilteredPersonList(p ->
+                p.getName().fullName.matches("(?i).*\\bCarl\\b.*")
+                        && p.getContactType() == seedu.address.model.person.Person.ContactType.STAFF
+                        && p.getShifts().stream().map(Object::toString).anyMatch(s -> s.equals(targetShift))
+        );
+
+        assertCommandSuccess(command, actual, expectedMessage, expected);
+        assertEquals(java.util.List.of(target), actual.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_nameAndItems_singleSupplierFound() throws Exception {
+        FindCommand command = parser.parse("find n/Elle items/egg");
+
+        Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        expected.updateFilteredPersonList(p ->
+                p.getName().fullName.matches("(?i).*\\bElle\\b.*")
+                        && p.getContactType() == seedu.address.model.person.Person.ContactType.SUPPLIER
+                        && p.getItems().stream()
+                        .map(Object::toString)
+                        .map(String::toLowerCase)
+                        .anyMatch(s -> s.contains("egg"))
+        );
+
+        assertCommandSuccess(command, actual, expectedMessage, expected);
+        assertEquals(java.util.List.of(seedu.address.testutil.TypicalPersons.ELLE),
+                actual.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_nameAndDays_singleSupplierFound() throws Exception {
+        FindCommand command = parser.parse("find n/Elle days/ 2025-10-10");
+
+        Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        expected.updateFilteredPersonList(p ->
+                p.getName().fullName.matches("(?i).*\\bElle\\b.*")
+                        && p.getContactType() == seedu.address.model.person.Person.ContactType.SUPPLIER
+                        && p.getDays().stream()
+                        .map(Object::toString)
+                        .anyMatch(s -> s.contains("2025-10-10"))
+        );
+
+        assertCommandSuccess(command, actual, expectedMessage, expected);
+        assertEquals(java.util.List.of(seedu.address.testutil.TypicalPersons.ELLE),
+                actual.getFilteredPersonList());
+    }
 }
+

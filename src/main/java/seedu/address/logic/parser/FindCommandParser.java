@@ -13,10 +13,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -38,41 +38,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         ArgumentMultimap map = ArgumentTokenizer.tokenize(
-                raw,
+                args,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
                 PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS
         );
-
-        List<Prefix> all = List.of(
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS
-        );
-
-        boolean anyPrefixEmpty = all.stream().anyMatch(px ->
-                map.getAllValues(px).stream().anyMatch(v -> v.trim().isEmpty()));
-        if (anyPrefixEmpty) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        boolean anyPrefixPresent = Stream.of(
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS
-        ).anyMatch(px -> map.getValue(px).isPresent());
-
-        if (!anyPrefixPresent) {
-            String preamble = map.getPreamble().trim();
-            if (preamble.isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-            List<String> keywords = Arrays.stream(preamble.split("\\s+"))
-                    .filter(s -> !s.isBlank())
-                    .collect(Collectors.toList());
-            return new FindCommand(new NameContainsKeywordsPredicate(keywords));
-        }
 
         List<Predicate<Person>> perField = new ArrayList<>();
         Function<String, List<String>> toKeywords = s -> Arrays.stream(s.trim().split("\\s+"))
-                .filter(k -> !k.isBlank()).collect(Collectors.toList());
+                .filter(k -> !k.isBlank())
+                .collect(Collectors.toList());
 
         // Common to all Person
         addIfPresent(map, PREFIX_NAME, toKeywords,
@@ -92,51 +66,44 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Supplier only fields: items, days
         addIfPresent(map, PREFIX_ITEMS, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> {
-                    if (p.getContactType() != Person.ContactType.SUPPLIER) {
-                        return "";
-                    }
-                    return p.getItems().stream()
-                            .map(Object::toString)
-                            .collect(Collectors.joining(" "));
+                    if (p.getContactType() != Person.ContactType.SUPPLIER) return "";
+                    return p.getItems().stream().map(Object::toString).collect(Collectors.joining(" "));
                 }, kws, false),
                 perField);
 
         addIfPresent(map, PREFIX_DAYS, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> {
-                    if (p.getContactType() != Person.ContactType.SUPPLIER) {
-                        return "";
-                    }
-                    return p.getDays().stream()
-                            .map(Object::toString)
-                            .collect(Collectors.joining(" "));
+                    if (p.getContactType() != Person.ContactType.SUPPLIER) return "";
+                    return p.getDays().stream().map(Object::toString).collect(Collectors.joining(" "));
                 }, kws, false),
                 perField);
 
         // Staff only field: shifts
-        map.getValue(PREFIX_SHIFTS).map(String::trim).filter(s -> !s.isEmpty()).ifPresent(needleRaw -> {
-            final String needle = needleRaw.toLowerCase();
-            perField.add(p -> {
-                if (p.getContactType() != Person.ContactType.STAFF) {
-                    return false;
-                }
-                String joined = p.getShifts().stream()
-                        .map(Object::toString)
-                        .collect(Collectors.joining(" "))
-                        .toLowerCase();
-                return joined.contains(needle);
-            });
-        });
+        addIfPresent(map, PREFIX_SHIFTS, toKeywords,
+                kws -> new FieldContainsKeywordsPredicate(p -> {
+                    if (p.getContactType() != Person.ContactType.STAFF) return "";
+                    return p.getShifts().stream().map(Objects::toString).collect(Collectors.joining(" "));
+                }, kws, false),
+                perField);
 
-
-        if (perField.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
+        // Reject empty values for any provided prefix (keep your current validation)
         for (Prefix px : List.of(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_TAG, PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS)) {
             if (map.getValue(px).filter(v -> v.trim().isEmpty()).isPresent()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
+        }
+
+        if (perField.isEmpty()) {
+            String preamble = map.getPreamble().trim();
+            if (preamble.isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+            List<String> kws = toKeywords.apply(preamble);
+            if (kws.isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+            perField.add(new NameContainsKeywordsPredicate(kws));
         }
 
         return new FindCommand(new AllOfPersonPredicates(perField));
@@ -148,9 +115,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                               List<Predicate<Person>> out) {
         map.getValue(prefix).ifPresent(raw -> {
             List<String> kws = toKeywords.apply(raw);
-            if (!kws.isEmpty()) {
-                out.add(makePredicate.apply(kws));
-            }
+            if (!kws.isEmpty()) out.add(makePredicate.apply(kws));
         });
     }
 }
+
