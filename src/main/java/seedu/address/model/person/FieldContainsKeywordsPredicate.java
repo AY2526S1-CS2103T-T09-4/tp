@@ -55,8 +55,12 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) return true;
-        if (!(other instanceof FieldContainsKeywordsPredicate)) return false;
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof FieldContainsKeywordsPredicate)) {
+            return false;
+        }
         FieldContainsKeywordsPredicate o = (FieldContainsKeywordsPredicate) other;
         return extractor.equals(o.extractor)
                 && keywords.equals(o.keywords)
