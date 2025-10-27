@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -79,4 +81,41 @@ public class AllOfPersonPredicatesTest {
         assertTrue(and.test(alice));
         assertFalse(and.test(benson));
     }
+
+    @Test
+    public void equalsAndHashCode_sameListInstance_true() {
+        Predicate<Person> pTrue = x -> true;
+        Predicate<Person> pNameA = x -> x.getName().fullName.contains("A");
+
+        List<Predicate<Person>> list = List.of(pTrue, pNameA);
+        AllOfPersonPredicates a = new AllOfPersonPredicates(list);
+        AllOfPersonPredicates b = new AllOfPersonPredicates(list);
+
+        assertEquals(a, a);
+        assertEquals(a, b);
+        assertEquals(a.hashCode(), b.hashCode());
+    }
+
+    @Test
+    public void equals_differentOrder_false() {
+        Predicate<Person> pTrue = x -> true;
+        Predicate<Person> pNameA = x -> x.getName().fullName.contains("A");
+
+        AllOfPersonPredicates a = new AllOfPersonPredicates(List.of(pTrue, pNameA));
+        AllOfPersonPredicates b = new AllOfPersonPredicates(List.of(pNameA, pTrue));
+
+        assertNotEquals(a, b);
+    }
+
+    @Test
+    public void equals_differentContent_false() {
+        Predicate<Person> pTrue = x -> true;
+        Predicate<Person> pFalse = x -> false;
+
+        AllOfPersonPredicates a = new AllOfPersonPredicates(List.of(pTrue));
+        AllOfPersonPredicates b = new AllOfPersonPredicates(List.of(pFalse));
+
+        assertNotEquals(a, b);
+    }
+
 }

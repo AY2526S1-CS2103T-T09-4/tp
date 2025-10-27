@@ -27,8 +27,8 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     public FieldContainsKeywordsPredicate(Function<Person, String> extractor,
                                           List<String> keywords,
                                           boolean wordMatch) {
-        this.extractor = Objects.requireNonNull(extractor);
-        this.keywords = Objects.requireNonNull(keywords);
+        this.extractor = Objects.requireNonNull(extractor, "extractor");
+        this.keywords = Objects.requireNonNull(keywords, "keywords");
         this.wordMatch = wordMatch;
     }
 
@@ -58,14 +58,23 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof FieldContainsKeywordsPredicate o)) {
+        if (!(other instanceof FieldContainsKeywordsPredicate)) {
             return false;
         }
-        return extractor.equals(o.extractor) && keywords.equals(o.keywords) && wordMatch == o.wordMatch;
+        FieldContainsKeywordsPredicate o = (FieldContainsKeywordsPredicate) other;
+        return extractor.equals(o.extractor)
+                && keywords.equals(o.keywords)
+                && wordMatch == o.wordMatch;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(extractor, keywords, wordMatch);
+    }
+
+    @Override
+    public String toString() {
+        return "FieldContainsKeywordsPredicate[keywords=" + keywords
+                + ", wordMatch=" + wordMatch + "]";
     }
 }
