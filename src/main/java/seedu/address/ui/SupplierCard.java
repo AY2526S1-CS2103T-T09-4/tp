@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.address.model.person.Person;
 
+import java.util.stream.Collectors;
+
 /**
  * A UI component that displays information of a {@code Supplier}.
  */
@@ -22,7 +24,15 @@ public class SupplierCard extends PersonCard {
     public SupplierCard(Person person, int displayedIndex) {
         super(person, displayedIndex, FXML);
         type.getStyleClass().add("type_supplier");
-        items.setText(person.getItems().toString());
-        days.setText(person.getDays().toString());
+        String formattedDays = person.getDays().stream()
+                .map(Object::toString)
+                .sorted()
+                .collect(Collectors.joining(", "));
+        String formattedItems = person.getItems().stream()
+                .map(Object::toString)
+                .sorted()
+                .collect(Collectors.joining(", "));
+        items.setText(formattedItems);
+        days.setText(formattedDays);
     }
 }

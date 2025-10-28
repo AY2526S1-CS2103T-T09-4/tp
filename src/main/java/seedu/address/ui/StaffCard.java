@@ -27,7 +27,7 @@ public class StaffCard extends PersonCard {
                 .sorted()
                 .collect(Collectors.joining(", "));
 
-        shifts.setText("Shifts: " + formattedShifts);
+        shifts.setText(formattedShifts);
     }
 }
 

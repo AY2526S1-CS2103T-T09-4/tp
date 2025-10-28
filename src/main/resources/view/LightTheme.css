@@ -411,3 +411,13 @@
     -fx-text-fill: #000000;
     -fx-opacity: 1;
 }
+
+.separator {
+    -fx-focus-traversable: false;
+    -fx-background-color: black;
+}
+
+.separator:vertical {
+    -fx-focus-traversable: false;
+    -fx-background-color: black;
+}
