@@ -430,3 +430,33 @@
     -fx-text-fill: black;
 }
 
+.shift-card {
+    -fx-background-color: rgba(245, 230, 204, 1);
+    -fx-background-radius: 8;
+    -fx-padding: 8;
+    -fx-border-color: #d9d9d9;
+    -fx-border-radius: 8;
+}
+
+.shift-header {
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3e7b91
+    -fx-padding: 0 0 4 0;
+}
+
+.shift-entry {
+    -fx-font-size: 11pt;
+    -fx-text-fill: #333333;
+    -fx-background-color: rgba(183, 200, 181, 1);
+    -fx-background-radius: 6;
+    -fx-padding: 3 6;
+    -fx-label-padding: 2 4;
+}
+
+.shift-entry.empty {
+    -fx-text-fill: #888888;
+    -fx-font-style: italic;
+    -fx-background-color: transparent;
+}
+
