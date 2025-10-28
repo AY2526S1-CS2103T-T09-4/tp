@@ -200,7 +200,7 @@ public class ParserUtil {
 
                 shifts.add(new Shift(date));
             } catch (DateTimeParseException e) {
-                throw new ParseException(DateParser.MESSAGE_USER_FORMAT_CONSTRAINTS);
+                throw new ParseException(Shift.MESSAGE_FORMAT_CONSTRAINTS);
             }
         }
         return shifts;

@@ -12,7 +12,7 @@ import seedu.address.logic.parser.DateParser;
  */
 public class Shift {
     public static final String MESSAGE_FORMAT_CONSTRAINTS = "Invalid date format for shift,"
-            + " Expected format: d-M-yyyy";
+            + " Expected format: d/M/yyyy";
     public static final String MESSAGE_DUPLICATE_CONSTRAINTS = "Duplicates dates for shifts are not allowed: ";
     public static final String MESSAGE_OLD_CONSTRAINTS = "Invalid shift date as this date has passed: ";
 

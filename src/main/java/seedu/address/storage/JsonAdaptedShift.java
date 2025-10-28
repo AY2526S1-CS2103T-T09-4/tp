@@ -52,7 +52,7 @@ class JsonAdaptedShift {
 
             return new Shift(parsedDate);
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException(DateParser.MESSAGE_USER_FORMAT_CONSTRAINTS);
+            throw new IllegalValueException(DateParser.MESSAGE_FORMAT_CONSTRAINT);
         }
     }
 }

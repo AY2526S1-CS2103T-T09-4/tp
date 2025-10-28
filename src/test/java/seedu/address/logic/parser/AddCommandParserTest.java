@@ -426,7 +426,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser,
                 STAFF_COMMAND + NAME_DESC_CARL + PHONE_DESC_CARL + EMAIL_DESC_CARL
                         + ADDRESS_DESC_CARL + INVALID_SHIFTS_FORMAT_DESC,
-                DateParser.MESSAGE_USER_FORMAT_CONSTRAINTS);
+                DateParser.MESSAGE_FORMAT_CONSTRAINT);
 
         // invalid note
         assertParseFailure(parser,
