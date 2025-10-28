@@ -43,9 +43,6 @@ class JsonAdaptedShift {
      * @throws IllegalValueException if there were any data constraints violated in the adapted shift.
      */
     public Shift toModelType() throws IllegalValueException {
-        if (shiftDate == null) {
-            throw new IllegalValueException(Shift.MESSAGE_COMPULSORY);
-        }
         try {
             LocalDate parsedDate = LocalDate.parse(shiftDate);
             if (parsedDate.isBefore(LocalDate.now())) {

@@ -352,19 +352,18 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissingStaff_success() {
-        // no tags, no note
+        // no tags, no note, no shifts
         Staff expectedStaff = new StaffBuilder().withName(VALID_NAME_CARL)
                 .withPhone(VALID_PHONE_CARL)
                 .withEmail(VALID_EMAIL_CARL)
                 .withAddress(VALID_ADDRESS_CARL)
-                .withShifts(VALID_SHIFTS_CARL)
                 .withTags()
                 .withNote("")
                 .build();
 
         assertParseSuccess(parser,
                 STAFF_COMMAND + NAME_DESC_CARL + PHONE_DESC_CARL + EMAIL_DESC_CARL
-                        + ADDRESS_DESC_CARL + SHIFTS_DESC_CARL,
+                        + ADDRESS_DESC_CARL,
                 new AddStaffCommand(expectedStaff));
     }
 
@@ -394,12 +393,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser,
                 STAFF_COMMAND + NAME_DESC_CARL + PHONE_DESC_CARL + EMAIL_DESC_CARL
                         + VALID_ADDRESS_CARL + SHIFTS_DESC_CARL,
-                expectedMessage);
-
-        // missing shift prefix
-        assertParseFailure(parser,
-                STAFF_COMMAND + NAME_DESC_CARL + PHONE_DESC_CARL + EMAIL_DESC_CARL
-                        + ADDRESS_DESC_CARL,
                 expectedMessage);
     }
 
@@ -446,18 +439,14 @@ public class AddCommandParserTest {
                 STAFF_COMMAND + NAME_DESC_CARL + PHONE_DESC_CARL + EMAIL_DESC_CARL
                         + ADDRESS_DESC_CARL + SHIFTS_DESC_CARL + INVALID_TAG_DESC,
                 Tag.MESSAGE_CONSTRAINTS);
-    }
 
-    @Test
-    public void parse_shiftInPast_failure() {
+        // invalid shift as shift is in past
         assertParseFailure(parser,
                 STAFF_COMMAND + NAME_DESC_CARL + PHONE_DESC_CARL + EMAIL_DESC_CARL
                         + ADDRESS_DESC_CARL + INVALID_SHIFTS_PAST_DESC,
                 Shift.MESSAGE_OLD_CONSTRAINTS + "2024-10-10");
-    }
 
-    @Test
-    public void parse_duplicateShifts_failure() {
+        //invalid shift as shift is duplicated
         assertParseFailure(parser,
                 STAFF_COMMAND + NAME_DESC_CARL + PHONE_DESC_CARL + EMAIL_DESC_CARL
                         + ADDRESS_DESC_CARL + INVALID_SHIFTS_DUPLICATE_DESC,

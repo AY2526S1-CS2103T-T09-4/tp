@@ -174,8 +174,9 @@ public class ParserUtil {
     public static List<Shift> parseShifts(List<String> shiftStrings) throws ParseException {
         requireNonNull(shiftStrings);
         List<Shift> shifts = new ArrayList<>();
+
         if (shiftStrings.isEmpty()) {
-            throw new ParseException(Shift.MESSAGE_COMPULSORY);
+            return shifts;
         }
 
         String raw = shiftStrings.get(0);
@@ -212,7 +213,7 @@ public class ParserUtil {
     public static List<Days> parseDays(List<String> daysStrings) throws ParseException {
         List<Days> days = new ArrayList<>();
         if (daysStrings.isEmpty()) {
-            throw new ParseException(Shift.MESSAGE_COMPULSORY);
+            throw new ParseException(Days.MESSAGE_COMPULSORY);
         }
 
         String raw = daysStrings.get(0);
@@ -225,7 +226,7 @@ public class ParserUtil {
                 LocalDate date = LocalDate.parse(trimmed);
                 days.add(new Days(date));
             } catch (DateTimeParseException e) {
-                throw new ParseException(Shift.MESSAGE_FORMAT_CONSTRAINTS);
+                throw new ParseException(Days.MESSAGE_CONSTRAINTS);
             }
         }
         return days;
