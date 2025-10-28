@@ -12,14 +12,14 @@ BrewBook is a **desktop app to help managers of small cafe to manage different c
 
 # Quick start
 
-Welcome to **BrewBook** — your café’s one-stop contact manager for customers, staff, and suppliers.  
+Welcome to **BrewBook** — your café’s one-stop contact manager for customers, staff, and suppliers.
 Follow these simple steps to get started — no technical experience needed!
 
 ---
 
 ## Step 1: Check that Java 17 is installed
 
-BrewBook requires **Java 17** to run.  
+BrewBook requires **Java 17** to run.
 Let’s check whether it’s already installed on your computer.
 
 - **On Windows**
@@ -33,10 +33,10 @@ Let’s check whether it’s already installed on your computer.
   ✅ Great! You already have Java 17 installed.
 - If you see an older version (e.g. “11” or “8”) or an error saying **“java is not recognized”**, you’ll need to install Java 17.
 
-👉 **To install Java 17:**  
+👉 **To install Java 17:**
 Visit the official Java 17 download page [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
 
-Download the **Windows x64 Installer (JDK 17)** and follow the instructions on screen.  
+Download the **Windows x64 Installer (JDK 17)** and follow the instructions on screen.
 When done, repeat the steps above to confirm it says **version 17**.
 
 - **On Mac**
@@ -47,9 +47,9 @@ When done, repeat the steps above to confirm it says **version 17**.
 - If it shows something like `"17.0.x"`, ✅ you’re ready!
 - If it says **“command not found”** or shows an older version, install Java 17.
 
-👉 **To install Java 17 on macOS:**  
-Go to [https://www.oracle.com/java/technologies/javase-jdk17-downloads.html](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)  
-Download the **macOS Installer (JDK 17)** and follow the setup instructions.  
+👉 **To install Java 17 on macOS:**
+Go to [https://www.oracle.com/java/technologies/javase-jdk17-downloads.html](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
+Download the **macOS Installer (JDK 17)** and follow the setup instructions.
 After installation, open Terminal again and run `java -version` to confirm it now shows version 17.
 
 ---
@@ -57,7 +57,7 @@ After installation, open Terminal again and run `java -version` to confirm it no
 ## Step 2: Download BrewBook
 
 1. Go to the [BrewBook releases page](https://github.com/AY2526S1-CS2103T-T09-4/tp/releases).
-2. Look for the latest version and click to download the file named **`BrewBook.jar`**.  
+2. Look for the latest version and click to download the file named **`BrewBook.jar`**.
    (Think of this as your “BrewBook app.”)
 
 ---
@@ -68,7 +68,7 @@ After installation, open Terminal again and run `java -version` to confirm it no
    - **Windows:** `C:\Users\Jean\Documents\BrewBook`
    - **macOS:** `/Users/Jean/Documents/BrewBook` or `~/Documents/BrewBook`
    - **Linux:** `/home/jean/Documents/BrewBook`
-2. Move the downloaded **`BrewBook.jar`** file into that folder.  
+2. Move the downloaded **`BrewBook.jar`** file into that folder.
       BrewBook will automatically save your data there each time you use it.
 
 ---
@@ -87,7 +87,7 @@ Now you’re ready to start managing your café contacts!
 
 ## Step 5: Try out a few simple commands
 
-BrewBook uses a **command box** — just type what you want to do and press **Enter**.  
+BrewBook uses a **command box** — just type what you want to do and press **Enter**.
 Here are a few examples you can try:
 
 | Action | What to Type                                                                                                                                             | What It Does |
@@ -97,7 +97,7 @@ Here are a few examples you can try:
 | Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                                | Adds a new customer |
 | Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/2026-12-04, 2026-12-07 notes/can only do weekdays t/partTime`              | Adds a new staff contact with a shift date |
 | Add a supplier | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/2026-10-10, 2026-10-20 notes/Halal supplier t/preferred` | Adds a supplier contact |
-| Edit a contact | `edit 3 n\John Doe` | Edits any field of a contact  
+| Edit a contact | `edit 3 n\John Doe` | Edits any field of a contact
 | Delete a contact | `delete 3`                                                                                                                                               | Removes the 3rd contact from the current list |
 | Exit the app | `exit`                                                                                                                                                   | Closes BrewBook safely |
 
@@ -107,13 +107,13 @@ Here are a few examples you can try:
 
 ## Step 6: Start using BrewBook for your café
 
-That’s it — you’re ready to go!  
+That’s it — you’re ready to go!
 You can now use BrewBook to keep track of:
 - Your **staff**, along with their shift schedules
 - Your **suppliers**, including what and when they supply
 - Your **customers**, and any notes you want to remember
 
-BrewBook **automatically saves your data**, so there’s no need to click “Save.”  
+BrewBook **automatically saves your data**, so there’s no need to click “Save.”
 When you open it next time, everything will still be there.
 
 ---
@@ -181,7 +181,7 @@ Examples:
 * `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/2026-11-11 notes/only weekends`
 * `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/2026-11-13, 2026-11-12 notes/only weekends`
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:** 
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
   - Shift dates must be in the future.
   - Duplicate dates for shifts are not allowed.
   - Dates must follow the format `YYYY-MM-DD`.
@@ -230,7 +230,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [n/NOTE] [points/PO
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags / shifts / items  / days, the existing fields of the person will be removed i.e adding is not cumulative. 
+* When editing tags / shifts / items  / days, the existing fields of the person will be removed i.e adding is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -266,11 +266,11 @@ Examples:
 * `list all` followed by `delete 1, 2` deletes the 1st & 2nd person in the address book.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-  - The index **must be a positive integer** 
+  - The index **must be a positive integer**
 </div>
 ### Sorting contacts: `sort`
 
-Sorts your contact list based on a specific field and optional order — for example, by name in ascending order.  
+Sorts your contact list based on a specific field and optional order — for example, by name in ascending order.
 This helps you quickly organize your list and find what you need.
 
 Format: `sort FIELD`
@@ -348,7 +348,7 @@ Action | Format, Examples
 **Add suppplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS[, ITEMS,...] days/DAYS[, DAYS,...] [notes/NOTES] [t/TAG]...​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/2025-10-30`
 **List** | `list [all/customer/staff/supplier]`
 **Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`
-**Clear** | `clear` 
+**Clear** | `clear`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [n/NOTE] [points/POINTS] [shifts/SHIFTS] [items/ITEMS] [days/DAYS] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
