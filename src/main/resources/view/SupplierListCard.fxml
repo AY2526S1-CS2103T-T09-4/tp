@@ -13,8 +13,10 @@
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
         </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+        <VBox alignment="TOP_LEFT" minHeight="105" GridPane.columnIndex="0" VBox.vgrow="ALWAYS">
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
@@ -32,9 +34,28 @@
             <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
             <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
             <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-            <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
-            <Label fx:id="items" styleClass="cell_small_label" text="\$items" />
-            <Label fx:id="days" styleClass="cell_small_label" text="\$days" />
+        </VBox>
+        <VBox minHeight="105" GridPane.columnIndex="1">
+            <padding>
+                <Insets bottom="5" left="15" right="5" top="5" />
+            </padding>
+            <children>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <Label text="Items:" styleClass="cell_small_label" />
+                    <Label fx:id="items" styleClass="cell_small_label" text="\$items" />
+                </HBox>
+                <Label text="Days:" styleClass="cell_small_label" />
+                <Label fx:id="days" styleClass="cell_small_label" text="\$days" />
+            </children>
+        </VBox>
+        <VBox minHeight="105" GridPane.columnIndex="2">
+            <padding>
+                <Insets bottom="5" left="15" right="5" top="5" />
+            </padding>
+            <children>
+                <Label text="Note:" styleClass="cell_small_label" />
+                <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
+            </children>
         </VBox>
     </GridPane>
 </HBox>
