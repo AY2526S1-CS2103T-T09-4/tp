@@ -30,11 +30,37 @@ import seedu.address.model.person.Person;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
+    private static final List<Prefix> ALLOWED_PREFIXES = List.of(
+            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+            PREFIX_TAG, PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS
+    );
+
+    private static final java.util.Set<String> ALLOWED_PREFIX_STRINGS =
+            ALLOWED_PREFIXES.stream().map(Prefix::getPrefix).collect(java.util.stream.Collectors.toSet());
+
+    private static java.util.List<String> getUnknownPrefixes(String raw) {
+        java.util.List<String> invalid = new java.util.ArrayList<>();
+        for (String tok : raw.trim().split("\\s+")) {
+            int slash = tok.indexOf('/');
+            if (slash > 0) {
+                String maybe = tok.substring(0, slash + 1); // e.g., "x/"
+                if (maybe.matches("[A-Za-z]+/") && !ALLOWED_PREFIX_STRINGS.contains(maybe)) {
+                    invalid.add(maybe);
+                }
+            }
+        }
+        return invalid;
+    }
+
     @Override
     public FindCommand parse(String args) throws ParseException {
         final String raw = args == null ? "" : args.trim();
         if (raw.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        var unknown = getUnknownPrefixes(raw);
+        if (!unknown.isEmpty()) {
+            throw new ParseException("Unknown prefix(es): " + String.join(", ", unknown));
         }
 
         ArgumentMultimap map = ArgumentTokenizer.tokenize(

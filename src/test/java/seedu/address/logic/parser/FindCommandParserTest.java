@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -13,6 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -289,6 +291,21 @@ public class FindCommandParserTest {
         assertCommandSuccess(cmd, actual,
                 String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
         assertEquals(java.util.List.of(), actual.getFilteredPersonList());
+    }
+
+    @Test
+    public void parse_unknownPrefix_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("x/abc"));
+    }
+
+    @Test
+    public void parse_unknownPrefixes_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("n/Alice x/abc e/alice@example.com"));
+    }
+
+    @Test
+    public void parse_upperCasePrefix_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("N/Alice"));
     }
 }
 
