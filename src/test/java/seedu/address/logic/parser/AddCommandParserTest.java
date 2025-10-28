@@ -426,7 +426,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser,
                 STAFF_COMMAND + NAME_DESC_CARL + PHONE_DESC_CARL + EMAIL_DESC_CARL
                         + ADDRESS_DESC_CARL + INVALID_SHIFTS_FORMAT_DESC,
-                Shift.MESSAGE_FORMAT_CONSTRAINTS);
+                DateParser.MESSAGE_USER_FORMAT_CONSTRAINTS);
 
         // invalid note
         assertParseFailure(parser,
@@ -444,13 +444,13 @@ public class AddCommandParserTest {
         assertParseFailure(parser,
                 STAFF_COMMAND + NAME_DESC_CARL + PHONE_DESC_CARL + EMAIL_DESC_CARL
                         + ADDRESS_DESC_CARL + INVALID_SHIFTS_PAST_DESC,
-                Shift.MESSAGE_OLD_CONSTRAINTS + "2024-10-10");
+                Shift.MESSAGE_OLD_CONSTRAINTS + "10/10/2024");
 
         //invalid shift as shift is duplicated
         assertParseFailure(parser,
                 STAFF_COMMAND + NAME_DESC_CARL + PHONE_DESC_CARL + EMAIL_DESC_CARL
                         + ADDRESS_DESC_CARL + INVALID_SHIFTS_DUPLICATE_DESC,
-                Shift.MESSAGE_DUPLICATE_CONSTRAINTS + "2030-10-10");
+                Shift.MESSAGE_DUPLICATE_CONSTRAINTS + "10/10/2030");
     }
 
 }

@@ -63,11 +63,11 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "frequentCustomer*"; // '*' not allowed in tags
-    public static final String INVALID_SHIFTS_FORMAT_DESC = " " + PREFIX_SHIFTS + "10/10/2025"; // invalid date format
+    public static final String INVALID_SHIFTS_FORMAT_DESC = " " + PREFIX_SHIFTS + "2025-10-10"; // invalid date format
     public static final String INVALID_SHIFTS_PAST_DESC = " " + PREFIX_SHIFTS
-            + "2024-10-10"; // invalid date as it is in the past
+            + "10/10/2024"; // invalid date as it is in the past
     public static final String INVALID_SHIFTS_DUPLICATE_DESC = " " + PREFIX_SHIFTS
-            + "2030-10-10, 2030-10-10"; // invalid dates due to duplicate
+            + "10/10/2030, 10/10/2030"; // invalid dates due to duplicate
     public static final String INVALID_DAYS_DESC = " " + PREFIX_DAYS + "10/11/2025"; // invalid date format
     public static final String INVALID_ITEMS_DESC = " " + PREFIX_ITEMS + "?milk";
     public static final String INVALID_POINTS_DESC = " " + PREFIX_POINTS + "-1";
@@ -83,7 +83,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_CARL = "bestStaff";
     public static final String VALID_TAG_CARL_2 = "morning";
     public static final String VALID_NOTE_CARL = "allergic to work";
-    public static final String VALID_SHIFTS_CARL = "2030-10-10";
+    public static final String VALID_SHIFTS_CARL = "10/10/2030";
     public static final String NAME_DESC_CARL = " " + PREFIX_NAME + VALID_NAME_CARL;
     public static final String PHONE_DESC_CARL = " " + PREFIX_PHONE + VALID_PHONE_CARL;
     public static final String EMAIL_DESC_CARL = " " + PREFIX_EMAIL + VALID_EMAIL_CARL;

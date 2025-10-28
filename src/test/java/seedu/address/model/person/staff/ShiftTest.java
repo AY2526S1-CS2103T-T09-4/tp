@@ -19,7 +19,7 @@ public class ShiftTest {
         LocalDate date = LocalDate.of(2025, 10, 15);
         Shift shift = new Shift(date);
 
-        assertEquals("2025-10-15", shift.toString());
+        assertEquals("15/10/2025", shift.toString());
     }
 
     @Test
@@ -27,6 +27,6 @@ public class ShiftTest {
         LocalDate date = LocalDate.of(2023, 1, 1);
         Shift shift = new Shift(date);
 
-        assertEquals("2023-01-01", shift.toString());
+        assertEquals("1/1/2023", shift.toString());
     }
 }

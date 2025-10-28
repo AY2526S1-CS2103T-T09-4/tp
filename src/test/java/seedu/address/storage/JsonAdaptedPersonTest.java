@@ -32,7 +32,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_NOTE = "x".repeat(201);
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_SHIFTS = "10/1/2025";
+    private static final String INVALID_SHIFTS = "2025-10-10";
     private static final String INVALID_DAYS = "10/1/2025";
     private static final String INVALID_ITEMS = "@@@";
     private static final Integer INVALID_POINTS = -1;
@@ -179,7 +179,7 @@ public class JsonAdaptedPersonTest {
         Person modelPerson = person.toModelType();
 
         assertEquals(VALID_SHIFTS.size(), modelPerson.getShifts().size());
-        assertEquals("2030-10-10", modelPerson.getShifts().get(0).toString());
+        assertEquals("10/10/2030", modelPerson.getShifts().get(0).toString());
     }
 
     @Test

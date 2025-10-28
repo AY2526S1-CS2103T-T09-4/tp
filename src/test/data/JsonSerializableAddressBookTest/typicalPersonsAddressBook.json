@@ -24,7 +24,7 @@
     "address" : "wall street",
     "note":"",
     "tags" : [ ],
-    "shifts" : [ "2025-10-10" ],
+    "shifts" : [ "10/10/2025" ],
     "type" : "STAFF"
   }, {
     "name" : "Daniel Meier",
