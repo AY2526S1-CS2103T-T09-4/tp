@@ -316,15 +316,29 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseDays_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseDays(List.of("2025/10/30")));
+    }
+
+    @Test
+    public void parseDays_invalidDay_throwsParseException() {
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseDays(List.of("2025-10-32")));
+    }
+
+    @Test
     public void parseDays_pastDate_throws() {
         String date = "2025-10-10";
-        assertThrows(ParseException.class, () -> ParserUtil.parseDays(List.of(date)));
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseDays(List.of(date)));
     }
 
     @Test
     public void parseDays_duplicate_throws() {
         String date = "2025-10-30";
-        assertThrows(ParseException.class, () -> ParserUtil.parseDays(List.of(date + ", " + date)));
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseDays(List.of(date + ", " + date)));
     }
 
     @Test
