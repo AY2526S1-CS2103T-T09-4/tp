@@ -1,10 +1,10 @@
 package seedu.address.ui;
 
+import java.util.stream.Collectors;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.address.model.person.Person;
-
-import java.util.stream.Collectors;
 
 /**
  * A UI component that displays information of a {@code Supplier}.
