@@ -81,8 +81,18 @@ public class FindCommandParser implements Parser<FindCommand> {
                 kws -> new FieldContainsKeywordsPredicate(p -> p.getPhone().value, kws, false), perField);
         addIfPresent(map, PREFIX_EMAIL, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> p.getEmail().value, kws, false), perField);
-        addIfPresent(map, PREFIX_ADDRESS, toKeywords,
-                kws -> new FieldContainsKeywordsPredicate(p -> p.getAddress().value, kws, false), perField);
+        map.getAllValues(PREFIX_ADDRESS).stream()
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .reduce((a, b) -> a + " " + b)
+                .ifPresent(rawPhrase -> {
+                    String needle = norm(rawPhrase);
+                    perField.add((Person p) -> {
+                        String hay = norm(p.getAddress().value);
+                        return hay.contains(needle);
+                    });
+                });
+
         addIfPresent(map, PREFIX_TAG, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(
                         p -> p.getTags().stream().map(tag -> tag.tagName).collect(Collectors.joining(" ")),
@@ -118,7 +128,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 }, kws, false),
                 perField);
 
-        // Reject empty values for any provided prefix (keep your current validation)
+        // Reject empty values for any provided prefix
         for (Prefix px : List.of(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_TAG, PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS)) {
             if (map.getValue(px).filter(v -> v.trim().isEmpty()).isPresent()) {
@@ -139,6 +149,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         return new FindCommand(new AllOfPersonPredicates(perField));
+    }
+
+    private static String norm(String s) {
+        return s.toLowerCase()
+                .replaceAll("[^\\p{Alnum}]+", " ")
+                .replaceAll("\\s+", " ")
+                .trim();
     }
 
     private void addIfPresent(ArgumentMultimap map, Prefix prefix,

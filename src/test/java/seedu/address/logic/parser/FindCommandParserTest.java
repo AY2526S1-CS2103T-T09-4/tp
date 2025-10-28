@@ -255,6 +255,19 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void execute_address_returnsZero() throws Exception {
+        FindCommand cmd = parser.parse("find a/123 Clementi");
+
+        Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expected.updateFilteredPersonList(p -> false);
+
+        assertCommandSuccess(cmd, actual,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
+        assertEquals(List.of(), actual.getFilteredPersonList());
+    }
+
+    @Test
     public void execute_shifts_returnsZero() throws Exception {
         // Non-staff person with shifts
         FindCommand cmd = parser.parse("find n/Alice shifts/ 2030-10-10");
