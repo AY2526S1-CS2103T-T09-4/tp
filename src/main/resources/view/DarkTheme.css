@@ -1,32 +1,42 @@
+@font-face {
+    font-family: 'Roboto Semibold';
+    src: url('../fonts/Roboto-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto Light';
+    src: url('../fonts/Roboto-Light.ttf');
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    background-color: #ffffff; /* Used in the default.html file */
 }
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Roboto Semibold";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Roboto Semibold";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Roboto Light";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Roboto Semibold";
 }
 
 .tab-pane {
@@ -121,7 +131,7 @@
 }
 
 .cell_big_label {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Roboto Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
@@ -353,7 +363,7 @@
 
 
 .list-cell .type_label {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Roboto Semibold";
     -fx-font-size: 13px;
     -fx-padding: 2 8 2 8;
     -fx-background-radius: 12px;
