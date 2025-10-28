@@ -91,20 +91,20 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: #fefaf5;
+    -fx-background-color: #ffefcb;
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: #fefaf5;
+    -fx-background-color: #ffefcb;
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: #fefaf5;
+    -fx-background-color: #ffefcb;
 }
 
 .list-cell {
@@ -119,27 +119,22 @@
     -fx-background-color: transparent;
 }
 
-
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
-    -fx-border-radius: 8;
+.customer-card #cardPane {
+    -fx-background-color: #895d2b;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px;
 }
 
-.list-cell .label {
-    -fx-text-fill: white;
+.staff-card #cardPane {
+    -fx-background-color: #a3966a;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px;
 }
 
-.customer-card {
-    -fx-background-color: #fdf6f8;
-}
-
-.staff-card {
-    -fx-background-color: #ebe8f6;
-}
-
-.supplier-card {
-    -fx-background-color: #d4c4ff;
+.supplier-card #cardPane {
+    -fx-background-color: #90553c;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px;
 }
 
 .customer-card .label,
@@ -148,23 +143,30 @@
     -fx-text-fill: black;
 }
 
-.list-cell.customer-card #cardPane {
-    -fx-background-color: #895d2b;
-    -fx-background-radius: 8px;
-    -fx-padding: 10px;
+.list-cell:filled:selected.customer-card #cardPane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #3e7b91;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+
 }
 
-.list-cell.staff-card #cardPane {
-    -fx-background-color: #a3966a;
-    -fx-background-radius: 8px;
-    -fx-padding: 10px;
+.list-cell:filled:selected.staff-card #cardPane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #3e7b91;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+
 }
 
-.list-cell.supplier-card #cardPane {
-    -fx-background-color: #90553c;
-    -fx-background-radius: 8px;
-    -fx-padding: 10px;
+.list-cell:filled:selected.supplier-card #cardPane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #3e7b91;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+
 }
+
 
 .cell_big_label {
     -fx-font-family: "Roboto Semibold";
@@ -179,7 +181,7 @@
 }
 
 .status-bar {
-    -fx-background-color: #fefaf5;
+    -fx-background-color: #ffefcb;
 }
 
 .status-bar .label {
@@ -190,13 +192,13 @@
 }
 
 .grid-pane {
-    -fx-background-color: #fefaf5;
+    -fx-background-color: #ffefcb;
     -fx-border-color: derive(#1d1d1d, 30%);
     -fx-border-width: 1px;
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: #fefaf5;
+    -fx-background-color: #ffefcb;
 }
 
 .context-menu {
@@ -208,7 +210,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: #fefaf5;
+    -fx-background-color: #ffefcb;
     -fx-effect: null;
 }
 
@@ -287,7 +289,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: #fefaf5;
+    -fx-background-color: #ffefcb;
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -319,11 +321,6 @@
     -fx-shape: " ";
 }
 
-#cardPane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0;
-}
-
 #commandTypeLabel {
     -fx-font-size: 11px;
     -fx-text-fill: #F70D1A;
@@ -332,7 +329,7 @@
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #f4f5f5;
+    -fx-border-color: #b8a98a;
     -fx-border-radius: 8;
     -fx-border-width: 2;
     -fx-font-family: "Roboto Light";
@@ -341,12 +338,17 @@
     -fx-padding: 12 10;
 }
 
+#commandTextField:prompt-text {
+    -fx-text-fill: #b8a98a; /* desaturated beige-grey */
+    -fx-font-style: italic;
+}
+
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
 .result-display {
-    -fx-background-color: #fefaf5;
+    -fx-background-color: #ffefcb;
     -fx-font-family: "Roboto Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
@@ -358,7 +360,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: rgba(0, 0, 0, 0.1);
+    -fx-background-color: rgba(255, 239, 203, 0.4);
     -fx-background-radius: 4;
     -fx-padding: 8;
     -fx-background-insets: 0;
@@ -421,3 +423,10 @@
     -fx-focus-traversable: false;
     -fx-background-color: black;
 }
+
+.list-cell:filled:selected.customer-card .label,
+.list-cell:filled:selected.staff-card .label,
+.list-cell:filled:selected.supplier-card .label {
+    -fx-text-fill: black;
+}
+
