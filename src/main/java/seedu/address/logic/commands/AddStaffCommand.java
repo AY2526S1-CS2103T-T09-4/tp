@@ -36,7 +36,7 @@ public class AddStaffCommand extends AddCommand {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "ahhock@example.com "
             + PREFIX_ADDRESS + "123 Clementi Ave 3 "
-            + PREFIX_SHIFTS + "2025-12-04, 2025-12-07 "
+            + PREFIX_SHIFTS + "12/12/2025, 15/12/2025 "
             + PREFIX_NOTE + "can only do weekdays "
             + PREFIX_TAG + "partTime ";
 

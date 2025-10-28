@@ -186,21 +186,21 @@ public class ParserUtil {
                 continue;
             }
             try {
-                LocalDate date = LocalDate.parse(trimmed);
+                LocalDate date = DateParser.parseDate(trimmed);
 
                 if (date.isBefore(LocalDate.now())) {
-                    throw new ParseException(Shift.MESSAGE_OLD_CONSTRAINTS + date);
+                    throw new ParseException(Shift.MESSAGE_OLD_CONSTRAINTS + date.format(DateParser.FORMATTER));
                 }
 
                 Shift newShift = new Shift(date);
 
                 if (shifts.contains(newShift)) {
-                    throw new ParseException(Shift.MESSAGE_DUPLICATE_CONSTRAINTS + date);
+                    throw new ParseException(Shift.MESSAGE_DUPLICATE_CONSTRAINTS + date.format(DateParser.FORMATTER));
                 }
 
                 shifts.add(new Shift(date));
             } catch (DateTimeParseException e) {
-                throw new ParseException(Shift.MESSAGE_FORMAT_CONSTRAINTS);
+                throw new ParseException(DateParser.MESSAGE_USER_FORMAT_CONSTRAINTS);
             }
         }
         return shifts;
