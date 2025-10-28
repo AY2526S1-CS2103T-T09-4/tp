@@ -233,7 +233,7 @@ public class FindCommandParserTest {
 
     @Test
     public void execute_nameAndDays_singleSupplierFound() throws Exception {
-        FindCommand command = parser.parse("find n/Elle days/ 2025-10-10");
+        FindCommand command = parser.parse("find n/Elle days/2030-10-10");
 
         Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -244,7 +244,7 @@ public class FindCommandParserTest {
                         && p.getContactType() == seedu.address.model.person.Person.ContactType.SUPPLIER
                         && p.getDays().stream()
                         .map(Object::toString)
-                        .anyMatch(s -> s.contains("2025-10-10"))
+                        .anyMatch(s -> s.contains("2030-10-10"))
         );
 
         assertCommandSuccess(command, actual, expectedMessage, expected);
