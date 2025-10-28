@@ -43,7 +43,7 @@ public class Items {
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return name.toLowerCase().hashCode();
     }
 
     @Override

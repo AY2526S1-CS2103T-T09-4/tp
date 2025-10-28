@@ -39,6 +39,11 @@ public class Days {
     }
 
     @Override
+    public int hashCode() {
+        return daysSupplied.hashCode();
+    }
+
+    @Override
     public String toString() {
         return daysSupplied.toString();
     }

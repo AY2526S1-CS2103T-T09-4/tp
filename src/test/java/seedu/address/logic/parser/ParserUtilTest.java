@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -312,5 +313,23 @@ public class ParserUtilTest {
         String pointsWithWhitespace = WHITESPACE + VALID_POINTS + WHITESPACE;
         Points expectedPoints = new Points(Integer.parseInt(VALID_POINTS));
         assertEquals(expectedPoints, ParserUtil.parsePoints(pointsWithWhitespace));
+    }
+
+    @Test
+    public void parseDays_pastDate_throws() {
+        String date = "2025-10-10";
+        assertThrows(ParseException.class, () -> ParserUtil.parseDays(List.of(date)));
+    }
+
+    @Test
+    public void parseDays_duplicate_throws() {
+        String date = "2025-10-30";
+        assertThrows(ParseException.class, () -> ParserUtil.parseDays(List.of(date + ", " + date)));
+    }
+
+    @Test
+    public void parseItems_duplicate_throws() {
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseItems(List.of("beans, BEANS")));
     }
 }

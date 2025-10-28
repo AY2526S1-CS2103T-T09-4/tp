@@ -253,7 +253,7 @@ public class ParserUtil {
         }
 
         String raw = itemStrings.get(0);
-        for (String token : raw.split(", ")) {
+        for (String token : raw.split(",")) {
             String trimmed = token.trim();
             if (trimmed.isEmpty()) {
                 continue;
