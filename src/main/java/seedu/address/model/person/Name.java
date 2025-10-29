@@ -10,7 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain alphanumeric characters and spaces, should not be blank, and should be " +
+                    "no longer than 37 characters. ";
+
+    private static final int MAX_LENGTH = 37;
 
     /*
      * The first character of the address must not be a whitespace,
@@ -35,7 +38,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH;
     }
 
 
