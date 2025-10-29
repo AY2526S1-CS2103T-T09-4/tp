@@ -66,10 +66,10 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NO_FIELDS = "At least one field to edit must be provided.";
     public static final String MESSAGE_FIELDS_NOT_EDITED = "Fields provided are the same as the existing values.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    private static boolean hasChange;
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
-    private static boolean hasChange;
 
     /**
      * @param index of the person in the filtered person list to edit
