@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.DateParser;
 import seedu.address.model.person.staff.Shift;
 
 /**
@@ -43,18 +44,15 @@ class JsonAdaptedShift {
      * @throws IllegalValueException if there were any data constraints violated in the adapted shift.
      */
     public Shift toModelType() throws IllegalValueException {
-        if (shiftDate == null) {
-            throw new IllegalValueException(Shift.MESSAGE_COMPULSORY);
-        }
         try {
-            LocalDate parsedDate = LocalDate.parse(shiftDate);
+            LocalDate parsedDate = DateParser.parseDate(shiftDate);
             if (parsedDate.isBefore(LocalDate.now())) {
                 return null;
             }
 
             return new Shift(parsedDate);
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException(Shift.MESSAGE_FORMAT_CONSTRAINTS);
+            throw new IllegalValueException(DateParser.MESSAGE_FORMAT_CONSTRAINT);
         }
     }
 }

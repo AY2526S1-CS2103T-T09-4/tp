@@ -15,7 +15,7 @@ import seedu.address.model.person.staff.Staff;
  * Command word mirrors the existing pattern ("add role …").
  * Example:
  *   add staff n/Ah Hock p/98765432 e:ahhock@example.com a/123 Clementi Ave 3 t/preferred
- *   shifts/2025-12-03, 2025-12-04, 2025-12-05 no/can only do weekdays
+ *   shifts/2025-12-03, 2025-12-04, 2025-12-05 notes/can only do weekdays
  *
  */
 public class AddStaffCommand extends AddCommand {
@@ -28,15 +28,15 @@ public class AddStaffCommand extends AddCommand {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_SHIFTS + "SHIFT[, SHIFT,...] "
-            + "[" + PREFIX_NOTE + "NOTES]"
+            + "[" + PREFIX_SHIFTS + "SHIFTS[, SHIFTS]...] "
+            + "[" + PREFIX_NOTE + "NOTES] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Ah Hock "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "ahhock@example.com "
             + PREFIX_ADDRESS + "123 Clementi Ave 3 "
-            + PREFIX_SHIFTS + "2025-12-04, 2025-12-07 "
+            + PREFIX_SHIFTS + "12/12/2025, 15/12/2025 "
             + PREFIX_NOTE + "can only do weekdays "
             + PREFIX_TAG + "partTime ";
 
