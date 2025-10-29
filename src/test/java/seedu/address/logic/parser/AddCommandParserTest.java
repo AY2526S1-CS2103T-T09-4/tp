@@ -7,7 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_LENGTH_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_SYMBOL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NOTES_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_POINTS_DESC;
@@ -55,13 +56,15 @@ import seedu.address.testutil.CustomerBuilder;
 
 public class AddCommandParserTest {
     private static final String CUSTOMER_COMMAND = Person.ContactType.CUSTOMER.lowerCase() + " ";
+    private static final String CUSTOMER_COMMAND_UPPER = CUSTOMER_COMMAND.toUpperCase();
     private static final String STAFF_COMMAND = Person.ContactType.STAFF.lowerCase() + " ";
+    private static final String STAFF_COMMAND_UPPER = STAFF_COMMAND.toUpperCase();
     private static final String SUPPLIER_COMMAND = Person.ContactType.SUPPLIER.lowerCase() + " ";
     private final AddCommandParser parser = new AddCommandParser();
 
     // Test cases for Customer
     @Test
-    public void parse_allFieldsPresent_success() {
+    public void parseCustomer_allFieldsPresent_success() {
         Customer expectedCustomer = new CustomerBuilder(AMY).build();
 
         assertParseSuccess(parser, CUSTOMER_COMMAND + PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY
@@ -78,10 +81,15 @@ public class AddCommandParserTest {
                         + TAG_DESC_AMY + TAG_DESC_AMY_2
                         + NOTE_DESC_AMY + POINTS_DESC_AMY,
                 new AddCustomerCommand(expectedCustomerMultipleTags));
+
+        // non-lowercase add customer command
+        assertParseSuccess(parser, CUSTOMER_COMMAND_UPPER + PREAMBLE_WHITESPACE + NAME_DESC_AMY
+                        + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NOTE_DESC_AMY + POINTS_DESC_AMY,
+                new AddCustomerCommand(expectedCustomer));
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parseCustomer_repeatedNonTagValue_failure() {
         String validExpectedCustomerString = CUSTOMER_COMMAND + PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_AMY + NOTE_DESC_AMY + POINTS_DESC_AMY;
 
@@ -115,7 +123,7 @@ public class AddCommandParserTest {
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, CUSTOMER_COMMAND + INVALID_NAME_DESC + validExpectedCustomerString,
+        assertParseFailure(parser, CUSTOMER_COMMAND + INVALID_NAME_SYMBOL_DESC + validExpectedCustomerString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
@@ -137,7 +145,7 @@ public class AddCommandParserTest {
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, CUSTOMER_COMMAND + validExpectedCustomerString + INVALID_NAME_DESC,
+        assertParseFailure(parser, CUSTOMER_COMMAND + validExpectedCustomerString + INVALID_NAME_SYMBOL_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
@@ -158,7 +166,7 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_optionalFieldsMissing_success() {
+    public void parseCustomer_optionalFieldsMissing_success() {
         // zero tags
         Customer expectedAmy = new CustomerBuilder(AMY).withTags().build();
         assertParseSuccess(parser, CUSTOMER_COMMAND + NAME_DESC_AMY
@@ -186,7 +194,7 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
+    public void parseCustomer_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCustomerCommand.MESSAGE_USAGE);
 
         // missing name prefix
@@ -221,10 +229,15 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_failure() {
-        // invalid name
+    public void parseCustomer_invalidValue_failure() {
+        // invalid name - special symbols
         assertParseFailure(parser, CUSTOMER_COMMAND
-                + INVALID_NAME_DESC + PHONE_DESC_AMY
+                + INVALID_NAME_SYMBOL_DESC + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + TAG_DESC_AMY + TAG_DESC_AMY_2, Name.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser, CUSTOMER_COMMAND
+                + INVALID_NAME_LENGTH_DESC + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + TAG_DESC_AMY + TAG_DESC_AMY_2, Name.MESSAGE_CONSTRAINTS);
 
@@ -261,7 +274,7 @@ public class AddCommandParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, CUSTOMER_COMMAND
-                + INVALID_NAME_DESC
+                + INVALID_NAME_SYMBOL_DESC
                 + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + INVALID_ADDRESS_DESC, Name.MESSAGE_CONSTRAINTS);
     }
