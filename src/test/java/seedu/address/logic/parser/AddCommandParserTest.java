@@ -413,7 +413,7 @@ public class AddCommandParserTest {
     public void parse_invalidValueStaff_failure() {
         // invalid name
         assertParseFailure(parser,
-                STAFF_COMMAND + INVALID_NAME_DESC + PHONE_DESC_CARL + EMAIL_DESC_CARL
+                STAFF_COMMAND + INVALID_NAME_SYMBOL_DESC + PHONE_DESC_CARL + EMAIL_DESC_CARL
                         + ADDRESS_DESC_CARL + SHIFTS_DESC_CARL,
                 Name.MESSAGE_CONSTRAINTS);
 
