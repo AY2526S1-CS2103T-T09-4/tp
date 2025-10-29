@@ -3,13 +3,25 @@ layout: page
 title: User Guide
 ---
 
-BrewBook is a **desktop app to help managers of small cafe to manage different contacts. Optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BrewBook can get your contact management tasks done faster than traditional GUI apps.
+Welcome to BrewBook! If you're a **small-cafe manager**, BrewBook was made for _you_. With BrewBook, you can manage your customers, staff and suppliers seamlessly, helping you keep track of key information of each group. 
+
+It is also optimised for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI). In simple terms, if you can type fast, BrewBook can help you manage your different contacts much faster than traditional GUI apps. 
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
+# About This Guide
+This guide provides instructions for small-cafe managers in Singapore on how to efficiently manage their different stakeholders - customers, staff and suppliers. After this guide, you will be able to:  
+* Add, edit and delete contacts
+* Sort the contact list by different fields
+* Filter the contact list by different fields
+
+**What you should know before starting:**
+* You should be comfortable using a Command-Line Interface (CLI) on your computer.
+* You should know how to copy and paste commands. 
+* 
 # Quick start
 
 Welcome to **BrewBook** — your café’s one-stop contact manager for customers, staff, and suppliers.
