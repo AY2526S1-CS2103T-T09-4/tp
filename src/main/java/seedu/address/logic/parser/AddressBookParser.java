@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_CLEAR_COMMAND_CHECK;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -56,6 +57,9 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
         case ClearCommand.COMMAND_WORD:
+            if (arguments != "") {
+                throw new ParseException(MESSAGE_CLEAR_COMMAND_CHECK);
+            }
             return new ClearCommand();
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -69,7 +73,6 @@ public class AddressBookParser {
             return new SortListCommandParser().parse(arguments);
         case SummaryCommand.COMMAND_WORD:
             return new SummaryCommand();
-
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
