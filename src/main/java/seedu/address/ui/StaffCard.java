@@ -1,9 +1,10 @@
 package seedu.address.ui;
 
-import java.util.stream.Collectors;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -12,9 +13,10 @@ import seedu.address.model.person.Person;
 public class StaffCard extends PersonCard {
 
     private static final String FXML = "StaffListCard.fxml";
+    private static final int MAX_SLOTS = 3;
 
     @FXML
-    protected Label shifts;
+    private VBox shiftsBox; // container for the mini list of shifts
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -22,12 +24,37 @@ public class StaffCard extends PersonCard {
     public StaffCard(Person person, int displayedIndex) {
         super(person, displayedIndex, FXML);
         type.getStyleClass().add("type_staff");
-        String formattedShifts = person.getShifts().stream()
+
+        updateShifts(person);
+    }
+
+    private void updateShifts(Person person) {
+        shiftsBox.getChildren().clear();
+
+        List<String> shifts = person.getShifts().stream()
                 .map(Object::toString)
                 .sorted()
-                .collect(Collectors.joining(", "));
+                .limit(MAX_SLOTS)
+                .toList();
 
-        shifts.setText(formattedShifts);
+        // Add actual shifts
+        for (String s : shifts) {
+            Label l = new Label(s);
+            l.getStyleClass().add("shift-entry");
+            shiftsBox.getChildren().add(l);
+        }
+
+        // Fill remaining slots with blanks
+        int blanks = MAX_SLOTS - shifts.size();
+        for (int i = 0; i < blanks; i++) {
+            Label placeholder = new Label("—");
+            placeholder.getStyleClass().add("shift-entry empty");
+            shiftsBox.getChildren().add(placeholder);
+        }
+
     }
+
+
+
 }
 

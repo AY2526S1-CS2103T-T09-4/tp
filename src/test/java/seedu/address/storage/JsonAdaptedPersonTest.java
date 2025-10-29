@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.DateParser;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -32,7 +33,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_NOTE = "x".repeat(201);
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_SHIFTS = "10/1/2025";
+    private static final String INVALID_SHIFTS = "2025-10-10";
     private static final String INVALID_DAYS = "10/1/2025";
     private static final String INVALID_ITEMS = "@@@";
     private static final Integer INVALID_POINTS = -1;
@@ -179,7 +180,7 @@ public class JsonAdaptedPersonTest {
         Person modelPerson = person.toModelType();
 
         assertEquals(VALID_SHIFTS.size(), modelPerson.getShifts().size());
-        assertEquals("2030-10-10", modelPerson.getShifts().get(0).toString());
+        assertEquals("10/10/2030", modelPerson.getShifts().get(0).toString());
     }
 
     @Test
@@ -191,7 +192,7 @@ public class JsonAdaptedPersonTest {
                 VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAGS, invalidShifts, EMPTY_ITEMS, EMPTY_DAYS, VALID_NOTE, null);
 
-        String expectedMessage = Shift.MESSAGE_FORMAT_CONSTRAINTS;
+        String expectedMessage = DateParser.MESSAGE_FORMAT_CONSTRAINT;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
