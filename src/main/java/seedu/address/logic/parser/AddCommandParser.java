@@ -52,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         String[] words = args.trim().split(" ", 2);
-        String preamble = words[0].trim();
+        String preamble = words[0].trim().toLowerCase();
 
         if (!isValidType(preamble)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
