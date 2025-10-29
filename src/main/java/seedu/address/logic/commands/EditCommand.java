@@ -63,11 +63,13 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: \n%1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NO_FIELDS = "At least one field to edit must be provided.";
+    public static final String MESSAGE_FIELDS_NOT_EDITED = "Fields provided are the same as the existing values.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private static boolean hasChange;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -97,6 +99,10 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        if (!hasChange) {
+            throw new CommandException(MESSAGE_FIELDS_NOT_EDITED);
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -123,8 +129,17 @@ public class EditCommand extends Command {
         List<Items> updatedItems = editPersonDescriptor.getItems().orElse(personToEdit.getItems());
         List<Days> updatedDays = editPersonDescriptor.getDays().orElse(personToEdit.getDays());
 
+        hasChange = !(personToEdit.getName().equals(updatedName)
+                && personToEdit.getPhone().equals(updatedPhone)
+                && personToEdit.getEmail().equals(updatedEmail)
+                && personToEdit.getAddress().equals(updatedAddress)
+                && personToEdit.getTags().equals(updatedTags)
+                && personToEdit.getNote().equals(updatedNote));
+
         switch (contactType) {
         case CUSTOMER:
+            assert personToEdit.getPoints() != null;
+            hasChange = hasChange || !(personToEdit.getPoints().equals(updatedPoints));
             if (!isNull(updatedShifts)) {
                 throw new CommandException(String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_SHIFTS));
             }
@@ -140,6 +155,8 @@ public class EditCommand extends Command {
                     updatedTags, updatedNote);
 
         case STAFF:
+            assert personToEdit.getShifts() != null;
+            hasChange = hasChange || !(personToEdit.getShifts().equals(updatedShifts));
             if (!isNull(updatedPoints)) {
                 throw new CommandException(String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_POINTS));
             }
@@ -154,6 +171,11 @@ public class EditCommand extends Command {
                     updatedAddress, updatedTags,
                     updatedShifts, updatedNote);
         case SUPPLIER:
+            assert personToEdit.getItems() != null;
+            assert personToEdit.getDays() != null;
+            hasChange = hasChange
+                    || !(personToEdit.getItems().equals(updatedItems))
+                    || !(personToEdit.getDays().equals(updatedDays));
             if (!isNull(updatedPoints)) {
                 throw new CommandException(String.format(MESSAGE_INVALID_FIELD_ENTERED, PREFIX_POINTS));
             }
@@ -241,14 +263,6 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, note, items, days, shifts, points);
-        }
-
-        public void setContactType(Person.ContactType contactType) {
-            this.contactType = contactType;
-        }
-
-        public Person.ContactType getContactType() {
-            return this.contactType;
         }
 
         public void setName(Name name) {
