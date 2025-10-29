@@ -39,12 +39,13 @@ public class PersonTest {
                 .withAddress(VALID_ADDRESS_CARL).withTags(VALID_TAG_CARL).build();
         assertTrue(AMY.isSamePerson(editedAmy));
 
+
+        // name differs in case, all other attributes same -> returns true
+        editedAmy = new CustomerBuilder(AMY).withName(VALID_NAME_AMY.toLowerCase()).build();
+        assertTrue(AMY.isSamePerson(editedAmy));
+
         // different name, all other attributes same -> returns false
         editedAmy = new CustomerBuilder(AMY).withName(VALID_NAME_CARL).build();
-        assertFalse(AMY.isSamePerson(editedAmy));
-
-        // name differs in case, all other attributes same -> returns false
-        editedAmy = new CustomerBuilder(AMY).withName(VALID_NAME_AMY.toLowerCase()).build();
         assertFalse(AMY.isSamePerson(editedAmy));
 
         // name has trailing spaces, all other attributes same -> returns false

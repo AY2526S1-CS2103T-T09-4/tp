@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY_CASE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY_SPACE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -49,10 +51,23 @@ public class AddCustomerCommandTest {
     @Test
     public void execute_duplicateCustomer_throwsCommandException() {
         Customer validCustomer = new CustomerBuilder().build();
-        AddCommand addCommand = new AddCustomerCommand(validCustomer);
         ModelStub modelStub = new ModelStubWithPerson(validCustomer);
 
+        // Exact same name
+        AddCommand addCommand = new AddCustomerCommand(validCustomer);
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+
+        // Same name, but different case
+        Customer diffCaseCustomer = new CustomerBuilder().withName(VALID_NAME_AMY_CASE).build();
+        AddCommand diffCaseAddCommand = new AddCustomerCommand(diffCaseCustomer);
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> diffCaseAddCommand
+                .execute(modelStub));
+
+        // Same name, but extra spaces
+        Customer extraSpaceCustomer = new CustomerBuilder().withName(VALID_NAME_AMY_SPACE).build();
+        AddCommand extraSpaceAddCommand = new AddCustomerCommand(extraSpaceCustomer);
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> extraSpaceAddCommand
+                .execute(modelStub));
     }
 
     @Test
