@@ -60,14 +60,14 @@ public class AddCustomerCommandTest {
         // Same name, but different case
         Customer diffCaseCustomer = new CustomerBuilder().withName(VALID_NAME_AMY_CASE).build();
         AddCommand diffCaseAddCommand = new AddCustomerCommand(diffCaseCustomer);
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON,
-                () -> diffCaseAddCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> diffCaseAddCommand
+                .execute(modelStub));
 
         // Same name, but extra spaces
         Customer extraSpaceCustomer = new CustomerBuilder().withName(VALID_NAME_AMY_SPACE).build();
         AddCommand extraSpaceAddCommand = new AddCustomerCommand(extraSpaceCustomer);
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON,
-                () -> extraSpaceAddCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> extraSpaceAddCommand
+                .execute(modelStub));
     }
 
     @Test
