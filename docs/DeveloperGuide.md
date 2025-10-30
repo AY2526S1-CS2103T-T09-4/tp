@@ -285,23 +285,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-For all use cases below, unless otherwise specified: 
+For all use cases below, unless otherwise specified:
 * The **System** is `BrewBook`.
 * The **Actor** is the `user`.
-* The **Precondition** is that the `user` is at the command prompt. 
+* The **Precondition** is that the `user` is at the command prompt.
 * `Person` refers to `customer`, `staff` and `supplier`.
 
 #### UC1 - Request for help
 
-**Guarantee**: Help message will be displayed. 
+**Guarantee**: Help message will be displayed.
 
 **MSS**
-1. User requests for help. 
-2. BrewBook displays help message. Use case ends. 
+1. User requests for help.
+2. BrewBook displays help message. Use case ends.
 
 #### UC2 - Add (customer | staff | supplier)
 
-* **Guarantee**: (Customer | Staff | Supplier) will be added. 
+* **Guarantee**: (Customer | Staff | Supplier) will be added.
 
 **MSS**
 
@@ -372,7 +372,7 @@ For all use cases below, unless otherwise specified:
 
 #### UC7 - Sort persons by field
 
-**Guarantee**: Persons will be sorted by the given field. 
+**Guarantee**: Persons will be sorted by the given field.
 
 **MSS**
 1. User requests to sort persons by field. 
@@ -487,13 +487,13 @@ testers are expected to do more *exploratory* testing.
    1. Test case 1: `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
       Expected: New customer added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
    2. Test case 2: `add customer n/John & Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
-      Expected: No customer is added. Name-specific error message highlighting the correct name format is shown. 
+      Expected: No customer is added. Name-specific error message highlighting the correct name format is shown.
    3. Test case 3: `add customer n/John Doe e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
-      Expected: No customer is added as phone number is missing. Generic error message highlighting the correct command format is shown. 
+      Expected: No customer is added as phone number is missing. Generic error message highlighting the correct command format is shown.
    4. Other incorrect add customer commands to try: 
-      1. Name longer than 48 characters. Shows name-specific error message. 
+      1. Name longer than 48 characters. Shows name-specific error message.
       2. Email doesn't follow the specified email format (e.g. does not include an `@`). Shows email-specific error message.
-      3. Phone number is shorter than 3 characters or is not purely numeric. 
+      3. Phone number is shorter than 3 characters or is not purely numeric.
       2. Notes longer than 200 characters. Shows notes-specific error message.
       3. Other missing compulsory tags (i.e. name, phone, email, address)
 2. Adding a staff. 
