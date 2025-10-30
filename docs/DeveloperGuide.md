@@ -148,6 +148,7 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Planned Enhancements**
@@ -287,12 +288,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                | I want to …​                                                               | So that I can…​                          |
 |----------|------------------------|----------------------------------------------------------------------------|------------------------------------------|
-| `* * *`  | new user               | add a supplier with name, person number, what and when they supply        | test adding suppliers                    |
-| `* * *`  | new user               | add a staff with name, person number, and when they're on shift           | test adding staff                        |
-| `* * *`  | new user               | add a customer with name, person number, and their current loyalty points | test adding customers                    |
-| `* * *`  | new user               | view all persons                                                          | get an overview of all my persons       |
-| `* * *`  | semi-experienced user  | delete individual persons                                                 | remove unwanted persons                 |
-| `* * *`  | semi-experienced user  | view persons of a certain category                                        | get an overview of individual categories |
+`* *` | potential user who is exploring using the app in the cafe, | see the app populated with sample data, | I can easily see how the app will look like when it is in use.
+`* *` | new user who is ready to start using the app, | interact with the sample data, | I am familiar with the features provided.
+`* * *` | new user who is ready to start using the app, | add my first supplier with name, contact number, what they supply, and when I need the supply | I can test adding people.
+`* * *` | new user who is ready to start using the app, | add my first staff with name, contact number, and when they're on shift | I can test adding people.
+`* * *` | new user who is ready to start using the app, | add my first customer with name, contact number, and their current loyalty points | I can test adding people.
+`* *` | new user who is ready to start using the app, | test the search by category function, | I can test searching people.
+`* *` | new user who is ready to start using the app, | delete the sample data, | I can start fresh with my own records.
+`* *` | new user who is ready to start using the app, | import my contacts via a CSV file, | I can add preexisting contacts in bulk quickly.
+`* * *` | new user who is ready to start using the app, | view all contacts |
+`* *` | semi-experienced user who has been using the app for a short while, | search by name | I can quickly find the contact
+`* *` | semi-experienced user who has been using the app for a short while, | filter the suppliers by what they supply, | I can quickly figure out who to contact.
+`* *` | semi-experienced user who has been using the app for a short while, | filter the staff by when they are on shift, | I can quickly figure out who to contact.
+`* *` | semi-experienced user who has been using the app for a short while, | check which suppliers I need to contact for restocks on which day, | I can be organised and not miss out any supplies
+`* *` | semi-experienced user who has been using the app for a short while, | view notes related to a contact, | I remember important details from past interactions
+`* *` | semi-experienced user who has been using the app for a short while, | check how many loyalty point a certain customer has | I can check if they are eligible for redemptions
+`* *` | semi-experienced user who has been using the app for a short while, | update the loyalty points of a certain customer | I can deduct / add loyalty points with purchases
+`* *` | semi-experienced user who has been using the app for a short while, | add a customer's allergen information | I know what products to avoid
+`* *` | semi-experienced user who has been using the app for a short while, | mark my employees as full-time or part-time | I can plan shift accordingly
+`* * *` | semi-experienced user who has been using the app for a short while, | delete individual contacts | I can remove unwanted contacts
+`* *` | semi-experienced user who has been using the app for a short while, | delete contacts in bulk | I don't have to manually delete them
+`* *` | semi-experienced user who has been using the app for a short while, | add remarks or comments tied to a specific contact | I can retain miscallaneous but important information about them
+`* *` | semi-experienced user who has been using the app for a short while, | add operating days / hours for suppliers | I don't have to search it up each time
+`* * *` | semi-experienced user who has been using the app for a short while, | display an overview of each "person category" on a dashboard | I have a summary of contact information
+`* *` | semi-experienced user who has been using the app for a short while, | store an employee's emergency information | I know who to contact in case of an incident.
+`* *` | long-time user, | able to see which suppliers and staff i need to contact on the current day | I don't have to search it up
+`* *` | long-time user, | able to see which suppliers and staff i need to contact on the next day | I don't have to search it up
+`* *` | long-time user, | have quick access to frequently used contact information | I don't have to search it up
+`* *` | long-time user, | set a reminder to contact a supplier, | I don’t forget to reorder.
+`* *` | long-time user, | export the contacts via a CSV file, | I can use it to import to my phone contacts.
+`* *` | long-time user, | update a contact's phone number and email address, | I can refer to the most up-to-date information.
+`* *` | long-time user, | archive/hide unused contacts, | I am not distracted by irrelevant contact.
+`*` | long-time user, | add a customer's birthday, | I know when to give special rewards.
+`* *` | long-time user, | filter contacts with multiple tags | I can have more specific searches
 
 *{More to be added}*
 
@@ -427,19 +455,27 @@ For all use cases below, unless otherwise specified:
 4.  Should work on both 32-bit and 64-bit environments.
 5.  A novice user with minimal technical knowledge should be able to use the core features without requiring external guidance.
 6.  All commands must provide usage examples to aid discovery and learning.
-7.  Search/filter results should be returned within 500ms.
-8.  Adding or editing a person should complete within 2 seconds, including saving to local.
+7.  Find/Sort results should be returned within 500ms.
+8.  Adding or editing a contact should complete within 1 second, including saving to local.
 9.  The app should not lose data under sudden app closure or power loss.
-10. Development should adhere to the project schedule, ensuring all milestone requirements are met before their deadlines.
+10. All data stored locally must be encrypted at rest and never sent to external servers.
+11. The app must run as a portable JAR without requiring admin privileges or an installer. 
+12. Development should adhere to the project schedule, ensuring all milestone requirements are met before their deadlines.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Customer**: A person who interacts with the café as a buyer or loyalty program member.
-* **Supplier**: A person who provides goods or services to the café (e.g., milk supplier, coffee bean supplier).
-* **Staff**: A person employed by the café, either full-time or part-time.
+* **Customer**: A contact who interacts with the café as a buyer or loyalty program member.
+* **Supplier**: A contact who provides goods or services to the café (e.g. milk supplier, coffee bean supplier).
+* **Staff**: A contact employed by the café, either full-time or part-time.
+* **Contact**: Any person record (Customer, Supplier, Staff).
+* **Tag**: User-defined labels attached to contacts for filtering. (e.g. partTime, wholesale, longTimeCustomer).
+* **Loyalty Points**: Numeric balance for a customer used for rewards.
+* **Shift**: Scheduled work dates for Staff.
+* **Items**: Item or goods supplied by one or more suppliers (e.g. milk, coffee bean)
+* **Days**: Scheduled date for supply of items. 
 
 --------------------------------------------------------------------------------------------------------------------
 
