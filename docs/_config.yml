@@ -13,3 +13,6 @@ github_icon: "images/github-icon.png"
 
 plugins:
   - jemoji
+
+kramdown:
+  toc_levels: 1..1

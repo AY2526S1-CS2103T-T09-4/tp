@@ -3,57 +3,90 @@ layout: page
 title: User Guide
 ---
 
-BrewBook is a **desktop app to help managers of small cafe to manage different contacts. Optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BrewBook can get your contact management tasks done faster than traditional GUI apps.
+**Welcome to BrewBook! Your café’s command center.**
+<br>Running a small café means juggling suppliers, staff, and loyal customers. BrewBook helps you keep all these relationships organized in one place.
 
-* Table of Contents
-{:toc}
+- **Suppliers**: Track who provides your beans, pastries, or equipment, and keep their details handy for quick reorders.
+- **Staff**: Store schedules, roles, and contact info so you can coordinate shifts effortlessly.
+- **Customers**: Record regulars’ preferences, loyalty points or note down catering contacts to strengthen relationships.
+
+Optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BrewBook can get your contact management tasks done faster than traditional GUI apps.
+
+---
+
+# Table of Contents
+
+{:toc }
 
 --------------------------------------------------------------------------------------------------------------------
+# How to use this guide
+This User Guide is designed to help you get hte most out of BrewBook. You don't need to read it cover-to-cover,
+instead we recommend you use it like a reference:
 
+- **New users**: Start with the **Quick start** section. It walks you through installation, setup, and your very first commands.
+- **Everyday use**: Jump to the **Features** section whenever you want to learn a specific command. Each command has:
+  - A short description of what it does.
+  - The exact format you need to type.
+  - Examples you can copy and paste.
+  - Notes on tips, constraints or special cases.
+- **Troubleshooting**: Check the **FAQ** and **Known issues** sections if something doesn't work as expected.
+- **At a glance**: Use the **Command summary** at the end for a quick reference to all commands in one place.
+
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**  
+    - Use the Table of Contents at the top of this page to jump directly to the section you need.
+</div>
+
+---
 # Quick start
 
 Welcome to **BrewBook** — your café’s one-stop contact manager for customers, staff, and suppliers.
 Follow these simple steps to get started — no technical experience needed!
 
 ---
-
 ## Step 1: Check that Java 17 is installed
 
 BrewBook requires **Java 17** to run.
 Let’s check whether it’s already installed on your computer.
 
 - **On Windows**
-  1. Click the **Start Menu**, type `cmd`, and open **Command Prompt**.
-  2. In the black window, type: `java -version`
-  3. Press **Enter**.
-- If you see something like:
-  ```
-  java version "17.0.10"
-  ```
-  ✅ Great! You already have Java 17 installed.
-- If you see an older version (e.g. “11” or “8”) or an error saying **“java is not recognized”**, you’ll need to install Java 17.
-
-👉 **To install Java 17:**
-Visit the official Java 17 download page [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
-
-Download the **Windows x64 Installer (JDK 17)** and follow the instructions on screen.
-When done, repeat the steps above to confirm it says **version 17**.
+    1. Click the **Start Menu**, type `cmd`, and open **Command Prompt**.
+    2. In the black window, type: `java -version`.
+    3. Press **Enter**.
 
 - **On Mac**
+    1. Open **Terminal** (press **Command + Space**, type `Terminal`, and press **Enter**).
+    2. Type: `java -version`.
+    3. Press **Enter**.
 
-  1. Open **Terminal** (press **Command + Space**, type `Terminal`, and press **Enter**).
-  2. Type: `java -version`
-  3. Press **Enter**.
-- If it shows something like `"17.0.x"`, ✅ you’re ready!
-- If it says **“command not found”** or shows an older version, install Java 17.
+- **On Linux**
+    1. Open **Terminal** from your application menu.
+    2. Type: `java -version`.
+    3. Press **Enter**.
 
-👉 **To install Java 17 on macOS:**
-Go to [https://www.oracle.com/java/technologies/javase-jdk17-downloads.html](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
-Download the **macOS Installer (JDK 17)** and follow the setup instructions.
-After installation, open Terminal again and run `java -version` to confirm it now shows version 17.
+- If it shows something like `"17.0.x"`, :white_check_mark: you’re ready!
+- If you see an older version (e.g. “11” or “8”) or an error saying **“java is not recognized”**, you’ll need to install Java 17.
+
+:point_right: **To install Java 17:**
+- **On Windows**
+    1. Visit the official Java 17 download page [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html). 
+    2. Download the **Windows x64 Installer (JDK 17)** and follow the instructions on screen. 
+    3. When done, repeat the steps above to confirm it says **version 17**.
+
+- **On Mac**
+    1. Visit the official Java 17 download page [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
+    2. Download the **macOS Installer (JDK 17)** and follow the setup instructions. 
+    3. When done, repeat the steps above to confirm it says **version 17**.
+
+- **On Linux**
+    1. In the **Terminal**, enter the following:
+    **Debian/Ubuntu (apt):**
+      ```bash
+      sudo apt update
+      sudo apt install openjdk-17-jdk```
+    2. When done, repeat the steps above to confirm it says **version 17**.
+
 
 ---
-
 ## Step 2: Download BrewBook
 
 1. Go to the [BrewBook releases page](https://github.com/AY2526S1-CS2103T-T09-4/tp/releases).
@@ -61,70 +94,72 @@ After installation, open Terminal again and run `java -version` to confirm it no
    (Think of this as your “BrewBook app.”)
 
 ---
-
 ## Step 3: Set up your BrewBook folder
 
 1. Create a new folder anywhere you like — for example:
    - **Windows:** `C:\Users\Jean\Documents\BrewBook`
    - **macOS:** `/Users/Jean/Documents/BrewBook` or `~/Documents/BrewBook`
-   - **Linux:** `/home/jean/Documents/BrewBook`
+   - **Linux:** `/home/Jean/Documents/BrewBook`
 2. Move the downloaded **`BrewBook.jar`** file into that folder.
       BrewBook will automatically save your data there each time you use it.
 
 ---
-
 ## Step 4: Open BrewBook
 
-1. Find the **`BrewBook.jar`** file you downloaded.
-2. **Double-click** it to open BrewBook.
-3. Wait a few seconds — the main screen will appear with some sample contacts.
+1. Open your **Command Prompt** or **Terminal**
+2. Type `cd [filename]` to navigate to where your BrewBook.jar file exists.
+    > If your .jar file is in the`Users\(name)\Downloads` directory and you are currently in `Users\(name)`,
+    > you should type cd Downloads in the **Command Prompt** or **Terminal**.
+3. Type `java -jar BrewBook.jar` and BrewBook will now open to it's landing page populated with sample data for your easy reference.
 
 ![Ui](images/Ui.png)
 
 Now you’re ready to start managing your café contacts!
 
 ---
-
 ## Step 5: Try out a few simple commands
 
 BrewBook uses a **command box** — just type what you want to do and press **Enter**.
 Here are a few examples you can try:
 
-| Action | What to Type                                                                                                                                             | What It Does |
-|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
-| Open help window | `help`                                                                                                                                                   | Shows a short guide on using BrewBook |
-| View all contacts | `list all`                                                                                                                                               | Displays every contact saved |
-| Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                                | Adds a new customer |
-| Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/2026-12-04, 2026-12-07 notes/can only do weekdays t/partTime`              | Adds a new staff contact with a shift date |
-| Add a supplier | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/2026-10-10, 2026-10-20 notes/Halal supplier t/preferred` | Adds a supplier contact |
-| Edit a contact | `edit 3 n\John Doe` | Edits any field of a contact
-| Delete a contact | `delete 3`                                                                                                                                               | Removes the 3rd contact from the current list |
-| Exit the app | `exit`                                                                                                                                                   | Closes BrewBook safely |
+| Action | What to Type                                                                                                                                              | What It Does                                          |
+|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
+| Open help window | `help`                                                                                                                                                    | Shows a short guide on using BrewBook                 |
+| View all contacts | `list all`                                                                                                                                                | Displays every contact saved                          |
+| Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                                 | Adds a new customer                                   |
+| Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/2026-12-04, 2026-12-07 notes/can only do weekdays t/partTime`               | Adds a new staff contact with a shift date            |
+| Add a supplier | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/2026-10-10, 2026-10-20 notes/Halal supplier t/preferred` | Adds a supplier contact                               |
+| Edit a contact | `edit 3 n\John Doe`                                                                                                                                       | Edits any field of a contact                          
+| Delete a contact | `delete 2, 3`                                                                                                                                             | Removes the 2nd and 3rd contact from the current list |
+| Exit the app | `exit`                                                                                                                                                    | Closes BrewBook safely                                |
 
-💡 **Tip:** You can copy and paste commands from here directly into BrewBook.
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**  
+    - You can copy and paste commands here directly into BrewBook.
+</div>
 
----
-
-## Step 6: Start using BrewBook for your café
-
-That’s it — you’re ready to go!
-You can now use BrewBook to keep track of:
-- Your **staff**, along with their shift schedules
-- Your **suppliers**, including what and when they supply
-- Your **customers**, and any notes you want to remember
-
-BrewBook **automatically saves your data**, so there’s no need to click “Save.”
-When you open it next time, everything will still be there.
-
----
-
-### Next step
-
+You are now ready to utilise BrewBook for your own use case!
 Explore the [Features](#features) section below for a full list of commands and examples to help you manage your café even more efficiently.
 
---------------------------------------------------------------------------------------------------------------------
+[Back to Table of Contents](#table-of-contents)
 
-## Features
+--------------------------------------------------------------------------------------------------------------------
+# Features
+[Viewing help](#viewing-help--help)
+[Adding a customer]()
+[Adding a staff]()
+[Adding a supplier]()
+[Viewing contacts]()
+[Editing a contact]()
+[Locating contact by keywords]()
+[Deleting contacts]()
+[Sorting contacts]()
+[Summarising important dates]()
+[Clearing all contacts]()
+[Exiting the program]()
+[Saving the data]()
+[Editing the data file]()
+
+[Back to Table of Contents](#table-of-contents)
 
 <div markdown="block" class="alert alert-info">
 
@@ -142,72 +177,109 @@ Explore the [Features](#features) section below for a full list of commands and 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `list`, `help`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
+* Command words are case-insensitive.
+  e.g `list all` and `LIST all` are both valid ways to use the list command and will work successfully.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that 1 multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+---
+## Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+**Format**: `help`
 
-### Adding a customer: `add customer`
+**Examples**:
+- `help` displays the help message with instructions on how to access the full help page.
+
+---
+## Adding a customer: `add customer`
 
 Adds a customer to the address book.
 
-Format: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…​`
+![add customer success]()
 
+**Format**: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…`
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-  - Points must be a non-negative integer.
+**Examples:**
+- `add customer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a customer named *John Doe* with phone `98765432`, email `johnd@example.com`, and address `John street, block 123, #01-01`.
+- `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy` adds a customer named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Rd`, notes `Loves chocolate`, 3 loyalty points, and a tag `allergy`.
+
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**  
+    - If this is a new customer, you don't have to specify points as it will automatically be set to 0.
 </div>
 
-Examples:
-* `add customer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
+- Name must not exceed 37.
+- Phone number must not be less than 3 digits.
+- Points must be a non-negative integer.
+</div>
 
-### Adding a staff: `add staff`
+---
+## Adding a staff: `add staff`
 
 Adds a staff to the address book.
 
-Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] shifts/SHIFT[, SHIFT,...][t/TAG]…`
+![add staff success]()
 
-Examples:
-* `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/2026-11-11 notes/only weekends`
-* `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/2026-11-13, 2026-11-12 notes/only weekends`
+Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...][t/TAG]…`
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-  - Shift dates must be in the future.
-  - Duplicate dates for shifts are not allowed.
-  - Dates must follow the format `YYYY-MM-DD`.
+**Examples:**
+- `add staff n/Amy Lok p/98765431 e/amyl@example.com a/Amy street, block 123, #02-05 notes/only weekends` adds a staff member named *Amy Lok* with phone `98765431`, email `amyl@example.com`, address `Amy street, block 123, #01-01`, and notes `only weekends`.
+- `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/11/11/2026 notes/only weekends` adds a staff member named *John Doe* with phone `98765432`, email `johnd@example.com`, address `John street, block 123, #01-01`, a single shift on `11/11/2026`, and notes `only weekends`.
+- `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/13/11/2026, 12/11/2026 notes/only weekends` adds a staff member named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Rd`, tags `friend` and `intern`, shifts on `13/11/2026` and `12/11/2026`, and notes `only weekends`.
+
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+- Shifts are not needed if you are unsure when your staff is available to start!    
+- Shifts are automatically deleted when the date has passed so you don't need to edit it!
 </div>
 
-### Adding a supplier: `add supplier`
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
+  - Name must not exceed 37.
+  - Phone number must not be less than 3 digits.
+  - Shifts date must be in the future.
+  - Duplicate dates for shifts are not allowed.
+  - Dates must follow the format `d/M/yyyy`.
+</div>
+
+---
+## Adding a supplier: `add supplier`
 
 Adds a supplier to the address book.
 
-Format: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS[, ITEMS,...] days/DAYS[, DAYS,...] [notes/NOTES] [t/TAG]...`
+![add supplier success]()
 
-Examples:
-* `add supplier n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 items/Coffee days/2025-12-11 notes/mainSupplier`
-* `add supplier n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 items/Bread days/2025-12-09`
+**Format**: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [items/ITEM[, ITEM]...] [days/DAY[, DAY]...] [notes/NOTES] [t/TAG]...`
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-  - Days dates must be in the future.
-  - Duplicate dates for Days are not allowed.
-  - Days must follow the format `YYYY-MM-DD`.
+**Examples**:
+- `add supplier n/Amy Lok p/12345670  e/amyl@example.com a/Amy street, block 123, #01-05` adds a supplier named *Amy Lok* with phone `12345670`, email `amyl@example.com`, address `Amy street, block 123, #01-05`
+- `add supplier n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 items/Coffee days/11/12/2025 notes/mainSupplier` adds a supplier named *John Doe* with phone `98765432`, email `johnd@example.com`, address `John street, block 123, #01-01`, supplying *Coffee* on `11/12/2025`, with notes `mainSupplier`.
+- `add supplier n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 items/Bread days/9/12/2025` adds a supplier named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Prison`, supplying *Bread* on `9/12/2025`, and tagged as `friend`.
+
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+- Days or items are not needed if you are unsure what and when your supplier will resupply!    
+- Days are automatically deleted when the date has passed so you don't need to edit it!
 </div>
 
-### Viewing contacts: `list`
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
+- Name must not exceed 37.
+  - Phone number must not be less than 3 digits.
+  - Days date must be in the future.
+  - Duplicate dates for Days are not allowed.
+  - Days must follow the format `d/M/yyyy`.
+</div>
+
+---
+## Viewing contacts: `list`
 
 Shows a list of all contacts in BrewBook, filtered by type.
 
-Format: `list TYPE`
+![list customer]()
+
+**Format**: `list TYPE`
 
 **Valid options for `TYPE`:**
 - `all` — shows *all* contacts
@@ -215,104 +287,140 @@ Format: `list TYPE`
 - `staff` — shows only staff members
 - `supplier` — shows only suppliers
 
-Examples:
-- `list all` → displays every contact saved in BrewBook
-- `list customer` → shows only customers
-- `list staff` → shows only your café’s employees
-- `list supplier` → shows only your café’s suppliers
+**Examples**:
+- `list all` Displays every contact saved in BrewBook.
+- `list customer` Shows only customers.
+- `list staff` Shows only your café’s employees.
+- `list supplier` Shows only your café’s suppliers.
 
-### Editing a person : `edit`
+---
+## Editing a contact : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [n/NOTE] [points/POINTS] [shifts/SHIFTS] [items/ITEMS] [days/DAYS] [t/TAG]…​`
+![edit customer success]()
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags / shifts / items  / days, the existing fields of the person will be removed i.e adding is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+**Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [n/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]..] [items/ITEM[, ITEM]...] [days/DAY[, DAY]...] [t/TAG]…​`
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+**Examples**:
+*  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+- Existing values will be updated to the input values. Don't worry about needing to update with previous values!
+- You can remove all a person's tags by typing `t/` without specifying any tags after it.
+</div>
 
-Finds person whose fields contain any of the given keywords.
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
+- The index must be a positive integer.
+- At least one optional fields must be provided.
+- Editing `tags`/`shifts`/`items`/`days`, the existing fields of the person will be removed (i.e adding is not cumulative).
+</div>
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+---
+## Locating contact by keywords: `find`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the field given is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Finds contacts whose fields contain any of the given keywords.
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+![find success]()
 
-### Deleting a person : `delete`
+**Format**: `find KEYWORD [MORE_KEYWORDS]`
+
+**Examples**:
+- `find John` returns a person named *john* and *John Doe*.
+- `find alex david` returns a person named *Alex Yeoh*, *David Li*.
+- `find n/alex p/12345678` returns a person named *Alex Yeoh* who has phone number `12345678`. <br>
+
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+- The search is case-insensitive so don't worry about capitalisation!
+- Persons matching at least one keyword will be returned (i.e. `OR` search).
+- Persons matching all parameters will be returned (i.e. AND search).
+- If no prefix is specified, find will resort to search by name for the given keyword.
+</div>
+
+---
+## Deleting contacts : `delete`
 
 Deletes the specified person or people from the address book.
 
-Format: `delete INDEX[, INDEX, ...]`
+![delete success]()
 
-Examples:
+**Format**: `delete INDEX[, INDEX, ...]`
+
+**Examples**:
 * `list all` followed by `delete 2` deletes the 2nd person in the address book.
-* `list all` followed by `delete 1, 2` deletes the 1st & 2nd person in the address book.
+* `find alex` followed by `delete 1, 2` deletes the 1st & 2nd person in the address book following the index of the new list.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-  - The index **must be a positive integer**
+  - The index must be a positive integer.
 </div>
+
+---
 ### Sorting contacts: `sort`
 
 Sorts your contact list based on a specific field and optional order — for example, by name in ascending order.
-This helps you quickly organize your list and find what you need.
 
-Format: `sort FIELD`
+![sort success]()
+
+**Format**: `sort FIELD`
 
 **Valid options for `FIELD`:**
-- `name` — sorts contacts alphabetically by name
-- `phone` — sorts contacts by phone number
-- `email` — sorts contacts alphabetically by email
-- `address` — sorts contacts alphabetically by address
-- `type` — sorts contacts by their role (customer, staff, or supplier)
+- `name` — sorts contacts alphabetically by name.
+- `phone` — sorts contacts by phone number.
+- `email` — sorts contacts alphabetically by email.
+- `address` — sorts contacts alphabetically by address.
+- `type` — sorts contacts by their role (customer, staff, or supplier).
 
-Examples:
-- `sort name` → sorts all contacts by name in ascending order (A–Z)
-- `sort phone o/desc` → sorts contacts by phone number in descending order
-- `sort type o/asc` → groups contacts by type (customer → staff → supplier) in ascending order
+**Examples**:
+- `sort name` sorts all contacts by name in ascending order (A–Z).
+- `sort phone o/desc` sorts contacts by phone number in descending order.
+- `sort type o/asc` groups contacts by type (customer → staff → supplier) in ascending order.
 
-### Summarising important dates : `summary`
+---
+## Summarising important dates : `summary`
 
 Displays all staff's shift and supplier's days.
 
-Format: `summary`
+![summary]()
 
-### Clearing all entries : `clear`
+**Format**: `summary`
+
+**Example**:
+- `summary` shows a consolidated list of upcoming shift dates for all staff and delivery days for all suppliers.
+
+---
+## Clearing all entries : `clear`
+
+![clear]()
 
 Clears all entries from the address book.
 
-Format: `clear`
+**Format**: `clear`
+
+**Example**:
+- `clear` deletes all entries from the address book.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
-The clear command deletes all contacts in BrewBook.
+- The clear command deletes all contacts in BrewBook.
+- This action cannot be undone.
 </div>
 
-### Exiting the program : `exit`
+---
+## Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+**Format**: `exit`
 
-### Saving the data
+**Example**: `exit` closes the application window and terminates the program.
+
+---
+## Saving the data
 
 BrewBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-### Editing the data file
+
+---
+## Editing the data file
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -321,25 +429,20 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 - Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-
-
 --------------------------------------------------------------------------------------------------------------------
+# FAQ
 
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Known issues
+# Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command summary
+# Command summary
 
 Action | Format, Examples
 --------|------------------
