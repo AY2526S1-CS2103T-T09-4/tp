@@ -17,8 +17,6 @@ public class SummaryCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Important dates summarised:\n\n";
 
-
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

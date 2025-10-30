@@ -52,7 +52,18 @@ public class ListCommand extends Command {
     }
 
     public static final String COMMAND_WORD = "list";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " <all | staff | customer | supplier>";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Displays a list of all contacts or filters the list by the specified contact type.\n\n"
+            + "**Format:**\n"
+            + COMMAND_WORD + " <"
+            + "all" + " | "
+            + "staff" + " | "
+            + "customer" + " | "
+            + "supplier" + ">\n\n"
+            + "**Examples:**\n"
+            + COMMAND_WORD + " all\n"
+            + COMMAND_WORD + " staff\n"
+            + COMMAND_WORD + " customer";
     public static final String MESSAGE_SUCCESS_FORMAT = "Listed %s";
 
     private final Category category;
