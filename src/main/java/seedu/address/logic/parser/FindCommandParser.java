@@ -159,7 +159,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new FindCommand(new AllOfPersonPredicates(perField));
     }
 
-        private static String norm(String s) {
+    private static String norm(String s) {
         return s.toLowerCase()
                 .replaceAll("[^\\p{Alnum}]+", " ")
                 .replaceAll("\\s+", " ")
