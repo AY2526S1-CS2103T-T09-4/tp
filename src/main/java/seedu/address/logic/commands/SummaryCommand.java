@@ -61,7 +61,8 @@ public class SummaryCommand extends Command {
     private String formatSupplier(Person p) {
         assert p instanceof Supplier;
         Supplier supplier = (Supplier) p;
+        String items = supplier.getItems().toString();
 
-        return String.format("%s: %s", supplier.getName(), supplier.getDays());
+        return String.format("%s (%s): %s", supplier.getName(), items.substring(1, items.length() - 1), supplier.getDays());
     }
 }
