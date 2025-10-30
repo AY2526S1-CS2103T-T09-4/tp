@@ -192,7 +192,7 @@ Shows a message explaining how to access the help page.
 
 **Format**: `help`
 
-**Examples**:
+**Example**:
 - `help` displays the help message with instructions on how to access the full help page.
 
 ---
@@ -351,7 +351,7 @@ Deletes the specified person or people from the address book.
 * `list all` followed by `delete 2` deletes the 2nd person in the address book.
 * `find alex` followed by `delete 1, 2` deletes the 1st & 2nd person in the address book following the index of the new list.
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
   - The index must be a positive integer.
 </div>
 
@@ -412,7 +412,8 @@ Exits the program.
 
 **Format**: `exit`
 
-**Example**: `exit` closes the application window and terminates the program.
+**Example**: 
+- `exit` closes the application window and terminates the program.
 
 ---
 ## Saving the data
@@ -422,24 +423,72 @@ BrewBook data are saved in the hard disk automatically after any command that ch
 ---
 ## Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+BrewBook data are saved automatically as a JSON file `[JAR file location]/data/brewbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
-- If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-- Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+- If your changes to the data file makes its format invalid, BrewBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+- Furthermore, certain edits can cause the BrewBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 # FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: You can transfer your data by following the steps below.
+1. Install BrewBook on the new computer.
+2. Launch it once to generate a fresh data file.
+3. Locate the data file on your old computer (usually in the BrewBook home folder).
+4. Copy that file to the new computer and overwrite the newly created one.
+
+
+**Q**: What happens if I accidentally run `clear`?<br>
+**A**: All data will be permanently deleted. There is no undo.  
+**To prevent data loss:**
+- Before using `clear`, locate your data file and make a backup copy.
+- Store the backup in a safe folder or cloud drive.
+
+
+**Q**: Where is my data stored?<br>
+**A**: BrewBook stores data in a local file inside the same folder as your BrewBook.jar.
+
+
+**Q**: Can I undo a delete command?<br>
+**A**: No. Once an entry is deleted using `delete`, it cannot be recovered.  
+**To avoid accidental deletes:**
+- Use `list` first to confirm the index.
+- Back up your data file regularly.
+
+
+**Q**: Why isn’t my command working?<br>
+**A**:
+- Check that your command follows the correct format.
+- Make sure required fields like `n/`, `p/`, or `e/` are included.
+- Use `help` to view all available commands and examples on how to use them along with their constraints.
+
+
+**Q**: Can I add multiple tags or items at once?<br>
+**A**: Yes.  
+
+
+**Q**: What date format should I use?<br>
+**A**: Use `d/M/yyyy` for all date inputs.  
+**Examples:**
+- `shifts/11/12/2025`
+- `days/9/12/2025, 16/12/2025`
+
+
+**Q**: Can I use BrewBook on mobile?<br>
+**A**: No. BrewBook is currently designed for desktop use only.
+
 
 --------------------------------------------------------------------------------------------------------------------
-# Known issues
+# Known issues / Troubleshooting
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **If no fields are specified in Edit command**, it will return success but no changes will be made.
+4. **Once you select a contact card**, you will not be able to unselect it.
+5. **BrewBook does not accept names with special symbols** such as '/', if you require, you may spell out the name in full as we allow a maximum of x number of character for name.
 
 --------------------------------------------------------------------------------------------------------------------
 # Command summary
@@ -447,11 +496,11 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 Action | Format, Examples
 --------|------------------
 **Add customer** | `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…​` <br> e.g., `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`
-**Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] shifts/SHIFT[, SHIFT,...][t/TAG]…` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/2025-12-04, 2025-12-07 notes/can only do weekdays t/partTime`
-**Add suppplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS items/ITEMS[, ITEMS,...] days/DAYS[, DAYS,...] [notes/NOTES] [t/TAG]...​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/2025-10-30`
+**Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...] [t/TAG]…` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/2025-12-04, 2025-12-07 notes/can only do weekdays t/partTime`
+**Add suppplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/2025-10-30`
 **List** | `list [all/customer/staff/supplier]`
 **Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`
 **Clear** | `clear`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [n/NOTE] [points/POINTS] [shifts/SHIFTS] [items/ITEMS] [days/DAYS] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [n/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]...] [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
