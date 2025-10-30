@@ -481,19 +481,19 @@ Compared to AB3, BrewBook was more demanding because:
 ### Challenges Faced
 
 #### Technical
-- **Model Redesign:**  
+- **Model Redesign:**
   Refactoring `Person` into an abstract superclass required deep changes across `Logic`, `Storage`, and `UI` as they `Person` was heavily utilised and embedded in the design of AB3.
 
-- **Parser and Command Handling:**  
+- **Parser and Command Handling:**
   Building a parser that could distinguish extending from the original parser and command handling because of these new entity types was also non-trivial. It caused frequent test failures due to dependencies and considerable time was spent understanding an debugging code.
 
 
 #### Collaboration
-- **Cross‑team Coordination:**  
+- **Cross‑team Coordination:**
   Model changes cascaded into multiple layers, requiring synchronized updates across contributors.
-- **Merge Conflicts:**  
+- **Merge Conflicts:**
   Refactoring shared components (e.g., `Person`, `AddressBook`, `Parser`) led to frequent conflicts and integration delays.
-- **Onboarding Overhead:**  
+- **Onboarding Overhead:**
   New contributors needed extra time to understand the redesigned architecture before contributing effectively.
 
 Despite these hurdles, the team mitigated risks through issue tracking, code reviews, and weekly syncs, ensuring architectural and design decisions were well‑documented and consensus‑driven.
@@ -502,15 +502,15 @@ Despite these hurdles, the team mitigated risks through issue tracking, code rev
 
 ### Effort Required
 
-- **Development Effort:**  
+- **Development Effort:**
   A large portion of time was spent on parser redesign, model restructuring, ensuring test coverage across three entity types, and fixing CICD failures.
-- **Testing Effort:**  
+- **Testing Effort:**
   Many existing AB3 test cases broke during refactoring. Significant effort went into updating and expanding tests to cover new behaviors.
-- **Documentation Effort:**  
+- **Documentation Effort:**
   The User Guide was expanded with consistent examples, screenshots, captions, FAQs, and troubleshooting sections to ensure clarity for evaluators and end‑users.
 
 ### Reuse & Adaptation
-- **Base Architecture:**  
+- **Base Architecture:**
   Reused AB3’s MVC structure, saving ~10% of effort.
 - **Adapted Classes:**
     - `Person` refactored into an abstract superclass, with `Customer`, `Staff`, and `Supplier` as subclasses.
