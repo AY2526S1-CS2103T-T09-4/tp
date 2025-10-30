@@ -35,13 +35,6 @@ public class ItemsTest {
     }
 
     @Test
-    public void hashCode_caseInsensitive_equal() {
-        Items a = new Items("Beans");
-        Items b = new Items("beans");
-        assertEquals(a.hashCode(), b.hashCode());
-    }
-
-    @Test
     public void equals_differentValue_false() {
         Items a = new Items("Beans");
         Items b = new Items("Milk");

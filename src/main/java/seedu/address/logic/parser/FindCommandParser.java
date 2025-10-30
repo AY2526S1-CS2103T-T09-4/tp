@@ -69,6 +69,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS
         );
 
+        map.verifyNoDuplicatePrefixesFor(
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS, PREFIX_TAG
+        );
+
         List<Predicate<Person>> perField = new ArrayList<>();
         Function<String, List<String>> toKeywords = s -> Arrays.stream(s.trim().split("\\s+"))
                 .filter(k -> !k.isBlank())
