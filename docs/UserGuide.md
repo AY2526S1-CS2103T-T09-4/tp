@@ -15,8 +15,12 @@ Optimized for use via a Command Line Interface (CLI) while still having the bene
 ---
 
 # Table of Contents
-{:toc}
-
+[How to use this guide](#how-to-use-this-guide)<br>
+[Quick start](#quick-start)<br>
+[Features](#features)<br>
+[FAQ](#faq)<br>
+[Known issues / Troubleshooting](#known-issues--troubleshooting)<br>
+[Command Summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 # How to use this guide
 This User Guide is designed to help you get hte most out of BrewBook. You don't need to read it cover-to-cover,
@@ -156,8 +160,6 @@ Explore the [Features](#features) section below for a full list of commands and 
 [Saving the data](#saving-the-data)<br> 
 [Editing the data file](#editing-the-data-file)
 
-[Back to Table of Contents](#table-of-contents)
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -179,6 +181,8 @@ Explore the [Features](#features) section below for a full list of commands and 
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that 1 multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 ## Viewing help : `help`
@@ -229,7 +233,7 @@ Adds a staff to the address book.
 ![add staff success](images/addStaff.png)
 *Figure: Result from executing `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`*
 
-Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...][t/TAG]…`
+**Format**: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...][t/TAG]…`
 
 **Examples:**
 - `add staff n/Amy Lok p/98765431 e/amyl@example.com a/Amy street, block 123, #02-05 notes/only weekends` adds a staff member named *Amy Lok* with phone `98765431`, email `amyl@example.com`, address `Amy street, block 123, #01-01`, and notes `only weekends`.
