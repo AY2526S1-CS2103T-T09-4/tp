@@ -75,6 +75,22 @@ public class NameContainsKeywordsPredicateTest {
     }
 
     @Test
+    public void test_nullOnlyKeyword_returnsFalse() {
+        NameContainsKeywordsPredicate predicate =
+                new NameContainsKeywordsPredicate(Collections.<String>singletonList(null));
+
+        assertFalse(predicate.test(new CustomerBuilder().withName("Alice Pauline").build()));
+    }
+
+    @Test
+    public void test_nullMixedWithValidKeyword_validMatches() {
+        NameContainsKeywordsPredicate predicate =
+                new NameContainsKeywordsPredicate(Arrays.asList(null, "Ali"));
+
+        assertTrue(predicate.test(new CustomerBuilder().withName("Alice Pauline").build()));
+    }
+
+    @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keywords);

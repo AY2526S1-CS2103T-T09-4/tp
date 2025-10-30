@@ -161,7 +161,7 @@ public class EditCommandTest {
         Customer lastPerson = (Customer) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         List<String> daysList = new ArrayList<>();
-        daysList.add("2025-12-12");
+        daysList.add("12/12/2025");
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withDays(daysList).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
@@ -223,7 +223,7 @@ public class EditCommandTest {
         Staff lastPerson = (Staff) model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         List<String> daysList = new ArrayList<>();
-        daysList.add("2025-12-12");
+        daysList.add("12/12/2025");
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withDays(daysList).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 

@@ -22,16 +22,19 @@ public class AddStaffCommand extends AddCommand {
 
     public static final String COMMAND_WORD = AddCommand.COMMAND_WORD + " staff";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a staff to the address book. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a staff member to the address book.\n\n"
+            + "**Format:**\n"
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_SHIFTS + "SHIFTS[, SHIFTS]...] "
             + "[" + PREFIX_NOTE + "NOTES] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "[" + PREFIX_TAG + "TAG]...\n\n"
+            + "**Example:**\n"
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "Ah Hock "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "ahhock@example.com "

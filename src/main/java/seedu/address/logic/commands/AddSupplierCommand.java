@@ -22,8 +22,10 @@ public class AddSupplierCommand extends AddCommand {
 
     public static final String COMMAND_WORD = AddCommand.COMMAND_WORD + " supplier";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a supplier to the address book. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a supplier to the address book.\n\n"
+            + "**Format:**\n"
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -31,14 +33,15 @@ public class AddSupplierCommand extends AddCommand {
             + PREFIX_ITEMS + "ITEM[,ITEM,...] "
             + PREFIX_DAYS + "DAY[,DAY,...] "
             + "[" + PREFIX_NOTE + "NOTES] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "[" + PREFIX_TAG + "TAG]...\n\n"
+            + "**Example:**\n"
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "Ben Lim "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "benlim@example.com "
             + PREFIX_ADDRESS + "123 Clementi Ave 3 "
             + PREFIX_ITEMS + "Flour, Eggs "
-            + PREFIX_DAYS + "2025-10-10, 2025-10-20 "
+            + PREFIX_DAYS + "10/12/2025, 12/12/2025 "
             + PREFIX_NOTE + "Halal supplier "
             + PREFIX_TAG + "preferred";
 

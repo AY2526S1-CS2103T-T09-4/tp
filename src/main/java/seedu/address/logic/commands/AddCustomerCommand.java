@@ -19,16 +19,19 @@ public class AddCustomerCommand extends AddCommand {
 
     public static final String COMMAND_WORD = AddCommand.COMMAND_WORD + " customer";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the address book. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a customer to the address book.\n\n"
+            + "**Format:**\n"
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_POINTS + "POINTS] "
             + "[" + PREFIX_NOTE + "NOTES] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "[" + PREFIX_TAG + "TAG]...\n\n"
+            + "**Example:**\n"
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "

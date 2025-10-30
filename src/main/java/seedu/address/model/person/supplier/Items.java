@@ -42,11 +42,6 @@ public class Items {
     }
 
     @Override
-    public int hashCode() {
-        return name.toLowerCase().hashCode();
-    }
-
-    @Override
     public String toString() {
         return name;
     }

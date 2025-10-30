@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.DateParser;
 import seedu.address.model.person.supplier.Days;
 
 /**
@@ -42,14 +43,15 @@ class JsonAdaptedDays {
      * @throws IllegalValueException if there were any data constraints violated in the adapted day.
      */
     public Days toModelType() throws IllegalValueException {
-        if (day == null) {
-            throw new IllegalValueException(Days.MESSAGE_COMPULSORY);
-        }
         try {
-            LocalDate parsed = LocalDate.parse(day);
-            return new Days(parsed);
+            LocalDate parsedDate = DateParser.parseDate(day);
+            if (parsedDate.isBefore(LocalDate.now())) {
+                return null;
+            }
+
+            return new Days(parsedDate);
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException(Days.MESSAGE_FORMAT_CONSTRAINTS);
+            throw new IllegalValueException(DateParser.MESSAGE_FORMAT_CONSTRAINT);
         }
     }
 }

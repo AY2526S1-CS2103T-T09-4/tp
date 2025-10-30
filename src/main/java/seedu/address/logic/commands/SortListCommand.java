@@ -15,15 +15,16 @@ public class SortListCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_SUCCESS = "Displaying sorted list.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the list of persons by a specified attribute and order.\n"
-            + "Parameters: "
-            + "<ATTRIBUTE> "
-            + "[" + PREFIX_SORT_ORDER + "<ORDER>" + "]\n"
-            + "Accepted values:\n"
-            + "  <ATTRIBUTE>: 'name', 'phone', 'email', 'address', or 'type'.\n"
-            + "  <ORDER>: 'asc' (Ascending, default) or 'desc' (Descending).\n"
-            + "Example 1 (Name, Ascending): " + COMMAND_WORD + " name\n"
-            + "Example 2 (Email, Descending): " + COMMAND_WORD + " email o/desc";
+            + ": Sorts the list of persons by a specified attribute and order.\n\n"
+            + "**Format:**\n"
+            + COMMAND_WORD + " ATTRIBUTE "
+            + "[" + PREFIX_SORT_ORDER + "ORDER]\n\n"
+            + "**Accepted Values:**\n"
+            + "    ATTRIBUTE: 'name', 'phone', 'email', 'address', or 'type'.\n"
+            + "    ORDER: 'asc' (Ascending, default) or 'desc' (Descending).\n\n"
+            + "**Examples:**\n"
+            + COMMAND_WORD + " name\n"
+            + COMMAND_WORD + " email " + PREFIX_SORT_ORDER + "desc";
 
 
     private final Comparator<Person> comparator;

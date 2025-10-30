@@ -14,6 +14,13 @@ title: BrewBook
 * If you are interested about developing BrewBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
+**Features at a Glance:**  
+* Store and Organise **Customer**, **Staff** and **Supplier** contacts 
+* Quick CLI commands for **fast operations**
+* Sleek and minimalist GUI for **visual management**
+
+
+
 **Acknowledgements**
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
