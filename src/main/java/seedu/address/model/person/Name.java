@@ -11,7 +11,7 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, should not be blank, and should be "
-                    + "no longer than 37 characters. ";
+                    + "no longer than 48 characters. ";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -19,7 +19,7 @@ public class Name {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    private static final int MAX_LENGTH = 37;
+    private static final int MAX_LENGTH = 48;
 
 
     public final String fullName;

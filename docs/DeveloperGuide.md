@@ -51,7 +51,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below displays how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -151,6 +151,20 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Planned Enhancements** 
+
+Team size: 5
+1. Prevent GUI from launching off-screen: The application currently relies on external workarounds (deleting a JSON file) when its main GUI window launches off-screen after a multi-monitor configuration change. We plan to enhance the window initialization logic to detect if the saved window position is outside the boundaries of the currently available screen(s). If an off-screen position is detected, the application will automatically reset the window position to the center of the primary screen upon launch. This prevents the user from having to manually delete the preferences file.
+2. Restore minimized help window upon subsequent `help` command: If the existing Help Window is minimized, running the help command currently fails to bring it to the foreground. We will tweak the help command's execution so that before attempting to open a new window, it first checks if an existing Help Window is minimized. If so, it will automatically restore and focus the original window, ensuring the user can immediately access the help content without manual intervention.
+3. Allow unselection of a contact card: Once a contact card is selected in the list, the current behavior does not provide a mechanism to unselect it, leaving the UI state potentially stale. We will enhance the contact list's selection behavior by allowing a contact card to be unselected. Specifically, clicking on the currently selected contact card a second time will toggle its selection state, causing it to become unselected and returning the list to its initial, unselected state.
+4. Expand name field to support special characters: The current name validation rejects special symbols (e.g., `/`) leading to workarounds like spelling out names. We plan to tweak the name validation logic to allow a predefined set of special characters (such as hyphens, apostrophes, and slashes) within the name field to better accommodate official names and job titles. For example, instead of rejecting 's/o', the application will accept it by updating the allowed character set in the name validation rules.
+5. Allow single-word aliases for common commands: BrewBook currently requires full command words like `list all` or `sort name`. We will tweak the command parsing to allow the use of single-letter or short aliases for the most frequent commands to improve CLI speed. For example: `ls all` will be an accepted alias for `list all`.
+6. Improve input feedback for partially correct commands: When a user is typing a command and pauses, the system can be more helpful. We will tweak the command result to provide immediate, context-sensitive suggestions or reminders based on the partially entered command. For instance, if the user types add customer `n/`, a small hint might appear: (Required: `p/`, `e/`, `a/`).
+7. Enhance help to provide command-specific guidance: The current help command opens a windows which link to the user guide. We will tweak the help command parser to accept an optional command name. For example, typing `help list` will display a concise summary of the `list` command's format, parameters and examples directly in the command result box, providing faster, targeted help without external resources.
+8. Highlight matching keywords in find results: After a find command, the GUI displays the list of matching contacts, but it does not show why they matched. We will tweak the contact card display so that when a list is populated from a find result, the matching keyword (e.g., "Lee") is highlighted on the contact card wherever it was found (in the name, notes, etc.), providing immediate visual feedback on search relevance.
+9. Enhance edit command to support additive/subtractive list updates: The current edit command overwrites all data for list-based fields. For example, editing shifts for a staff member who already has shifts scheduled will delete all previous shifts and replace them with the new input. We will tweak the edit command's syntax to allow for adding or removing specific items from lists like shifts, items, or tags. For example, `edit 1 shifts/add(2026-12-10)` will add the new shift without deleting existing ones, and `edit 1 shifts/remove(2026-12-04)` will remove only that specific shift.
+10. Tweak `list` command to default to `list all`: The current list command requires a specific parameter (e.g., `list all`, `list customer`). If a user types just `list` with no arguments, it will result in an "Invalid command format" error. We will tweak the command parser to make the `list` command more intuitive. If the user types only `list`, BrewBook will automatically treat it as an alias for `list all`, immediately displaying all contacts instead of showing an error.
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -194,7 +208,7 @@ than attempting to perform the undo.
 
 </div>
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+The following sequence diagram displays how an undo operation goes through the `Logic` component:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
 
@@ -264,7 +278,7 @@ _{Explain here how the data archiving feature will be implemented}_
 Manager of a small cafe
 
 
-**Value proposition**: BrewBook helps managers of small cafes to manage different stakeholders, including customers, suppliers and employees (full-time/part-time). It helps cafe managers coordinate with customers, suppliers, and staff by linking roles directly to contacts—so they don’t need to remember who does what.
+**Value proposition**: BrewBook helps managers of small cafes to manage different stakeholders, including customers, suppliers and employees (full-time/part-time). It helps cafe managers coordinate with customers, suppliers, and staff by linking roles directly to persons—so they don’t need to remember who does what.
 
 
 
@@ -312,106 +326,126 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `BrewBook` and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, unless otherwise specified:
+* The **System** is `BrewBook`.
+* The **Actor** is the `user`.
+* The **Precondition** is that the `user` is at the command prompt.
+* `Person` refers to `customer`, `staff` and `supplier`.
 
-**Use case: UC1 - Delete contact**
+#### UC1 - Request for help
 
-**Preconditions**: User is at the command prompt.
-    
-**Guarantee**: Current contact will be deleted.
+**Guarantee**: Help message will be displayed.
+
+**MSS**
+1. User requests for help.
+2. BrewBook displays help message. Use case ends.
+
+#### UC2 - Add (customer | staff | supplier)
+
+* **Guarantee**: (Customer | Staff | Supplier) will be added.
 
 **MSS**
 
-1.  User requests to list contacts.
-2.  BrewBook shows a list of contacts.
-3.  User requests to delete a specific contact in the list.
-4.  BrewBook deletes the person.
-    Use case ends.
+1. User requests to add (customer | staff | supplier) with the required information.
+2. BrewBook adds the (customer | staff | supplier) and displays a success message with the added person. Use case ends.
 
 **Extensions**
+* 1a.(Customer | Staff | Supplier) information is invalid or missing
+  * 1a1. BrewBook displays an error message and informs the user of the invalid or missing information. Use case ends.
 
-* 2a. The list is empty.
-  Use case ends
+#### UC3 - List (all | customer | staff | supplier)
+
+**Guarantee**: (All | Customer | Staff | Supplier) persons will be displayed.
+
+**MSS**
+
+1. User requests to display (all | customer | staff | supplier) persons.
+2. Brewbook lists (all | customer | staff | supplier) persons and displays a success message. Use case ends.
+
+#### UC4 - Edit person
+
+**Guarantee**: Requested person will be edited.
+
+**MSS**
+
+1.  User requests to list persons (UC3).
+2.  BrewBook lists all persons.
+3.  User requests to edit a specific person in the list with the required information.
+4.  BrewBook edits the person and displays a success message. Use case ends.
+
+**Extensions**
+* 2a. The list is empty. Use case ends
 * 3a. The given index is invalid.
-  * 3a1. BrewBook shows an error message and informs the user of the possible valid indices.
-    Use case resumes at step 2.
+    * 3a1. BrewBook displays an error message and informs the user of the possible valid indices.
+      Use case resumes at step 2.
+* 3b. The given information is invalid or no information is given.
+    * 1a1. BrewBook displays an error message and informs the user of the invalid or missing information.
+    * Use case resumes at Step 2.
 
-**Use case: UC2 - Delete multiple contacts**
+#### UC5 - Find person(s) by keyword(s)
 
-**Preconditions**: User is at the command prompt.
+**Guarantee**: All person(s) matching the keyword(s) will be displayed.
 
-**Guarantee**: Selected contacts will be deleted.
+**MSS**
+1. User requests to find person(s) by keyword(s).
+2. Brewbook lists all person(s) matching the keyword(s) and displays a success message. Use case ends.
+
+**Extensions**
+* 2a. No person matches the given keyword(s). Use case ends
+
+#### UC6 - Delete person(s)
+
+**Guarantee**: Requested persons will be deleted.
 
 **MSS**
 
 1.  User requests to list persons.
-2.  BrewBook shows a list of persons.
-3.  User requests to delete multiple contacts in the list.
-4.  BrewBook deletes the contacts.
-    Use case ends.
+2.  BrewBook lists all persons.
+3.  User requests to delete person(s) in the list.
+4.  BrewBook deletes the person(s) and displays a success message. Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-  Use case ends
-* 3a. The given index range is invalid.
-    * 3a1. BrewBook shows an error message and informs the user of the possible valid indices.
+* 2a. The list is empty. Use case ends
+* 3a. The given index(es) is invalid.
+    * 3a1. BrewBook displays an error message and informs the user of the possible valid indices.
       Use case resumes at step 2.
 
-**Use case: UC3 - Edit contact**
+#### UC7 - Sort persons by field
 
-**Preconditions**: User is at the command prompt.
-
-**Guarantee**: Current contact will be edited.
+**Guarantee**: Persons will be sorted by the given field.
 
 **MSS**
-
-1.  User requests to list persons.
-2.  BrewBook shows a list of persons.
-3.  User requests to edit a specific person in the list.
-4.  BrewBook edits the person.
-    Use case ends.
+1. User requests to sort persons by field. 
+2. Brewbook sorts persons by the field and displays a success message. Use case ends.
 
 **Extensions**
+* 2a. Field provided is invalid. 
+  * 2a. BrewBook displays an error message and informs the user of the possible fields. Use case ends.
 
-* 2a. The list is empty.
-  Use case ends
-* 3a. The given index is invalid.
-    * 3a1. BrewBook shows an error message and informs the user of the possible valid indices.
-      Use case resumes at step 2.
-* 3b. The given format is invalid.
-    * 3b1. BrewBook shows an error message and informs the user of the correct format.
-      Use case resumes at step 2.
+#### UC8 - Summarise all staffs' shift and suppliers' items and days
 
-**Use case: UC4 - Set reminder to contact supplier**
-
-**Preconditions**: User is at the command prompt.
-
-**Guarantee**: Reminder to contact supplier will be set.
+**Guarantee**: Summarise all staffs' shift and suppliers' items and days.
 
 **MSS**
+1. User requests to summarise all staffs' shift and suppliers' items and days.
+2. BrewBook displays a summary of all staffs' shift and suppliers' items and days. Use case ends.
 
-1.  User requests to list suppliers.
-2.  BrewBook shows a list of suppliers.
-3.  User requests to add a reminder for a specific supplier in the list.
-4.  BrewBook adds the reminder.
-    Use case ends.
+#### UC9 - Clear all persons
 
-**Extensions**
+**Guarantee**: Clears all persons
 
-* 2a. The list is empty.
-  Use case ends
-* 3a1. The given index is invalid.
-    * 3a1. BrewBook shows an error message and informs the user of the possible valid indices.
-      Use case resumes at step 2.
-* 3b. The given format is invalid.
-    * 3b1. BrewBook shows an error message and informs the user of the correct format.
-      Use case resumes at step 2.
-* 3c. The given date is invalid.
-    * 3c1. BrewBook shows an error message and informs the user of the correct date format.
-      Use case resumes at step 2.
+**MSS**
+1. User requests to clear all persons. 
+2. BrewBook clears all persons and displays a success message. Use case ends.
 
-*{More to be added}*
+#### UC10 - Exit the app
+
+**Guarantee**: Exits the app
+
+**MSS**
+1. User requests to exit the app.
+2. BrewBook closes the app. Use case ends.
 
 ### Non-Functional Requirements
 
@@ -460,7 +494,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample persons. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -478,7 +512,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First person is deleted from the list. Details of the deleted person shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -495,3 +529,69 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Adding a person
+
+1. Adding a customer. 
+   1. Test case 1: `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
+      Expected: New customer added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
+   2. Test case 2: `add customer n/John & Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
+      Expected: No customer is added. Name-specific error message highlighting the correct name format is shown.
+   3. Test case 3: `add customer n/John Doe e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
+      Expected: No customer is added as phone number is missing. Generic error message highlighting the correct command format is shown.
+   4. Other incorrect add customer commands to try: 
+      1. Name longer than 48 characters. Shows name-specific error message.
+      2. Email doesn't follow the specified email format (e.g. does not include an `@`). Shows email-specific error message.
+      3. Phone number is shorter than 3 characters or is not purely numeric.
+      2. Notes longer than 200 characters. Shows notes-specific error message.
+      3. Other missing compulsory tags (i.e. name, phone, email, address)
+2. Adding a staff. 
+    1. Test case 1: `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
+       Expected: New staff added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
+    2. Test case 2: `add staff n/Ah Hock p/98765432 e/ahhockexample.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
+       Expected: No customer is added. Email-specific error message highlighting the correct email format is shown.
+    3. Test case 3: `add staff n/Ah Hock p/98765432 e/ahhock@example.com shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
+       Expected: No customer is added as address is missing. Generic error message highlighting the correct command format is shown.
+    4. Other incorrect add staff commands to try:
+        1. Name not alphanumeric or longer than 48 characters. Shows name-specific error message.
+        2. Phone number is shorter than 3 characters or is not purely numeric.
+        3. Notes longer than 200 characters. Shows notes-specific error message.
+        4. Shifts in an incorrect date format (i.e. not `d/M/yyyy`). Shows shift-specific error message.
+        5. Other missing compulsory tags (i.e. name, phone, email, address) 
+3. Adding a supplier.
+    1. Test case 1: `add supplier n/Ben Lim p/98765432 e/benlim@example.com a/123 Clementi Ave 3 items/Flour, Eggs days/10/12/2025, 12/12/2025 notes/Halal supplier t/preferred`<br>
+       Expected: New supplier added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
+    2. Test case 2: `add supplier n/Ben Lim p/abc e/benlim@example.com a/123 Clementi Ave 3 items/Flour, Eggs days/10122025, 12122025 notes/Halal supplier t/preferred`<br>
+       Expected: No supplier is added. Date-specific error message highlighting the correct date format is shown.
+    3. Test case 3: `add supplier n/Ben Lim p/98765432 a/123 Clementi Ave 3 items/Flour, Eggs days/10/12/2025, 12/12/2025 notes/Halal supplier t/preferred`<br>
+       Expected: No supplier is added as email is missing. Generic error message highlighting the correct command format is shown.
+    4. Other incorrect add supplier commands to try:
+        1. Name not alphanumeric or longer than 48 characters. Shows name-specific error message.
+        2. Phone number is shorter than 3 characters or is not purely numeric.
+        3. Email doesn't follow the specified email format (e.g. does not include an `@`). Shows email-specific error message.
+        4. Notes longer than 200 characters. Shows notes-specific error message.
+        5. Days in an incorrect date format (i.e. not `d/M/yyyy`). Shows shift-specific error message.
+        6. Other missing compulsory tags (i.e. name, phone, email, address) 
+
+### Finding person(s) by keyword(s)
+
+1. Finding by keywords. 
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Works similarly for `list (customer | staff | supplier)`
+
+    2. Test case 1: `find Alex`
+       1. Case 1: If there is are persons with names containing Alex, these persons will be shown. A success message indicating the number of persons listed will be shown.
+       2. Case 2: If there are no persons with names containing Alex, the list will be empty. A message saying that 0 persons are listed will be shown.
+
+    3. Test case 2: `find Alex e/gmail`
+       1. Case 1: If there is are persons with names containing Alex and email containing gmail, these persons will be shown. A success message indicating the number of persons listed will be shown.
+       2. Case 2: If there are no persons with names containing Alex and email containing gmail, the list will be empty. A message saying that 0 persons are listed will be shown.
+
+   4. Test case 3: `find e/gmail`
+      1. Case 1: If there is are persons with email containing gmail, these persons will be shown. A success message indicating the number of persons listed will be shown.
+      2. Case 2: If there are no persons with email containing gmail, the list will be empty. A message saying that 0 persons are listed will be shown.
+
+   5. Test case 4: `find` <br>
+      Expected: Generic error message highlighting the correct command format is shown.
+
+   6. Other correct commands to try: add any combination of name and fields. The relevant persons will be shown.
