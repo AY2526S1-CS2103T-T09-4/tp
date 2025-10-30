@@ -15,8 +15,7 @@ Optimized for use via a Command Line Interface (CLI) while still having the bene
 ---
 
 # Table of Contents
-Table of Contents
-{:toc }
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 # How to use this guide
@@ -32,8 +31,8 @@ instead we recommend you use it like a reference:
 - **Troubleshooting**: Check the **FAQ** and **Known issues** sections if something doesn't work as expected.
 - **At a glance**: Use the **Command summary** at the end for a quick reference to all commands in one place.
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**<br>
-    - Use the Table of Contents at the top of this page to jump directly to the section you need.
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+* Use the Table of Contents at the top of this page to jump directly to the section you need.
 </div>
 
 ---
@@ -131,8 +130,8 @@ Here are a few examples you can try:
 | Delete a contact | `delete 2, 3`                                                                                                                                 | Removes the 2nd and 3rd contact from the current list |
 | Exit the app | `exit`                                                                                                                                        | Closes BrewBook safely                                |
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**  
-    - You can copy and paste commands here directly into BrewBook.
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+* You can copy and paste commands here directly into BrewBook.
 </div>
 
 You are now ready to utilise BrewBook for your own use case!
@@ -210,8 +209,8 @@ Adds a customer to the address book.
 - `add customer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a customer named *John Doe* with phone `98765432`, email `johnd@example.com`, and address `John street, block 123, #01-01`.
 - `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy` adds a customer named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Rd`, notes `Loves chocolate`, 3 loyalty points, and a tag `allergy`.
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**  
-    - If this is a new customer, you don't have to specify points as it will automatically be set to 0.
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+* If this is a new customer, you don't have to specify points as it will automatically be set to 0.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
@@ -238,8 +237,8 @@ Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/
 - `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/13/11/2026, 12/11/2026 notes/only weekends` adds a staff member named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Rd`, tags `friend` and `intern`, shifts on `13/11/2026` and `12/11/2026`, and notes `only weekends`.
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
-- Shifts are not needed if you are unsure when your staff is available to start!    
-- Shifts are automatically deleted when the date has passed so you don't need to edit it!
+* Shifts are not needed if you are unsure when your staff is available to start!    
+* Shifts are automatically deleted when the date has passed so you don't need to edit it!
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
@@ -274,10 +273,10 @@ Adds a supplier to the address book.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
 - Name must not exceed 48 characters.
-  - Phone number must not be less than 3 digits.
-  - Days date must be in the future.
-  - Duplicate dates for Days are not allowed.
-  - Days must follow the format `d/M/yyyy`.
+- Phone number must not be less than 3 digits.
+- Days date must be in the future.
+- Duplicate dates for Days are not allowed.
+- Days must follow the format `d/M/yyyy`.
 </div>
 
 [Back to Features](#features)
@@ -496,7 +495,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 
 
 **Q**: Why isn’t my command working?<br>
-**A**:
+**A**: Please check the following.
 - Check that your command follows the correct format.
 - Make sure required fields like `n/`, `p/`, or `e/` are included.
 - Use `help` to view all available commands and examples on how to use them along with their constraints.
@@ -534,8 +533,8 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 Action | Format, Examples
 --------|------------------
 **Add customer** | `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…​` <br> e.g., `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`
-**Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...] [t/TAG]…` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/2025-12-04, 2025-12-07 notes/can only do weekdays t/partTime`
-**Add suppplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/2025-10-30`
+**Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...] [t/TAG]…` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/4/2025 notes/can only do weekdays t/partTime`
+**Add supplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/28/10/2025`
 **List** | `list [all/customer/staff/supplier]`
 **Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`
 **Clear** | `clear`
