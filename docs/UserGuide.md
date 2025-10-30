@@ -32,7 +32,7 @@ instead we recommend you use it like a reference:
 - **Troubleshooting**: Check the **FAQ** and **Known issues** sections if something doesn't work as expected.
 - **At a glance**: Use the **Command summary** at the end for a quick reference to all commands in one place.
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**  
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
     - Use the Table of Contents at the top of this page to jump directly to the section you need.
 </div>
 
@@ -69,12 +69,12 @@ Let’s check whether it’s already installed on your computer.
 :point_right: **To install Java 17:**
 - **On Windows**
     1. Visit the official Java 17 download page [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html). 
-    2. Download the **Windows x64 Installer (JDK 17)** and follow the instructions on screen. 
+    2. Download the **Windows x64 Installer (JDK 17)** and follow the instructions on screen.
     3. When done, repeat the steps above to confirm it says **version 17**.
 
 - **On Mac**
     1. Visit the official Java 17 download page [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
-    2. Download the **macOS Installer (JDK 17)** and follow the setup instructions. 
+    2. Download the **macOS Installer (JDK 17)** and follow the setup instructions.
     3. When done, repeat the steps above to confirm it says **version 17**.
 
 - **On Linux**
@@ -84,7 +84,6 @@ Let’s check whether it’s already installed on your computer.
       sudo apt update
       sudo apt install openjdk-17-jdk```
     2. When done, repeat the steps above to confirm it says **version 17**.
-
 
 ---
 ## Step 2: Download BrewBook
