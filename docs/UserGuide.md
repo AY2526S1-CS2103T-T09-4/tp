@@ -273,10 +273,10 @@ Adds a supplier to the address book.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
 - Name must not exceed 48 characters.
-  - Phone number must not be less than 3 digits.
-  - Days date must be in the future.
-  - Duplicate dates for Days are not allowed.
-  - Days must follow the format `d/M/yyyy`.
+- Phone number must not be less than 3 digits.
+- Days date must be in the future.
+- Duplicate dates for Days are not allowed.
+- Days must follow the format `d/M/yyyy`.
 </div>
 
 [Back to Features](#features)
@@ -495,7 +495,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 
 
 **Q**: Why isn’t my command working?<br>
-**A**:
+**A**: Please check the following.
 - Check that your command follows the correct format.
 - Make sure required fields like `n/`, `p/`, or `e/` are included.
 - Use `help` to view all available commands and examples on how to use them along with their constraints.
@@ -533,8 +533,8 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 Action | Format, Examples
 --------|------------------
 **Add customer** | `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…​` <br> e.g., `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`
-**Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...] [t/TAG]…` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/2025-12-04, 2025-12-07 notes/can only do weekdays t/partTime`
-**Add suppplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/2025-10-30`
+**Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...] [t/TAG]…` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/4/2025 notes/can only do weekdays t/partTime`
+**Add supplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/28/10/2025`
 **List** | `list [all/customer/staff/supplier]`
 **Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`
 **Clear** | `clear`
