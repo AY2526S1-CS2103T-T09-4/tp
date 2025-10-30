@@ -460,3 +460,73 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+---
+## **Appendix: Effort**
+
+BrewBook builds upon the AB3 foundation but significantly expands its scope and complexity. While AB3 manages a single entity type (Person), BrewBook introduces and integrates **three distinct entity types** — Customers, Staff, and Suppliers — each with unique attributes and behaviors. This multi-entity architecture required substantial redesign of the data model, parser logic, and UI rendering.
+
+---
+
+### Difficulty Level
+
+Compared to AB3, BrewBook was more demanding because:
+- It had to support **multiple entity types** instead of one, requiring a more flexible and extensible architecture.
+- Commands had to be **entity‑aware** (e.g., `add staff`, `add supplier`), increasing parser complexity.
+- The system needed to handle **date‑sensitive features** (staff shifts, supplier delivery days) and consolidate them in a unified `summary` view.
+- Documentation and user support had to scale with the expanded feature set, demanding more structured and user‑friendly guides.
+
+---
+
+### Challenges Faced
+
+#### Technical
+- **Model Redesign:**  
+  Refactoring `Person` into an abstract superclass required deep changes across `Logic`, `Storage`, and `UI` as they `Person` was heavily utilised and embedded in the design of AB3.
+
+- **Parser and Command Handling:**  
+  Building a parser that could distinguish extending from the original parser and command handling because of these new entity types was also non-trivial. It caused frequent test failures due to dependencies and considerable time was spent understanding an debugging code.
+
+
+#### Collaboration
+- **Cross‑team Coordination:**  
+  Model changes cascaded into multiple layers, requiring synchronized updates across contributors.
+- **Merge Conflicts:**  
+  Refactoring shared components (e.g., `Person`, `AddressBook`, `Parser`) led to frequent conflicts and integration delays.
+- **Onboarding Overhead:**  
+  New contributors needed extra time to understand the redesigned architecture before contributing effectively.
+
+Despite these hurdles, the team mitigated risks through issue tracking, code reviews, and weekly syncs, ensuring architectural and design decisions were well‑documented and consensus‑driven.
+
+---
+
+### Effort Required
+
+- **Development Effort:**  
+  A large portion of time was spent on parser redesign, model restructuring, ensuring test coverage across three entity types, and fixing CICD failures.
+- **Testing Effort:**  
+  Many existing AB3 test cases broke during refactoring. Significant effort went into updating and expanding tests to cover new behaviors.
+- **Documentation Effort:**  
+  The User Guide was expanded with consistent examples, screenshots, captions, FAQs, and troubleshooting sections to ensure clarity for evaluators and end‑users.
+
+### Reuse & Adaptation
+- **Base Architecture:**  
+  Reused AB3’s MVC structure, saving ~10% of effort.
+- **Adapted Classes:**
+    - `Person` refactored into an abstract superclass, with `Customer`, `Staff`, and `Supplier` as subclasses.
+    - `AddressBook` extended to manage multiple entity lists.
+
+While reuse provided a foundation, adapting these components to BrewBook’s multi‑entity design required substantial reengineering.
+
+---
+
+### Achievements
+
+- Delivered a **robust, extensible system** supporting multiple entity types with clear separation of concerns.
+- Designed a **clean and intuitive CLI** with consistent command formats and helpful error messages.
+- Produced a **comprehensive User Guide** with examples, screenshots, and troubleshooting tips to support onboarding and evaluation.
+- Maintained **team cohesion** despite architectural complexity and differing individual schedules, ensuring smooth integration of features.
+
+---
+
+**In summary:** BrewBook represents a meaningful evolution from AB3. It demanded deeper architectural thinking, more rigorous testing, and stronger collaboration practices, but ultimately resulted in a more powerful and user‑friendly product.
