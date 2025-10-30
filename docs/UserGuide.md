@@ -20,10 +20,10 @@ Optimized for use via a Command Line Interface (CLI) while still having the bene
 [Features](#features)<br>
 [FAQ](#faq)<br>
 [Known issues / Troubleshooting](#known-issues--troubleshooting)<br>
-[Command Summary](#command-summary)
---------------------------------------------------------------------------------------------------------------------
+[Command Summary](#command-summary) <br>
+---
 # How to use this guide
-This User Guide is designed to help you get hte most out of BrewBook. You don't need to read it cover-to-cover,
+This User Guide is designed to help you get the most out of BrewBook. You don't need to read it cover-to-cover,
 instead we recommend you use it like a reference:
 
 - **New users**: Start with the **Quick start** section. It walks you through installation, setup, and your very first commands.
@@ -108,10 +108,10 @@ Let’s check whether it’s already installed on your computer.
 ## Step 4: Open BrewBook
 
 1. Open your **Command Prompt** or **Terminal**
-2. Type `cd [filename]` to navigate to where your BrewBook.jar file exists.
+2. Type `cd [folderpath]` to navigate to where your BrewBook.jar file exists.
     > If your .jar file is in the`Users\(name)\Downloads` directory and you are currently in `Users\(name)`,
     > you should type `cd Downloads` in the **Command Prompt** or **Terminal**.
-3. Type `java -jar BrewBook.jar` and BrewBook will now open to it's landing page populated with sample data for your easy reference.
+3. Type `java -jar BrewBook.jar` and BrewBook will now open to its' landing page populated with sample data for your easy reference.
 
 ![Ui](images/Ui.png)
 
@@ -120,7 +120,7 @@ Now you’re ready to start managing your café contacts!
 ---
 ## Step 5: Try out a few simple commands
 
-BrewBook uses a **command box** — just type what you want to do and press **Enter**.
+BrewBook uses a **command box** — just type a command exactly as shown below and press **Enter**.
 Here are a few examples you can try:
 
 | Action | What to Type                                                                                                                                  | What It Does                                          |
@@ -317,7 +317,7 @@ Edits an existing person in the address book.
 ![edit customer success](images/editResult.png)
 *Figure: Result from executing `edit 1 n/Alex Yeoh` when the name was originally Alex Yeo*
 
-**Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [n/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]..] [items/ITEM[, ITEM]...] [days/DAY[, DAY]...] [t/TAG]…​`
+**Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [notes/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]..] [items/ITEM[, ITEM]...] [days/DAY[, DAY]...] [t/TAG]…​`
 
 **Examples**:
 *  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -348,12 +348,10 @@ Finds contacts whose fields contain any of the given keywords.
 
 **Examples**:
 - `find John` returns a person named *john* and *John Doe*.
-- `find alex david` returns a person named *Alex Yeoh*, *David Li*.
 - `find n/alex p/12345678` returns a person named *Alex Yeoh* who has phone number `12345678`. <br>
 
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - The search is case-insensitive so don't worry about capitalisation!
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
 - Persons matching all parameters will be returned (i.e. AND search).
 - If no prefix is specified, find will resort to search by name for the given keyword.
 </div>
@@ -401,6 +399,11 @@ Sorts your contact list based on a specific field and optional order — for exa
 - `sort name` sorts all contacts by name in ascending order (A–Z).
 - `sort phone o/desc` sorts contacts by phone number in descending order.
 - `sort type o/asc` groups contacts by type (customer → staff → supplier) in ascending order.
+
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+- You can specify your sort order by using `o/asc` for ascending and `o/desc` for descending.
+- The default sort order is ascending.
+</div>
 
 [Back to Features](#features)
 
@@ -506,7 +509,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 
 
 **Q**: Can I add multiple tags or items at once?<br>
-**A**: Yes.  
+**A**: Yes. Please refer to add command to see how to do it.
 
 
 **Q**: What date format should I use?<br>
@@ -524,7 +527,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 --------------------------------------------------------------------------------------------------------------------
 # Known issues / Troubleshooting
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file (located in same folder as BrewBook.jar) created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **Once you select a contact card**, you will not be able to unselect it.
 4. **BrewBook does not accept names with special symbols** such as '/', if you require, you may spell out the name in full as we allow a maximum of 48 number of character for name.
@@ -542,7 +545,7 @@ Action | Format, Examples
 **List** | `list [all/customer/staff/supplier]`
 **Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`
 **Clear** | `clear`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [n/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]...] [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [notes/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]...] [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
 
