@@ -10,7 +10,9 @@ import java.time.LocalDate;
  */
 public class Days {
     public static final String MESSAGE_COMPULSORY = "At least one day must be provided";
-    public static final String MESSAGE_CONSTRAINTS = "Invalid date format for day, Expected format: yyyy-MM-dd";
+    public static final String MESSAGE_FORMAT_CONSTRAINTS = "Invalid date format for day, Expected format: yyyy-MM-dd";
+    public static final String MESSAGE_DUPLICATE_CONSTRAINTS = "Duplicates dates for days are not allowed: ";
+    public static final String MESSAGE_OLD_CONSTRAINTS = "Invalid days date as this date has passed: ";
 
     private final LocalDate daysSupplied;
 
@@ -20,6 +22,25 @@ public class Days {
     public Days(LocalDate daysSupplied) {
         requireAllNonNull(daysSupplied);
         this.daysSupplied = daysSupplied;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof Days)) {
+            return false;
+        }
+
+        Days otherDays = (Days) other;
+        return daysSupplied.equals(otherDays.daysSupplied);
+    }
+
+    @Override
+    public int hashCode() {
+        return daysSupplied.hashCode();
     }
 
     @Override

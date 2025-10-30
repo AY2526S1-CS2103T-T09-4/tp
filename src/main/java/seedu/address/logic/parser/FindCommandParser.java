@@ -30,11 +30,37 @@ import seedu.address.model.person.Person;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
+    private static final List<Prefix> ALLOWED_PREFIXES = List.of(
+            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+            PREFIX_TAG, PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS
+    );
+
+    private static final java.util.Set<String> ALLOWED_PREFIX_STRINGS =
+            ALLOWED_PREFIXES.stream().map(Prefix::getPrefix).collect(java.util.stream.Collectors.toSet());
+
+    private static java.util.List<String> getUnknownPrefixes(String raw) {
+        java.util.List<String> invalid = new java.util.ArrayList<>();
+        for (String tok : raw.trim().split("\\s+")) {
+            int slash = tok.indexOf('/');
+            if (slash > 0) {
+                String maybe = tok.substring(0, slash + 1); // e.g., "x/"
+                if (maybe.matches("[A-Za-z]+/") && !ALLOWED_PREFIX_STRINGS.contains(maybe)) {
+                    invalid.add(maybe);
+                }
+            }
+        }
+        return invalid;
+    }
+
     @Override
     public FindCommand parse(String args) throws ParseException {
         final String raw = args == null ? "" : args.trim();
         if (raw.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        var unknown = getUnknownPrefixes(raw);
+        if (!unknown.isEmpty()) {
+            throw new ParseException("Unknown prefix(es): " + String.join(", ", unknown));
         }
 
         ArgumentMultimap map = ArgumentTokenizer.tokenize(
@@ -55,8 +81,18 @@ public class FindCommandParser implements Parser<FindCommand> {
                 kws -> new FieldContainsKeywordsPredicate(p -> p.getPhone().value, kws, false), perField);
         addIfPresent(map, PREFIX_EMAIL, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> p.getEmail().value, kws, false), perField);
-        addIfPresent(map, PREFIX_ADDRESS, toKeywords,
-                kws -> new FieldContainsKeywordsPredicate(p -> p.getAddress().value, kws, false), perField);
+        map.getAllValues(PREFIX_ADDRESS).stream()
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .reduce((a, b) -> a + " " + b)
+                .ifPresent(rawPhrase -> {
+                    String needle = norm(rawPhrase);
+                    perField.add((Person p) -> {
+                        String hay = norm(p.getAddress().value);
+                        return hay.contains(needle);
+                    });
+                });
+
         addIfPresent(map, PREFIX_TAG, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(
                         p -> p.getTags().stream().map(tag -> tag.tagName).collect(Collectors.joining(" ")),
@@ -92,7 +128,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 }, kws, false),
                 perField);
 
-        // Reject empty values for any provided prefix (keep your current validation)
+        // Reject empty values for any provided prefix
         for (Prefix px : List.of(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_TAG, PREFIX_ITEMS, PREFIX_DAYS, PREFIX_SHIFTS)) {
             if (map.getValue(px).filter(v -> v.trim().isEmpty()).isPresent()) {
@@ -113,6 +149,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         return new FindCommand(new AllOfPersonPredicates(perField));
+    }
+
+    private static String norm(String s) {
+        return s.toLowerCase()
+                .replaceAll("[^\\p{Alnum}]+", " ")
+                .replaceAll("\\s+", " ")
+                .trim();
     }
 
     private void addIfPresent(ArgumentMultimap map, Prefix prefix,

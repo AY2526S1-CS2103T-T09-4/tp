@@ -49,7 +49,7 @@ class JsonAdaptedDays {
             LocalDate parsed = LocalDate.parse(day);
             return new Days(parsed);
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException(Days.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Days.MESSAGE_FORMAT_CONSTRAINTS);
         }
     }
 }

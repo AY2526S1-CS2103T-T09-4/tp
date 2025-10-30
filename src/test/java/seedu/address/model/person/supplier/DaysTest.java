@@ -1,6 +1,9 @@
 package seedu.address.model.person.supplier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -30,4 +33,45 @@ public class DaysTest {
         assertEquals("2023-01-01", days.toString());
     }
 
+    @Test
+    public void equals_sameInstance_true() {
+        Days d = new Days(LocalDate.of(2025, 10, 30));
+        assertTrue(d.equals(d));
+    }
+
+    @Test
+    public void equals_null_false() {
+        Days d = new Days(LocalDate.of(2025, 10, 30));
+        assertFalse(d.equals(null));
+    }
+
+    @Test
+    public void equals_differentType_false() {
+        Days d = new Days(LocalDate.of(2025, 10, 30));
+        Object notDays = "2025-10-30";
+        assertFalse(d.equals(notDays));
+    }
+
+    @Test
+    public void equals_sameDate_true() {
+        LocalDate d = LocalDate.of(2030, 10, 30);
+        Days a = new Days(d);
+        Days b = new Days(LocalDate.of(2030, 10, 30));
+        assertEquals(a, b);
+    }
+
+    @Test
+    public void hashCode_sameDate_equal() {
+        LocalDate d = LocalDate.of(2030, 10, 30);
+        Days a = new Days(d);
+        Days b = new Days(LocalDate.of(2030, 10, 30));
+        assertEquals(a.hashCode(), b.hashCode());
+    }
+
+    @Test
+    public void equals_differentDate_false() {
+        Days a = new Days(LocalDate.of(2030, 10, 30));
+        Days b = new Days(LocalDate.of(2030, 11, 2));
+        assertNotEquals(a, b);
+    }
 }

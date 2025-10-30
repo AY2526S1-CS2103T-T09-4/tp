@@ -20,6 +20,7 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_FIELD_ENTERED = "Invalid field entered. %1$s is not valid for this "
             + "contact type.";
+    public static final String MESSAGE_CLEAR_COMMAND_CHECK = "To clear all contacts, type 'clear' alone.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

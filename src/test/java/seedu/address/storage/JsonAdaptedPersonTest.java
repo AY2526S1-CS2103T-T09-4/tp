@@ -233,7 +233,7 @@ public class JsonAdaptedPersonTest {
                 VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAGS, EMPTY_SHIFTS, VALID_ITEMS, invalidDays, VALID_NOTE, null);
 
-        String expectedMessage = Days.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Days.MESSAGE_FORMAT_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

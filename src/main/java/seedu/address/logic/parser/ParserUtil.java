@@ -211,6 +211,7 @@ public class ParserUtil {
      * Parses {@code List<String> daysString} into a {@code List<Days>}.
      */
     public static List<Days> parseDays(List<String> daysStrings) throws ParseException {
+        requireNonNull(daysStrings);
         List<Days> days = new ArrayList<>();
         if (daysStrings.isEmpty()) {
             throw new ParseException(Days.MESSAGE_COMPULSORY);
@@ -224,9 +225,20 @@ public class ParserUtil {
             }
             try {
                 LocalDate date = LocalDate.parse(trimmed);
+
+                if (date.isBefore(LocalDate.now())) {
+                    throw new ParseException(Days.MESSAGE_OLD_CONSTRAINTS + date);
+                }
+
+                Days newDay = new Days(date);
+
+                if (days.contains(newDay)) {
+                    throw new ParseException(Days.MESSAGE_DUPLICATE_CONSTRAINTS + date);
+                }
+
                 days.add(new Days(date));
             } catch (DateTimeParseException e) {
-                throw new ParseException(Days.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Days.MESSAGE_FORMAT_CONSTRAINTS);
             }
         }
         return days;
@@ -242,12 +254,17 @@ public class ParserUtil {
         }
 
         String raw = itemStrings.get(0);
-        for (String token : raw.split(", ")) {
+        for (String token : raw.split(",")) {
             String trimmed = token.trim();
             if (trimmed.isEmpty()) {
                 continue;
             }
             try {
+                Items newItem = new Items(trimmed);
+
+                if (items.contains(newItem)) {
+                    throw new ParseException(Items.MESSAGE_DUPLICATE_CONSTRAINTS + trimmed);
+                }
                 items.add(new Items(trimmed));
             } catch (IllegalArgumentException e) {
                 throw new ParseException(Items.MESSAGE_CONSTRAINTS);
