@@ -15,8 +15,7 @@ Optimized for use via a Command Line Interface (CLI) while still having the bene
 ---
 
 # Table of Contents
-Table of Contents
-{:toc }
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 # How to use this guide
@@ -32,8 +31,8 @@ instead we recommend you use it like a reference:
 - **Troubleshooting**: Check the **FAQ** and **Known issues** sections if something doesn't work as expected.
 - **At a glance**: Use the **Command summary** at the end for a quick reference to all commands in one place.
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**<br>
-    - Use the Table of Contents at the top of this page to jump directly to the section you need.
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+* Use the Table of Contents at the top of this page to jump directly to the section you need.
 </div>
 
 ---
@@ -131,8 +130,8 @@ Here are a few examples you can try:
 | Delete a contact | `delete 2, 3`                                                                                                                                 | Removes the 2nd and 3rd contact from the current list |
 | Exit the app | `exit`                                                                                                                                        | Closes BrewBook safely                                |
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**  
-    - You can copy and paste commands here directly into BrewBook.
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+* You can copy and paste commands here directly into BrewBook.
 </div>
 
 You are now ready to utilise BrewBook for your own use case!
@@ -210,8 +209,8 @@ Adds a customer to the address book.
 - `add customer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a customer named *John Doe* with phone `98765432`, email `johnd@example.com`, and address `John street, block 123, #01-01`.
 - `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy` adds a customer named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Rd`, notes `Loves chocolate`, 3 loyalty points, and a tag `allergy`.
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**  
-    - If this is a new customer, you don't have to specify points as it will automatically be set to 0.
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+* If this is a new customer, you don't have to specify points as it will automatically be set to 0.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
@@ -238,8 +237,8 @@ Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/
 - `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/13/11/2026, 12/11/2026 notes/only weekends` adds a staff member named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Rd`, tags `friend` and `intern`, shifts on `13/11/2026` and `12/11/2026`, and notes `only weekends`.
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
-- Shifts are not needed if you are unsure when your staff is available to start!    
-- Shifts are automatically deleted when the date has passed so you don't need to edit it!
+* Shifts are not needed if you are unsure when your staff is available to start!    
+* Shifts are automatically deleted when the date has passed so you don't need to edit it!
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
