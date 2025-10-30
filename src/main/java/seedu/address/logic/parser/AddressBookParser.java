@@ -43,7 +43,7 @@ public class AddressBookParser {
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase().trim();
         final String arguments = matcher.group("arguments");
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
@@ -57,7 +57,7 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
         case ClearCommand.COMMAND_WORD:
-            if (arguments != "") {
+            if (!arguments.isEmpty()) {
                 throw new ParseException(MESSAGE_CLEAR_COMMAND_CHECK);
             }
             return new ClearCommand();
