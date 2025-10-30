@@ -150,7 +150,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 --------------------------------------------------------------------------------------------------------------------
 
-## **Planned Enhancements** 
+## **Planned Enhancements**
 
 Team size: 5
 1. Prevent GUI from launching off-screen: The application currently relies on external workarounds (deleting a JSON file) when its main GUI window launches off-screen after a multi-monitor configuration change. We plan to enhance the window initialization logic to detect if the saved window position is outside the boundaries of the currently available screen(s). If an off-screen position is detected, the application will automatically reset the window position to the center of the primary screen upon launch. This prevents the user from having to manually delete the preferences file.
@@ -388,11 +388,11 @@ For all use cases below, unless otherwise specified:
 **Guarantee**: Persons will be sorted by the given field.
 
 **MSS**
-1. User requests to sort persons by field. 
+1. User requests to sort persons by field.
 2. Brewbook sorts persons by the field and displays a success message. Use case ends.
 
 **Extensions**
-* 2a. Field provided is invalid. 
+* 2a. Field provided is invalid.
   * 2a. BrewBook displays an error message and informs the user of the possible fields. Use case ends.
 
 #### UC8 - Summarise all staffs' shift and suppliers' items and days
@@ -408,7 +408,7 @@ For all use cases below, unless otherwise specified:
 **Guarantee**: Clears all persons
 
 **MSS**
-1. User requests to clear all persons. 
+1. User requests to clear all persons.
 2. BrewBook clears all persons and displays a success message. Use case ends.
 
 #### UC10 - Exit the app
@@ -520,7 +520,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple persons in the list. Filtered the list using `list x` or `find` command.
    2. Test case: `delete 1` <br>
       Expected: First contact in filtered list is deleted. Details of the deleted contact shown in the status. Running `list all` should bring back all unfiltered entries in original index of list.
-    
+
 
 ### Saving data
 
@@ -539,20 +539,20 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a person
 
-1. Adding a customer. 
+1. Adding a customer.
    1. Test case 1: `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
       Expected: New customer added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
    2. Test case 2: `add customer n/John & Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
       Expected: No customer is added. Name-specific error message highlighting the correct name format is shown.
    3. Test case 3: `add customer n/John Doe e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
       Expected: No customer is added as phone number is missing. Generic error message highlighting the correct command format is shown.
-   4. Other incorrect add customer commands to try: 
+   4. Other incorrect add customer commands to try:
       1. Name longer than 48 characters. Shows name-specific error message.
       2. Email doesn't follow the specified email format (e.g. does not include an `@`). Shows email-specific error message.
       3. Phone number is shorter than 3 characters or is not purely numeric.
       2. Notes longer than 200 characters. Shows notes-specific error message.
       3. Other missing compulsory tags (i.e. name, phone, email, address)
-2. Adding a staff. 
+2. Adding a staff.
     1. Test case 1: `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
        Expected: New staff added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
     2. Test case 2: `add staff n/Ah Hock p/98765432 e/ahhockexample.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
@@ -564,7 +564,7 @@ testers are expected to do more *exploratory* testing.
         2. Phone number is shorter than 3 characters or is not purely numeric.
         3. Notes longer than 200 characters. Shows notes-specific error message.
         4. Shifts in an incorrect date format (i.e. not `d/M/yyyy`). Shows shift-specific error message.
-        5. Other missing compulsory tags (i.e. name, phone, email, address) 
+        5. Other missing compulsory tags (i.e. name, phone, email, address)
 3. Adding a supplier.
     1. Test case 1: `add supplier n/Ben Lim p/98765432 e/benlim@example.com a/123 Clementi Ave 3 items/Flour, Eggs days/10/12/2025, 12/12/2025 notes/Halal supplier t/preferred`<br>
        Expected: New supplier added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
@@ -578,11 +578,11 @@ testers are expected to do more *exploratory* testing.
         3. Email doesn't follow the specified email format (e.g. does not include an `@`). Shows email-specific error message.
         4. Notes longer than 200 characters. Shows notes-specific error message.
         5. Days in an incorrect date format (i.e. not `d/M/yyyy`). Shows shift-specific error message.
-        6. Other missing compulsory tags (i.e. name, phone, email, address) 
+        6. Other missing compulsory tags (i.e. name, phone, email, address)
 
 ### Finding person(s) by keyword(s)
 
-1. Finding by keywords. 
+1. Finding by keywords.
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Works similarly for `list (customer | staff | supplier)`
 
