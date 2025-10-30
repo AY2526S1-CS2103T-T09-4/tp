@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.DateParser;
-import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.supplier.Days;
 
 /**

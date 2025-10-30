@@ -1,10 +1,10 @@
 package seedu.address.model.person.supplier;
 
-import seedu.address.logic.parser.DateParser;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
+
+import seedu.address.logic.parser.DateParser;
 
 /**
  * Represents a supplier's supplying days in the address book.
