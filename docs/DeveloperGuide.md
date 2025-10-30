@@ -480,3 +480,69 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Adding a person
+
+1. Adding a customer. 
+   1. Test case 1: `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
+      Expected: New customer added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
+   2. Test case 2: `add customer n/John & Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
+      Expected: No customer is added. Name-specific error message highlighting the correct name format is shown. 
+   3. Test case 3: `add customer n/John Doe e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
+      Expected: No customer is added as phone number is missing. Generic error message highlighting the correct command format is shown. 
+   4. Other incorrect add customer commands to try: 
+      1. Name longer than 48 characters. Shows name-specific error message. 
+      2. Email doesn't follow the specified email format (e.g. does not include an `@`). Shows email-specific error message.
+      3. Phone number is shorter than 3 characters or is not purely numeric. 
+      2. Notes longer than 200 characters. Shows notes-specific error message.
+      3. Other missing compulsory tags (i.e. name, phone, email, address)
+2. Adding a staff. 
+    1. Test case 1: `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
+       Expected: New staff added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
+    2. Test case 2: `add staff n/Ah Hock p/98765432 e/ahhockexample.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
+       Expected: No customer is added. Email-specific error message highlighting the correct email format is shown.
+    3. Test case 3: `add staff n/Ah Hock p/98765432 e/ahhock@example.com shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
+       Expected: No customer is added as address is missing. Generic error message highlighting the correct command format is shown.
+    4. Other incorrect add staff commands to try:
+        1. Name not alphanumeric or longer than 48 characters. Shows name-specific error message.
+        2. Phone number is shorter than 3 characters or is not purely numeric.
+        3. Notes longer than 200 characters. Shows notes-specific error message.
+        4. Shifts in an incorrect date format (i.e. not `d/M/yyyy`). Shows shift-specific error message.
+        5. Other missing compulsory tags (i.e. name, phone, email, address) 
+3. Adding a supplier.
+    1. Test case 1: `add supplier n/Ben Lim p/98765432 e/benlim@example.com a/123 Clementi Ave 3 items/Flour, Eggs days/10/12/2025, 12/12/2025 notes/Halal supplier t/preferred`<br>
+       Expected: New supplier added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
+    2. Test case 2: `add supplier n/Ben Lim p/abc e/benlim@example.com a/123 Clementi Ave 3 items/Flour, Eggs days/10122025, 12122025 notes/Halal supplier t/preferred`<br>
+       Expected: No supplier is added. Date-specific error message highlighting the correct date format is shown.
+    3. Test case 3: `add supplier n/Ben Lim p/98765432 a/123 Clementi Ave 3 items/Flour, Eggs days/10/12/2025, 12/12/2025 notes/Halal supplier t/preferred`<br>
+       Expected: No supplier is added as email is missing. Generic error message highlighting the correct command format is shown.
+    4. Other incorrect add supplier commands to try:
+        1. Name not alphanumeric or longer than 48 characters. Shows name-specific error message.
+        2. Phone number is shorter than 3 characters or is not purely numeric.
+        3. Email doesn't follow the specified email format (e.g. does not include an `@`). Shows email-specific error message.
+        4. Notes longer than 200 characters. Shows notes-specific error message.
+        5. Days in an incorrect date format (i.e. not `d/M/yyyy`). Shows shift-specific error message.
+        6. Other missing compulsory tags (i.e. name, phone, email, address) 
+
+### Finding person(s) by keyword(s)
+
+1. Finding by keywords. 
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Works similarly for `list (customer | staff | supplier)`
+
+    2. Test case 1: `find Alex`
+       1. Case 1: If there is are persons with names containing Alex, these persons will be shown. A success message indicating the number of persons listed will be shown.
+       2. Case 2: If there are no persons with names containing Alex, the list will be empty. A message saying that 0 persons are listed will be shown.
+
+    3. Test case 2: `find Alex e/gmail`
+       1. Case 1: If there is are persons with names containing Alex and email containing gmail, these persons will be shown. A success message indicating the number of persons listed will be shown.
+       2. Case 2: If there are no persons with names containing Alex and email containing gmail, the list will be empty. A message saying that 0 persons are listed will be shown.
+
+   4. Test case 3: `find e/gmail`
+      1. Case 1: If there is are persons with email containing gmail, these persons will be shown. A success message indicating the number of persons listed will be shown.
+      2. Case 2: If there are no persons with email containing gmail, the list will be empty. A message saying that 0 persons are listed will be shown.
+
+   5. Test case 4: `find` <br>
+      Expected: Generic error message highlighting the correct command format is shown.
+
+   6. Other correct commands to try: add any combination of name and fields. The relevant persons will be shown. 
