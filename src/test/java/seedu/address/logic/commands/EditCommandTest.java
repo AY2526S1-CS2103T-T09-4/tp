@@ -6,13 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_FIELD_ENTERED;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DAYS_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEMS_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POINTS_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POINTS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTS_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -166,7 +175,7 @@ public class EditCommandTest {
         assertCommandFailure(daysEditCommand, model, MESSAGE_FIELDS_NOT_EDITED);
 
         // Items included but not changed
-        List<String> itemList = Arrays.asList("egg");
+        List<String> itemList = Arrays.asList("egg, milk");
         EditCommand.EditPersonDescriptor itemsDescriptor = new EditPersonDescriptorBuilder().withItems(itemList)
                 .build();
         EditCommand itemsEditCommand = new EditCommand(indexFifthPerson, itemsDescriptor);
@@ -191,6 +200,277 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Tests the hasChange field in EditCommand. The Name field is changed, Phone field is provided but not changed.
+     */
+    @Test
+    public void execute_customerPhoneNotChanged_success() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+
+        Index indexFirstPerson = Index.fromOneBased(1);
+        Customer firstPerson = (Customer) model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+
+        CustomerBuilder customerBuilder = new CustomerBuilder(firstPerson);
+        Person editedPerson = customerBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_ALICE).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_ALICE).build();
+        EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Tests the hasChange field in EditCommand. The Name and Phone field is changed, Address field is provided but not
+     * changed.
+     */
+    @Test
+    public void execute_customerAddressNotChanged_success() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+
+        Index indexFirstPerson = Index.fromOneBased(1);
+        Customer firstPerson = (Customer) model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+
+        CustomerBuilder customerBuilder = new CustomerBuilder(firstPerson);
+        Person editedPerson = customerBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withAddress(VALID_ADDRESS_ALICE).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_ALICE).build();
+        EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Tests the hasChange field in EditCommand. The Name, Phone and Address field is changed, Email field is provided
+     * but not changed.
+     */
+    @Test
+    public void execute_customerEmailNotChanged_success() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+
+        Index indexFirstPerson = Index.fromOneBased(1);
+        Customer firstPerson = (Customer) model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+
+        CustomerBuilder customerBuilder = new CustomerBuilder(firstPerson);
+        Person editedPerson = customerBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY).build();
+        EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Tests the hasChange field in EditCommand. The Name, Phone, Address and Email field is changed, Tag field is
+     * provided but not changed.
+     */
+    @Test
+    public void execute_customerTagNotChanged_success() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+
+        Index indexFirstPerson = Index.fromOneBased(1);
+        Customer firstPerson = (Customer) model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+
+        CustomerBuilder customerBuilder = new CustomerBuilder(firstPerson);
+        Person editedPerson = customerBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_CARL).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_CARL).build();;
+        EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Tests the hasChange field in EditCommand. The Name, Phone, Address, Email and Tag field is changed, Note field is
+     * provided but not changed.
+     */
+    @Test
+    public void execute_customerNoteNotChanged_success() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+
+        Index indexFirstPerson = Index.fromOneBased(1);
+        Customer firstPerson = (Customer) model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+
+        CustomerBuilder customerBuilder = new CustomerBuilder(firstPerson);
+        Person editedPerson = customerBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_AMY)
+                .withNote(VALID_NOTE_CARL).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_AMY).withNote(VALID_NOTE_CARL).build();
+        EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Tests the hasChange field in EditCommand. The Name, Phone, Address, Email, Tag and Note field is changed, Points
+     * field is provided but not changed.
+     */
+    @Test
+    public void execute_customerPointNotChanged_success() {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+
+        Index indexFirstPerson = Index.fromOneBased(1);
+        Customer firstPerson = (Customer) model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+
+        CustomerBuilder customerBuilder = new CustomerBuilder(firstPerson);
+        Person editedPerson = customerBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_AMY)
+                .withNote(VALID_NOTE_AMY).withPoints(VALID_POINTS_ALICE).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_AMY).withNote(VALID_NOTE_AMY).withPoints(VALID_POINTS_ALICE).build();
+        EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Tests the hasChange field in EditCommand. The Name, Phone, Address, Email, Tag and Note field is changed, Shifts
+     * field is provided but not changed.
+     */
+    @Test
+    public void execute_staffShiftsNotChanged_success() throws ParseException {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_STAFFS);
+
+        Index indexFirstPerson = Index.fromOneBased(1);
+        Staff firstPerson = (Staff) model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+
+        StaffBuilder staffBuilder = new StaffBuilder(firstPerson);
+        Person editedPerson = staffBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_AMY)
+                .withNote(VALID_NOTE_AMY).withShifts(VALID_SHIFTS_CARL).build();
+
+        List<String> listShift = new ArrayList<>();
+        listShift.add(VALID_SHIFTS_CARL);
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_AMY)
+                .withNote(VALID_NOTE_AMY).withShift(listShift).build();
+        EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Tests the hasChange field in EditCommand. The Name, Phone, Address, Email, Tag and Note field is changed, Item
+     * field is provided but not changed.
+     */
+    @Test
+    public void execute_SupplierItemsNotChanged_success() throws ParseException {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
+
+        Index indexFirstPerson = Index.fromOneBased(1);
+        Supplier firstPerson = (Supplier) model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+
+        SupplierBuilder supplierBuilder = new SupplierBuilder(firstPerson);
+        Person editedPerson = supplierBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_AMY)
+                .withNote(VALID_NAME_AMY).withItems(VALID_ITEMS_ELLE).build();
+
+        List<String> listItems = new ArrayList<>();
+        listItems.add(VALID_ITEMS_ELLE);
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_AMY).withNote(VALID_NAME_AMY).withItems(listItems).build();
+        EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Tests the hasChange field in EditCommand. The Name, Phone, Address, Email, Tag, Note and Items field is changed,
+     * Day field is provided but not changed.
+     */
+    @Test
+    public void execute_SupplierDaysNotChanged_success() throws ParseException {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
+
+        Index indexFirstPerson = Index.fromOneBased(1);
+        Supplier firstPerson = (Supplier) model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+
+        SupplierBuilder supplierBuilder = new SupplierBuilder(firstPerson);
+        Person editedPerson = supplierBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_AMY)
+                .withNote(VALID_NOTE_AMY).withItems(VALID_ITEMS_ELLE).withDays(VALID_DAYS_ELLE).build();
+
+        List<String> listItems = new ArrayList<>();
+        listItems.add(VALID_ITEMS_ELLE);
+        List<String> listDays = new ArrayList<>();
+        listDays.add(VALID_DAYS_ELLE);
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_AMY)
+                .withNote(VALID_NOTE_AMY).withItems(listItems).withDays(listDays).build();
+        EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+        System.out.println(expectedModel.getFilteredPersonList().get(4).getItems());
+        System.out.println(editedPerson.getItems());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

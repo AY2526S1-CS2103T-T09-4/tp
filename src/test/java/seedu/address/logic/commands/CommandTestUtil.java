@@ -54,6 +54,7 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_ALICE = "94351253";
     public static final String VALID_EMAIL_ALICE = "alice@example.com";
     public static final String VALID_ADDRESS_ALICE = "123, Jurong West Ave 6, #08-111";
+    public static final String VALID_POINTS_ALICE = "2";
     public static final String NAME_DESC_ALICE = " " + PREFIX_NAME + VALID_NAME_ALICE;
     public static final String PHONE_DESC_ALICE = " " + PREFIX_PHONE + VALID_PHONE_ALICE;
     public static final String EMAIL_DESC_ALICE = " " + PREFIX_EMAIL + VALID_EMAIL_ALICE;
@@ -95,6 +96,13 @@ public class CommandTestUtil {
     public static final String NOTE_DESC_CARL = " " + PREFIX_NOTE + VALID_NOTE_CARL;
     public static final String SHIFTS_DESC_CARL = " " + PREFIX_SHIFTS + VALID_SHIFTS_CARL;
 
+    public static final String VALID_NAME_DANIEL = "Daniel Meier";
+    public static final String VALID_PHONE_DANIEL = "87652533";
+    public static final String VALID_EMAIL_DANIEL = "cornelia@example.com";
+    public static final String VALID_ADDRESS_DANIEL = "10th street";
+    public static final String VALID_TAG_DANIEL = "friends";
+    public static final String VALID_NOTE_DANIEL = "works weekdays";
+    public static final String VALID_SHIFTS_DANIEL = "20/10/2030";
 
     public static final String VALID_NAME_ELLE = "Elle Meyer";
     public static final String VALID_PHONE_ELLE = "9482224";
@@ -103,7 +111,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_ELLE = "cheapest";
     public static final String VALID_TAG_ELLE_2 = "fastDelivery";
     public static final String VALID_NOTE_ELLE = "one dollar per gallon";
-    public static final String VALID_ITEMS_ELLE = "egg";
+    public static final String VALID_ITEMS_ELLE = "egg, milk";
     public static final String VALID_DAYS_ELLE = "2030-10-10";
     public static final String NAME_DESC_ELLE = " " + PREFIX_NAME + VALID_NAME_ELLE;
     public static final String PHONE_DESC_ELLE = " " + PREFIX_PHONE + VALID_PHONE_ELLE;
@@ -114,6 +122,9 @@ public class CommandTestUtil {
     public static final String NOTE_DESC_ELLE = " " + PREFIX_NOTE + VALID_NOTE_ELLE;
     public static final String ITEMS_DESC_ELLE = " " + PREFIX_ITEMS + VALID_ITEMS_ELLE;
     public static final String DAYS_DESC_ELLE = " " + PREFIX_DAYS + VALID_DAYS_ELLE;
+
+    public static final String VALID_ITEMS_FIONA = "coffee";
+    public static final String VALID_DAYS_FIONA = "2030-10-20";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
 

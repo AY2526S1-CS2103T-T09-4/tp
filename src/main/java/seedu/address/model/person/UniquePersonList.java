@@ -62,6 +62,8 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+            System.out.println(!target.isSamePerson(editedPerson));
+            System.out.println(contains(editedPerson));
             throw new DuplicatePersonException();
         }
 

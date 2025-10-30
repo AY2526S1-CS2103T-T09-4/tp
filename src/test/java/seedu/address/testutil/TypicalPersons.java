@@ -3,24 +3,29 @@ package seedu.address.testutil;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_DANIEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DAYS_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_DANIEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEMS_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DANIEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DANIEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POINTS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTS_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DANIEL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,8 +56,8 @@ public class TypicalPersons {
     // Staff
     public static final Staff CARL = new StaffBuilder().withName(VALID_NAME_CARL).withPhone(VALID_PHONE_CARL)
             .withEmail(VALID_EMAIL_CARL).withAddress(VALID_ADDRESS_CARL).withShifts(VALID_SHIFTS_CARL).build();
-    public static final Staff DANIEL = new StaffBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
+    public static final Staff DANIEL = new StaffBuilder().withName(VALID_NAME_DANIEL).withPhone(VALID_PHONE_DANIEL)
+            .withEmail(VALID_EMAIL_DANIEL).withAddress(VALID_ADDRESS_DANIEL).withTags(VALID_TAG_DANIEL).build();
 
     // Supplier
     public static final Supplier ELLE = new SupplierBuilder().withName(VALID_NAME_ELLE).withPhone(VALID_PHONE_ELLE)
