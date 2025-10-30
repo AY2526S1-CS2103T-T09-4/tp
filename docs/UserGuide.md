@@ -189,6 +189,7 @@ Explore the [Features](#features) section below for a full list of commands and 
 Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
+*Figure: Help message leading to User Guide.*
 
 **Format**: `help`
 
@@ -202,7 +203,8 @@ Shows a message explaining how to access the help page.
 
 Adds a customer to the address book.
 
-![add customer success]()
+![add customer success](images/addCustomer.png)
+*Figure: Result from executing `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`*
 
 **Format**: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…`
 
@@ -215,7 +217,7 @@ Adds a customer to the address book.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-- Name must not exceed 48.
+- Name must not exceed 48 characters.
 - Phone number must not be less than 3 digits.
 - Points must be a non-negative integer.
 </div>
@@ -227,7 +229,8 @@ Adds a customer to the address book.
 
 Adds a staff to the address book.
 
-![add staff success]()
+![add staff success](images/addStaff.png)
+*Figure: Result from executing `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`*
 
 Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...][t/TAG]…`
 
@@ -242,7 +245,7 @@ Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-  - Name must not exceed 48.
+  - Name must not exceed 48 characters.
   - Phone number must not be less than 3 digits.
   - Shifts date must be in the future.
   - Duplicate dates for shifts are not allowed.
@@ -256,7 +259,8 @@ Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/
 
 Adds a supplier to the address book.
 
-![add supplier success]()
+![add supplier success](images/addSupplier.png)
+*Figure: Result from executing: `add supplier n/Ben Lim p/98765432 e/benlim@example.com a/123 Clementi Ave 3 items/Flour, Eggs days/10/12/2025, 12/12/2025 notes/Halal supplier t/preferred`*
 
 **Format**: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [items/ITEM[, ITEM]...] [days/DAY[, DAY]...] [notes/NOTES] [t/TAG]...`
 
@@ -271,7 +275,7 @@ Adds a supplier to the address book.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-- Name must not exceed 48.
+- Name must not exceed 48 characters.
   - Phone number must not be less than 3 digits.
   - Days date must be in the future.
   - Duplicate dates for Days are not allowed.
@@ -285,7 +289,8 @@ Adds a supplier to the address book.
 
 Shows a list of all contacts in BrewBook, filtered by type.
 
-![list customer]()
+![list customer](images/listCustomer.png)
+*Figure: Result from executing `list customer` to show a list of all customers only*
 
 **Format**: `list TYPE`
 
@@ -308,7 +313,8 @@ Shows a list of all contacts in BrewBook, filtered by type.
 
 Edits an existing person in the address book.
 
-![edit customer success]()
+![edit customer success](images/editResult.png)
+*Figure: Result from executing `edit 1 n/Alex Yeoh` when the name was originally Alex Yeo*
 
 **Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [n/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]..] [items/ITEM[, ITEM]...] [days/DAY[, DAY]...] [t/TAG]…​`
 
@@ -334,7 +340,8 @@ Edits an existing person in the address book.
 
 Finds contacts whose fields contain any of the given keywords.
 
-![find success]()
+![find success](images/findResult.png)
+*Figure: Result from executing `find Alex`*
 
 **Format**: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -357,7 +364,8 @@ Finds contacts whose fields contain any of the given keywords.
 
 Deletes the specified person or people from the address book.
 
-![delete success]()
+![delete success](images/deleteSuccess.png)
+*Figure: Result from executing `delete 1, 2` to delete Alex and Bernice*
 
 **Format**: `delete INDEX[, INDEX, ...]`
 
@@ -376,7 +384,8 @@ Deletes the specified person or people from the address book.
 
 Sorts your contact list based on a specific field and optional order — for example, by name in ascending order.
 
-![sort success]()
+![sort success](images/sortSuccess.png)
+*Figure: Result from executing `sort name` such that contacts are now in alphabetical order*
 
 **Format**: `sort FIELD`
 
@@ -399,19 +408,21 @@ Sorts your contact list based on a specific field and optional order — for exa
 
 Displays all staff's shift and supplier's days.
 
-![summary]()
+![summary](images/summaryResult.png)
+*Figure: Result from executing `summary`*
 
 **Format**: `summary`
 
 **Example**:
-- `summary` shows a consolidated list of upcoming shift dates for all staff and delivery days for all suppliers.
+- `summary` shows a consolidated list of upcoming shift dates for all staff and delivery days and items for all suppliers.
 
 [Back to features](#features)
 
 ---
 ## Clearing all entries : `clear`
 
-![clear]()
+![clear](images/clearResult.png)
+*Figure: Result from executing `clear`, deleting all contacts*
 
 Clears all entries from the address book.
 
@@ -514,9 +525,8 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **If no fields are specified in Edit command**, it will return success but no changes will be made.
-4. **Once you select a contact card**, you will not be able to unselect it.
-5. **BrewBook does not accept names with special symbols** such as '/', if you require, you may spell out the name in full as we allow a maximum of 48 number of character for name.
+3. **Once you select a contact card**, you will not be able to unselect it.
+4. **BrewBook does not accept names with special symbols** such as '/', if you require, you may spell out the name in full as we allow a maximum of 48 number of character for name.
 
 [Back to Table of Contents](#table-of-contents)
 
