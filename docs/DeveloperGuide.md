@@ -589,3 +589,15 @@ testers are expected to do more *exploratory* testing.
       Expected: Generic error message highlighting the correct command format is shown.
 
    6. Other correct commands to try: add any combination of name and fields. The relevant persons will be shown.
+
+### Sorting list
+
+1. Sorting by name
+   1. Prerequisites: multiple persons in list.
+   2. Test case 1: `sort name o/asc` or `sort name o/desc`<br>
+      Expected: GUI displays sorted list. Success message displayed.
+   3. Test case 2: `sort name o/something` <br>
+      Expected: List does not change. Error details shown in status message.
+2. Sorting by phone, email, address and type
+   1. Test cases: `sort phone`, `sort email`, `sort address`, `sort type`: <br>
+      Expected: Similar to previous test case, `o/asc` and `o/desc` are optional.
