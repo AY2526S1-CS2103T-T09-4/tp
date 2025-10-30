@@ -51,7 +51,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below displays how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -150,7 +150,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 --------------------------------------------------------------------------------------------------------------------
 
-## **Planned Enhancements** 
+## **Planned Enhancements**
 
 Team size: 5
 1. Prevent GUI from launching off-screen: The application currently relies on external workarounds (deleting a JSON file) when its main GUI window launches off-screen after a multi-monitor configuration change. We plan to enhance the window initialization logic to detect if the saved window position is outside the boundaries of the currently available screen(s). If an off-screen position is detected, the application will automatically reset the window position to the center of the primary screen upon launch. This prevents the user from having to manually delete the preferences file.
@@ -388,11 +388,11 @@ For all use cases below, unless otherwise specified:
 **Guarantee**: Persons will be sorted by the given field.
 
 **MSS**
-1. User requests to sort persons by field. 
+1. User requests to sort persons by field.
 2. Brewbook sorts persons by the field and displays a success message. Use case ends.
 
 **Extensions**
-* 2a. Field provided is invalid. 
+* 2a. Field provided is invalid.
   * 2a. BrewBook displays an error message and informs the user of the possible fields. Use case ends.
 
 #### UC8 - Summarise all staffs' shift and suppliers' items and days
@@ -408,7 +408,7 @@ For all use cases below, unless otherwise specified:
 **Guarantee**: Clears all persons
 
 **MSS**
-1. User requests to clear all persons. 
+1. User requests to clear all persons.
 2. BrewBook clears all persons and displays a success message. Use case ends.
 
 #### UC10 - Exit the app
@@ -467,49 +467,92 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Multi-instance handling
+
+   1. Attempt to launch a second instance while one is already running.
+      Expected: multiple independent windows are shown safely.
+
+### List commands
+
+1. Displaying lists of person type
+   1. Prerequisites: Multiple persons of different types (customer, staff, supplier) in address book.
+   2. Test case: `list TYPE` (where type can be one of all, customer, staff and supplier)<br>
+      Expected: GUI should display filtered list of specified person type. Success message shown in status message. Running `list all` again will bring back the original list with all entries.
+   3. Some incorrect `list` commands to try: `list some`, `list 1`, `...`<br>
+      Expected: GUI should not change currently displayed list. Error details shown in status message.
+
+### Summary command
+
+1. Displaying summary with populated data
+   1. Prerequisites: App contains multiple staff entries with assigned shifts and multiple suppliers with assigned days.
+   2. Test case: `summary`<br>
+      Expected: Status message displays a neatly formatted summary showing each staff and their corresponding shifts and each supplier with their items and days. No data altered. Summary should work the same even on filtered lists.
+2. Displaying summary with no data
+   1. Prerequisites: empty dataset or contain only customers
+   2. Test case: `summary` <br>
+      Expected: Status message should display an empty summary.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list all` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First person is deleted from the list. Details of the deleted person shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+      Expected: Similar to previous, unless invalid x was provided which has its own error messages.
 
-1. _{ more test cases …​ }_
+2. Deleting multiple person
+   1. Prerequisites: Multiple persons in the list.
+   2. Test case: `delete 1, 2` <br>
+      Expected: First 2 contacts are deleted from the list. Details of the deleted contact shown in the status message. Updated list should shift remaining persons up.
+   3. Test case: `delete 1, 1` <br>
+      Expected: First contact is deleted. Duplicate indexes are allowed.
+   4. Other test cases to try: `delete 1, x`, `delete 1, 2, 3, ...` (where x is larger than list size)<br>
+      Expected: Invalid index for x and deletion of multiple persons in the list.
+
+3. Deleting from sub-list
+   1. Prerequisites: Multiple persons in the list. Filtered the list using `list x` or `find` command.
+   2. Test case: `delete 1` <br>
+      Expected: First contact in filtered list is deleted. Details of the deleted contact shown in the status. Running `list all` should bring back all unfiltered entries in original index of list.
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case for missing data file: Delete `data/brewbook.json` before launching the jar file. <br>
+      Expected: App starts successfully with default sample data populated. `brewbook.json` will not be created upon exit unless sample data was altered.
 
-1. _{ more test cases …​ }_
+   2. Test case for corrupted data file: Open `data/brewbook.json` and delete a few brackets to make the file an invalid json file. <br>
+      Expected: App starts successfully with an empty address book (no contacts). No crash or unhandled exception. A new valid `brewbook.json` file is generated on exit if there are changes to person list via `add` commands.
+
+2. Saving after normal operations
+   1. Prerequisites: add or delete entries in address book after launching.
+   2. Test case: Exit the app normally (via close button or menu) <br>
+      Expected: A `brewbook.json` file is created or updated under `/data`. All updated entries should appear when the app is launched again.
 
 ### Adding a person
 
-1. Adding a customer. 
+1. Adding a customer.
    1. Test case 1: `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
       Expected: New customer added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
    2. Test case 2: `add customer n/John & Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
       Expected: No customer is added. Name-specific error message highlighting the correct name format is shown.
    3. Test case 3: `add customer n/John Doe e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
       Expected: No customer is added as phone number is missing. Generic error message highlighting the correct command format is shown.
-   4. Other incorrect add customer commands to try: 
+   4. Other incorrect add customer commands to try:
       1. Name longer than 48 characters. Shows name-specific error message.
       2. Email doesn't follow the specified email format (e.g. does not include an `@`). Shows email-specific error message.
       3. Phone number is shorter than 3 characters or is not purely numeric.
       2. Notes longer than 200 characters. Shows notes-specific error message.
       3. Other missing compulsory tags (i.e. name, phone, email, address)
-2. Adding a staff. 
+2. Adding a staff.
     1. Test case 1: `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
        Expected: New staff added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
     2. Test case 2: `add staff n/Ah Hock p/98765432 e/ahhockexample.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
@@ -521,7 +564,7 @@ testers are expected to do more *exploratory* testing.
         2. Phone number is shorter than 3 characters or is not purely numeric.
         3. Notes longer than 200 characters. Shows notes-specific error message.
         4. Shifts in an incorrect date format (i.e. not `d/M/yyyy`). Shows shift-specific error message.
-        5. Other missing compulsory tags (i.e. name, phone, email, address) 
+        5. Other missing compulsory tags (i.e. name, phone, email, address)
 3. Adding a supplier.
     1. Test case 1: `add supplier n/Ben Lim p/98765432 e/benlim@example.com a/123 Clementi Ave 3 items/Flour, Eggs days/10/12/2025, 12/12/2025 notes/Halal supplier t/preferred`<br>
        Expected: New supplier added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
@@ -535,11 +578,11 @@ testers are expected to do more *exploratory* testing.
         3. Email doesn't follow the specified email format (e.g. does not include an `@`). Shows email-specific error message.
         4. Notes longer than 200 characters. Shows notes-specific error message.
         5. Days in an incorrect date format (i.e. not `d/M/yyyy`). Shows shift-specific error message.
-        6. Other missing compulsory tags (i.e. name, phone, email, address) 
+        6. Other missing compulsory tags (i.e. name, phone, email, address)
 
 ### Finding person(s) by keyword(s)
 
-1. Finding by keywords. 
+1. Finding by keywords.
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Works similarly for `list (customer | staff | supplier)`
 
@@ -559,3 +602,15 @@ testers are expected to do more *exploratory* testing.
       Expected: Generic error message highlighting the correct command format is shown.
 
    6. Other correct commands to try: add any combination of name and fields. The relevant persons will be shown.
+
+### Sorting list
+
+1. Sorting by name
+   1. Prerequisites: multiple persons in list.
+   2. Test case 1: `sort name o/asc` or `sort name o/desc`<br>
+      Expected: GUI displays sorted list. Success message displayed.
+   3. Test case 2: `sort name o/something` <br>
+      Expected: List does not change. Error details shown in status message.
+2. Sorting by phone, email, address and type
+   1. Test cases: `sort phone`, `sort email`, `sort address`, `sort type`: <br>
+      Expected: Similar to previous test case, `o/asc` and `o/desc` are optional.

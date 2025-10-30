@@ -14,8 +14,8 @@ title: BrewBook
 * If you are interested about developing BrewBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
-**Features at a Glance:**  
-* Store and Organise **Customer**, **Staff** and **Supplier** contacts 
+**Features at a Glance:**
+* Store and Organise **Customer**, **Staff** and **Supplier** contacts
 * Quick CLI commands for **fast operations**
 * Sleek and minimalist GUI for **visual management**
 
