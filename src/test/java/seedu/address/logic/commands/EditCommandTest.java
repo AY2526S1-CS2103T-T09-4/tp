@@ -170,7 +170,7 @@ public class EditCommandTest {
 
         // Days included but not changed
         EditCommand.EditPersonDescriptor daysDescriptor = new EditPersonDescriptorBuilder()
-                .withDays(new ArrayList<>(Collections.singleton("2030-10-10"))).build();
+                .withDays(new ArrayList<>(Collections.singleton("10/10/2030"))).build();
         EditCommand daysEditCommand = new EditCommand(indexFifthPerson, daysDescriptor);
         assertCommandFailure(daysEditCommand, model, MESSAGE_FIELDS_NOT_EDITED);
 
@@ -393,9 +393,9 @@ public class EditCommandTest {
 
         List<String> listShift = new ArrayList<>();
         listShift.add(VALID_SHIFTS_CARL);
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-                .withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_AMY)
-                .withNote(VALID_NOTE_AMY).withShift(listShift).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_AMY).withNote(VALID_NOTE_AMY).withShift(listShift).build();
         EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
@@ -412,7 +412,7 @@ public class EditCommandTest {
      * field is provided but not changed.
      */
     @Test
-    public void execute_SupplierItemsNotChanged_success() throws ParseException {
+    public void execute_supplierItemsNotChanged_success() throws ParseException {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
 
         Index indexFirstPerson = Index.fromOneBased(1);
@@ -444,7 +444,7 @@ public class EditCommandTest {
      * Day field is provided but not changed.
      */
     @Test
-    public void execute_SupplierDaysNotChanged_success() throws ParseException {
+    public void execute_supplierDaysNotChanged_success() throws ParseException {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
 
         Index indexFirstPerson = Index.fromOneBased(1);
@@ -459,9 +459,9 @@ public class EditCommandTest {
         listItems.add(VALID_ITEMS_ELLE);
         List<String> listDays = new ArrayList<>();
         listDays.add(VALID_DAYS_ELLE);
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-                .withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_AMY)
-                .withNote(VALID_NOTE_AMY).withItems(listItems).withDays(listDays).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_AMY).withNote(VALID_NOTE_AMY).withItems(listItems).withDays(listDays).build();
         EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
