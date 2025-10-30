@@ -272,7 +272,7 @@ Adds a supplier to the address book.
 - `add supplier n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 items/Bread days/9/12/2025` adds a supplier named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Prison`, supplying *Bread* on `9/12/2025`, and tagged as `friend`.
 
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
-- Days or items are not needed if you are unsure what and when your supplier will resupply!    
+- Days or items are not needed if you are unsure what and when your supplier will resupply!
 - Days are automatically deleted when the date has passed so you don't need to edit it!
 </div>
 

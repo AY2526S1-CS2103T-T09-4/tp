@@ -22,7 +22,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AllOfPersonPredicates;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -80,8 +79,15 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .collect(Collectors.toList());
 
         // Common to all Person
-        addIfPresent(map, PREFIX_NAME, toKeywords,
-                kws -> (Predicate<Person>) new NameContainsKeywordsPredicate(kws), perField);
+        map.getAllValues(PREFIX_NAME).stream()
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .reduce((a, b) -> a + " " + b)
+                .ifPresent(rawPhrase -> {
+                    String keyword = norm(rawPhrase);
+                    perField.add((Person p) ->
+                            norm(p.getName().fullName).contains(keyword));
+                });
         addIfPresent(map, PREFIX_PHONE, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> p.getPhone().value, kws, false), perField);
         addIfPresent(map, PREFIX_EMAIL, toKeywords,
@@ -140,17 +146,14 @@ public class FindCommandParser implements Parser<FindCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
         }
+        String preamble = map.getPreamble().trim();
+        if (!preamble.isEmpty()) {
+            String needle = norm(preamble);
+            perField.add((Person p) -> norm(p.getName().fullName).contains(needle));
+        }
 
         if (perField.isEmpty()) {
-            String preamble = map.getPreamble().trim();
-            if (preamble.isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-            List<String> kws = toKeywords.apply(preamble);
-            if (kws.isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-            perField.add(new NameContainsKeywordsPredicate(kws));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         return new FindCommand(new AllOfPersonPredicates(perField));
