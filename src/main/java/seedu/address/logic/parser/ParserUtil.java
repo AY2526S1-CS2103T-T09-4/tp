@@ -214,7 +214,7 @@ public class ParserUtil {
         requireNonNull(daysStrings);
         List<Days> days = new ArrayList<>();
         if (daysStrings.isEmpty()) {
-            throw new ParseException(Days.MESSAGE_COMPULSORY);
+            return days;
         }
 
         String raw = daysStrings.get(0);
@@ -224,16 +224,16 @@ public class ParserUtil {
                 continue;
             }
             try {
-                LocalDate date = LocalDate.parse(trimmed);
+                LocalDate date = DateParser.parseDate(trimmed);
 
                 if (date.isBefore(LocalDate.now())) {
-                    throw new ParseException(Days.MESSAGE_OLD_CONSTRAINTS + date);
+                    throw new ParseException(Days.MESSAGE_OLD_CONSTRAINTS + date.format(DateParser.FORMATTER));
                 }
 
                 Days newDay = new Days(date);
 
                 if (days.contains(newDay)) {
-                    throw new ParseException(Days.MESSAGE_DUPLICATE_CONSTRAINTS + date);
+                    throw new ParseException(Days.MESSAGE_DUPLICATE_CONSTRAINTS + date.format(DateParser.FORMATTER));
                 }
 
                 days.add(new Days(date));
@@ -249,8 +249,8 @@ public class ParserUtil {
      */
     public static List<Items> parseItems(List<String> itemStrings) throws ParseException {
         List<Items> items = new ArrayList<>();
-        if (itemStrings == null || itemStrings.isEmpty()) {
-            throw new ParseException(Items.MESSAGE_COMPULSORY);
+        if (itemStrings.isEmpty()) {
+            return items;
         }
 
         String raw = itemStrings.get(0);
@@ -268,9 +268,6 @@ public class ParserUtil {
             } catch (IllegalArgumentException e) {
                 throw new ParseException(Items.MESSAGE_CONSTRAINTS);
             }
-        }
-        if (items.isEmpty()) {
-            throw new ParseException(Items.MESSAGE_COMPULSORY);
         }
         return items;
     }

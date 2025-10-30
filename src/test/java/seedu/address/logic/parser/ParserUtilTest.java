@@ -318,7 +318,7 @@ public class ParserUtilTest {
     @Test
     public void parseDays_invalidFormat_throwsParseException() {
         assertThrows(ParseException.class, () ->
-                ParserUtil.parseDays(List.of("2025/10/30")));
+                    ParserUtil.parseDays(List.of("2025/10/30")));
     }
 
     @Test

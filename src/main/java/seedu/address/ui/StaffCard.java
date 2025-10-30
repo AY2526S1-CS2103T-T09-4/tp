@@ -17,6 +17,8 @@ public class StaffCard extends PersonCard {
 
     @FXML
     private VBox shiftsBox; // container for the mini list of shifts
+    @FXML
+    private Label shiftsHeader;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -29,13 +31,13 @@ public class StaffCard extends PersonCard {
     }
 
     private void updateShifts(Person person) {
-        shiftsBox.getChildren().clear();
-
         List<String> shifts = person.getShifts().stream()
                 .map(Object::toString)
                 .sorted()
                 .limit(MAX_SLOTS)
                 .toList();
+
+        shiftsHeader.setText("Upcoming shifts:");
 
         // Add actual shifts
         for (String s : shifts) {
@@ -53,8 +55,5 @@ public class StaffCard extends PersonCard {
         }
 
     }
-
-
-
 }
 

@@ -34,7 +34,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_NOTE = "x".repeat(201);
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_SHIFTS = "2025-10-10";
-    private static final String INVALID_DAYS = "10/1/2025";
+    private static final String INVALID_DAYS = "2025-10-10";
     private static final String INVALID_ITEMS = "@@@";
     private static final Integer INVALID_POINTS = -1;
 
@@ -52,7 +52,7 @@ public class JsonAdaptedPersonTest {
             new JsonAdaptedShift(new Shift(LocalDate.parse("2030-10-10")))));
     private static final List<JsonAdaptedDays> EMPTY_DAYS = new ArrayList<>();
     private static final List<JsonAdaptedDays> VALID_DAYS = new ArrayList<>(List.of(
-            new JsonAdaptedDays(new Days(LocalDate.parse("2025-10-10")))));
+            new JsonAdaptedDays(new Days(LocalDate.parse("2030-10-10")))));
     private static final List<JsonAdaptedItems> EMPTY_ITEMS = new ArrayList<>();
     private static final List<JsonAdaptedItems> VALID_ITEMS = new ArrayList<>(List.of(
             new JsonAdaptedItems("Flour"), new JsonAdaptedItems("Eggs")));
@@ -205,7 +205,7 @@ public class JsonAdaptedPersonTest {
         Person modelPerson = person.toModelType();
 
         assertEquals(VALID_DAYS.size(), modelPerson.getDays().size());
-        assertEquals("2025-10-10", modelPerson.getDays().get(0).toString());
+        assertEquals("10/10/2030", modelPerson.getDays().get(0).toString());
         assertEquals(List.of("Flour", "Eggs"), modelPerson.getItems().stream().map(Object::toString).toList());
     }
 
@@ -233,7 +233,7 @@ public class JsonAdaptedPersonTest {
                 VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAGS, EMPTY_SHIFTS, VALID_ITEMS, invalidDays, VALID_NOTE, null);
 
-        String expectedMessage = Days.MESSAGE_FORMAT_CONSTRAINTS;
+        String expectedMessage = DateParser.MESSAGE_FORMAT_CONSTRAINT;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

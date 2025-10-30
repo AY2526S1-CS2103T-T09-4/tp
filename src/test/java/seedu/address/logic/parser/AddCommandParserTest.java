@@ -4,11 +4,19 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.DAYS_DESC_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAYS_DUPLICATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAYS_FORMAT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAYS_PAST_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITEMS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITEMS_DUPLICATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_LENGTH_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_SYMBOL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NOTES_DESC;
@@ -18,14 +26,18 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_SHIFTS_DUPLIC
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SHIFTS_FORMAT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SHIFTS_PAST_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.ITEMS_DESC_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.POINTS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.SHIFTS_DESC_CARL;
@@ -33,24 +45,37 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_AMY_2;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CARL_2;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_ELLE_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DAYS_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEMS_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ELLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POINTS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTS_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARL_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ELLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ELLE_2;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POINTS;
@@ -65,6 +90,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCustomerCommand;
 import seedu.address.logic.commands.AddStaffCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -74,9 +100,13 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.model.person.staff.Staff;
+import seedu.address.model.person.supplier.Days;
+import seedu.address.model.person.supplier.Items;
+import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.CustomerBuilder;
 import seedu.address.testutil.StaffBuilder;
+import seedu.address.testutil.SupplierBuilder;
 
 public class AddCommandParserTest {
     private static final String CUSTOMER_COMMAND = Person.ContactType.CUSTOMER.lowerCase() + " ";
@@ -92,7 +122,7 @@ public class AddCommandParserTest {
         Customer expectedCustomer = new CustomerBuilder(AMY).build();
 
         assertParseSuccess(parser, CUSTOMER_COMMAND + PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NOTE_DESC_AMY + POINTS_DESC_AMY,
+                        + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NOTE_DESC_AMY + POINTS_DESC_AMY,
                 new AddCustomerCommand(expectedCustomer));
 
 
@@ -464,6 +494,187 @@ public class AddCommandParserTest {
                 STAFF_COMMAND + NAME_DESC_CARL + PHONE_DESC_CARL + EMAIL_DESC_CARL
                         + ADDRESS_DESC_CARL + INVALID_SHIFTS_DUPLICATE_DESC,
                 Shift.MESSAGE_DUPLICATE_CONSTRAINTS + "10/10/2030");
+    }
+
+    // test cases for Supplier
+    @Test
+    public void parse_allFieldsPresentSupplier_success() {
+        Supplier expectedSupplier = new SupplierBuilder().withName(VALID_NAME_ELLE)
+                .withPhone(VALID_PHONE_ELLE)
+                .withEmail(VALID_EMAIL_ELLE)
+                .withAddress(VALID_ADDRESS_ELLE)
+                .withItems(VALID_ITEMS_ELLE)
+                .withDays(VALID_DAYS_ELLE)
+                .withNote(VALID_NOTE_ELLE)
+                .withTags(VALID_TAG_ELLE)
+                .build();
+
+        assertParseSuccess(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + DAYS_DESC_ELLE + NOTE_DESC_ELLE + TAG_DESC_ELLE,
+                new AddSupplierCommand(expectedSupplier));
+
+        // multiple tags
+        Supplier expectedSupplierMultipleTags = new SupplierBuilder().withName(VALID_NAME_ELLE)
+                .withPhone(VALID_PHONE_ELLE)
+                .withEmail(VALID_EMAIL_ELLE)
+                .withAddress(VALID_ADDRESS_ELLE)
+                .withItems(VALID_ITEMS_ELLE)
+                .withDays(VALID_DAYS_ELLE)
+                .withNote(VALID_NOTE_ELLE)
+                .withTags(VALID_TAG_ELLE, VALID_TAG_ELLE_2)
+                .build();
+
+        assertParseSuccess(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + DAYS_DESC_ELLE + NOTE_DESC_ELLE
+                        + TAG_DESC_ELLE + TAG_DESC_ELLE_2,
+                new AddSupplierCommand(expectedSupplierMultipleTags));
+    }
+
+    @Test
+    public void parse_repeatedNonTagValueSupplier_failure() {
+        String validSupplierString = SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE
+                + EMAIL_DESC_ELLE + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + DAYS_DESC_ELLE;
+
+        // multiple names
+        assertParseFailure(parser, SUPPLIER_COMMAND + NAME_DESC_ELLE + validSupplierString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+
+        // multiple phones
+        assertParseFailure(parser, SUPPLIER_COMMAND + PHONE_DESC_ELLE + validSupplierString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
+
+        // multiple emails
+        assertParseFailure(parser, SUPPLIER_COMMAND + EMAIL_DESC_ELLE + validSupplierString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
+
+        // multiple addresses
+        assertParseFailure(parser, SUPPLIER_COMMAND + ADDRESS_DESC_ELLE + validSupplierString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+
+        // multiple items
+        assertParseFailure(parser, SUPPLIER_COMMAND + ITEMS_DESC_ELLE + validSupplierString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ITEMS));
+
+        // multiple days
+        assertParseFailure(parser, SUPPLIER_COMMAND + DAYS_DESC_ELLE + validSupplierString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DAYS));
+    }
+
+    @Test
+    public void parse_optionalFieldsMissingSupplier_success() {
+        // no tags, no note, no items, no days.
+        Supplier expectedSupplier = new SupplierBuilder().withName(VALID_NAME_ELLE)
+                .withPhone(VALID_PHONE_ELLE)
+                .withEmail(VALID_EMAIL_ELLE)
+                .withAddress(VALID_ADDRESS_ELLE)
+                .withTags()
+                .withNote("")
+                .build();
+
+        assertParseSuccess(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE,
+                new AddSupplierCommand(expectedSupplier));
+    }
+
+    @Test
+    public void parse_compulsoryFieldMissingSupplier_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
+
+        // missing name prefix
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + VALID_NAME_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + DAYS_DESC_ELLE,
+                expectedMessage);
+
+        // missing phone prefix
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + VALID_PHONE_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + DAYS_DESC_ELLE,
+                expectedMessage);
+
+        // missing email prefix
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + VALID_EMAIL_ELLE
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + DAYS_DESC_ELLE,
+                expectedMessage);
+
+        // missing address prefix
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + VALID_ADDRESS_AMY + ITEMS_DESC_ELLE + DAYS_DESC_ELLE,
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidValueSupplier_failure() {
+        // invalid name
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + INVALID_NAME_LENGTH_DESC + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + DAYS_DESC_ELLE,
+                Name.MESSAGE_CONSTRAINTS);
+
+        // invalid phone
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + INVALID_PHONE_DESC + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + DAYS_DESC_ELLE,
+                Phone.MESSAGE_CONSTRAINTS);
+
+        // invalid email
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + INVALID_EMAIL_DESC
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + DAYS_DESC_ELLE,
+                Email.MESSAGE_CONSTRAINTS);
+
+        // invalid address
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + INVALID_ADDRESS_DESC + ITEMS_DESC_ELLE + DAYS_DESC_ELLE,
+                Address.MESSAGE_CONSTRAINTS);
+
+        // invalid items
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + INVALID_ITEMS_DESC + DAYS_DESC_ELLE,
+                Items.MESSAGE_CONSTRAINTS);
+
+        //invalid days
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + INVALID_DAYS_FORMAT_DESC,
+                DateParser.MESSAGE_FORMAT_CONSTRAINT);
+
+        // invalid note
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + DAYS_DESC_ELLE + INVALID_NOTES_DESC,
+                Note.MESSAGE_CONSTRAINTS);
+
+        // invalid tag
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + DAYS_DESC_ELLE + INVALID_TAG_DESC,
+                Tag.MESSAGE_CONSTRAINTS);
+
+        // invalid days as days is in past
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + INVALID_DAYS_PAST_DESC,
+                Days.MESSAGE_OLD_CONSTRAINTS + "10/10/2024");
+
+        //invalid days as days is duplicated
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + ITEMS_DESC_ELLE + INVALID_DAYS_DUPLICATE_DESC,
+                Days.MESSAGE_DUPLICATE_CONSTRAINTS + "10/10/2030");
+
+        //invalid items as items is duplicated
+        assertParseFailure(parser,
+                SUPPLIER_COMMAND + NAME_DESC_ELLE + PHONE_DESC_ELLE + EMAIL_DESC_ELLE
+                        + ADDRESS_DESC_ELLE + INVALID_ITEMS_DUPLICATE_DESC + DAYS_DESC_ELLE,
+                Items.MESSAGE_DUPLICATE_CONSTRAINTS + "milk");
     }
 
 }

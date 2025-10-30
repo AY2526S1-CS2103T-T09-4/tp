@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.logic.commands.CommandTestUtil;
@@ -8,7 +9,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.supplier.Days;
 import seedu.address.model.person.supplier.Items;
 import seedu.address.model.person.supplier.Supplier;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Supplier objects.
@@ -45,20 +45,19 @@ public class SupplierBuilder extends PersonBuilder<Supplier> {
     @Override
     public SupplierBuilder withDays(String ... days) {
         try {
-            this.days = SampleDataUtil.getDaysList();
+            this.days = ParserUtil.parseDays(Arrays.asList(days));
         } catch (ParseException e) {
-            // Fallthrough
+            throw new IllegalArgumentException("Invalid days format in SupplierBuilder", e);
         }
-
         return this;
     }
 
     @Override
     public SupplierBuilder withItems(String ... items) {
         try {
-            this.items = SampleDataUtil.getItemsList();
+            this.items = ParserUtil.parseItems(Arrays.asList(items));
         } catch (ParseException e) {
-            // Fallthrough
+            throw new IllegalArgumentException("Invalid items format in SupplierBuilder", e);
         }
 
         return this;

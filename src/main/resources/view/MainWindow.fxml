@@ -24,7 +24,7 @@
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox style="-fx-background-color: #ffefcb;">
+      <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -50,7 +50,7 @@
                 </padding>
               </StackPane>
 
-              <StackPane fx:id="resultDisplayPlaceholder"  maxHeight="500" minHeight="100" prefHeight="100" VBox.vgrow="ALWAYS">
+              <StackPane fx:id="resultDisplayPlaceholder"  maxHeight="300" minHeight="300" prefHeight="300" VBox.vgrow="ALWAYS">
                      <padding>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </padding>
