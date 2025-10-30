@@ -261,7 +261,6 @@ public class ParserUtil {
             }
             try {
                 Items newItem = new Items(trimmed);
-
                 if (items.contains(newItem)) {
                     throw new ParseException(Items.MESSAGE_DUPLICATE_CONSTRAINTS + trimmed);
                 }

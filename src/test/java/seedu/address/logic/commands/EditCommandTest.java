@@ -5,12 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_FIELD_ENTERED;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POINTS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_FIELDS_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POINTS;
@@ -20,6 +26,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -101,6 +109,68 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_noFieldsEditedFailure() throws ParseException {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        Index indexFirstPerson = Index.fromOneBased(1);
+        Index indexSecondPerson = Index.fromOneBased(2);
+        Index indexThirdPerson = Index.fromOneBased(3);
+        Index indexFifthPerson = Index.fromOneBased(5);
+
+        // Name included but not changed
+        EditPersonDescriptor nameDescriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_ALICE).build();
+        EditCommand nameEditCommand = new EditCommand(indexFirstPerson, nameDescriptor);
+        assertCommandFailure(nameEditCommand, model, MESSAGE_FIELDS_NOT_EDITED);
+
+        // Phone included but not changed
+        EditPersonDescriptor phoneDescriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_ALICE).build();
+        EditCommand phoneEditCommand = new EditCommand(indexFirstPerson, phoneDescriptor);
+        assertCommandFailure(phoneEditCommand, model, MESSAGE_FIELDS_NOT_EDITED);
+
+        // Address included but not changed
+        EditCommand.EditPersonDescriptor addressDescriptor = new EditPersonDescriptorBuilder()
+                .withAddress(VALID_ADDRESS_ALICE).build();
+        EditCommand addressEditCommand = new EditCommand(indexFirstPerson, addressDescriptor);
+        assertCommandFailure(addressEditCommand, model, MESSAGE_FIELDS_NOT_EDITED);
+
+        // Email included but not changed
+        EditCommand.EditPersonDescriptor emailDescriptor = new EditPersonDescriptorBuilder()
+                .withEmail(VALID_EMAIL_ALICE).build();
+        EditCommand emailEditCommand = new EditCommand(indexFirstPerson, emailDescriptor);
+        assertCommandFailure(emailEditCommand, model, MESSAGE_FIELDS_NOT_EDITED);
+
+        // Note included but not changed
+        EditCommand.EditPersonDescriptor noteDescriptor = new EditPersonDescriptorBuilder()
+                .withNote("allergic to nuts").build();
+        EditCommand noteEditCommand = new EditCommand(indexSecondPerson, noteDescriptor);
+        assertCommandFailure(noteEditCommand, model, MESSAGE_FIELDS_NOT_EDITED);
+
+        // Points included but not changed
+        EditCommand.EditPersonDescriptor pointsDescriptor = new EditPersonDescriptorBuilder()
+                .withPoints(VALID_POINTS_AMY).build();
+        EditCommand pointsEditCommand = new EditCommand(indexFirstPerson, pointsDescriptor);
+        assertCommandFailure(pointsEditCommand, model, MESSAGE_FIELDS_NOT_EDITED);
+
+        // Shifts included but not changed
+        EditCommand.EditPersonDescriptor shiftsDescriptor = new EditPersonDescriptorBuilder()
+                .withShift(new ArrayList<>(Collections.singleton("10/10/2030"))).build();
+        EditCommand shiftsEditCommand = new EditCommand(indexThirdPerson, shiftsDescriptor);
+        assertCommandFailure(shiftsEditCommand, model, MESSAGE_FIELDS_NOT_EDITED);
+
+        // Days included but not changed
+        EditCommand.EditPersonDescriptor daysDescriptor = new EditPersonDescriptorBuilder()
+                .withDays(new ArrayList<>(Collections.singleton("2030-10-10"))).build();
+        EditCommand daysEditCommand = new EditCommand(indexFifthPerson, daysDescriptor);
+        assertCommandFailure(daysEditCommand, model, MESSAGE_FIELDS_NOT_EDITED);
+
+        // Items included but not changed
+        List<String> itemList = Arrays.asList("egg");
+        EditCommand.EditPersonDescriptor itemsDescriptor = new EditPersonDescriptorBuilder().withItems(itemList)
+                .build();
+        EditCommand itemsEditCommand = new EditCommand(indexFifthPerson, itemsDescriptor);
+        assertCommandFailure(itemsEditCommand, model, MESSAGE_FIELDS_NOT_EDITED);
     }
 
     @Test

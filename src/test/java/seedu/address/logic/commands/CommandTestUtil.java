@@ -59,7 +59,6 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_ALICE = " " + PREFIX_EMAIL + VALID_EMAIL_ALICE;
     public static final String ADDRESS_DESC_ALICE = " " + PREFIX_ADDRESS + VALID_ADDRESS_ALICE;
 
-
     public static final String INVALID_NAME_SYMBOL_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_NAME_LENGTH_DESC = " " + PREFIX_NAME + "x".repeat(38);
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -104,7 +103,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_ELLE = "cheapest";
     public static final String VALID_TAG_ELLE_2 = "fastDelivery";
     public static final String VALID_NOTE_ELLE = "one dollar per gallon";
-    public static final String VALID_ITEMS_ELLE = "egg, milk";
+    public static final String VALID_ITEMS_ELLE = "egg";
     public static final String VALID_DAYS_ELLE = "2030-10-10";
     public static final String NAME_DESC_ELLE = " " + PREFIX_NAME + VALID_NAME_ELLE;
     public static final String PHONE_DESC_ELLE = " " + PREFIX_PHONE + VALID_PHONE_ELLE;
