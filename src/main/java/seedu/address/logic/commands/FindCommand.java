@@ -31,7 +31,6 @@ public class FindCommand extends Command {
             + "Without prefixes, searches by name.\n\n"
             + "**Search Rules:**\n"
             + "    Case-Insensitive: e.g., 'hans' will match 'Hans'.\n"
-            + "    Full Word Match: Only full words will be matched. e.g., 'Han' will NOT match 'Hans'.\n"
             + "    Field Search: Only the field specified by the prefix is searched.\n"
             + "    Keyword Order: The order of keywords does NOT matter. e.g., 'Hans Bo' will match 'Bo Hans'.\n"
             + "    Multiple Keywords (Per Field): Persons matching at least ONE keyword in a field will be returned "
@@ -50,7 +49,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_DAYS + "DAY_KEYWORD [MORE_KEYWORDS]]\n\n"
             + "**Examples:**\n"
             + COMMAND_WORD + " John Doe\n"
-            + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_SHIFTS + "2025-10-10\n"
+            + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_SHIFTS + "2025/10/10\n"
             + COMMAND_WORD + " " + PREFIX_EMAIL + "example.com " + PREFIX_TAG + "friend";
 
     private final Predicate<Person> predicate;
