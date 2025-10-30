@@ -21,6 +21,7 @@ Optimized for use via a Command Line Interface (CLI) while still having the bene
 [FAQ](#faq)<br>
 [Known issues / Troubleshooting](#known-issues--troubleshooting)<br>
 [Command Summary](#command-summary) <br>
+
 ---
 # How to use this guide
 This User Guide is designed to help you get the most out of BrewBook. You don't need to read it cover-to-cover,
