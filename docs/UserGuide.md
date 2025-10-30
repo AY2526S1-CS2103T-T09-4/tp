@@ -71,7 +71,7 @@ Let’s check whether it’s already installed on your computer.
 
 :point_right: **To install Java 17:**
 - **On Windows**
-    1. Visit the official Java 17 download page [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html). 
+    1. Visit the official Java 17 download page [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
     2. Download the **Windows x64 Installer (JDK 17)** and follow the instructions on screen.
     3. When done, repeat the steps above to confirm it says **version 17**.
 
@@ -130,7 +130,7 @@ Here are a few examples you can try:
 | Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                     | Adds a new customer                                   |
 | Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/4/12/2026 notes/can only do weekdays t/partTime`                | Adds a new staff contact with a shift date            |
 | Add a supplier | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/10/10/2026 notes/Halal supplier t/preferred` | Adds a supplier contact                               |
-| Edit a contact | `edit 3 n\John Doe`                                                                                                                           | Edits any field of a contact                          
+| Edit a contact | `edit 3 n\John Doe`                                                                                                                           | Edits any field of a contact                          |
 | Delete a contact | `delete 2, 3`                                                                                                                                 | Removes the 2nd and 3rd contact from the current list |
 | Exit the app | `exit`                                                                                                                                        | Closes BrewBook safely                                |
 
@@ -157,7 +157,7 @@ Explore the [Features](#features) section below for a full list of commands and 
 [Summarising important dates](#summarising-important-dates--summary)<br>
 [Clearing all contacts](#clearing-all-entries--clear)<br>
 [Exiting the program](#exiting-the-program--exit)<br>
-[Saving the data](#saving-the-data)<br> 
+[Saving the data](#saving-the-data)<br>
 [Editing the data file](#editing-the-data-file)
 
 <div markdown="block" class="alert alert-info">
@@ -241,7 +241,7 @@ Adds a staff to the address book.
 - `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/13/11/2026, 12/11/2026 notes/only weekends` adds a staff member named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Rd`, tags `friend` and `intern`, shifts on `13/11/2026` and `12/11/2026`, and notes `only weekends`.
 
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
-* Shifts are not needed if you are unsure when your staff is available to start!    
+* Shifts are not needed if you are unsure when your staff is available to start!
 * Shifts are automatically deleted when the date has passed so you don't need to edit it!
 </div>
 
@@ -271,7 +271,7 @@ Adds a supplier to the address book.
 - `add supplier n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 items/Bread days/9/12/2025` adds a supplier named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Prison`, supplying *Bread* on `9/12/2025`, and tagged as `friend`.
 
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
-- Days or items are not needed if you are unsure what and when your supplier will resupply!    
+- Days or items are not needed if you are unsure what and when your supplier will resupply!
 - Days are automatically deleted when the date has passed so you don't need to edit it!
 </div>
 
@@ -449,7 +449,7 @@ Exits the program.
 
 **Format**: `exit`
 
-**Example**: 
+**Example**:
 - `exit` closes the application window and terminates the program.
 
 [Back to Features](#features)
@@ -484,7 +484,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 
 
 **Q**: What happens if I accidentally run `clear`?<br>
-**A**: All data will be permanently deleted. There is no undo.  
+**A**: All data will be permanently deleted. There is no undo.
 **To prevent data loss:**
 - Before using `clear`, locate your data file and make a backup copy.
 - Store the backup in a safe folder or cloud drive.
@@ -495,7 +495,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 
 
 **Q**: Can I undo a delete command?<br>
-**A**: No. Once an entry is deleted using `delete`, it cannot be recovered.  
+**A**: No. Once an entry is deleted using `delete`, it cannot be recovered.
 **To avoid accidental deletes:**
 - Use `list` first to confirm the index.
 - Back up your data file regularly.
@@ -513,7 +513,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 
 
 **Q**: What date format should I use?<br>
-**A**: Use `d/M/yyyy` for all date inputs.  
+**A**: Use `d/M/yyyy` for all date inputs.
 **Examples:**
 - `shifts/11/12/2025`
 - `days/9/12/2025, 16/12/2025`
