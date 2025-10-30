@@ -24,10 +24,13 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     private static boolean wordPrefixMatchIgnoreCase(String haystack, String needle) {
-        if (needle == null) return false;
+        if (needle == null) {
+            return false;
+        }
         String q = needle.trim();
-        if (q.length() < MIN_PREFIX_LEN) return false; // avoid super-broad 1-char matches
-        // \b = word boundary; we only require the *prefix* after the boundary
+        if (q.length() < MIN_PREFIX_LEN) {
+            return false;
+        }
         Pattern p = Pattern.compile("(?i)\\b" + Pattern.quote(q));
         return p.matcher(haystack).find();
     }
