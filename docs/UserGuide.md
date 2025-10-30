@@ -240,7 +240,7 @@ Adds a staff to the address book.
 - `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/11/11/2026 notes/only weekends` adds a staff member named *John Doe* with phone `98765432`, email `johnd@example.com`, address `John street, block 123, #01-01`, a single shift on `11/11/2026`, and notes `only weekends`.
 - `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/13/11/2026, 12/11/2026 notes/only weekends` adds a staff member named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Rd`, tags `friend` and `intern`, shifts on `13/11/2026` and `12/11/2026`, and notes `only weekends`.
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+<div markdown="1" class="alert alert-success">:bulb: **Tips:**
 * Shifts are not needed if you are unsure when your staff is available to start!    
 * Shifts are automatically deleted when the date has passed so you don't need to edit it!
 </div>
@@ -270,7 +270,7 @@ Adds a supplier to the address book.
 - `add supplier n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 items/Coffee days/11/12/2025 notes/mainSupplier` adds a supplier named *John Doe* with phone `98765432`, email `johnd@example.com`, address `John street, block 123, #01-01`, supplying *Coffee* on `11/12/2025`, with notes `mainSupplier`.
 - `add supplier n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 items/Bread days/9/12/2025` adds a supplier named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Prison`, supplying *Bread* on `9/12/2025`, and tagged as `friend`.
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+<div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - Days or items are not needed if you are unsure what and when your supplier will resupply!    
 - Days are automatically deleted when the date has passed so you don't need to edit it!
 </div>
@@ -323,7 +323,7 @@ Edits an existing person in the address book.
 *  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+<div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - Existing values will be updated to the input values. Don't worry about needing to update with previous values!
 - You can remove all a person's tags by typing `t/` without specifying any tags after it.
 </div>
@@ -351,7 +351,7 @@ Finds contacts whose fields contain any of the given keywords.
 - `find alex david` returns a person named *Alex Yeoh*, *David Li*.
 - `find n/alex p/12345678` returns a person named *Alex Yeoh* who has phone number `12345678`. <br>
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+<div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - The search is case-insensitive so don't worry about capitalisation!
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
 - Persons matching all parameters will be returned (i.e. AND search).
@@ -432,7 +432,7 @@ Clears all entries from the address book.
 **Example**:
 - `clear` deletes all entries from the address book.
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
 - The clear command deletes all contacts in BrewBook.
 - This action cannot be undone.
 </div>
