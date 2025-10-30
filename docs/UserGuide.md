@@ -15,7 +15,7 @@ Optimized for use via a Command Line Interface (CLI) while still having the bene
 ---
 
 # Table of Contents
-
+Table of Contents
 {:toc }
 
 --------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ instead we recommend you use it like a reference:
 - **Troubleshooting**: Check the **FAQ** and **Known issues** sections if something doesn't work as expected.
 - **At a glance**: Use the **Command summary** at the end for a quick reference to all commands in one place.
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**<br>
     - Use the Table of Contents at the top of this page to jump directly to the section you need.
 </div>
 
@@ -63,7 +63,7 @@ Let’s check whether it’s already installed on your computer.
     2. Type: `java -version`.
     3. Press **Enter**.
 
-- If it shows something like `"17.0.x"`, :white_check_mark: you’re ready!
+- If it shows something like `"17.0.x"`, you’re ready!
 - If you see an older version (e.g. “11” or “8”) or an error saying **“java is not recognized”**, you’ll need to install Java 17.
 
 :point_right: **To install Java 17:**
@@ -80,9 +80,8 @@ Let’s check whether it’s already installed on your computer.
 - **On Linux**
     1. In the **Terminal**, enter the following:
     **Debian/Ubuntu (apt):**
-      ```bash
-      sudo apt update
-      sudo apt install openjdk-17-jdk```
+      <br>`sudo apt update`
+      <br>`sudo apt install openjdk-17-jdk`
     2. When done, repeat the steps above to confirm it says **version 17**.
 
 ---
@@ -90,7 +89,7 @@ Let’s check whether it’s already installed on your computer.
 
 1. Go to the [BrewBook releases page](https://github.com/AY2526S1-CS2103T-T09-4/tp/releases).
 2. Look for the latest version and click to download the file named **`BrewBook.jar`**.
-   (Think of this as your “BrewBook app.”)
+   <br>(Think of this as your “BrewBook app.”)
 
 ---
 ## Step 3: Set up your BrewBook folder
@@ -108,7 +107,7 @@ Let’s check whether it’s already installed on your computer.
 1. Open your **Command Prompt** or **Terminal**
 2. Type `cd [filename]` to navigate to where your BrewBook.jar file exists.
     > If your .jar file is in the`Users\(name)\Downloads` directory and you are currently in `Users\(name)`,
-    > you should type cd Downloads in the **Command Prompt** or **Terminal**.
+    > you should type `cd Downloads` in the **Command Prompt** or **Terminal**.
 3. Type `java -jar BrewBook.jar` and BrewBook will now open to it's landing page populated with sample data for your easy reference.
 
 ![Ui](images/Ui.png)
@@ -121,16 +120,16 @@ Now you’re ready to start managing your café contacts!
 BrewBook uses a **command box** — just type what you want to do and press **Enter**.
 Here are a few examples you can try:
 
-| Action | What to Type                                                                                                                                              | What It Does                                          |
-|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
-| Open help window | `help`                                                                                                                                                    | Shows a short guide on using BrewBook                 |
-| View all contacts | `list all`                                                                                                                                                | Displays every contact saved                          |
-| Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                                 | Adds a new customer                                   |
-| Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/2026-12-04, 2026-12-07 notes/can only do weekdays t/partTime`               | Adds a new staff contact with a shift date            |
-| Add a supplier | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/2026-10-10, 2026-10-20 notes/Halal supplier t/preferred` | Adds a supplier contact                               |
-| Edit a contact | `edit 3 n\John Doe`                                                                                                                                       | Edits any field of a contact                          
-| Delete a contact | `delete 2, 3`                                                                                                                                             | Removes the 2nd and 3rd contact from the current list |
-| Exit the app | `exit`                                                                                                                                                    | Closes BrewBook safely                                |
+| Action | What to Type                                                                                                                                  | What It Does                                          |
+|--------|-----------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
+| Open help window | `help`                                                                                                                                        | Shows a short guide on using BrewBook                 |
+| View all contacts | `list all`                                                                                                                                    | Displays every contact saved                          |
+| Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                     | Adds a new customer                                   |
+| Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/4/12/2026 notes/can only do weekdays t/partTime`                | Adds a new staff contact with a shift date            |
+| Add a supplier | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/10/10/2026 notes/Halal supplier t/preferred` | Adds a supplier contact                               |
+| Edit a contact | `edit 3 n\John Doe`                                                                                                                           | Edits any field of a contact                          
+| Delete a contact | `delete 2, 3`                                                                                                                                 | Removes the 2nd and 3rd contact from the current list |
+| Exit the app | `exit`                                                                                                                                        | Closes BrewBook safely                                |
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**  
     - You can copy and paste commands here directly into BrewBook.
@@ -143,19 +142,19 @@ Explore the [Features](#features) section below for a full list of commands and 
 
 --------------------------------------------------------------------------------------------------------------------
 # Features
-[Viewing help](#viewing-help--help)
-[Adding a customer](#adding-a-customer-add-customer)
-[Adding a staff](#adding-a-staff-add-staff)
-[Adding a supplier](#adding-a-supplier-add-supplier)
-[Viewing contacts](#viewing-contacts-list)
-[Editing a contact](#editing-a-contact--edit)
-[Locating contact by keywords](#locating-contact-by-keywords-find)
-[Deleting contacts](#deleting-contacts--delete)
-[Sorting contacts](#sorting-contacts-sort)
-[Summarising important dates](#summarising-important-dates--summary)
-[Clearing all contacts](#clearing-all-entries--clear)
-[Exiting the program](#exiting-the-program--exit)
-[Saving the data](#saving-the-data)
+[Viewing help](#viewing-help--help)<br>
+[Adding a customer](#adding-a-customer-add-customer)<br>
+[Adding a staff](#adding-a-staff-add-staff)<br>
+[Adding a supplier](#adding-a-supplier-add-supplier)<br>
+[Viewing contacts](#viewing-contacts-list)<br>
+[Editing a contact](#editing-a-contact--edit)<br>
+[Locating contact by keywords](#locating-contact-by-keywords-find)<br>
+[Deleting contacts](#deleting-contacts--delete)<br>
+[Sorting contacts](#sorting-contacts-sort)<br>
+[Summarising important dates](#summarising-important-dates--summary)<br>
+[Clearing all contacts](#clearing-all-entries--clear)<br>
+[Exiting the program](#exiting-the-program--exit)<br>
+[Saving the data](#saving-the-data)<br> 
 [Editing the data file](#editing-the-data-file)
 
 [Back to Table of Contents](#table-of-contents)
@@ -195,7 +194,7 @@ Shows a message explaining how to access the help page.
 **Example**:
 - `help` displays the help message with instructions on how to access the full help page.
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ## Adding a customer: `add customer`
@@ -221,7 +220,7 @@ Adds a customer to the address book.
 - Points must be a non-negative integer.
 </div>
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ## Adding a staff: `add staff`
@@ -251,7 +250,7 @@ Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/
   - Dates must follow the format `d/M/yyyy`.
 </div>
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ## Adding a supplier: `add supplier`
@@ -281,7 +280,7 @@ Adds a supplier to the address book.
   - Days must follow the format `d/M/yyyy`.
 </div>
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ## Viewing contacts: `list`
@@ -305,7 +304,7 @@ Shows a list of all contacts in BrewBook, filtered by type.
 - `list staff` Shows only your café’s employees.
 - `list supplier` Shows only your café’s suppliers.
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ## Editing a contact : `edit`
@@ -332,7 +331,7 @@ Edits an existing person in the address book.
 - Editing `tags`/`shifts`/`items`/`days`, the existing fields of the person will be removed (i.e adding is not cumulative).
 </div>
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ## Locating contact by keywords: `find`
@@ -356,7 +355,7 @@ Finds contacts whose fields contain any of the given keywords.
 - If no prefix is specified, find will resort to search by name for the given keyword.
 </div>
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ## Deleting contacts : `delete`
@@ -376,7 +375,7 @@ Deletes the specified person or people from the address book.
   - The index must be a positive integer.
 </div>
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ### Sorting contacts: `sort`
@@ -400,7 +399,7 @@ Sorts your contact list based on a specific field and optional order — for exa
 - `sort phone o/desc` sorts contacts by phone number in descending order.
 - `sort type o/asc` groups contacts by type (customer → staff → supplier) in ascending order.
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ## Summarising important dates : `summary`
@@ -415,7 +414,7 @@ Displays all staff's shift and supplier's days.
 **Example**:
 - `summary` shows a consolidated list of upcoming shift dates for all staff and delivery days and items for all suppliers.
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ## Clearing all entries : `clear`
@@ -435,7 +434,7 @@ Clears all entries from the address book.
 - This action cannot be undone.
 </div>
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ## Exiting the program : `exit`
@@ -447,14 +446,14 @@ Exits the program.
 **Example**: 
 - `exit` closes the application window and terminates the program.
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ## Saving the data
 
 BrewBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-[Back to features](#features)
+[Back to Features](#features)
 
 ---
 ## Editing the data file
@@ -466,7 +465,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 - Furthermore, certain edits can cause the BrewBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-[Back to features](#features)
+[Back to Features](#features)
 --------------------------------------------------------------------------------------------------------------------
 # FAQ
 
