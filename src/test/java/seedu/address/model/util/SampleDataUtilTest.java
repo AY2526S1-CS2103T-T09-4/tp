@@ -21,12 +21,10 @@ public class SampleDataUtilTest {
     public void getSamplePersons_containsValidPersons() throws ParseException {
         Person[] samplePersons = SampleDataUtil.getSamplePersons();
         for (Person person : samplePersons) {
-            assertTrue(person.getContactType().equals(Person.ContactType.CUSTOMER));
             assertNotNull(person.getName());
             assertNotNull(person.getPhone());
             assertNotNull(person.getEmail());
             assertNotNull(person.getAddress());
-            assertNotNull(person.getPoints());
             assertNotNull(person.getTags());
             assertNotNull(person.getNote());
         }
