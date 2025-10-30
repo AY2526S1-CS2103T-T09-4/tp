@@ -24,9 +24,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         try {
             List<String> indicesStr = Arrays.stream(args.split(", ")).toList();
             List<Index> indices = new ArrayList<>();
+
             for (String s : indicesStr) {
                 Index index = ParserUtil.parseIndex(s);
-                indices.add(index);
+                if (!hasIndex(indices, index)) {
+                    indices.add(index);
+                }
             }
 
             return new DeleteCommand(indices);
@@ -34,6 +37,19 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
+    }
+
+    /**
+     * Checks whether a given list of {@code Indexes} contains a given {@code Index} and returns the corresponding
+     * boolean.
+     */
+    public boolean hasIndex(List<Index> list, Index index) {
+        for (Index i : list) {
+            if (index.equals(i)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

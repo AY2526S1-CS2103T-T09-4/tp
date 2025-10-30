@@ -32,6 +32,11 @@ public class DeleteCommandParserTest {
     }
 
     @Test
+    public void parse_duplicateArgs_returnsDeleteCommand() {
+        assertParseSuccess(parser, "1, 1, 1", new DeleteCommand(List.of(INDEX_FIRST_PERSON)));
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "1,2,3", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
