@@ -145,19 +145,19 @@ Explore the [Features](#features) section below for a full list of commands and 
 --------------------------------------------------------------------------------------------------------------------
 # Features
 [Viewing help](#viewing-help--help)
-[Adding a customer]()
-[Adding a staff]()
-[Adding a supplier]()
-[Viewing contacts]()
-[Editing a contact]()
-[Locating contact by keywords]()
-[Deleting contacts]()
-[Sorting contacts]()
-[Summarising important dates]()
-[Clearing all contacts]()
-[Exiting the program]()
-[Saving the data]()
-[Editing the data file]()
+[Adding a customer](#adding-a-customer-add-customer)
+[Adding a staff](#adding-a-staff-add-staff)
+[Adding a supplier](#adding-a-supplier-add-supplier)
+[Viewing contacts](#viewing-contacts-list)
+[Editing a contact](#editing-a-contact--edit)
+[Locating contact by keywords](#locating-contact-by-keywords-find)
+[Deleting contacts](#deleting-contacts--delete)
+[Sorting contacts](#sorting-contacts-sort)
+[Summarising important dates](#summarising-important-dates--summary)
+[Clearing all contacts](#clearing-all-entries--clear)
+[Exiting the program](#exiting-the-program--exit)
+[Saving the data](#saving-the-data)
+[Editing the data file](#editing-the-data-file)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -195,6 +195,8 @@ Shows a message explaining how to access the help page.
 **Example**:
 - `help` displays the help message with instructions on how to access the full help page.
 
+[Back to features](#features)
+
 ---
 ## Adding a customer: `add customer`
 
@@ -213,10 +215,12 @@ Adds a customer to the address book.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-- Name must not exceed 37.
+- Name must not exceed 48.
 - Phone number must not be less than 3 digits.
 - Points must be a non-negative integer.
 </div>
+
+[Back to features](#features)
 
 ---
 ## Adding a staff: `add staff`
@@ -238,12 +242,14 @@ Format: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-  - Name must not exceed 37.
+  - Name must not exceed 48.
   - Phone number must not be less than 3 digits.
   - Shifts date must be in the future.
   - Duplicate dates for shifts are not allowed.
   - Dates must follow the format `d/M/yyyy`.
 </div>
+
+[Back to features](#features)
 
 ---
 ## Adding a supplier: `add supplier`
@@ -265,12 +271,14 @@ Adds a supplier to the address book.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-- Name must not exceed 37.
+- Name must not exceed 48.
   - Phone number must not be less than 3 digits.
   - Days date must be in the future.
   - Duplicate dates for Days are not allowed.
   - Days must follow the format `d/M/yyyy`.
 </div>
+
+[Back to features](#features)
 
 ---
 ## Viewing contacts: `list`
@@ -292,6 +300,8 @@ Shows a list of all contacts in BrewBook, filtered by type.
 - `list customer` Shows only customers.
 - `list staff` Shows only your café’s employees.
 - `list supplier` Shows only your café’s suppliers.
+
+[Back to features](#features)
 
 ---
 ## Editing a contact : `edit`
@@ -317,6 +327,8 @@ Edits an existing person in the address book.
 - Editing `tags`/`shifts`/`items`/`days`, the existing fields of the person will be removed (i.e adding is not cumulative).
 </div>
 
+[Back to features](#features)
+
 ---
 ## Locating contact by keywords: `find`
 
@@ -338,6 +350,8 @@ Finds contacts whose fields contain any of the given keywords.
 - If no prefix is specified, find will resort to search by name for the given keyword.
 </div>
 
+[Back to features](#features)
+
 ---
 ## Deleting contacts : `delete`
 
@@ -354,6 +368,8 @@ Deletes the specified person or people from the address book.
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
   - The index must be a positive integer.
 </div>
+
+[Back to features](#features)
 
 ---
 ### Sorting contacts: `sort`
@@ -376,6 +392,8 @@ Sorts your contact list based on a specific field and optional order — for exa
 - `sort phone o/desc` sorts contacts by phone number in descending order.
 - `sort type o/asc` groups contacts by type (customer → staff → supplier) in ascending order.
 
+[Back to features](#features)
+
 ---
 ## Summarising important dates : `summary`
 
@@ -387,6 +405,8 @@ Displays all staff's shift and supplier's days.
 
 **Example**:
 - `summary` shows a consolidated list of upcoming shift dates for all staff and delivery days for all suppliers.
+
+[Back to features](#features)
 
 ---
 ## Clearing all entries : `clear`
@@ -405,6 +425,8 @@ Clears all entries from the address book.
 - This action cannot be undone.
 </div>
 
+[Back to features](#features)
+
 ---
 ## Exiting the program : `exit`
 
@@ -415,10 +437,14 @@ Exits the program.
 **Example**: 
 - `exit` closes the application window and terminates the program.
 
+[Back to features](#features)
+
 ---
 ## Saving the data
 
 BrewBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+[Back to features](#features)
 
 ---
 ## Editing the data file
@@ -430,6 +456,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 - Furthermore, certain edits can cause the BrewBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+[Back to features](#features)
 --------------------------------------------------------------------------------------------------------------------
 # FAQ
 
@@ -480,6 +507,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 **Q**: Can I use BrewBook on mobile?<br>
 **A**: No. BrewBook is currently designed for desktop use only.
 
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 # Known issues / Troubleshooting
@@ -488,7 +516,9 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **If no fields are specified in Edit command**, it will return success but no changes will be made.
 4. **Once you select a contact card**, you will not be able to unselect it.
-5. **BrewBook does not accept names with special symbols** such as '/', if you require, you may spell out the name in full as we allow a maximum of x number of character for name.
+5. **BrewBook does not accept names with special symbols** such as '/', if you require, you may spell out the name in full as we allow a maximum of 48 number of character for name.
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 # Command summary
@@ -504,3 +534,5 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [n/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]...] [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
+
+[Back to Table of Contents](#table-of-contents)
