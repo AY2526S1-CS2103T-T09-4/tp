@@ -15,7 +15,7 @@ Optimized for use via a Command Line Interface (CLI) while still having the bene
 ---
 
 # Table of Contents
-
+Table of Contents
 {:toc }
 
 --------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ instead we recommend you use it like a reference:
 - **Troubleshooting**: Check the **FAQ** and **Known issues** sections if something doesn't work as expected.
 - **At a glance**: Use the **Command summary** at the end for a quick reference to all commands in one place.
 
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**<br>
     - Use the Table of Contents at the top of this page to jump directly to the section you need.
 </div>
 
