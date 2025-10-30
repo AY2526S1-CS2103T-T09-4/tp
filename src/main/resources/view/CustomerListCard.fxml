@@ -10,42 +10,47 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" styleClass="customer-card" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" styleClass="customer-card" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@Cards.css">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+            <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>
+            <ColumnConstraints percentWidth="25" hgrow="SOMETIMES"/>
+            <ColumnConstraints percentWidth="25" hgrow="SOMETIMES"/>
         </columnConstraints>
-        <VBox alignment="TOP_LEFT" minHeight="105" GridPane.columnIndex="0" VBox.vgrow="ALWAYS">
+        <VBox minHeight="105" GridPane.columnIndex="0" VBox.vgrow="ALWAYS" spacing="6">
             <padding>
-                <Insets bottom="5" left="15" right="5" top="5" />
+                <Insets top="10" right="10" bottom="10" left="15"/>
             </padding>
-            <HBox alignment="CENTER_LEFT" spacing="15">
+
+            <HBox spacing="15" alignment="CENTER_LEFT">
                 <Label fx:id="id" styleClass="cell_big_label">
                     <minWidth>
-                        <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE" />
+                        <Region fx:constant="USE_PREF_SIZE"/>
                     </minWidth>
                 </Label>
-                <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
-                <Label fx:id="type" styleClass="type_label" />
+                <Label fx:id="name" styleClass="cell_big_label" text="\$first"/>
+                <Label fx:id="type" styleClass="type_label"/>
             </HBox>
-            <FlowPane fx:id="tags" />
-            <Label fx:id="points" styleClass="cell_small_label" text="\$points" />
-            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-            <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-            <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+
+            <FlowPane fx:id="tags" hgap="6" vgap="4"/>
+
+            <Label fx:id="phone" styleClass="cell_small_label" text="$phone"/>
+            <Label fx:id="address" styleClass="cell_small_label" text="$address"/>
+            <Label fx:id="email" styleClass="cell_small_label" text="$email"/>
         </VBox>
-      <VBox minHeight="105" GridPane.columnIndex="2">
-         <padding>
-            <Insets bottom="5" left="15" right="5" top="5" />
-         </padding>
-          <children>
-              <Label text="Note:" styleClass="cell_small_label" />
-              <Label fx:id="note" styleClass="cell_small_label" text="$note" />
-          </children>
-      </VBox>
+        <VBox minHeight="105" GridPane.columnIndex="1" spacing="6">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="15"/>
+            </padding>
+            <Label fx:id="points" styleClass="cell_small_label" text="$points"/>
+        </VBox>
+        <VBox minHeight="105" GridPane.columnIndex="2" spacing="6">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="15"/>
+            </padding>
+            <Label text="Note:" styleClass="cell_small_label"/>
+            <Label fx:id="note" styleClass="cell_small_label" text="$note"/>
+        </VBox>
       <rowConstraints>
          <RowConstraints />
       </rowConstraints>
