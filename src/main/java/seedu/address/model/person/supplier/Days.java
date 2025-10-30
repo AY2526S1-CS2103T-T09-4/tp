@@ -1,5 +1,7 @@
 package seedu.address.model.person.supplier;
 
+import seedu.address.logic.parser.DateParser;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
@@ -9,8 +11,7 @@ import java.time.LocalDate;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Days {
-    public static final String MESSAGE_COMPULSORY = "At least one day must be provided";
-    public static final String MESSAGE_FORMAT_CONSTRAINTS = "Invalid date format for day, Expected format: yyyy-MM-dd";
+    public static final String MESSAGE_FORMAT_CONSTRAINTS = "Invalid date format for day, Expected format: d/M/yyyy";
     public static final String MESSAGE_DUPLICATE_CONSTRAINTS = "Duplicates dates for days are not allowed: ";
     public static final String MESSAGE_OLD_CONSTRAINTS = "Invalid days date as this date has passed: ";
 
@@ -39,13 +40,8 @@ public class Days {
     }
 
     @Override
-    public int hashCode() {
-        return daysSupplied.hashCode();
-    }
-
-    @Override
     public String toString() {
-        return daysSupplied.toString();
+        return daysSupplied.format(DateParser.FORMATTER);
     }
 }
 
