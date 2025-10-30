@@ -54,15 +54,18 @@ public class SummaryCommand extends Command {
     private String formatStaff(Person p) {
         assert p instanceof Staff;
         Staff staff = (Staff) p;
+        String shifts = staff.getShifts().toString();
 
-        return String.format("%s: %s", staff.getName(), staff.getShifts());
+        return String.format("%s: %s", staff.getName(), shifts.substring(1, shifts.length() - 1));
     }
 
     private String formatSupplier(Person p) {
         assert p instanceof Supplier;
         Supplier supplier = (Supplier) p;
         String items = supplier.getItems().toString();
+        String days = supplier.getDays().toString();
 
-        return String.format("%s (%s): %s", supplier.getName(), items.substring(1, items.length() - 1), supplier.getDays());
+        return String.format("%s (%s): %s", supplier.getName(),
+                items.substring(1, items.length() - 1), days.substring(1, days.length() - 1));
     }
 }
