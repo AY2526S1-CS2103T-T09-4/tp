@@ -23,16 +23,16 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.stream().anyMatch(k -> wordPrefixMatchIgnoreCase(name, k));
     }
 
-    private static boolean wordPrefixMatchIgnoreCase(String haystack, String needle) {
-        if (needle == null) {
+    private static boolean wordPrefixMatchIgnoreCase(String name, String keyword) {
+        if (keyword == null) {
             return false;
         }
-        String q = needle.trim();
+        String q = keyword.trim();
         if (q.length() < MIN_PREFIX_LEN) {
             return false;
         }
         Pattern p = Pattern.compile("(?i)\\b" + Pattern.quote(q));
-        return p.matcher(haystack).find();
+        return p.matcher(name).find();
     }
 
 

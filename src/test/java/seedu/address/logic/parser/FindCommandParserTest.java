@@ -296,7 +296,7 @@ public class FindCommandParserTest {
     @Test
     public void execute_days_returnsZero() throws Exception {
         // Non-supplier person with days
-        FindCommand cmd = parser.parse("find n/Alice days/ 2025-10-20");
+        FindCommand cmd = parser.parse("find n/Alice days/2025-10-20");
         Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expected.updateFilteredPersonList(p -> false);

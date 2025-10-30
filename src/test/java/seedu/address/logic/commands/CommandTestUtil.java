@@ -71,8 +71,14 @@ public class CommandTestUtil {
             + "10/10/2024"; // invalid date as it is in the past
     public static final String INVALID_SHIFTS_DUPLICATE_DESC = " " + PREFIX_SHIFTS
             + "10/10/2030, 10/10/2030"; // invalid dates due to duplicate
-    public static final String INVALID_DAYS_DESC = " " + PREFIX_DAYS + "10/11/2025"; // invalid date format
+    public static final String INVALID_DAYS_FORMAT_DESC = " " + PREFIX_DAYS + "2025-10-10";
+    public static final String INVALID_DAYS_PAST_DESC = " " + PREFIX_DAYS
+            + "10/10/2024"; // invalid date as it is in the past
+    public static final String INVALID_DAYS_DUPLICATE_DESC = " " + PREFIX_DAYS
+            + "10/10/2030, 10/10/2030"; // invalid dates due to duplicate
     public static final String INVALID_ITEMS_DESC = " " + PREFIX_ITEMS + "?milk";
+    public static final String INVALID_ITEMS_DUPLICATE_DESC = " " + PREFIX_ITEMS
+            + "milk, milk";
     public static final String INVALID_POINTS_DESC = " " + PREFIX_POINTS + "-1";
     public static final String INVALID_NOTES_DESC = " " + PREFIX_NOTE + "x".repeat(201);
 
