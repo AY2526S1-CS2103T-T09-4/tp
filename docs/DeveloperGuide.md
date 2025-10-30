@@ -286,10 +286,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 For all use cases below, unless otherwise specified: 
-* The **System** is `BrewBook`. 
-* The **Actor** is the `user`. 
+* The **System** is `BrewBook`.
+* The **Actor** is the `user`.
 * The **Precondition** is that the `user` is at the command prompt. 
-* `Person` refers to `customer`, `staff` and `supplier`. 
+* `Person` refers to `customer`, `staff` and `supplier`.
 
 #### UC1 - Request for help
 
@@ -305,21 +305,21 @@ For all use cases below, unless otherwise specified:
 
 **MSS**
 
-1. User requests to add (customer | staff | supplier) with the required information. 
-2. BrewBook adds the (customer | staff | supplier) and displays a success message with the added person. Use case ends. 
+1. User requests to add (customer | staff | supplier) with the required information.
+2. BrewBook adds the (customer | staff | supplier) and displays a success message with the added person. Use case ends.
 
 **Extensions**
 * 1a.(Customer | Staff | Supplier) information is invalid or missing
-  * 1a1. BrewBook displays an error message and informs the user of the invalid or missing information. Use case ends. 
+  * 1a1. BrewBook displays an error message and informs the user of the invalid or missing information. Use case ends.
 
 #### UC3 - List (all | customer | staff | supplier)
 
-**Guarantee**: (All | Customer | Staff | Supplier) persons will be displayed. 
+**Guarantee**: (All | Customer | Staff | Supplier) persons will be displayed.
 
 **MSS**
 
 1. User requests to display (all | customer | staff | supplier) persons.
-2. Brewbook lists (all | customer | staff | supplier) persons and displays a success message. Use case ends. 
+2. Brewbook lists (all | customer | staff | supplier) persons and displays a success message. Use case ends.
 
 #### UC4 - Edit person
 
@@ -327,10 +327,10 @@ For all use cases below, unless otherwise specified:
 
 **MSS**
 
-1.  User requests to list persons (UC3). 
-2.  BrewBook lists all persons. 
+1.  User requests to list persons (UC3).
+2.  BrewBook lists all persons.
 3.  User requests to edit a specific person in the list with the required information.
-4.  BrewBook edits the person and displays a success message. Use case ends. 
+4.  BrewBook edits the person and displays a success message. Use case ends.
 
 **Extensions**
 * 2a. The list is empty. Use case ends
@@ -338,7 +338,7 @@ For all use cases below, unless otherwise specified:
     * 3a1. BrewBook displays an error message and informs the user of the possible valid indices.
       Use case resumes at step 2.
 * 3b. The given information is invalid or no information is given.
-    * 1a1. BrewBook displays an error message and informs the user of the invalid or missing information. 
+    * 1a1. BrewBook displays an error message and informs the user of the invalid or missing information.
     * Use case resumes at Step 2.
 
 #### UC5 - Find person(s) by keyword(s)
@@ -347,7 +347,7 @@ For all use cases below, unless otherwise specified:
 
 **MSS**
 1. User requests to find person(s) by keyword(s).
-2. Brewbook lists all person(s) matching the keyword(s) and displays a success message. Use case ends. 
+2. Brewbook lists all person(s) matching the keyword(s) and displays a success message. Use case ends.
 
 **Extensions**
 * 2a. No person matches the given keyword(s). Use case ends
@@ -376,19 +376,19 @@ For all use cases below, unless otherwise specified:
 
 **MSS**
 1. User requests to sort persons by field. 
-2. Brewbook sorts persons by the field and displays a success message. Use case ends.  
+2. Brewbook sorts persons by the field and displays a success message. Use case ends.
 
 **Extensions**
 * 2a. Field provided is invalid. 
-  * 2a. BrewBook displays an error message and informs the user of the possible fields. Use case ends. 
+  * 2a. BrewBook displays an error message and informs the user of the possible fields. Use case ends.
 
 #### UC8 - Summarise all staffs' shift and suppliers' items and days
 
-**Guarantee**: Summarise all staffs' shift and suppliers' items and days. 
+**Guarantee**: Summarise all staffs' shift and suppliers' items and days.
 
 **MSS**
 1. User requests to summarise all staffs' shift and suppliers' items and days.
-2. BrewBook displays a summary of all staffs' shift and suppliers' items and days. Use case ends. 
+2. BrewBook displays a summary of all staffs' shift and suppliers' items and days. Use case ends.
 
 #### UC9 - Clear all persons
 
@@ -396,14 +396,14 @@ For all use cases below, unless otherwise specified:
 
 **MSS**
 1. User requests to clear all persons. 
-2. BrewBook clears all persons and displays a success message. Use case ends. 
+2. BrewBook clears all persons and displays a success message. Use case ends.
 
 #### UC10 - Exit the app
 
 **Guarantee**: Exits the app
 
 **MSS**
-1. User requests to exit the app. 
+1. User requests to exit the app.
 2. BrewBook closes the app. Use case ends.
 
 ### Non-Functional Requirements
@@ -545,4 +545,4 @@ testers are expected to do more *exploratory* testing.
    5. Test case 4: `find` <br>
       Expected: Generic error message highlighting the correct command format is shown.
 
-   6. Other correct commands to try: add any combination of name and fields. The relevant persons will be shown. 
+   6. Other correct commands to try: add any combination of name and fields. The relevant persons will be shown.
