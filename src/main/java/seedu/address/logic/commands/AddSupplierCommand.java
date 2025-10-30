@@ -38,7 +38,7 @@ public class AddSupplierCommand extends AddCommand {
             + PREFIX_EMAIL + "benlim@example.com "
             + PREFIX_ADDRESS + "123 Clementi Ave 3 "
             + PREFIX_ITEMS + "Flour, Eggs "
-            + PREFIX_DAYS + "10/12/2025, 10/12/2025 "
+            + PREFIX_DAYS + "10/12/2025, 12/12/2025 "
             + PREFIX_NOTE + "Halal supplier "
             + PREFIX_TAG + "preferred";
 
