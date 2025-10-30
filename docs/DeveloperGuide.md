@@ -434,29 +434,72 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Multi-instance handling
+
+   1. Attempt to launch a second instance while one is already running.
+      Expected: multiple independent windows are shown safely.
+
+### List commands
+
+1. Displaying lists of person type
+   1. Prerequisites: Multiple persons of different types (customer, staff, supplier) in address book.
+   2. Test case: `list TYPE` (where type can be one of all, customer, staff and supplier)<br>
+      Expected: GUI should display filtered list of specified person type. Success message shown in status message. Running `list all` again will bring back the original list with all entries.
+   3. Some incorrect `list` commands to try: `list some`, `list 1`, `...`<br>
+      Expected: GUI should not change currently displayed list. Error details shown in status message.
+
+### Summary command
+
+1. Displaying summary with populated data
+   1. Prerequisites: App contains multiple staff entries with assigned shifts and multiple suppliers with assigned days.
+   2. Test case: `summary`<br>
+      Expected: Status message displays a neatly formatted summary showing each staff and their corresponding shifts and each supplier with their items and days. No data altered. Summary should work the same even on filtered lists.
+2. Displaying summary with no data
+   1. Prerequisites: empty dataset or contain only customers
+   2. Test case: `summary` <br>
+      Expected: Status message should display an empty summary.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list all` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Updated list should shift remaining persons up.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+      Expected: Similar to previous, unless invalid x was provided which has its own error messages.
 
-1. _{ more test cases …​ }_
+2. Deleting multiple person
+   1. Prerequisites: Multiple persons in the list.
+   2. Test case: `delete 1, 2` <br>
+      Expected: First 2 contacts are deleted from the list. Details of the deleted contact shown in the status message. Updated list should shift remaining persons up.
+   3. Test case: `delete 1, 1` <br>
+      Expected: First contact is deleted. Duplicate indexes are allowed.
+   4. Other test cases to try: `delete 1, x`, `delete 1, 2, 3, ...` (where x is larger than list size)<br>
+      Expected: Invalid index for x and deletion of multiple persons in the list.
+
+3. Deleting from sub-list
+   1. Prerequisites: Multiple persons in the list. Filtered the list using `list x` or `find` command.
+   2. Test case: `delete 1` <br>
+      Expected: First contact in filtered list is deleted. Details of the deleted contact shown in the status. Running `list all` should bring back all unfiltered entries in original index of list.
+    
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case for missing data file: Delete `data/brewbook.json` before launching the jar file. <br>
+      Expected: App starts successfully with default sample data populated. `brewbook.json` will not be created upon exit unless sample data was altered.
 
-1. _{ more test cases …​ }_
+   2. Test case for corrupted data file: Open `data/brewbook.json` and delete a few brackets to make the file an invalid json file. <br>
+      Expected: App starts successfully with an empty address book (no contacts). No crash or unhandled exception. A new valid `brewbook.json` file is generated on exit if there are changes to person list via `add` commands.
+
+2. Saving after normal operations
+   1. Prerequisites: add or delete entries in address book after launching.
+   2. Test case: Exit the app normally (via close button or menu) <br>
+      Expected: A `brewbook.json` file is created or updated under `/data`. All updated entries should appear when the app is launched again.
