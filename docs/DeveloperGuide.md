@@ -266,7 +266,7 @@ _{Explain here how the data archiving feature will be implemented}_ <br> <br>
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md) 
+* [DevOps guide](DevOps.md)
 <br> <br>
 [Back to Table of Contents](#table-of-contents)
 
@@ -477,7 +477,7 @@ For all use cases below, unless otherwise specified:
 * **Loyalty Points**: Numeric balance for a customer used for rewards.
 * **Shift**: Scheduled work dates for Staff.
 * **Items**: Item or goods supplied by one or more suppliers (e.g. milk, coffee bean)
-* **Days**: Scheduled date for supply of items. 
+* **Days**: Scheduled date for supply of items.
 <br> <br>
 [Back to Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
