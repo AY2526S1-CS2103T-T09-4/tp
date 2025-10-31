@@ -3,7 +3,6 @@ layout: page
 title: Developer Guide
 ---
 ## Table of Contents
-[Acknowledgements](#acknowledgements)<br>
 [Setting up, getting started](#setting-up-getting-started)<br>
 [Design](#design)<br>
 [Planned Enhancements](#planned-enhancements)<br>
@@ -12,12 +11,6 @@ title: Developer Guide
 [Appendix: Requirements](#appendix-requirements)<br>
 [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)<br>
 [Appendix: Effort](#appendix-effort)<br>
---------------------------------------------------------------------------------------------------------------------
-
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -154,8 +147,8 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
-
+Classes used by multiple components are in the `seedu.address.commons` package. <br> <br>
+[Back to Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Planned Enhancements**
@@ -170,7 +163,8 @@ Team size: 5
 7. Enhance help to provide command-specific guidance: The current help command opens a windows which link to the user guide. We will tweak the help command parser to accept an optional command name. For example, typing `help list` will display a concise summary of the `list` command's format, parameters and examples directly in the command result box, providing faster, targeted help without external resources.
 8. Highlight matching keywords in find results: After a find command, the GUI displays the list of matching contacts, but it does not show why they matched. We will tweak the contact card display so that when a list is populated from a find result, the matching keyword (e.g., "Lee") is highlighted on the contact card wherever it was found (in the name, notes, etc.), providing immediate visual feedback on search relevance.
 9. Enhance edit command to support additive/subtractive list updates: The current edit command overwrites all data for list-based fields. For example, editing shifts for a staff member who already has shifts scheduled will delete all previous shifts and replace them with the new input. We will tweak the edit command's syntax to allow for adding or removing specific items from lists like shifts, items, or tags. For example, `edit 1 shifts/add(2026-12-10)` will add the new shift without deleting existing ones, and `edit 1 shifts/remove(2026-12-04)` will remove only that specific shift.
-10. Tweak `list` command to default to `list all`: The current list command requires a specific parameter (e.g., `list all`, `list customer`). If a user types just `list` with no arguments, it will result in an "Invalid command format" error. We will tweak the command parser to make the `list` command more intuitive. If the user types only `list`, BrewBook will automatically treat it as an alias for `list all`, immediately displaying all contacts instead of showing an error.
+10. Tweak `list` command to default to `list all`: The current list command requires a specific parameter (e.g., `list all`, `list customer`). If a user types just `list` with no arguments, it will result in an "Invalid command format" error. We will tweak the command parser to make the `list` command more intuitive. If the user types only `list`, BrewBook will automatically treat it as an alias for `list all`, immediately displaying all contacts instead of showing an error. <br>
+[Back to Table of Contents](#table-of-contents)
 
 ## **Implementation**
 
@@ -262,9 +256,8 @@ _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
-
-
+_{Explain here how the data archiving feature will be implemented}_ <br> <br>
+[Back to Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -273,7 +266,9 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [DevOps guide](DevOps.md) 
+<br> <br>
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -482,8 +477,9 @@ For all use cases below, unless otherwise specified:
 * **Loyalty Points**: Numeric balance for a customer used for rewards.
 * **Shift**: Scheduled work dates for Staff.
 * **Items**: Item or goods supplied by one or more suppliers (e.g. milk, coffee bean)
-* **Days**: Scheduled date for supply of items.
-
+* **Days**: Scheduled date for supply of items. 
+<br> <br>
+[Back to Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -657,6 +653,9 @@ testers are expected to do more *exploratory* testing.
     1. Test cases: `sort phone`, `sort email`, `sort address`, `sort type`: <br>
        Expected: Similar to previous test case, `o/asc` and `o/desc` are optional.
 
+       <br>
+[Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
@@ -722,3 +721,5 @@ While reuse provided a foundation, adapting these components to BrewBook’s mul
 
 
 **In summary:** BrewBook represents a meaningful evolution from AB3. It demanded deeper architectural thinking, more rigorous testing, and stronger collaboration practices, but ultimately resulted in a more powerful and user‑friendly product.
+<br> <br>
+[Back to Table of Contents](#table-of-contents)
