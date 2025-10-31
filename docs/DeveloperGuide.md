@@ -3,8 +3,15 @@ layout: page
 title: Developer Guide
 ---
 ## Table of Contents
-[Acknowledgemenets](#Acknowledgements)<br>
-
+[Acknowledgements](#acknowledgements)<br>
+[Setting up, getting started](#setting-up-getting-started)<br>
+[Design](#design)<br>
+[Planned Enhancements](#planned-enhancements)<br>
+[Implementation](#implementation)<br>
+[Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)<br>
+[Appendix: Requirements](#appendix-requirements)<br>
+[Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)<br>
+[Appendix: Effort](#appendix-effort)<br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
