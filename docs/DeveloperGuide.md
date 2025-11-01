@@ -2,15 +2,15 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+## Table of Contents
+[Setting up, getting started](#setting-up-getting-started)<br>
+[Design](#design)<br>
+[Planned Enhancements](#planned-enhancements)<br>
+[Implementation](#implementation)<br>
+[Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)<br>
+[Appendix: Requirements](#appendix-requirements)<br>
+[Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)<br>
+[Appendix: Effort](#appendix-effort)<br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -117,7 +117,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
@@ -126,12 +126,6 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage component
@@ -147,9 +141,24 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
-
+Classes used by multiple components are in the `seedu.address.commons` package. <br> <br>
+[Back to Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
+
+## **Planned Enhancements**
+
+Team size: 5
+1. Prevent GUI from launching off-screen: The application currently relies on external workarounds (deleting a JSON file) when its main GUI window launches off-screen after a multi-monitor configuration change. We plan to enhance the window initialization logic to detect if the saved window position is outside the boundaries of the currently available screen(s). If an off-screen position is detected, the application will automatically reset the window position to the center of the primary screen upon launch. This prevents the user from having to manually delete the preferences file.
+2. Restore minimized help window upon subsequent `help` command: If the existing Help Window is minimized, running the help command currently fails to bring it to the foreground. We will tweak the help command's execution so that before attempting to open a new window, it first checks if an existing Help Window is minimized. If so, it will automatically restore and focus the original window, ensuring the user can immediately access the help content without manual intervention.
+3. Allow unselection of a contact card: Once a contact card is selected in the list, the current behavior does not provide a mechanism to unselect it, leaving the UI state potentially stale. We will enhance the contact list's selection behavior by allowing a contact card to be unselected. Specifically, clicking on the currently selected contact card a second time will toggle its selection state, causing it to become unselected and returning the list to its initial, unselected state.
+4. Expand name field to support special characters: The current name validation rejects special symbols (e.g., `/`) leading to workarounds like spelling out names. We plan to tweak the name validation logic to allow a predefined set of special characters (such as hyphens, apostrophes, and slashes) within the name field to better accommodate official names and job titles. For example, instead of rejecting 's/o', the application will accept it by updating the allowed character set in the name validation rules.
+5. Allow single-word aliases for common commands: BrewBook currently requires full command words like `list all` or `sort name`. We will tweak the command parsing to allow the use of single-letter or short aliases for the most frequent commands to improve CLI speed. For example: `ls all` will be an accepted alias for `list all`.
+6. Improve input feedback for partially correct commands: When a user is typing a command and pauses, the system can be more helpful. We will tweak the command result to provide immediate, context-sensitive suggestions or reminders based on the partially entered command. For instance, if the user types add customer `n/`, a small hint might appear: (Required: `p/`, `e/`, `a/`).
+7. Enhance help to provide command-specific guidance: The current help command opens a windows which link to the user guide. We will tweak the help command parser to accept an optional command name. For example, typing `help list` will display a concise summary of the `list` command's format, parameters and examples directly in the command result box, providing faster, targeted help without external resources.
+8. Highlight matching keywords in find results: After a find command, the GUI displays the list of matching contacts, but it does not show why they matched. We will tweak the contact card display so that when a list is populated from a find result, the matching keyword (e.g., "Lee") is highlighted on the contact card wherever it was found (in the name, notes, etc.), providing immediate visual feedback on search relevance.
+9. Enhance edit command to support additive/subtractive list updates: The current edit command overwrites all data for list-based fields. For example, editing shifts for a staff member who already has shifts scheduled will delete all previous shifts and replace them with the new input. We will tweak the edit command's syntax to allow for adding or removing specific items from lists like shifts, items, or tags. For example, `edit 1 shifts/add(2026-12-10)` will add the new shift without deleting existing ones, and `edit 1 shifts/remove(2026-12-04)` will remove only that specific shift.
+10. Tweak `list` command to default to `list all`: The current list command requires a specific parameter (e.g., `list all`, `list customer`). If a user types just `list` with no arguments, it will result in an "Invalid command format" error. We will tweak the command parser to make the `list` command more intuitive. If the user types only `list`, BrewBook will automatically treat it as an alias for `list all`, immediately displaying all contacts instead of showing an error. <br>
+[Back to Table of Contents](#table-of-contents)
 
 ## **Implementation**
 
@@ -194,7 +203,7 @@ than attempting to perform the undo.
 
 </div>
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+The following sequence diagram displays how an undo operation goes through the `Logic` component:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
 
@@ -229,21 +238,20 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
-
-
+_{Explain here how the data archiving feature will be implemented}_ <br> <br>
+[Back to Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -253,6 +261,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+<br> <br>
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -264,7 +274,7 @@ _{Explain here how the data archiving feature will be implemented}_
 Manager of a small cafe
 
 
-**Value proposition**: BrewBook helps managers of small cafes to manage different stakeholders, including customers, suppliers and employees (full-time/part-time). It helps cafe managers coordinate with customers, suppliers, and staff by linking roles directly to contacts—so they don’t need to remember who does what.
+**Value proposition**: BrewBook helps managers of small cafes to manage different stakeholders, including customers, suppliers and employees (full-time/part-time). It helps cafe managers coordinate with customers, suppliers, and staff by linking roles directly to persons—so they don’t need to remember who does what.
 
 
 
@@ -274,117 +284,164 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                | I want to …​                                                               | So that I can…​                          |
 |----------|------------------------|----------------------------------------------------------------------------|------------------------------------------|
-| `* * *`  | new user               | add a supplier with name, contact number, what and when they supply        | test adding suppliers                    |
-| `* * *`  | new user               | add a staff with name, contact number, and when they're on shift           | test adding staff                        |
-| `* * *`  | new user               | add a customer with name, contact number, and their current loyalty points | test adding customers                    |
-| `* * *`  | new user               | view all contacts                                                          | get an overview of all my contacts       |
-| `* * *`  | semi-experienced user  | delete individual contacts                                                 | remove unwanted contacts                 |
-| `* * *`  | semi-experienced user  | view contacts of a certain category                                        | get an overview of individual categories |
+`* *` | potential user who is exploring using the app in the cafe, | see the app populated with sample data, | I can easily see how the app will look like when it is in use.
+`* *` | new user who is ready to start using the app, | interact with the sample data, | I am familiar with the features provided.
+`* * *` | new user who is ready to start using the app, | add my first supplier with name, contact number, what they supply, and when I need the supply | I can test adding people.
+`* * *` | new user who is ready to start using the app, | add my first staff with name, contact number, and when they're on shift | I can test adding people.
+`* * *` | new user who is ready to start using the app, | add my first customer with name, contact number, and their current loyalty points | I can test adding people.
+`* *` | new user who is ready to start using the app, | test the search by category function, | I can test searching people.
+`* *` | new user who is ready to start using the app, | delete the sample data, | I can start fresh with my own records.
+`* *` | new user who is ready to start using the app, | import my contacts via a CSV file, | I can add preexisting contacts in bulk quickly.
+`* * *` | new user who is ready to start using the app, | view all contacts |
+`* *` | semi-experienced user who has been using the app for a short while, | search by name | I can quickly find the contact
+`* *` | semi-experienced user who has been using the app for a short while, | filter the suppliers by what they supply, | I can quickly figure out who to contact.
+`* *` | semi-experienced user who has been using the app for a short while, | filter the staff by when they are on shift, | I can quickly figure out who to contact.
+`* *` | semi-experienced user who has been using the app for a short while, | check which suppliers I need to contact for restocks on which day, | I can be organised and not miss out any supplies
+`* *` | semi-experienced user who has been using the app for a short while, | view notes related to a contact, | I remember important details from past interactions
+`* *` | semi-experienced user who has been using the app for a short while, | check how many loyalty point a certain customer has | I can check if they are eligible for redemptions
+`* *` | semi-experienced user who has been using the app for a short while, | update the loyalty points of a certain customer | I can deduct / add loyalty points with purchases
+`* *` | semi-experienced user who has been using the app for a short while, | add a customer's allergen information | I know what products to avoid
+`* *` | semi-experienced user who has been using the app for a short while, | mark my employees as full-time or part-time | I can plan shift accordingly
+`* * *` | semi-experienced user who has been using the app for a short while, | delete individual contacts | I can remove unwanted contacts
+`* *` | semi-experienced user who has been using the app for a short while, | delete contacts in bulk | I don't have to manually delete them
+`* *` | semi-experienced user who has been using the app for a short while, | add remarks or comments tied to a specific contact | I can retain miscallaneous but important information about them
+`* *` | semi-experienced user who has been using the app for a short while, | add operating days / hours for suppliers | I don't have to search it up each time
+`* * *` | semi-experienced user who has been using the app for a short while, | display an overview of each "person category" on a dashboard | I have a summary of contact information
+`* *` | semi-experienced user who has been using the app for a short while, | store an employee's emergency information | I know who to contact in case of an incident.
+`* *` | long-time user, | able to see which suppliers and staff i need to contact on the current day | I don't have to search it up
+`* *` | long-time user, | able to see which suppliers and staff i need to contact on the next day | I don't have to search it up
+`* *` | long-time user, | have quick access to frequently used contact information | I don't have to search it up
+`* *` | long-time user, | set a reminder to contact a supplier, | I don’t forget to reorder.
+`* *` | long-time user, | export the contacts via a CSV file, | I can use it to import to my phone contacts.
+`* *` | long-time user, | update a contact's phone number and email address, | I can refer to the most up-to-date information.
+`* *` | long-time user, | archive/hide unused contacts, | I am not distracted by irrelevant contact.
+`*` | long-time user, | add a customer's birthday, | I know when to give special rewards.
+`* *` | long-time user, | filter contacts with multiple tags | I can have more specific searches
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `BrewBook` and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, unless otherwise specified:
+* The **System** is `BrewBook`.
+* The **Actor** is the `user`.
+* The **Precondition** is that the `user` is at the command prompt.
+* `Person` refers to `customer`, `staff` and `supplier`.
 
-**Use case: UC1 - Delete contact**
+#### UC1 - Request for help
 
-**Preconditions**: User is at the command prompt.
+**Guarantee**: Help message will be displayed.
 
-**Guarantee**: Current contact will be deleted.
+**MSS**
+1. User requests for help.
+2. BrewBook displays help message. Use case ends.
+
+#### UC2 - Add (customer \| staff \| supplier)
+
+* **Guarantee**: (Customer \| Staff \| Supplier) will be added.
 
 **MSS**
 
-1.  User requests to list contacts.
-2.  BrewBook shows a list of contacts.
-3.  User requests to delete a specific contact in the list.
-4.  BrewBook deletes the person.
-    Use case ends.
+1. User requests to add (customer \| staff \| supplier) with the required information.
+2. BrewBook adds the (customer \| staff \| supplier) and displays a success message with the added person. Use case ends.
 
 **Extensions**
+* 1a.(Customer \| Staff \| Supplier) information is invalid or missing
+    * 1a1. BrewBook displays an error message and informs the user of the invalid or missing information. Use case ends.
 
-* 2a. The list is empty.
-  Use case ends
+#### UC3 - List (all \| customer \| staff \| supplier)
+
+**Guarantee**: (All \| Customer \| Staff \| Supplier) persons will be displayed.
+
+**MSS**
+
+1. User requests to display (all \| customer \| staff \| supplier) persons.
+2. Brewbook lists (all \| customer \| staff \| supplier) persons and displays a success message. Use case ends.
+
+#### UC4 - Edit person
+
+**Guarantee**: Requested person will be edited.
+
+**MSS**
+
+1.  User requests to list persons (UC3).
+2.  BrewBook lists all persons.
+3.  User requests to edit a specific person in the list with the required information.
+4.  BrewBook edits the person and displays a success message. Use case ends.
+
+**Extensions**
+* 2a. The list is empty. Use case ends
 * 3a. The given index is invalid.
-  * 3a1. BrewBook shows an error message and informs the user of the possible valid indices.
-    Use case resumes at step 2.
+    * 3a1. BrewBook displays an error message and informs the user of the possible valid indices.
+      Use case resumes at Step 2.
+* 3b. The given information is invalid or no information is given.
+    * 3b1. BrewBook displays an error message and informs the user of the invalid or missing information.
+    * Use case resumes at Step 2.
 
-**Use case: UC2 - Delete multiple contacts**
+#### UC5 - Find person(s) by keyword(s)
 
-**Preconditions**: User is at the command prompt.
+**Guarantee**: All person(s) matching the keyword(s) will be displayed.
 
-**Guarantee**: Selected contacts will be deleted.
+**MSS**
+1. User requests to find person(s) by keyword(s).
+2. Brewbook lists all person(s) matching the keyword(s) and displays a success message. Use case ends.
+
+**Extensions**
+* 2a. No person matches the given keyword(s). Use case ends
+
+#### UC6 - Delete person(s)
+
+**Guarantee**: Requested persons will be deleted.
 
 **MSS**
 
-1.  User requests to list persons.
-2.  BrewBook shows a list of persons.
-3.  User requests to delete multiple contacts in the list.
-4.  BrewBook deletes the contacts.
-    Use case ends.
+1.  User requests to list persons (UC3).
+2.  BrewBook lists all persons.
+3.  User requests to delete person(s) in the list.
+4.  BrewBook deletes the person(s) and displays a success message. Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-  Use case ends
-* 3a. The given index range is invalid.
-    * 3a1. BrewBook shows an error message and informs the user of the possible valid indices.
+* 2a. The list is empty. Use case ends
+* 3a. The given index(es) is invalid.
+    * 3a1. BrewBook displays an error message and informs the user of the possible valid indices.
       Use case resumes at step 2.
 
-**Use case: UC3 - Edit contact**
+#### UC7 - Sort persons by field
 
-**Preconditions**: User is at the command prompt.
-
-**Guarantee**: Current contact will be edited.
+**Guarantee**: Persons will be sorted by the given field.
 
 **MSS**
-
-1.  User requests to list persons.
-2.  BrewBook shows a list of persons.
-3.  User requests to edit a specific person in the list.
-4.  BrewBook edits the person.
-    Use case ends.
+1. User requests to sort persons by field.
+2. Brewbook sorts persons by the field and displays a success message. Use case ends.
 
 **Extensions**
+* 2a. Field provided is invalid.
+    * 2a1. BrewBook displays an error message and informs the user of the possible fields. Use case ends.
 
-* 2a. The list is empty.
-  Use case ends
-* 3a. The given index is invalid.
-    * 3a1. BrewBook shows an error message and informs the user of the possible valid indices.
-      Use case resumes at step 2.
-* 3b. The given format is invalid.
-    * 3b1. BrewBook shows an error message and informs the user of the correct format.
-      Use case resumes at step 2.
+#### UC8 - Summarise all staff's shift and suppliers' items and days
 
-**Use case: UC4 - Set reminder to contact supplier**
-
-**Preconditions**: User is at the command prompt.
-
-**Guarantee**: Reminder to contact supplier will be set.
+**Guarantee**: Summarise all staffs' shift and suppliers' items and days.
 
 **MSS**
+1. User requests to summarise all staffs' shift and suppliers' items and days.
+2. BrewBook displays a summary of all staffs' shift and suppliers' items and days. Use case ends.
 
-1.  User requests to list suppliers.
-2.  BrewBook shows a list of suppliers.
-3.  User requests to add a reminder for a specific supplier in the list.
-4.  BrewBook adds the reminder.
-    Use case ends.
+#### UC9 - Clear all persons
 
-**Extensions**
+**Guarantee**: Clears all persons
 
-* 2a. The list is empty.
-  Use case ends
-* 3a1. The given index is invalid.
-    * 3a1. BrewBook shows an error message and informs the user of the possible valid indices.
-      Use case resumes at step 2.
-* 3b. The given format is invalid.
-    * 3b1. BrewBook shows an error message and informs the user of the correct format.
-      Use case resumes at step 2.
-* 3c. The given date is invalid.
-    * 3c1. BrewBook shows an error message and informs the user of the correct date format.
-      Use case resumes at step 2.
+**MSS**
+1. User requests to clear all persons.
+2. BrewBook clears all persons and displays a success message. Use case ends.
 
-*{More to be added}*
+#### UC10 - Exit the app
+
+**Guarantee**: Exits the app
+
+**MSS**
+1. User requests to exit the app.
+2. BrewBook closes the app. Use case ends.
 
 ### Non-Functional Requirements
 
@@ -394,10 +451,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  Should work on both 32-bit and 64-bit environments.
 5.  A novice user with minimal technical knowledge should be able to use the core features without requiring external guidance.
 6.  All commands must provide usage examples to aid discovery and learning.
-7.  Search/filter results should be returned within 500ms.
-8.  Adding or editing a contact should complete within 2 seconds, including saving to local.
+7.  Find/Sort results should be returned within 500ms.
+8.  Adding or editing a contact should complete within 1 second, including saving to local.
 9.  The app should not lose data under sudden app closure or power loss.
-10. Development should adhere to the project schedule, ensuring all milestone requirements are met before their deadlines.
+10. All data stored locally must be encrypted at rest and never sent to external servers.
+11. The app must run as a portable JAR without requiring admin privileges or an installer.
+12. Development should adhere to the project schedule, ensuring all milestone requirements are met before their deadlines.
 
 *{More to be added}*
 
@@ -405,9 +464,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Customer**: A contact who interacts with the café as a buyer or loyalty program member.
-* **Supplier**: A contact who provides goods or services to the café (e.g., milk supplier, coffee bean supplier).
+* **Supplier**: A contact who provides goods or services to the café (e.g. milk supplier, coffee bean supplier).
 * **Staff**: A contact employed by the café, either full-time or part-time.
-
+* **Contact**: Any person record (Customer, Supplier, Staff).
+* **Tag**: User-defined labels attached to contacts for filtering. (e.g. partTime, wholesale, longTimeCustomer).
+* **Loyalty Points**: Numeric balance for a customer used for rewards.
+* **Shift**: Scheduled work dates for Staff.
+* **Items**: Item or goods supplied by one or more suppliers (e.g. milk, coffee bean)
+* **Days**: Scheduled date for supply of items.
+<br> <br>
+[Back to Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -423,40 +489,231 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample persons. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Multi-instance handling
+
+    1. Attempt to launch a second instance while one is already running.
+       Expected: multiple independent windows are shown safely.
+
+### List commands
+
+1. Displaying lists of person type
+    1. Prerequisites: Multiple persons of different types (customer, staff, supplier) in address book.
+    2. Test case: `list TYPE` (where type can be one of all, customer, staff and supplier)<br>
+       Expected: GUI should display filtered list of specified person type. Success message shown in status message. Running `list all` again will bring back the original list with all entries.
+    3. Some incorrect `list` commands to try: `list some`, `list 1`, `...`<br>
+       Expected: GUI should not change currently displayed list. Error details shown in status message.
+
+### Summary command
+
+1. Displaying summary with populated data
+    1. Prerequisites: App contains multiple staff entries with assigned shifts and multiple suppliers with assigned days.
+    2. Test case: `summary`<br>
+       Expected: Status message displays a neatly formatted summary showing each staff and their corresponding shifts and each supplier with their items and days. No data altered. Summary should work the same even on filtered lists.
+2. Displaying summary with no data
+    1. Prerequisites: empty dataset or contain only customers
+    2. Test case: `summary` <br>
+       Expected: Status message should display an empty summary.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list all` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First person is deleted from the list. Details of the deleted person shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous, unless invalid x was provided which has its own error messages.
 
-1. _{ more test cases …​ }_
+2. Deleting multiple person
+    1. Prerequisites: Multiple persons in the list.
+    2. Test case: `delete 1, 2` <br>
+       Expected: First 2 contacts are deleted from the list. Details of the deleted contact shown in the status message. Updated list should shift remaining persons up.
+    3. Test case: `delete 1, 1` <br>
+       Expected: First contact is deleted. Duplicate indexes are allowed.
+    4. Other test cases to try: `delete 1, x`, `delete 1, 2, 3, ...` (where x is larger than list size)<br>
+       Expected: Invalid index for x and deletion of multiple persons in the list.
+
+3. Deleting from sub-list
+    1. Prerequisites: Multiple persons in the list. Filtered the list using `list x` or `find` command.
+    2. Test case: `delete 1` <br>
+       Expected: First contact in filtered list is deleted. Details of the deleted contact shown in the status. Running `list all` should bring back all unfiltered entries in original index of list.
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+    1. Test case for missing data file: Delete `data/brewbook.json` before launching the jar file. <br>
+       Expected: App starts successfully with default sample data populated. `brewbook.json` will not be created upon exit unless sample data was altered.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    2. Test case for corrupted data file: Open `data/brewbook.json` and delete a few brackets to make the file an invalid json file. <br>
+       Expected: App starts successfully with an empty address book (no contacts). No crash or unhandled exception. A new valid `brewbook.json` file is generated on exit if there are changes to person list via `add` commands.
 
-1. _{ more test cases …​ }_
+2. Saving after normal operations
+    1. Prerequisites: add or delete entries in address book after launching.
+    2. Test case: Exit the app normally (via close button or menu) <br>
+       Expected: A `brewbook.json` file is created or updated under `/data`. All updated entries should appear when the app is launched again.
+
+### Adding a person
+
+1. Adding a customer.
+    1. Test case 1: `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
+       Expected: New customer added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
+    2. Test case 2: `add customer n/John & Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
+       Expected: No customer is added. Name-specific error message highlighting the correct name format is shown.
+    3. Test case 3: `add customer n/John Doe e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`<br>
+       Expected: No customer is added as phone number is missing. Generic error message highlighting the correct command format is shown.
+    4. Other incorrect add customer commands to try:
+        1. Name longer than 48 characters. Shows name-specific error message.
+        2. Email doesn't follow the specified email format (e.g. does not include an `@`). Shows email-specific error message.
+        3. Phone number is shorter than 3 characters or is not purely numeric.
+        2. Notes longer than 200 characters. Shows notes-specific error message.
+        3. Other missing compulsory tags (i.e. name, phone, email, address)
+2. Adding a staff.
+    1. Test case 1: `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
+       Expected: New staff added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
+    2. Test case 2: `add staff n/Ah Hock p/98765432 e/ahhockexample.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
+       Expected: No customer is added. Email-specific error message highlighting the correct email format is shown.
+    3. Test case 3: `add staff n/Ah Hock p/98765432 e/ahhock@example.com shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
+       Expected: No customer is added as address is missing. Generic error message highlighting the correct command format is shown.
+    4. Other incorrect add staff commands to try:
+        1. Name not alphanumeric or longer than 48 characters. Shows name-specific error message.
+        2. Phone number is shorter than 3 characters or is not purely numeric.
+        3. Notes longer than 200 characters. Shows notes-specific error message.
+        4. Shifts in an incorrect date format (i.e. not `d/M/yyyy`). Shows shift-specific error message.
+        5. Other missing compulsory tags (i.e. name, phone, email, address)
+3. Adding a supplier.
+    1. Test case 1: `add supplier n/Ben Lim p/98765432 e/benlim@example.com a/123 Clementi Ave 3 items/Flour, Eggs days/10/12/2025, 12/12/2025 notes/Halal supplier t/preferred`<br>
+       Expected: New supplier added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
+    2. Test case 2: `add supplier n/Ben Lim p/abc e/benlim@example.com a/123 Clementi Ave 3 items/Flour, Eggs days/10122025, 12122025 notes/Halal supplier t/preferred`<br>
+       Expected: No supplier is added. Date-specific error message highlighting the correct date format is shown.
+    3. Test case 3: `add supplier n/Ben Lim p/98765432 a/123 Clementi Ave 3 items/Flour, Eggs days/10/12/2025, 12/12/2025 notes/Halal supplier t/preferred`<br>
+       Expected: No supplier is added as email is missing. Generic error message highlighting the correct command format is shown.
+    4. Other incorrect add supplier commands to try:
+        1. Name not alphanumeric or longer than 48 characters. Shows name-specific error message.
+        2. Phone number is shorter than 3 characters or is not purely numeric.
+        3. Email doesn't follow the specified email format (e.g. does not include an `@`). Shows email-specific error message.
+        4. Notes longer than 200 characters. Shows notes-specific error message.
+        5. Days in an incorrect date format (i.e. not `d/M/yyyy`). Shows shift-specific error message.
+        6. Other missing compulsory tags (i.e. name, phone, email, address)
+
+### Finding person(s) by keyword(s)
+
+1. Finding by keywords.
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Works similarly for `list (customer | staff | supplier)`
+
+    2. Test case 1: `find Alex`
+        1. Case 1: If there is are persons with names containing Alex, these persons will be shown. A success message indicating the number of persons listed will be shown.
+        2. Case 2: If there are no persons with names containing Alex, the list will be empty. A message saying that 0 persons are listed will be shown.
+
+    3. Test case 2: `find Alex e/gmail`
+        1. Case 1: If there is are persons with names containing Alex and email containing gmail, these persons will be shown. A success message indicating the number of persons listed will be shown.
+        2. Case 2: If there are no persons with names containing Alex and email containing gmail, the list will be empty. A message saying that 0 persons are listed will be shown.
+
+    4. Test case 3: `find e/gmail`
+        1. Case 1: If there is are persons with email containing gmail, these persons will be shown. A success message indicating the number of persons listed will be shown.
+        2. Case 2: If there are no persons with email containing gmail, the list will be empty. A message saying that 0 persons are listed will be shown.
+
+    5. Test case 4: `find` <br>
+       Expected: Generic error message highlighting the correct command format is shown.
+
+    6. Other correct commands to try: add any combination of name and fields. The relevant persons will be shown.
+
+### Sorting list
+
+1. Sorting by name
+    1. Prerequisites: multiple persons in list.
+    2. Test case 1: `sort name o/asc` or `sort name o/desc`<br>
+       Expected: GUI displays sorted list. Success message displayed.
+    3. Test case 2: `sort name o/something` <br>
+       Expected: List does not change. Error details shown in status message.
+2. Sorting by phone, email, address and type
+    1. Test cases: `sort phone`, `sort email`, `sort address`, `sort type`: <br>
+       Expected: Similar to previous test case, `o/asc` and `o/desc` are optional.
+
+       <br>
+[Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+BrewBook builds upon the AB3 foundation but significantly expands its scope and complexity. While AB3 manages a single entity type (Person), BrewBook introduces and integrates **three distinct entity types** — Customers, Staff, and Suppliers — each with unique attributes and behaviors. This multi-entity architecture required substantial redesign of the data model, parser logic, and UI rendering.
+
+
+### Difficulty Level
+
+Compared to AB3, BrewBook was more demanding because:
+- It had to support **multiple entity types** instead of one, requiring a more flexible and extensible architecture.
+- Commands had to be **entity‑aware** (e.g., `add staff`, `add supplier`), increasing parser complexity.
+- The system needed to handle **date‑sensitive features** (staff shifts, supplier delivery days) and consolidate them in a unified `summary` view.
+- Documentation and user support had to scale with the expanded feature set, demanding more structured and user‑friendly guides.
+
+
+### Challenges Faced
+
+#### Technical
+- **Model Redesign:**
+  Refactoring `Person` into an abstract superclass required deep changes across `Logic`, `Storage`, and `UI` as they `Person` was heavily utilised and embedded in the design of AB3.
+
+- **Parser and Command Handling:**
+  Building a parser that could distinguish extending from the original parser and command handling because of these new entity types was also non-trivial. It caused frequent test failures due to dependencies and considerable time was spent understanding an debugging code.
+
+#### Collaboration
+- **Cross‑team Coordination:**
+  Model changes cascaded into multiple layers, requiring synchronized updates across contributors.
+- **Merge Conflicts:**
+  Refactoring shared components (e.g., `Person`, `AddressBook`, `Parser`) led to frequent conflicts and integration delays.
+- **Onboarding Overhead:**
+  New contributors needed extra time to understand the redesigned architecture before contributing effectively.
+
+Despite these hurdles, the team mitigated risks through issue tracking, code reviews, and weekly syncs, ensuring architectural and design decisions were well‑documented and consensus‑driven.
+
+
+### Effort Required
+
+- **Development Effort:**
+  A large portion of time was spent on parser redesign, model restructuring, ensuring test coverage across three entity types, and fixing CICD failures.
+- **Testing Effort:**
+  Many existing AB3 test cases broke during refactoring. Significant effort went into updating and expanding tests to cover new behaviors.
+- **Documentation Effort:**
+  The User Guide was expanded with consistent examples, screenshots, captions, FAQs, and troubleshooting sections to ensure clarity for evaluators and end‑users.
+
+
+### Reuse & Adaptation
+- **Base Architecture:**
+  Reused AB3’s MVC structure, saving ~10% of effort.
+- **Adapted Classes:**
+    - `Person` refactored into an abstract superclass, with `Customer`, `Staff`, and `Supplier` as subclasses.
+    - `AddressBook` extended to manage multiple entity lists.
+
+While reuse provided a foundation, adapting these components to BrewBook’s multi‑entity design required substantial reengineering.
+
+
+### Achievements
+
+- Delivered a **robust, extensible system** supporting multiple entity types with clear separation of concerns.
+- Designed a **clean and intuitive CLI** with consistent command formats and helpful error messages.
+- Produced a **comprehensive User Guide** with examples, screenshots, and troubleshooting tips to support onboarding and evaluation.
+- Maintained **team cohesion** despite architectural complexity and differing individual schedules, ensuring smooth integration of features.
+
+
+**In summary:** BrewBook represents a meaningful evolution from AB3. It demanded deeper architectural thinking, more rigorous testing, and stronger collaboration practices, but ultimately resulted in a more powerful and user‑friendly product.
+<br> <br>
+[Back to Table of Contents](#table-of-contents)
