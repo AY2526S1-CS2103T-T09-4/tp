@@ -131,7 +131,7 @@ Here are a few examples you can try:
 | Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                     | Adds a new customer                                   |
 | Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/4/12/2026 notes/can only do weekdays t/partTime`                | Adds a new staff contact with a shift date            |
 | Add a supplier | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/10/10/2026 notes/Halal supplier t/preferred` | Adds a supplier contact                               |
-| Edit a contact | `edit 3 n\John Doe`                                                                                                                           | Edits any field of a contact                          |
+| Edit a contact | `edit 3 n/John Doe`                                                                                                                           | Edits any field of a contact                          |
 | Delete a contact | `delete 2, 3`                                                                                                                                 | Removes the 2nd and 3rd contact from the current list |
 | Exit the app | `exit`                                                                                                                                        | Closes BrewBook safely                                |
 
@@ -220,8 +220,10 @@ Adds a customer to the address book.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
 - Name must not exceed 48 characters.
+- Name must not be a duplicate (i.e must not already exist in BrewBook).
 - Phone number must not be less than 3 digits.
 - Points must be a non-negative integer.
+- Notes must not exceed 200 characters.
 </div>
 
 [Back to Features](#features)
@@ -249,10 +251,12 @@ Adds a staff to the address book.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
   - Name must not exceed 48 characters.
+- Name must not be a duplicate (i.e must not already exist in BrewBook).
   - Phone number must not be less than 3 digits.
   - Shifts date must be in the future.
   - Duplicate dates for shifts are not allowed.
   - Dates must follow the format `d/M/yyyy`.
+- Notes must not exceed 200 characters.
 </div>
 
 [Back to Features](#features)
@@ -280,10 +284,12 @@ Adds a supplier to the address book.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
 - Name must not exceed 48 characters.
+- Name must not be a duplicate (i.e must not already exist in BrewBook).
 - Phone number must not be less than 3 digits.
 - Days date must be in the future.
 - Duplicate dates for Days are not allowed.
 - Days must follow the format `d/M/yyyy`.
+- Notes must not exceed 200 characters.
 </div>
 
 [Back to Features](#features)
@@ -335,6 +341,14 @@ Edits an existing person in the address book.
 - The index must be a positive integer.
 - At least one optional fields must be provided.
 - Editing `tags`/`shifts`/`items`/`days`, the existing fields of the person will be removed (i.e adding is not cumulative).
+- Name must not exceed 48 characters.
+- Name must not be a duplicate (i.e must not already exist in BrewBook).
+- Phone number must not be less than 3 digits.
+- Days and Shifts date must be in the future.
+- Duplicate dates for Days and Shifts are not allowed.
+- Days and Shifts must follow the format `d/M/yyyy`.
+- Notes must not exceed 200 characters.
+- Points must be a non-negative integer.
 </div>
 
 [Back to Features](#features)
@@ -545,10 +559,13 @@ Action | Format, Examples
 **Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...] [t/TAG]…` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/4/2025 notes/can only do weekdays t/partTime`
 **Add supplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...​` <br> e.g., `add supplier n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/28/10/2025`
 **List** | `list [all/customer/staff/supplier]`
+**Sort** | `sort name o/asc`
+**Summary** | `summary`
 **Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`
 **Clear** | `clear`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [notes/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]...] [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
+**Exit** | `exit`
 
 [Back to Table of Contents](#table-of-contents)
