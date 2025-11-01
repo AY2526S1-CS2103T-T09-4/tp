@@ -337,7 +337,17 @@ Finds contacts whose fields contain any of the given keywords.
 ![find success](images/findResult.png)
 *Figure: Result from executing `find Alex`*
 
-**Format**: `find KEYWORD [MORE_KEYWORDS]`
+**Format**: `find KEYWORD [MORE_KEYWORDS]` or `find [n/NAME_KEYWORD [MORE_KEYWORDS]] [p/PHONE_KEYWORD [MORE_KEYWORDS]] [e/EMAIL_KEYWORD [MORE_KEYWORDS]] [a/ADDRESS_KEYWORD [MORE_KEYWORDS]] [t/TAG_KEYWORD [MORE_KEYWORDS]] [shifts/DATE_KEYWORD [MORE_KEYWORDS]] [items/ITEM_KEYWORD [MORE_KEYWORDS]] [days/DAY_KEYWORD [MORE_KEYWORDS]]` 
+
+**Valid options for `KEYWORD`:**
+- `n` — searches name field
+- `p` — searches phone field
+- `e` — searches email field
+- `a` — searches address field
+- `t` — searches tags field
+- `shifts` — searches shift field
+- `items` — searches items field
+- `days` — searches days field
 
 **Examples**:
 - `find John` returns a person named *john* and *John Doe*.
@@ -541,7 +551,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`
 **Clear** | `clear`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [notes/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]...] [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`
 **Help** | `help`
 **Exit** | `exit`
 
