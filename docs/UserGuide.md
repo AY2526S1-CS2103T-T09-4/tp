@@ -244,7 +244,7 @@ Adds a staff to the address book.
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 * Shifts are not needed if you are unsure when your staff is available to start!
 * Shifts are automatically deleted when the date has passed so you don't need to edit it!
-* If you want to preserve past shifts records, you should make copies of the .json file and archive it!
+* If you want to preserve past shifts records, you should make copies of the .json file and archive it before the shift is deleted!
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
@@ -275,7 +275,7 @@ Adds a supplier to the address book.
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - Days or items are not needed if you are unsure what and when your supplier will resupply!
 - Days are automatically deleted when the date has passed so you don't need to edit it!
-* If you want to preserve past days records, you should make copies of the .json file and archive it!
+* If you want to preserve past days records, you should make copies of the .json file and archive it before the day is deleted!
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
