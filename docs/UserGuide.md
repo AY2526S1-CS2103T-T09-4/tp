@@ -215,7 +215,7 @@ Shows a message explaining how to access the help page.
 
 ## Adding a customer: `add customer`
 
-Adds a customer to the address book and returns to `list all` view.
+Adds a customer to BrewBook and returns to `list all` view.
 
 ![add customer success](images/addCustomer.png)
 *Figure: Result from executing `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`*
@@ -235,7 +235,7 @@ Adds a customer to the address book and returns to `list all` view.
 ---
 ## Adding a staff: `add staff`
 
-Adds a staff to the address book and returns to `list all` view.
+Adds a staff to the BrewBook and returns to `list all` view.
 
 ![add staff success](images/addStaff.png)
 *Figure: Result from executing `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`*
@@ -258,7 +258,7 @@ Adds a staff to the address book and returns to `list all` view.
 ---
 ## Adding a supplier: `add supplier`
 
-Adds a supplier to the address book and returns to `list all` view.
+Adds a supplier to the BrewBook and returns to `list all` view.
 
 ![add supplier success](images/addSupplier.png)
 *Figure: Result from executing: `add supplier n/Ben Lim p/98765432 e/benlim@example.com a/123 Clementi Ave 3 items/Flour, Eggs days/10/12/2025, 12/12/2025 notes/Halal supplier t/preferred`*
@@ -305,7 +305,7 @@ Shows a list of all contacts in BrewBook, filtered by type.
 ---
 ## Editing a contact : `edit`
 
-Edits an existing person in the address book and returns to `list all` view.
+Edits an existing person in BrewBook and returns to `list all` view.
 
 ![edit customer success](images/editResult.png)
 *Figure: Result from executing `edit 1 n/Alex Yeoh` when the name was originally Alex Yeo*
@@ -364,7 +364,7 @@ Finds contacts whose fields contain any of the given keywords.
 ---
 ## Deleting contacts : `delete`
 
-Deletes the specified person or people from the address book.
+Deletes the specified person or people from BrewBook.
 
 ![delete success](images/deleteSuccess.png)
 *Figure: Result from executing `delete 1, 2` to delete Alex and Bernice*
@@ -372,8 +372,8 @@ Deletes the specified person or people from the address book.
 **Format**: `delete INDEX[, INDEX, ...]`
 
 **Examples**:
-* `list all` followed by `delete 2` deletes the 2nd person in the address book.
-* `find alex` followed by `delete 1, 2` deletes the 1st & 2nd person in the address book following the index of the new list.
+* `list all` followed by `delete 2` deletes the 2nd person in the BrewBook.
+* `find alex` followed by `delete 1, 2` deletes the 1st & 2nd person in the BrewBook following the index of the new list.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
   - The index must be a positive integer.
@@ -430,12 +430,12 @@ Displays all staff's shift and supplier's days.
 ![clear](images/clearResult.png)
 *Figure: Result from executing `clear`, deleting all contacts*
 
-Clears all entries from the address book.
+Clears all entries from the BrewBook.
 
 **Format**: `clear`
 
 **Example**:
-- `clear` deletes all entries from the address book.
+- `clear` deletes all entries from the BrewBook.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
 - The clear command deletes all contacts in BrewBook.
