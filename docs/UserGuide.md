@@ -201,6 +201,18 @@ Shows a message explaining how to access the help page.
 [Back to Features](#features)
 
 ---
+
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints for fields:**
+- Name must not exceed 48 characters.
+- Name must not be a duplicate (i.e must not already exist in BrewBook).
+- Phone number must not be less than 3 digits.
+- Days and Shifts date must be in the future.
+- Duplicate dates for Days and Shifts are not allowed.
+- Days and Shifts must follow the format `d/M/yyyy`.
+- Notes must not exceed 200 characters.
+- Points must be a non-negative integer.
+</div>
+
 ## Adding a customer: `add customer`
 
 Adds a customer to the address book.
@@ -216,14 +228,6 @@ Adds a customer to the address book.
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
 * If this is a new customer, you don't have to specify points as it will automatically be set to 0.
-</div>
-
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-- Name must not exceed 48 characters.
-- Name must not be a duplicate (i.e must not already exist in BrewBook).
-- Phone number must not be less than 3 digits.
-- Points must be a non-negative integer.
-- Notes must not exceed 200 characters.
 </div>
 
 [Back to Features](#features)
@@ -249,16 +253,6 @@ Adds a staff to the address book.
 * If you want to preserve past shifts records, you should make copies of the .json file and archive it before the shift is deleted!
 </div>
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-  - Name must not exceed 48 characters.
-- Name must not be a duplicate (i.e must not already exist in BrewBook).
-  - Phone number must not be less than 3 digits.
-  - Shifts date must be in the future.
-  - Duplicate dates for shifts are not allowed.
-  - Dates must follow the format `d/M/yyyy`.
-- Notes must not exceed 200 characters.
-</div>
-
 [Back to Features](#features)
 
 ---
@@ -280,16 +274,6 @@ Adds a supplier to the address book.
 - Days or items are not needed if you are unsure what and when your supplier will resupply!
 - Days are automatically deleted when the date has passed so you don't need to edit it!
 * If you want to preserve past days records, you should make copies of the .json file and archive it before the day is deleted!
-</div>
-
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-- Name must not exceed 48 characters.
-- Name must not be a duplicate (i.e must not already exist in BrewBook).
-- Phone number must not be less than 3 digits.
-- Days date must be in the future.
-- Duplicate dates for Days are not allowed.
-- Days must follow the format `d/M/yyyy`.
-- Notes must not exceed 200 characters.
 </div>
 
 [Back to Features](#features)
@@ -341,14 +325,6 @@ Edits an existing person in the address book.
 - The index must be a positive integer.
 - At least one optional fields must be provided.
 - Editing `tags`/`shifts`/`items`/`days`, the existing fields of the person will be removed (i.e adding is not cumulative).
-- Name must not exceed 48 characters.
-- Name must not be a duplicate (i.e must not already exist in BrewBook).
-- Phone number must not be less than 3 digits.
-- Days and Shifts date must be in the future.
-- Duplicate dates for Days and Shifts are not allowed.
-- Days and Shifts must follow the format `d/M/yyyy`.
-- Notes must not exceed 200 characters.
-- Points must be a non-negative integer.
 </div>
 
 [Back to Features](#features)
@@ -488,6 +464,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 </div>
 
 [Back to Features](#features)
+
 --------------------------------------------------------------------------------------------------------------------
 # FAQ
 
