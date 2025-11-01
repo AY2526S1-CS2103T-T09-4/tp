@@ -379,6 +379,10 @@ Deletes the specified person or people from BrewBook.
 * `list all` followed by `delete 2` deletes the 2nd person in the BrewBook.
 * `find alex` followed by `delete 1, 2` deletes the 1st & 2nd person in the BrewBook following the index of the new list.
 
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+- If you accidentally type the same number i.e `delete 2, 2`, don't worry! BrewBook will recognise that you only want to delete contact number 2 and only delete 2.
+</div>
+
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
   - The index must be a positive integer.
 </div>
