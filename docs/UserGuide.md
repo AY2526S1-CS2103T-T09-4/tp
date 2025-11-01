@@ -183,6 +183,17 @@ Explore the [Features](#features) section below for a full list of commands and 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that 1 multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<div markdown="1" class="alert alert-warning">:exclamation: **Generic constraints for fields:**
+- Name must not exceed 48 characters.
+- Name must not be a duplicate (i.e must not already exist in BrewBook).
+- Phone number must not be less than 3 digits.
+- Days and Shifts date must be in the future.
+- Duplicate dates for Days and Shifts are not allowed.
+- Days and Shifts must follow the format `d/M/yyyy`.
+- Notes must not exceed 200 characters.
+- Points must be a non-negative integer.
+</div>
+
 [Back to Table of Contents](#table-of-contents)
 
 ---
@@ -202,17 +213,6 @@ Shows a message explaining how to access the help page.
 
 ---
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints for fields:**
-- Name must not exceed 48 characters.
-- Name must not be a duplicate (i.e must not already exist in BrewBook).
-- Phone number must not be less than 3 digits.
-- Days and Shifts date must be in the future.
-- Duplicate dates for Days and Shifts are not allowed.
-- Days and Shifts must follow the format `d/M/yyyy`.
-- Notes must not exceed 200 characters.
-- Points must be a non-negative integer.
-</div>
-
 ## Adding a customer: `add customer`
 
 Adds a customer to BrewBook and returns to `list all` view.
@@ -228,6 +228,10 @@ Adds a customer to BrewBook and returns to `list all` view.
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
 * If this is a new customer, you don't have to specify points as it will automatically be set to 0.
+</div>
+
+<div markdown="1" class="alert alert-warning">:exclamation: **Generic constraints for fields:**
+- Points has a maximum value of 2147483647. Values higher than this will be interpreted as an invalid negative number.
 </div>
 
 [Back to Features](#features)
@@ -296,8 +300,6 @@ Shows a list of all contacts in BrewBook, filtered by type.
 
 **Examples**:
 - `list all` Displays every contact saved in BrewBook.
-- `list customer` Shows only customers.
-- `list staff` Shows only your café’s employees.
 - `list supplier` Shows only your café’s suppliers.
 
 [Back to Features](#features)
@@ -325,6 +327,7 @@ Edits an existing person in BrewBook and returns to `list all` view.
 - The index must be a positive integer.
 - At least one optional fields must be provided.
 - Editing `tags`/`shifts`/`items`/`days`, the existing fields of the person will be removed (i.e adding is not cumulative).
+- For type specific tags like `shifts`, `items`, `days`, and `points`, you can only edit them if the person type corresponds to these tags. (i.e You can only edit `points` for a person of type customer, if person is of type staff it will not work)
 </div>
 
 [Back to Features](#features)
@@ -332,7 +335,7 @@ Edits an existing person in BrewBook and returns to `list all` view.
 ---
 ## Locating contact by keywords: `find`
 
-Finds contacts whose fields contain any of the given keywords.
+Finds contacts whose fields contain the given keywords using AND search. 
 
 ![find success](images/findResult.png)
 *Figure: Result from executing `find Alex`*
@@ -351,6 +354,7 @@ Finds contacts whose fields contain any of the given keywords.
 
 **Examples**:
 - `find John` returns a person named *john* and *John Doe*.
+- `find James Jake` returns a person named *James Tan*, and will not return 2 separate people with names *James* and *Tan*
 - `find n/alex p/12345678` returns a person named *Alex Yeoh* who has phone number `12345678`. <br>
 
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
