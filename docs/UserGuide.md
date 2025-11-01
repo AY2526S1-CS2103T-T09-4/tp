@@ -381,12 +381,12 @@ Deletes the specified person or people from the address book.
 ---
 ### Sorting contacts: `sort`
 
-Sorts your contact list based on a specific field and optional order — for example, by name in ascending order.
+Sorts your contact list based on a specific field and optional order. If no order is given, it will be assumed to be in ascending order.
 
 ![sort success](images/sortSuccess.png)
 *Figure: Result from executing `sort name` such that contacts are now in alphabetical order*
 
-**Format**: `sort FIELD`
+**Format**: `sort FIELD [o/ORDER]`
 
 **Valid options for `FIELD`:**
 - `name` — sorts contacts alphabetically by name.
@@ -395,15 +395,14 @@ Sorts your contact list based on a specific field and optional order — for exa
 - `address` — sorts contacts alphabetically by address.
 - `type` — sorts contacts by their role (customer, staff, or supplier).
 
+**Valid options for `ORDER`:**
+- `asc` — sorts in ascending order.
+- `desc` — sorts in descending order.
+
 **Examples**:
 - `sort name` sorts all contacts by name in ascending order (A–Z).
 - `sort phone o/desc` sorts contacts by phone number in descending order.
 - `sort type o/asc` groups contacts by type (customer → staff → supplier) in ascending order.
-
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**
-- You can specify your sort order by using `o/asc` for ascending and `o/desc` for descending.
-- The default sort order is ascending.
-</div>
 
 [Back to Features](#features)
 
