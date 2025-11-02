@@ -196,7 +196,7 @@ public class FindCommandParserTest {
     }
     @Test
 
-    public void parse_items_supplierHayBuilt_butNeedleMissing_returnsZero() throws Exception {
+    public void parse_invalidItems_returnsZero() throws Exception {
         Model actual = freshModel();
         Model expected = freshModel();
 
