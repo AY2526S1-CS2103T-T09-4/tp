@@ -133,7 +133,7 @@ public class FindCommandParserTest {
 
     @Test
     public void execute_address_returnsZero() throws Exception {
-        FindCommand cmd = parser.parse("find a/123 Clementi");
+        FindCommand cmd = parser.parse(" a/123 Clementi");
 
         Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -147,7 +147,7 @@ public class FindCommandParserTest {
     @Test
     public void execute_shifts_returnsZero() throws Exception {
         // Non-staff person with shifts
-        FindCommand cmd = parser.parse("find n/Alice shifts/ 2030-10-10");
+        FindCommand cmd = parser.parse(" n/Alice shifts/ 2030-10-10");
         Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expected.updateFilteredPersonList(p -> false);
@@ -160,7 +160,7 @@ public class FindCommandParserTest {
     @Test
     public void execute_items_returnsZero() throws Exception {
         // Non-supplier person with items
-        FindCommand cmd = parser.parse("find n/Alice items/egg");
+        FindCommand cmd = parser.parse(" n/Alice items/egg");
         Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expected.updateFilteredPersonList(p -> false);
@@ -175,7 +175,7 @@ public class FindCommandParserTest {
         Model actual = freshModel();
         Model expected = freshModel();
 
-        FindCommand cmd = parser.parse("items/flour");
+        FindCommand cmd = parser.parse(" items/flour");
 
         expected.updateFilteredPersonList(p -> false);
         assertCommandSuccess(cmd, actual,
@@ -188,7 +188,7 @@ public class FindCommandParserTest {
         Model actual = freshModel();
         Model expected = freshModel();
 
-        FindCommand cmd = parser.parse("items/egg, flour");
+        FindCommand cmd = parser.parse(" items/egg, flour");
 
         expected.updateFilteredPersonList(p -> false);
 
@@ -240,7 +240,7 @@ public class FindCommandParserTest {
         Model actual = new ModelManager(ab, new UserPrefs());
         Model expected = new ModelManager(ab, new UserPrefs());
 
-        FindCommand cmd = parser.parse("items/flour");
+        FindCommand cmd = parser.parse(" items/flour");
 
         expected.updateFilteredPersonList(p -> false);
 
@@ -265,7 +265,7 @@ public class FindCommandParserTest {
         actual.addPerson(supplier);
         expected.addPerson(supplier);
 
-        FindCommand cmd = new FindCommandParser().parse("items/own su");
+        FindCommand cmd = new FindCommandParser().parse(" items/own su");
 
         expected.updateFilteredPersonList(p -> false);
         assertCommandSuccess(cmd, actual,
@@ -273,9 +273,50 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_items_returns() throws Exception {
+        Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        FindCommandParser findParser = new FindCommandParser();
+        FindCommand find = findParser.parse(" n/Elle items/egg, milk");
+
+        expected.updateFilteredPersonList(p -> p.equals(TypicalPersons.ELLE));
+        assertCommandSuccess(find, actual,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1), expected);
+    }
+
+    @Test
+    public void parse_wrongItems_returnsZero() throws Exception {
+        Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        FindCommandParser findParser = new FindCommandParser();
+        FindCommand find = findParser.parse(" n/Elle items/egg, sugars");
+
+        expected.updateFilteredPersonList(p -> false);
+        assertCommandSuccess(find, actual,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
+        assertEquals(java.util.List.of(), actual.getFilteredPersonList());
+    }
+
+    @Test
+    public void parse_items_nonSupplier() throws Exception {
+        Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        FindCommandParser findParser = new FindCommandParser();
+        FindCommand find = findParser.parse(" n/Alice items/egg");
+
+        expected.updateFilteredPersonList(p -> false);
+        assertCommandSuccess(find, actual,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
+        assertEquals(java.util.List.of(), actual.getFilteredPersonList());
+    }
+
+    @Test
     public void execute_days_returnsZero() throws Exception {
         // Non-supplier person with days
-        FindCommand cmd = parser.parse("find n/Alice days/2025-10-20");
+        FindCommand cmd = parser.parse(" n/Alice days/2025-10-20");
         Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
