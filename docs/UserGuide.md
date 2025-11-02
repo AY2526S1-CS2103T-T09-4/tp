@@ -29,10 +29,10 @@ instead we recommend you use it like a reference:
 
 - **New users**: Start with the **Quick start** section. It walks you through installation, setup, and your very first commands.
 - **Everyday use**: Jump to the **Features** section whenever you want to learn a specific command. Each command has:
-  - A short description of what it does.
-  - The exact format you need to type.
-  - Examples you can copy and paste.
-  - Notes on tips, constraints or special cases.
+    - A short description of what it does.
+    - The exact format you need to type.
+    - Examples you can copy and paste.
+    - Notes on tips, constraints or special cases.
 - **Troubleshooting**: Check the **FAQ** and **Known issues** sections if something doesn't work as expected.
 - **At a glance**: Use the **Command summary** at the end for a quick reference to all commands in one place.
 
@@ -83,9 +83,9 @@ Let’s check whether it’s already installed on your computer.
 
 - **On Linux**
     1. In the **Terminal**, enter the following:
-    **Debian/Ubuntu (apt):**
-      <br>`sudo apt update`
-      <br>`sudo apt install openjdk-17-jdk`
+       **Debian/Ubuntu (apt):**
+       <br>`sudo apt update`
+       <br>`sudo apt install openjdk-17-jdk`
     2. When done, repeat the steps above to confirm it says **version 17**.
 
 ---
@@ -99,19 +99,19 @@ Let’s check whether it’s already installed on your computer.
 ## Step 3: Set up your BrewBook folder
 
 1. Create a new folder anywhere you like — for example:
-   - **Windows:** `C:\Users\Jean\Documents\BrewBook`
-   - **macOS:** `/Users/Jean/Documents/BrewBook` or `~/Documents/BrewBook`
-   - **Linux:** `/home/Jean/Documents/BrewBook`
+    - **Windows:** `C:\Users\Jean\Documents\BrewBook`
+    - **macOS:** `/Users/Jean/Documents/BrewBook` or `~/Documents/BrewBook`
+    - **Linux:** `/home/Jean/Documents/BrewBook`
 2. Move the downloaded **`BrewBook.jar`** file into that folder.
-      BrewBook will automatically save your data there each time you use it.
+   BrewBook will automatically save your data there each time you use it.
 
 ---
 ## Step 4: Open BrewBook
 
 1. Open your **Command Prompt** or **Terminal**
 2. Type `cd [folderpath]` to navigate to where your BrewBook.jar file exists.
-    > If your .jar file is in the`Users\(name)\Downloads` directory and you are currently in `Users\(name)`,
-    > you should type `cd Downloads` in the **Command Prompt** or **Terminal**.
+   > If your .jar file is in the`Users\(name)\Downloads` directory and you are currently in `Users\(name)`,
+   > you should type `cd Downloads` in the **Command Prompt** or **Terminal**.
 3. Type `java -jar BrewBook.jar` and BrewBook will now open to its' landing page populated with sample data for your easy reference.
 
 ![Ui](images/Ui.png)
