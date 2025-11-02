@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Note {
 
-    public static final String MESSAGE_CONSTRAINTS = "Notes can take any values not exceeding 200 words";
+    public static final String MESSAGE_CONSTRAINTS = "Notes can take any values not exceeding 200 characters";
 
     private static final int MAX_LENGTH = 200;
 

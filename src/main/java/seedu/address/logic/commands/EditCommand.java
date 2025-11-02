@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFTS;
@@ -59,7 +60,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]\n\n"
+            + "[" + PREFIX_POINTS + "POINTS] "
+            + "[" + PREFIX_SHIFTS + "SHIFT[, SHIFT]...] "
+            + "[" + PREFIX_ITEMS + "ITEM[, ITEM]...] "
+            + "[" + PREFIX_DAYS + "DAY[, DAY]...] "
+            + "[" + PREFIX_NOTE + "NOTE] "
+            + "[" + PREFIX_TAG + "TAG]...\n\n"
             + "**Examples:**\n"
             + COMMAND_WORD + " 1 " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com\n"
             + COMMAND_WORD + " 2 " + PREFIX_NAME + "New Name " + PREFIX_ADDRESS + "New Address\n"
