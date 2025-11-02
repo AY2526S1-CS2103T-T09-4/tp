@@ -324,7 +324,7 @@ Shows a list of all contacts in BrewBook, filtered by type.
 Edits an existing person in BrewBook and returns to `list all` view.
 
 ![edit customer success](images/editResult.png)
-*Figure: Result from executing `edit 1 n/Alex Yeoh` when the name was originally Alex Yeo*
+*Figure: Result from executing `edit 1 n/Alex` when the name was originally Alex Yeoh*
 
 **Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [notes/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]..] [items/ITEM[, ITEM]...] [days/DAY[, DAY]...] [t/TAG]…​`
 
@@ -390,7 +390,7 @@ Finds contacts whose fields contain the given keywords using AND search.
 Deletes the specified person or people from BrewBook.
 
 ![delete success](images/deleteSuccess.png)
-*Figure: Result from executing `delete 1, 2` to delete Alex and Bernice*
+*Figure: Result from executing `delete 1, 2` to delete Alex and Charlotte*
 
 **Format**: `delete INDEX[, INDEX, ...]`
 
