@@ -231,7 +231,6 @@ public class FindCommandParserTest {
     public void execute_itemsWithSupplier_returnsZero() throws Exception {
         // Create a model with a supplier that has items
         AddressBook ab = new AddressBook();
-        // Assuming you have a builder or constructor for Supplier
         Person supplier = new SupplierBuilder()
                 .withName("Test Supplier")
                 .withItems("egg", "milk")
