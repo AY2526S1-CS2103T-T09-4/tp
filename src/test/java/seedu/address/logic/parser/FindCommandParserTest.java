@@ -194,7 +194,20 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
         assertEquals(java.util.List.of(), actual.getFilteredPersonList());
     }
+    @Test
 
+    public void parse_items_supplierHayBuilt_butNeedleMissing_returnsZero() throws Exception {
+        Model actual = freshModel();
+        Model expected = freshModel();
+
+        FindCommand cmd = parser.parse("items/eggs");
+
+        expected.updateFilteredPersonList(p -> false);
+
+        assertCommandSuccess(cmd, actual,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
+        assertEquals(java.util.List.of(), actual.getFilteredPersonList());
+    }
 
     @Test
     public void execute_days_returnsZero() throws Exception {
