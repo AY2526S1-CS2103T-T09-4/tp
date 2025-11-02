@@ -124,12 +124,13 @@ public class FindCommandParser implements Parser<FindCommand> {
                             .collect(Collectors.toList());
                     return (Person p) -> {
                         if (p.getContactType() != Person.ContactType.SUPPLIER) { return false; }
-                        final String hay = p.getItems().stream()
+                        final List<String> itemsLower = p.getItems().stream()
                                 .map(Object::toString)
                                 .map(String::toLowerCase)
-                                .collect(Collectors.joining(" | "));
+                                .collect(Collectors.toList());
 
-                        return needles.stream().allMatch(hay::contains);
+                        return needles.stream().allMatch(needle ->
+                                itemsLower.stream().anyMatch(item -> item.contains(needle)));
                     };
                 },
                 perField);

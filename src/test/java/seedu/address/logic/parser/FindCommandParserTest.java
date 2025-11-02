@@ -249,6 +249,30 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_invalidItems_returnsZero() throws Exception {
+        // Supplier has TWO separate items: "brown" and "sugar"
+        Model actual = new ModelManager(new AddressBook(), new UserPrefs());
+        Model expected = new ModelManager(new AddressBook(), new UserPrefs());
+
+        Person supplier = new SupplierBuilder()
+                .withName("Choco Co")
+                .withPhone("99990000")
+                .withEmail("choco@example.com")
+                .withAddress("1 Test Ave")
+                .withItems("brown", "sugar")
+                .build();
+
+        actual.addPerson(supplier);
+        expected.addPerson(supplier);
+
+        FindCommand cmd = new FindCommandParser().parse("items/own su");
+
+        expected.updateFilteredPersonList(p -> false);
+        assertCommandSuccess(cmd, actual,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
+    }
+
+    @Test
     public void execute_days_returnsZero() throws Exception {
         // Non-supplier person with days
         FindCommand cmd = parser.parse("find n/Alice days/2025-10-20");
