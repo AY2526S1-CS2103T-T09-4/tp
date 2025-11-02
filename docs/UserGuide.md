@@ -221,7 +221,7 @@ Adds a customer to BrewBook and returns to `list all` view.
 ![add customer success](images/addCustomer.png)
 *Figure: Result from executing `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`*
 
-**Format**: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…`
+**Format**: `add customer n/NAME p/PHONE e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTES] [t/TAG]...`
 
 **Examples:**
 - `add customer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a customer named *John Doe* with phone `98765432`, email `johnd@example.com`, and address `John street, block 123, #01-01`.
@@ -247,7 +247,7 @@ Adds a staff to the BrewBook and returns to `list all` view.
 ![add staff success](images/addStaff.png)
 *Figure: Result from executing `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`*
 
-**Format**: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...][t/TAG]…`
+**Format**: `add staff n/NAME p/PHONE e/EMAIL a/ADDRESS [shifts/SHIFTS[, SHIFTS]...] [notes/NOTES] [t/TAG]...`
 
 **Examples:**
 - `add staff n/Amy Lok p/98765431 e/amyl@example.com a/Amy street, block 123, #02-05 notes/only weekends` adds a staff member named *Amy Lok* with phone `98765431`, email `amyl@example.com`, address `Amy street, block 123, #01-01`, and notes `only weekends`.
@@ -276,7 +276,7 @@ Adds a supplier to the BrewBook and returns to `list all` view.
 ![add supplier success](images/addSupplier.png)
 *Figure: Result from executing: `add supplier n/Ben Lim p/98765432 e/benlim@example.com a/123 Clementi Ave 3 items/Flour, Eggs days/10/12/2025, 12/12/2025 notes/Halal supplier t/preferred`*
 
-**Format**: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [items/ITEM[, ITEM]...] [days/DAY[, DAY]...] [notes/NOTES] [t/TAG]...`
+**Format**: `add supplier n/NAME p/PHONE e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...`
 
 **Examples**:
 - `add supplier n/Amy Lok p/12345670  e/amyl@example.com a/Amy street, block 123, #01-05` adds a supplier named *Amy Lok* with phone `12345670`, email `amyl@example.com`, address `Amy street, block 123, #01-05`
@@ -575,9 +575,9 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 
 Action | Format, Examples
 --------|------------------
-**Add customer** | `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…​` <br> e.g., `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`
-**Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...] [t/TAG]…` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/4/2025 notes/can only do weekdays t/partTime`
-**Add supplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...​` <br> e.g., `add supplier n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/28/10/2025`
+**Add customer** | `add customer n/NAME p/PHONE e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTES] [t/TAG]...` <br> e.g., `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`
+**Add staff** | `add staff n/NAME p/PHONE e/EMAIL a/ADDRESS [shifts/SHIFTS[, SHIFTS]...] [notes/NOTES] [t/TAG]...` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/4/2025 notes/can only do weekdays t/partTime`
+**Add supplier** | `add supplier n/NAME p/PHONE e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...` <br> e.g., `add supplier n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/28/10/2025`
 **List** | `list [all/customer/staff/supplier]`
 **Sort** | `sort name o/asc`
 **Summary** | `summary`
