@@ -14,7 +14,7 @@ public class DateParser {
     public static final String MESSAGE_FORMAT_CONSTRAINT = "Invalid date format,"
             + " Expected format: d/M/yyyy";
     public static final DateTimeFormatter FORMATTER =
-            DateTimeFormatter.ofPattern("dd/MM/yyyy").withResolverStyle(ResolverStyle.STRICT);
+            DateTimeFormatter.ofPattern("d/M/yyyy").withResolverStyle(ResolverStyle.SMART);
 
     /**
      * Parses a date string in the format d/M/yyyy into a LocalDate.
