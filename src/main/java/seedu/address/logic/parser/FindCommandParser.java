@@ -77,6 +77,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         Function<String, List<String>> toKeywords = s -> Arrays.stream(s.trim().split("\\s+"))
                 .filter(k -> !k.isBlank())
                 .collect(Collectors.toList());
+        Function<String, List<String>> toCommaPhrases = s -> Arrays.stream(s.trim().split("\\s*,\\s*"))
+                .map(String::trim)
+                .filter(t -> !t.isEmpty())
+                .collect(Collectors.toList());
 
         // Common to all Person
         map.getAllValues(PREFIX_NAME).stream()
@@ -84,9 +88,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .filter(s -> !s.isEmpty())
                 .reduce((a, b) -> a + " " + b)
                 .ifPresent(rawPhrase -> {
-                    String keyword = norm(rawPhrase);
-                    perField.add((Person p) ->
-                            norm(p.getName().fullName).contains(keyword));
+                    String keyword = rawPhrase.trim().toLowerCase().replaceAll("\\s+", " ");
+                    if (!keyword.isEmpty()) {
+                        perField.add((Person p) -> p.getName().fullName.toLowerCase()
+                                .replaceAll("\\s+", " ").contains(keyword));
+                    }
                 });
         addIfPresent(map, PREFIX_PHONE, toKeywords,
                 kws -> new FieldContainsKeywordsPredicate(p -> p.getPhone().value, kws, false), perField);
@@ -111,13 +117,21 @@ public class FindCommandParser implements Parser<FindCommand> {
                 perField);
 
         // Supplier only fields: items, days
-        addIfPresent(map, PREFIX_ITEMS, toKeywords,
-                kws -> new FieldContainsKeywordsPredicate(p -> {
-                    if (p.getContactType() != Person.ContactType.SUPPLIER) {
-                        return "";
-                    }
-                    return p.getItems().stream().map(Object::toString).collect(Collectors.joining(" "));
-                }, kws, false),
+        addIfPresent(map, PREFIX_ITEMS, toCommaPhrases,
+                kws -> {
+                    final List<String> needles = kws.stream()
+                            .map(String::toLowerCase)
+                            .collect(Collectors.toList());
+                    return (Person p) -> {
+                        if (p.getContactType() != Person.ContactType.SUPPLIER) return false;
+                        final String hay = p.getItems().stream()
+                                .map(Object::toString)
+                                .map(String::toLowerCase)
+                                .collect(Collectors.joining(" | "));
+
+                        return needles.stream().allMatch(hay::contains);
+                    };
+                },
                 perField);
 
         addIfPresent(map, PREFIX_DAYS, toKeywords,
@@ -148,8 +162,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         String preamble = map.getPreamble().trim();
         if (!preamble.isEmpty()) {
-            String needle = norm(preamble);
-            perField.add((Person p) -> norm(p.getName().fullName).contains(needle));
+            String needle = preamble.toLowerCase().replaceAll("\\s+", " ");
+            if(!needle.isEmpty()) {
+                perField.add((Person p) -> p.getName().fullName.toLowerCase()
+                        .replaceAll("\\s+", " ").contains(needle));
+            }
         }
 
         if (perField.isEmpty()) {
