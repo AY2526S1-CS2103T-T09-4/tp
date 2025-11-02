@@ -123,7 +123,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                             .map(String::toLowerCase)
                             .collect(Collectors.toList());
                     return (Person p) -> {
-                        if (p.getContactType() != Person.ContactType.SUPPLIER) return false;
+                        if (p.getContactType() != Person.ContactType.SUPPLIER) { return false; }
                         final String hay = p.getItems().stream()
                                 .map(Object::toString)
                                 .map(String::toLowerCase)
@@ -163,7 +163,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         String preamble = map.getPreamble().trim();
         if (!preamble.isEmpty()) {
             String needle = preamble.toLowerCase().replaceAll("\\s+", " ");
-            if(!needle.isEmpty()) {
+            if (!needle.isEmpty()) {
                 perField.add((Person p) -> p.getName().fullName.toLowerCase()
                         .replaceAll("\\s+", " ").contains(needle));
             }
