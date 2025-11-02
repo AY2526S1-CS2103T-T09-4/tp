@@ -289,6 +289,7 @@ Adds a supplier to the BrewBook and returns to `list all` view.
 * If a valid format but incorrect date for Days is inputted (e.g 29/2/2026, a non-leap year), then BrewBook will automatically find the next nearest valid date to replace it (28/2/2026).
 * If you need to add duplicate numbers for a supplier (i.e. Company contact hotline), this will be a valid input!
 * If you want to preserve past days records, you should make copies of the .json file and archive it before the day is deleted! See how to do it in FAQ.
+</div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
 - Unable to add a person as multiple types. (i.e. If John is added as a supplier, you cannot add him again as a customer).
