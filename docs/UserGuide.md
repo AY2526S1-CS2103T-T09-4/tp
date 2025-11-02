@@ -292,7 +292,7 @@ Adds a supplier to the BrewBook and returns to `list all` view.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
-- Unable to add a person as multiple types. (i.e. If John is added as a supplier, you cannot add him again as a customer)
+- Unable to add a person as multiple types. (i.e. If John is added as a supplier, you cannot add him again as a customer).
 </div>
 
 [Back to Features](#features)
@@ -399,7 +399,7 @@ Deletes the specified person or people from BrewBook.
 * `find alex` followed by `delete 1, 2` deletes the 1st & 2nd person in the BrewBook following the index of the new list.
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
-- If you accidentally type the same number i.e `delete 2, 2`, don't worry! BrewBook will recognise that you only want to delete contact number 2 and only delete 2.
+- If you accidentally type the same number (i.e `delete 2, 2`), don't worry! BrewBook will recognise that you only want to delete contact number 2 and only delete 2.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
