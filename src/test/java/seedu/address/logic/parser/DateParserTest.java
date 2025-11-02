@@ -24,7 +24,7 @@ public class DateParserTest {
 
     @Test
     public void parseDate_nonExistentDate_throwsIllegalArgumentException() throws ParseException {
-        assertEquals(LocalDate.of(2025, 2, 28), DateParser.parseDate("31/02/2025")); // Feb 31 doesn't exist
+        assertThrows(ParseException.class, () -> DateParser.parseDate("31/02/2025"));
     }
 
     @Test
