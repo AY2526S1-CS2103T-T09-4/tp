@@ -7,7 +7,6 @@ title: Developer Guide
 [Design](#design)<br>
 [Design Decisions](#design-decisions)<br>
 [Planned Enhancements](#planned-enhancements)<br>
-[Implementation](#implementation)<br>
 [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)<br>
 [Appendix: Requirements](#appendix-requirements)<br>
 [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)<br>
@@ -143,6 +142,7 @@ The `Storage` component,
 ### Common classes
 Classes used by multiple components are in the `seedu.address.commons` package. <br> <br>
 [Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Design Decisions**
 
@@ -155,12 +155,14 @@ Classes used by multiple components are in the `seedu.address.commons` package. 
 #### Phone
 * **Digits only**: Restricting phone numbers to digits minimizes user confusion and input mistakes, such as accidentally including `+` or other symbols that the system uses differently.
 * **Minimum length of 3 digits**: Phone numbers shorter than three digits are generally invalid, so this prevents erroneous input.
+* **Maximum length of 15 digits**: The maximum length of an international phone number is 15 digits, as specified by the International Telecommunication Union's (ITU) E.164 standard.
 
 #### Email
 * The email validation enforces a stricter, simplified subset of RFC 5322 standards. Although this excludes some rare cases allowed by the RFC, it enhances security and usability without noticeable loss of functionality.  
 
 #### Address
-* No restrictions are applied to allow flexibility in real-world address formats.
+* No restrictions on characters type to allow flexibility in real-world address formats.
+* **Maximum limit of 254 characters**: This limit is a deliberate technical trade-off that balances flexibility with performance, and it adheres to common industry standards for data storage.
 
 #### Points
 * Only positive integers are accepted, reflecting common practice in F&B loyalty programs in Singapore. 
@@ -170,11 +172,10 @@ Classes used by multiple components are in the `seedu.address.commons` package. 
 * Only future days and shifts are tracked to avoid cluttering the system with outdated data. Past shifts no longer require active management and are irrelevant to current planning.
 
 #### Items
-* Alphanumeric characters and all special symbols are accepted except commas (,) and slashes (/). Commas are reserved as separators between items, and slashes serve as prefixes or command indicators. This restriction maintains clear parsing logic while supporting rich item description. 
-
-
+* Alphanumeric characters and all special symbols are accepted except commas (,) and slashes (/). Commas are reserved as separators between items, and slashes serve as prefixes or command indicators. This restriction maintains clear parsing logic while supporting rich item description.
 
 [Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Planned Enhancements**
@@ -187,98 +188,11 @@ Team size: 5
 5. Allow single-word aliases for common commands: BrewBook currently requires full command words like `list all` or `sort name`. We will tweak the command parsing to allow the use of single-letter or short aliases for the most frequent commands to improve CLI speed. For example: `ls all` will be an accepted alias for `list all`.
 6. Improve input feedback for partially correct commands: When a user is typing a command and pauses, the system can be more helpful. We will tweak the command result to provide immediate, context-sensitive suggestions or reminders based on the partially entered command. For instance, if the user types add customer `n/`, a small hint might appear: (Required: `p/`, `e/`, `a/`).
 7. Enhance help to provide command-specific guidance: The current help command opens a windows which link to the user guide. We will tweak the help command parser to accept an optional command name. For example, typing `help list` will display a concise summary of the `list` command's format, parameters and examples directly in the command result box, providing faster, targeted help without external resources.
-8. Highlight matching keywords in find results: After a find command, the GUI displays the list of matching contacts, but it does not show why they matched. We will tweak the contact card display so that when a list is populated from a find result, the matching keyword (e.g., "Lee") is highlighted on the contact card wherever it was found (in the name, notes, etc.), providing immediate visual feedback on search relevance.
+8. Enhance add and edit to support multirole contacts: The application currently forces a contact to be exclusively one type (Customer, Staff, or Supplier). This is a flaw, as a staff member may also be a loyal customer, forcing the user to create duplicate entries. We will tweak the contact model and the add/edit commands to allow a contact to possess multiple roles. The add command will be enhanced to accept multiple types (e.g., add customer staff n/...), and the edit command will be tweaked to add or remove roles from an existing contact (e.g., edit 4 role/add(customer)), allowing a single entry to store all relevant information (like points/ for their customer profile and shifts/ for their staff profile).
 9. Enhance edit command to support additive/subtractive list updates: The current edit command overwrites all data for list-based fields. For example, editing shifts for a staff member who already has shifts scheduled will delete all previous shifts and replace them with the new input. We will tweak the edit command's syntax to allow for adding or removing specific items from lists like shifts, items, or tags. For example, `edit 1 shifts/add(2026-12-10)` will add the new shift without deleting existing ones, and `edit 1 shifts/remove(2026-12-04)` will remove only that specific shift.
-10. Tweak `list` command to default to `list all`: The current list command requires a specific parameter (e.g., `list all`, `list customer`). If a user types just `list` with no arguments, it will result in an "Invalid command format" error. We will tweak the command parser to make the `list` command more intuitive. If the user types only `list`, BrewBook will automatically treat it as an alias for `list all`, immediately displaying all contacts instead of showing an error. <br>
+10. Implement a unified calendar view for upcoming dates: The current system displays staff shifts and supplier days as simple lists of dates, requiring users to manually track upcoming events. We plan to tweak the UI's display panel to include an optional Calendar View toggle. When activated, this view will aggregate and visually display all future shifts and days on a simple, scrollable monthly calendar, making it much easier for cafe managers to spot staffing holes or incoming deliveries at a glance, enhancing the utility of the existing date fields.
+
 [Back to Table of Contents](#table-of-contents)
-
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram displays how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -301,10 +215,7 @@ _{more aspects and alternatives to be added}_
 **Target user profile**:
 Manager of a small cafe
 
-
 **Value proposition**: BrewBook helps managers of small cafes to manage different stakeholders, including customers, suppliers and employees (full-time/part-time). It helps cafe managers coordinate with customers, suppliers, and staff by linking roles directly to persons—so they don’t need to remember who does what.
-
-
 
 ### User stories
 

@@ -317,6 +317,7 @@ Adds a supplier to the BrewBook and returns to `list all` view.
 * If you need to add duplicate numbers for a supplier (i.e. Company contact hotline), this will be a valid input!
 * If you want to preserve past days records, you should make copies of the .json file and archive it before the day is deleted! See how to do it in FAQ.
 </div>
+
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
 - Unable to add a person as multiple types. (i.e. If John is added as a supplier, you cannot add him again as a customer).
 </div>
