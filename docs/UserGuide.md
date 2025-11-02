@@ -369,6 +369,7 @@ Finds contacts whose fields contain the given keywords using AND search.
 **Examples**:
 - `find John` returns a person named *john* and *John Doe*.
 - `find James Tan` returns a person named *James Tan*, and will not return 2 separate people with names *James* and *Tan*
+- `find Lim Ben` returns a person named *Lim Ben*, and will not return a person named *Ben Lim*.
 - `find n/alex p/12345678` returns a person named *Alex Yeoh* who has phone number `12345678`. <br>
 
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
