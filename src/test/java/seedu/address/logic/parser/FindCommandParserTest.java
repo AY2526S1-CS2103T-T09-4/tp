@@ -18,6 +18,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.SupplierBuilder;
 import seedu.address.testutil.TypicalPersons;
 
 public class FindCommandParserTest {
@@ -223,6 +225,28 @@ public class FindCommandParserTest {
 
         assertCommandSuccess(cmd, actual, expectedMessage, expected);
         assertEquals(List.of(), actual.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_itemsWithSupplier_returnsZero() throws Exception {
+        // Create a model with a supplier that has items
+        AddressBook ab = new AddressBook();
+        // Assuming you have a builder or constructor for Supplier
+        Person supplier = new SupplierBuilder()
+                .withName("Test Supplier")
+                .withItems("egg", "milk")
+                .build();
+        ab.addPerson(supplier);
+
+        Model actual = new ModelManager(ab, new UserPrefs());
+        Model expected = new ModelManager(ab, new UserPrefs());
+
+        FindCommand cmd = parser.parse("items/flour");
+
+        expected.updateFilteredPersonList(p -> false);
+
+        assertCommandSuccess(cmd, actual,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
     }
 
     @Test
