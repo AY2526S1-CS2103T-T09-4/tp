@@ -194,19 +194,35 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
         assertEquals(java.util.List.of(), actual.getFilteredPersonList());
     }
-    @Test
 
-    public void parse_invalidItems_returnsZero() throws Exception {
+    @Test
+    public void execute_items_filtersNonSuppliers() throws Exception {
+        FindCommand cmd = parser.parse("items/egg");
+
         Model actual = freshModel();
         Model expected = freshModel();
 
-        FindCommand cmd = parser.parse("items/eggs");
+        expected.updateFilteredPersonList(p -> false);
+
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+
+        assertCommandSuccess(cmd, actual, expectedMessage, expected);
+        assertEquals(List.of(), actual.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_itemsMultiple_allMatch() throws Exception {
+        FindCommand cmd = parser.parse("items/egg, milk");
+
+        Model actual = freshModel();
+        Model expected = freshModel();
 
         expected.updateFilteredPersonList(p -> false);
 
-        assertCommandSuccess(cmd, actual,
-                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
-        assertEquals(java.util.List.of(), actual.getFilteredPersonList());
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+
+        assertCommandSuccess(cmd, actual, expectedMessage, expected);
+        assertEquals(List.of(), actual.getFilteredPersonList());
     }
 
     @Test
