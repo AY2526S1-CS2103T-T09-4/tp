@@ -166,7 +166,7 @@ Explore the [Features](#features) section below for a full list of commands and 
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add supplier n/NAME`, `NAME` is a parameter which can be used as `add supplier n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -185,6 +185,7 @@ Explore the [Features](#features) section below for a full list of commands and 
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Generic constraints for fields:**
 - Name must not exceed 48 characters.
+- Name does not allow special characters. You may spell them in full instead (i.e s/o -> son of)
 - Name must not be a duplicate (i.e must not already exist in BrewBook).
 - Phone number must not be less than 3 digits.
 - Days and Shifts date must be in the future.
@@ -231,8 +232,9 @@ Adds a customer to BrewBook and returns to `list all` view.
 * If you need to add duplicate numbers for a customer (i.e. family phone), this will be a valid input!
 </div>
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Generic constraints for fields:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
 - Points has a maximum value of 2147483647. Values higher than this will be interpreted as an invalid negative number.
+- Unable to add a person as multiple types. (i.e. If John is added as a customer, you cannot add him again as a supplier)
 </div>
 
 [Back to Features](#features)
@@ -255,9 +257,13 @@ Adds a staff to the BrewBook and returns to `list all` view.
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 * Shifts are not needed if you are unsure when your staff is available to start!
 * Shifts are automatically deleted when the date has passed so you don't need to edit it!
+* If a valid format but incorrect date for shifts is inputted (e.g 29/2/2026, a non-leap year), then BrewBook will automatically find the next nearest valid date to replace it (28/2/2026).
 * If you need to add duplicate numbers for a staff (i.e. Shared Shift Phone), this will be a valid input!
 * If you want to preserve past shifts records, you should make copies of the .json file and archive it before the shift is deleted! See how to do it [here](#archive-data).
+</div>
 
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
+- Unable to add a person as multiple types. (i.e. If John is added as a staff, you cannot add him again as a supplier)
 </div>
 
 [Back to Features](#features)
@@ -280,8 +286,13 @@ Adds a supplier to the BrewBook and returns to `list all` view.
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - Days or items are not needed if you are unsure what and when your supplier will resupply!
 - Days are automatically deleted when the date has passed so you don't need to edit it!
+* If a valid format but incorrect date for Days is inputted (e.g 29/2/2026, a non-leap year), then BrewBook will automatically find the next nearest valid date to replace it (28/2/2026).
 * If you need to add duplicate numbers for a supplier (i.e. Company contact hotline), this will be a valid input!
 * If you want to preserve past days records, you should make copies of the .json file and archive it before the day is deleted! See how to do it [here](#archive-data)!
+</div>
+
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
+- Unable to add a person as multiple types. (i.e. If John is added as a supplier, you cannot add him again as a customer)
 </div>
 
 [Back to Features](#features)
@@ -363,7 +374,7 @@ Finds contacts whose fields contain the given keywords using AND search.
 
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - The search is case-insensitive so don't worry about capitalisation!
-- Persons matching all parameters will be returned (i.e. AND search).
+- Persons matching all stated parameters will be returned (i.e. AND search).
 - If no prefix is specified, find will resort to search by name for the given keyword.
 </div>
 
@@ -534,7 +545,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 
 
 **Q**: Can I add multiple tags or items at once?<br>
-**A**: Yes. Please refer to add command to see how to do it.
+**A**: Yes. Please refer to add commands to see how to do it.
 
 
 **Q**: What date format should I use?<br>
