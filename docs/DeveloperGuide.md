@@ -5,6 +5,7 @@ title: Developer Guide
 ## Table of Contents
 [Setting up, getting started](#setting-up-getting-started)<br>
 [Design](#design)<br>
+[Design Decisions](#design-decisions)<br>
 [Planned Enhancements](#planned-enhancements)<br>
 [Implementation](#implementation)<br>
 [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)<br>
@@ -140,8 +141,39 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
-
 Classes used by multiple components are in the `seedu.address.commons` package. <br> <br>
+[Back to Table of Contents](#table-of-contents)
+--------------------------------------------------------------------------------------------------------------------
+## **Design Decisions**
+
+### Parser Validation
+
+#### Name
+* **Only alphanumeric characters and spaces**: BrewBook restricts names to alphanumeric characters and spaces to suit small café managers’ needs. This simplifies input, reduces potential errors, and streamlines operations in a busy environment.
+* **Maximum length of 48 characters**: The user interface has practical space limits, and 48 characters strikes a balance between allowing detailed names and maintaining readability.
+
+#### Phone
+* **Digits only**: Restricting phone numbers to digits minimizes user confusion and input mistakes, such as accidentally including `+` or other symbols that the system uses differently.
+* **Minimum length of 3 digits**: Phone numbers shorter than three digits are generally invalid, so this prevents erroneous input.
+
+#### Email
+* The email validation enforces a stricter, simplified subset of RFC 5322 standards. Although this excludes some rare cases allowed by the RFC, it enhances security and usability without noticeable loss of functionality.  
+
+#### Address
+* No restrictions are applied to allow flexibility in real-world address formats.
+
+#### Points
+* Only positive integers are accepted, reflecting common practice in F&B loyalty programs in Singapore. 
+* BrewBook limits points to a maximum of `Integer.MAX_VALUE` due to Java’s integer size constraints.
+
+#### Shifts / Days
+* Only future days and shifts are tracked to avoid cluttering the system with outdated data. Past shifts no longer require active management and are irrelevant to current planning.
+
+#### Items
+* Alphanumeric characters and all special symbols are accepted except commas (,) and slashes (/). Commas are reserved as separators between items, and slashes serve as prefixes or command indicators. This restriction maintains clear parsing logic while supporting rich item description. 
+
+
+
 [Back to Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
