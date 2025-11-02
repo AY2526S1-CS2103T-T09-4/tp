@@ -8,16 +8,16 @@ import java.time.format.ResolverStyle;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Utility class for parsing dates in d/M/yyyy format.
+ * Utility class for parsing dates in d/M/uuuu format.
  */
 public class DateParser {
     public static final String MESSAGE_FORMAT_CONSTRAINT = "Invalid date format,"
             + " Expected format: d/M/yyyy";
     public static final DateTimeFormatter FORMATTER =
-            DateTimeFormatter.ofPattern("d/M/yyyy").withResolverStyle(ResolverStyle.SMART);
+            DateTimeFormatter.ofPattern("d/M/uuuu").withResolverStyle(ResolverStyle.STRICT);
 
     /**
-     * Parses a date string in the format d/M/yyyy into a LocalDate.
+     * Parses a date string in the format d/M/uuuu into a LocalDate.
      *
      * <p>Examples of valid input:
      * <ul>
@@ -33,7 +33,15 @@ public class DateParser {
         try {
             return LocalDate.parse(input.trim(), FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new ParseException(MESSAGE_FORMAT_CONSTRAINT);
+            String fullMessage = e.getMessage();
+            int separatorIndex = fullMessage.indexOf(": ");
+
+            if (separatorIndex != -1) {
+                String specificError = fullMessage.substring(separatorIndex + 2);
+                throw new ParseException(specificError);
+            } else {
+                throw new ParseException(MESSAGE_FORMAT_CONSTRAINT);
+            }
         }
     }
 }
