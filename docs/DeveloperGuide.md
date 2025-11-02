@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +68,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,7 +85,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -115,7 +115,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -130,7 +130,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -248,10 +248,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_ <br> <br>
-[Back to Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -282,41 +278,41 @@ Manager of a small cafe
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                | I want to …​                                                               | So that I can…​                          |
-|----------|------------------------|----------------------------------------------------------------------------|------------------------------------------|
-`* *` | potential user who is exploring using the app in the cafe, | see the app populated with sample data, | I can easily see how the app will look like when it is in use.
-`* *` | new user who is ready to start using the app, | interact with the sample data, | I am familiar with the features provided.
-`* * *` | new user who is ready to start using the app, | add my first supplier with name, contact number, what they supply, and when I need the supply | I can test adding people.
-`* * *` | new user who is ready to start using the app, | add my first staff with name, contact number, and when they're on shift | I can test adding people.
-`* * *` | new user who is ready to start using the app, | add my first customer with name, contact number, and their current loyalty points | I can test adding people.
-`* *` | new user who is ready to start using the app, | test the search by category function, | I can test searching people.
-`* *` | new user who is ready to start using the app, | delete the sample data, | I can start fresh with my own records.
-`* *` | new user who is ready to start using the app, | import my contacts via a CSV file, | I can add preexisting contacts in bulk quickly.
-`* * *` | new user who is ready to start using the app, | view all contacts |
-`* *` | semi-experienced user who has been using the app for a short while, | search by name | I can quickly find the contact
-`* *` | semi-experienced user who has been using the app for a short while, | filter the suppliers by what they supply, | I can quickly figure out who to contact.
-`* *` | semi-experienced user who has been using the app for a short while, | filter the staff by when they are on shift, | I can quickly figure out who to contact.
-`* *` | semi-experienced user who has been using the app for a short while, | check which suppliers I need to contact for restocks on which day, | I can be organised and not miss out any supplies
-`* *` | semi-experienced user who has been using the app for a short while, | view notes related to a contact, | I remember important details from past interactions
-`* *` | semi-experienced user who has been using the app for a short while, | check how many loyalty point a certain customer has | I can check if they are eligible for redemptions
-`* *` | semi-experienced user who has been using the app for a short while, | update the loyalty points of a certain customer | I can deduct / add loyalty points with purchases
-`* *` | semi-experienced user who has been using the app for a short while, | add a customer's allergen information | I know what products to avoid
-`* *` | semi-experienced user who has been using the app for a short while, | mark my employees as full-time or part-time | I can plan shift accordingly
-`* * *` | semi-experienced user who has been using the app for a short while, | delete individual contacts | I can remove unwanted contacts
-`* *` | semi-experienced user who has been using the app for a short while, | delete contacts in bulk | I don't have to manually delete them
-`* *` | semi-experienced user who has been using the app for a short while, | add remarks or comments tied to a specific contact | I can retain miscallaneous but important information about them
-`* *` | semi-experienced user who has been using the app for a short while, | add operating days / hours for suppliers | I don't have to search it up each time
-`* * *` | semi-experienced user who has been using the app for a short while, | display an overview of each "person category" on a dashboard | I have a summary of contact information
-`* *` | semi-experienced user who has been using the app for a short while, | store an employee's emergency information | I know who to contact in case of an incident.
-`* *` | long-time user, | able to see which suppliers and staff i need to contact on the current day | I don't have to search it up
-`* *` | long-time user, | able to see which suppliers and staff i need to contact on the next day | I don't have to search it up
-`* *` | long-time user, | have quick access to frequently used contact information | I don't have to search it up
-`* *` | long-time user, | set a reminder to contact a supplier, | I don’t forget to reorder.
-`* *` | long-time user, | export the contacts via a CSV file, | I can use it to import to my phone contacts.
-`* *` | long-time user, | update a contact's phone number and email address, | I can refer to the most up-to-date information.
-`* *` | long-time user, | archive/hide unused contacts, | I am not distracted by irrelevant contact.
-`*` | long-time user, | add a customer's birthday, | I know when to give special rewards.
-`* *` | long-time user, | filter contacts with multiple tags | I can have more specific searches
+| Priority | As a …​                | I want to …​                                                                                  | So that I can…​                          |
+|----------|------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------|
+`* *` | potential user who is exploring using the app in the cafe, | see the app populated with sample data,                                                       | I can easily see how the app will look like when it is in use.
+`* *` | new user who is ready to start using the app, | interact with the sample data,                                                                | I am familiar with the features provided.
+`* * *` | new user who is ready to start using the app, | add my first supplier with name, contact number, what they supply, and when I need the supply | I can test adding customers/staff/supplier.
+`* * *` | new user who is ready to start using the app, | add my first staff with name, contact number, and when they're on shift                       | I can test adding customers/staff/supplier.
+`* * *` | new user who is ready to start using the app, | add my first customer with name, contact number, and their current loyalty points             | I can test adding customers/staff/supplier.
+`* *` | new user who is ready to start using the app, | test the list by category function,                                                           | I can test searching customers/staff/supplier.
+`* *` | new user who is ready to start using the app, | delete the sample data,                                                                       | I can start fresh with my own records.
+`* *` | new user who is ready to start using the app, | import my contacts via a CSV file,                                                            | I can add preexisting contacts in bulk quickly.
+`* * *` | new user who is ready to start using the app, | view all contacts                                                                             | I can immediately begin interacting customers/staff/supplier.
+`* *` | semi-experienced user who has been using the app for a short while, | search by name                                                                                | I can quickly find the contact
+`* *` | semi-experienced user who has been using the app for a short while, | filter the suppliers by what they supply,                                                     | I can quickly figure out who to contact.
+`* *` | semi-experienced user who has been using the app for a short while, | filter the staff by when they are on shift,                                                   | I can quickly figure out who to contact.
+`* *` | semi-experienced user who has been using the app for a short while, | check which suppliers I need to contact for restocks on which day,                            | I can be organised and not miss out any supplies
+`* *` | semi-experienced user who has been using the app for a short while, | view notes related to a contact,                                                              | I remember important details from past interactions
+`* *` | semi-experienced user who has been using the app for a short while, | check how many loyalty point a certain customer has                                           | I can check if they are eligible for redemptions
+`* *` | semi-experienced user who has been using the app for a short while, | update the loyalty points of a certain customer                                               | I can deduct / add loyalty points with purchases
+`* *` | semi-experienced user who has been using the app for a short while, | add a customer's allergen information                                                         | I know what products to avoid
+`* *` | semi-experienced user who has been using the app for a short while, | mark my employees as full-time or part-time                                                   | I can plan shift accordingly
+`* * *` | semi-experienced user who has been using the app for a short while, | delete individual contacts                                                                    | I can remove unwanted contacts
+`* *` | semi-experienced user who has been using the app for a short while, | delete contacts in bulk                                                                       | I don't have to manually delete them
+`* *` | semi-experienced user who has been using the app for a short while, | add remarks or comments tied to a specific contact                                            | I can retain miscallaneous but important information about them
+`* *` | semi-experienced user who has been using the app for a short while, | add operating days / hours for suppliers                                                      | I don't have to search it up each time
+`* * *` | semi-experienced user who has been using the app for a short while, | display an overview of each "person category" on a dashboard                                  | I have a summary of contact information
+`* *` | semi-experienced user who has been using the app for a short while, | store an employee's emergency information                                                     | I know who to contact in case of an incident.
+`* *` | long-time user, | able to see which suppliers and staff i need to contact on the current day                    | I don't have to search it up
+`* *` | long-time user, | able to see which suppliers and staff i need to contact on the next day                       | I don't have to search it up
+`* *` | long-time user, | have quick access to frequently used contact information                                      | I don't have to search it up
+`* *` | long-time user, | set a reminder to contact a supplier,                                                         | I don’t forget to reorder.
+`* *` | long-time user, | export the contacts via a CSV file,                                                           | I can use it to import to my phone contacts.
+`* *` | long-time user, | update a contact's phone number and email address,                                            | I can refer to the most up-to-date information.
+`* *` | long-time user, | archive/hide unused contacts,                                                                 | I am not distracted by irrelevant contact.
+`*` | long-time user, | add a customer's birthday,                                                                    | I know when to give special rewards.
+`* *` | long-time user, | filter contacts with multiple tags                                                            | I can have more specific searches
 
 *{More to be added}*
 
@@ -588,9 +584,9 @@ testers are expected to do more *exploratory* testing.
     1. Test case 1: `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
        Expected: New staff added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
     2. Test case 2: `add staff n/Ah Hock p/98765432 e/ahhockexample.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
-       Expected: No customer is added. Email-specific error message highlighting the correct email format is shown.
+       Expected: No staff is added. Email-specific error message highlighting the correct email format is shown.
     3. Test case 3: `add staff n/Ah Hock p/98765432 e/ahhock@example.com shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
-       Expected: No customer is added as address is missing. Generic error message highlighting the correct command format is shown.
+       Expected: No staff is added as address is missing. Generic error message highlighting the correct command format is shown.
     4. Other incorrect add staff commands to try:
         1. Name not alphanumeric or longer than 48 characters. Shows name-specific error message.
         2. Phone number is shorter than 3 characters or is not purely numeric.
@@ -615,9 +611,6 @@ testers are expected to do more *exploratory* testing.
 ### Finding person(s) by keyword(s)
 
 1. Finding by keywords.
-
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Works similarly for `list (customer | staff | supplier)`
-
     2. Test case 1: `find Alex`
         1. Case 1: If there is are persons with names containing Alex, these persons will be shown. A success message indicating the number of persons listed will be shown.
         2. Case 2: If there are no persons with names containing Alex, the list will be empty. A message saying that 0 persons are listed will be shown.
