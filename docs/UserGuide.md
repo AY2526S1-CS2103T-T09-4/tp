@@ -256,7 +256,7 @@ Adds a staff to the BrewBook and returns to `list all` view.
 * Shifts are not needed if you are unsure when your staff is available to start!
 * Shifts are automatically deleted when the date has passed so you don't need to edit it!
 * If you need to add duplicate numbers for a staff (i.e. Shared Shift Phone), this will be a valid input!
-* If you want to preserve past shifts records, you should make copies of the .json file and archive it before the shift is deleted!
+* If you want to preserve past shifts records, you should make copies of the .json file and archive it before the shift is deleted! See how to do it [here](#archive-data).
 
 </div>
 
@@ -281,7 +281,7 @@ Adds a supplier to the BrewBook and returns to `list all` view.
 - Days or items are not needed if you are unsure what and when your supplier will resupply!
 - Days are automatically deleted when the date has passed so you don't need to edit it!
 * If you need to add duplicate numbers for a supplier (i.e. Company contact hotline), this will be a valid input!
-* If you want to preserve past days records, you should make copies of the .json file and archive it before the day is deleted!
+* If you want to preserve past days records, you should make copies of the .json file and archive it before the day is deleted! See how to do it [here](#archive-data)!
 </div>
 
 [Back to Features](#features)
@@ -497,6 +497,13 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 3. Locate the data file on your old computer (usually in the BrewBook home folder).
 4. Copy that file to the new computer and overwrite the newly created one.
 
+<a id="archive-data"></a>
+**Q**: How do I archive my data since shifts and days get auto-deleted?<br>
+**A**: You can archive your data by following the steps below.
+1. Create an archive folder to place this data file.
+2. Locate the data file called brewbook.json in your computer (usually in the folder called `data` where you placed your BrewBook file).
+3. Copy that file into the archive folder you previously created.
+
 
 **Q**: What happens if I accidentally run `clear`?<br>
 **A**: All data will be permanently deleted. There is no undo.
@@ -512,8 +519,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 **Q**: Can I undo a delete command?<br>
 **A**: No. Once an entry is deleted using `delete`, it cannot be recovered.
 **To avoid accidental deletes:**
-- Use `list` first to confirm the index.
-- Back up your data file regularly.
+- Back up/archive your data file regularly.
 
 
 **Q**: Why isn’t my command working?<br>
