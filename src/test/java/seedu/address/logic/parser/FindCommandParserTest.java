@@ -169,11 +169,25 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_noItemsMatch_returnsZero() throws Exception {
+        Model actual = freshModel();
+        Model expected = freshModel();
+
+        FindCommand cmd = parser.parse("items/flour");
+
+        expected.updateFilteredPersonList(p -> false);
+        assertCommandSuccess(cmd, actual,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expected);
+        assertEquals(List.of(), actual.getFilteredPersonList());
+    }
+
+    @Test
     public void execute_days_returnsZero() throws Exception {
         // Non-supplier person with days
         FindCommand cmd = parser.parse("find n/Alice days/2025-10-20");
         Model actual = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expected = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
         expected.updateFilteredPersonList(p -> false);
 
         assertCommandSuccess(cmd, actual,
