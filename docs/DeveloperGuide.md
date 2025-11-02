@@ -161,7 +161,7 @@ Classes used by multiple components are in the `seedu.address.commons` package. 
 * The email validation enforces a stricter, simplified subset of RFC 5322 standards. Although this excludes some rare cases allowed by the RFC, it enhances security and usability without noticeable loss of functionality.  
 
 #### Address
-* No restrictions are applied to allow flexibility in real-world address formats.
+* No restrictions on characters type to allow flexibility in real-world address formats.
 * **Maximum limit of 254 characters**: This limit is a deliberate technical trade-off that balances flexibility with performance, and it adheres to common industry standards for data storage.
 
 #### Points
