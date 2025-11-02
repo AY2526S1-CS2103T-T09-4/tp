@@ -254,7 +254,7 @@ Adds a staff to the BrewBook and returns to `list all` view.
 - `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/11/11/2026 notes/only weekends` adds a staff member named *John Doe* with phone `98765432`, email `johnd@example.com`, address `John street, block 123, #01-01`, a single shift on `11/11/2026`, and notes `only weekends`.
 - `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/13/11/2026, 12/11/2026 notes/only weekends` adds a staff member named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Rd`, tags `friend` and `intern`, shifts on `13/11/2026` and `12/11/2026`, and notes `only weekends`.
 
-<div markdown="1" class="alert alert-success">:bulb: **Tips:**
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
 * Shifts are not needed if you are unsure when your staff is available to start!
 * Shifts are automatically deleted when the date has passed so you don't need to edit it!
 * If a valid format but incorrect date for shifts is inputted (e.g 29/2/2026, a non-leap year), then BrewBook will automatically find the next nearest valid date to replace it (28/2/2026).
