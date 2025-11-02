@@ -7,7 +7,6 @@ title: Developer Guide
 [Design](#design)<br>
 [Design Decisions](#design-decisions)<br>
 [Planned Enhancements](#planned-enhancements)<br>
-[Implementation](#implementation)<br>
 [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)<br>
 [Appendix: Requirements](#appendix-requirements)<br>
 [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)<br>
