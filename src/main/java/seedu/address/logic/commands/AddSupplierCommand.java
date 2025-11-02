@@ -23,15 +23,15 @@ public class AddSupplierCommand extends AddCommand {
     public static final String COMMAND_WORD = AddCommand.COMMAND_WORD + " supplier";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a supplier to the address book.\n\n"
+            + ": Adds a supplier to BrewBook.\n\n"
             + "**Format:**\n"
             + COMMAND_WORD + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_ITEMS + "ITEM[,ITEM,...] "
-            + PREFIX_DAYS + "DAY[,DAY,...] "
+            + PREFIX_ITEMS + "[ITEM[,ITEM,...]] "
+            + PREFIX_DAYS + "[DAY[,DAY,...]] "
             + "[" + PREFIX_NOTE + "NOTES] "
             + "[" + PREFIX_TAG + "TAG]...\n\n"
             + "**Example:**\n"

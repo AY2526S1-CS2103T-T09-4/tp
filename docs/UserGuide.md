@@ -29,10 +29,10 @@ instead we recommend you use it like a reference:
 
 - **New users**: Start with the **Quick start** section. It walks you through installation, setup, and your very first commands.
 - **Everyday use**: Jump to the **Features** section whenever you want to learn a specific command. Each command has:
-  - A short description of what it does.
-  - The exact format you need to type.
-  - Examples you can copy and paste.
-  - Notes on tips, constraints or special cases.
+    - A short description of what it does.
+    - The exact format you need to type.
+    - Examples you can copy and paste.
+    - Notes on tips, constraints or special cases.
 - **Troubleshooting**: Check the **FAQ** and **Known issues** sections if something doesn't work as expected.
 - **At a glance**: Use the **Command summary** at the end for a quick reference to all commands in one place.
 
@@ -83,9 +83,9 @@ Let’s check whether it’s already installed on your computer.
 
 - **On Linux**
     1. In the **Terminal**, enter the following:
-    **Debian/Ubuntu (apt):**
-      <br>`sudo apt update`
-      <br>`sudo apt install openjdk-17-jdk`
+       **Debian/Ubuntu (apt):**
+       <br>`sudo apt update`
+       <br>`sudo apt install openjdk-17-jdk`
     2. When done, repeat the steps above to confirm it says **version 17**.
 
 ---
@@ -99,19 +99,19 @@ Let’s check whether it’s already installed on your computer.
 ## Step 3: Set up your BrewBook folder
 
 1. Create a new folder anywhere you like — for example:
-   - **Windows:** `C:\Users\Jean\Documents\BrewBook`
-   - **macOS:** `/Users/Jean/Documents/BrewBook` or `~/Documents/BrewBook`
-   - **Linux:** `/home/Jean/Documents/BrewBook`
+    - **Windows:** `C:\Users\Jean\Documents\BrewBook`
+    - **macOS:** `/Users/Jean/Documents/BrewBook` or `~/Documents/BrewBook`
+    - **Linux:** `/home/Jean/Documents/BrewBook`
 2. Move the downloaded **`BrewBook.jar`** file into that folder.
-      BrewBook will automatically save your data there each time you use it.
+   BrewBook will automatically save your data there each time you use it.
 
 ---
 ## Step 4: Open BrewBook
 
 1. Open your **Command Prompt** or **Terminal**
 2. Type `cd [folderpath]` to navigate to where your BrewBook.jar file exists.
-    > If your .jar file is in the`Users\(name)\Downloads` directory and you are currently in `Users\(name)`,
-    > you should type `cd Downloads` in the **Command Prompt** or **Terminal**.
+   > If your .jar file is in the`Users\(name)\Downloads` directory and you are currently in `Users\(name)`,
+   > you should type `cd Downloads` in the **Command Prompt** or **Terminal**.
 3. Type `java -jar BrewBook.jar` and BrewBook will now open to its' landing page populated with sample data for your easy reference.
 
 ![Ui](images/Ui.png)
@@ -131,7 +131,7 @@ Here are a few examples you can try:
 | Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                     | Adds a new customer                                   |
 | Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/4/12/2026 notes/can only do weekdays t/partTime`                | Adds a new staff contact with a shift date            |
 | Add a supplier | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/10/10/2026 notes/Halal supplier t/preferred` | Adds a supplier contact                               |
-| Edit a contact | `edit 3 n\John Doe`                                                                                                                           | Edits any field of a contact                          |
+| Edit a contact | `edit 3 n/John Doe`                                                                                                                           | Edits any field of a contact                          |
 | Delete a contact | `delete 2, 3`                                                                                                                                 | Removes the 2nd and 3rd contact from the current list |
 | Exit the app | `exit`                                                                                                                                        | Closes BrewBook safely                                |
 
@@ -166,7 +166,7 @@ Explore the [Features](#features) section below for a full list of commands and 
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add supplier n/NAME`, `NAME` is a parameter which can be used as `add supplier n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -181,6 +181,18 @@ Explore the [Features](#features) section below for a full list of commands and 
   e.g `list all` and `LIST all` are both valid ways to use the list command and will work successfully.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that 1 multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
+<div markdown="1" class="alert alert-warning">:exclamation: **Generic constraints for fields:**
+- Name must not exceed 48 characters.
+- Name does not allow special characters. You may spell them in full instead (i.e s/o -> son of)
+- Name must not be a duplicate (i.e must not already exist in BrewBook).
+- Phone number must not be less than 3 digits.
+- Days and Shifts date must be in the future.
+- Duplicate dates for Days and Shifts are not allowed.
+- Days and Shifts must follow the format `d/M/yyyy`.
+- Notes must not exceed 200 characters.
+- Points must be a non-negative integer.
 </div>
 
 [Back to Table of Contents](#table-of-contents)
@@ -201,14 +213,15 @@ Shows a message explaining how to access the help page.
 [Back to Features](#features)
 
 ---
+
 ## Adding a customer: `add customer`
 
-Adds a customer to the address book.
+Adds a customer to BrewBook and returns to `list all` view.
 
 ![add customer success](images/addCustomer.png)
 *Figure: Result from executing `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 points/3 notes/allergic to nuts t/frequent`*
 
-**Format**: `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…`
+**Format**: `add customer n/NAME p/PHONE e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTES] [t/TAG]...`
 
 **Examples:**
 - `add customer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a customer named *John Doe* with phone `98765432`, email `johnd@example.com`, and address `John street, block 123, #01-01`.
@@ -216,12 +229,12 @@ Adds a customer to the address book.
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
 * If this is a new customer, you don't have to specify points as it will automatically be set to 0.
+* If you need to add duplicate numbers for a customer (i.e. family phone), this will be a valid input!
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-- Name must not exceed 48 characters.
-- Phone number must not be less than 3 digits.
-- Points must be a non-negative integer.
+- Points has a maximum value of 2147483647. Values higher than this will be interpreted as an invalid negative number.
+- Unable to add a person as multiple types. (i.e. If John is added as a customer, you cannot add him again as a supplier)
 </div>
 
 [Back to Features](#features)
@@ -229,12 +242,12 @@ Adds a customer to the address book.
 ---
 ## Adding a staff: `add staff`
 
-Adds a staff to the address book.
+Adds a staff to the BrewBook and returns to `list all` view.
 
 ![add staff success](images/addStaff.png)
 *Figure: Result from executing `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`*
 
-**Format**: `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...][t/TAG]…`
+**Format**: `add staff n/NAME p/PHONE e/EMAIL a/ADDRESS [shifts/SHIFTS[, SHIFTS]...] [notes/NOTES] [t/TAG]...`
 
 **Examples:**
 - `add staff n/Amy Lok p/98765431 e/amyl@example.com a/Amy street, block 123, #02-05 notes/only weekends` adds a staff member named *Amy Lok* with phone `98765431`, email `amyl@example.com`, address `Amy street, block 123, #01-01`, and notes `only weekends`.
@@ -244,14 +257,13 @@ Adds a staff to the address book.
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 * Shifts are not needed if you are unsure when your staff is available to start!
 * Shifts are automatically deleted when the date has passed so you don't need to edit it!
+* If a valid format but incorrect date for shifts is inputted (e.g 29/2/2026, a non-leap year), then BrewBook will automatically find the next nearest valid date to replace it (28/2/2026).
+* If you need to add duplicate numbers for a staff (i.e. Shared Shift Phone), this will be a valid input!
+* If you want to preserve past shifts records, you should make copies of the .json file and archive it before the shift is deleted! See how to do it in FAQ.
 </div>
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-  - Name must not exceed 48 characters.
-  - Phone number must not be less than 3 digits.
-  - Shifts date must be in the future.
-  - Duplicate dates for shifts are not allowed.
-  - Dates must follow the format `d/M/yyyy`.
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
+- Unable to add a person as multiple types. (i.e. If John is added as a staff, you cannot add him again as a supplier)
 </div>
 
 [Back to Features](#features)
@@ -259,12 +271,12 @@ Adds a staff to the address book.
 ---
 ## Adding a supplier: `add supplier`
 
-Adds a supplier to the address book.
+Adds a supplier to the BrewBook and returns to `list all` view.
 
 ![add supplier success](images/addSupplier.png)
 *Figure: Result from executing: `add supplier n/Ben Lim p/98765432 e/benlim@example.com a/123 Clementi Ave 3 items/Flour, Eggs days/10/12/2025, 12/12/2025 notes/Halal supplier t/preferred`*
 
-**Format**: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [items/ITEM[, ITEM]...] [days/DAY[, DAY]...] [notes/NOTES] [t/TAG]...`
+**Format**: `add supplier n/NAME p/PHONE e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...`
 
 **Examples**:
 - `add supplier n/Amy Lok p/12345670  e/amyl@example.com a/Amy street, block 123, #01-05` adds a supplier named *Amy Lok* with phone `12345670`, email `amyl@example.com`, address `Amy street, block 123, #01-05`
@@ -274,14 +286,13 @@ Adds a supplier to the address book.
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - Days or items are not needed if you are unsure what and when your supplier will resupply!
 - Days are automatically deleted when the date has passed so you don't need to edit it!
+* If a valid format but incorrect date for Days is inputted (e.g 29/2/2026, a non-leap year), then BrewBook will automatically find the next nearest valid date to replace it (28/2/2026).
+* If you need to add duplicate numbers for a supplier (i.e. Company contact hotline), this will be a valid input!
+* If you want to preserve past days records, you should make copies of the .json file and archive it before the day is deleted! See how to do it in FAQ.
 </div>
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-- Name must not exceed 48 characters.
-- Phone number must not be less than 3 digits.
-- Days date must be in the future.
-- Duplicate dates for Days are not allowed.
-- Days must follow the format `d/M/yyyy`.
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
+- Unable to add a person as multiple types. (i.e. If John is added as a supplier, you cannot add him again as a customer).
 </div>
 
 [Back to Features](#features)
@@ -304,8 +315,6 @@ Shows a list of all contacts in BrewBook, filtered by type.
 
 **Examples**:
 - `list all` Displays every contact saved in BrewBook.
-- `list customer` Shows only customers.
-- `list staff` Shows only your café’s employees.
 - `list supplier` Shows only your café’s suppliers.
 
 [Back to Features](#features)
@@ -313,10 +322,10 @@ Shows a list of all contacts in BrewBook, filtered by type.
 ---
 ## Editing a contact : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in BrewBook and returns to `list all` view.
 
 ![edit customer success](images/editResult.png)
-*Figure: Result from executing `edit 1 n/Alex Yeoh` when the name was originally Alex Yeo*
+*Figure: Result from executing `edit 1 n/Alex` when the name was originally Alex Yeoh*
 
 **Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [notes/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]..] [items/ITEM[, ITEM]...] [days/DAY[, DAY]...] [t/TAG]…​`
 
@@ -333,6 +342,7 @@ Edits an existing person in the address book.
 - The index must be a positive integer.
 - At least one optional fields must be provided.
 - Editing `tags`/`shifts`/`items`/`days`, the existing fields of the person will be removed (i.e adding is not cumulative).
+- For type specific tags like `shifts`, `items`, `days`, and `points`, you can only edit them if the person type corresponds to these tags. (i.e You can only edit `points` for a person of type customer, if person is of type staff it will not work)
 </div>
 
 [Back to Features](#features)
@@ -340,21 +350,37 @@ Edits an existing person in the address book.
 ---
 ## Locating contact by keywords: `find`
 
-Finds contacts whose fields contain any of the given keywords.
+Finds contacts whose fields contain the given keywords using AND search. 
 
 ![find success](images/findResult.png)
 *Figure: Result from executing `find Alex`*
 
-**Format**: `find KEYWORD [MORE_KEYWORDS]`
+**Format**: `find KEYWORD [MORE_KEYWORDS]` or `find [n/NAME_KEYWORD [MORE_KEYWORDS]] [p/PHONE_KEYWORD [MORE_KEYWORDS]] [e/EMAIL_KEYWORD [MORE_KEYWORDS]] [a/ADDRESS_KEYWORD [MORE_KEYWORDS]] [t/TAG_KEYWORD [MORE_KEYWORDS]] [shifts/DATE_KEYWORD [MORE_KEYWORDS]] [items/ITEM_KEYWORD [MORE_KEYWORDS]] [days/DAY_KEYWORD [MORE_KEYWORDS]]` 
+
+**Valid options for `KEYWORD`:**
+- `n` — searches name field
+- `p` — searches phone field
+- `e` — searches email field
+- `a` — searches address field
+- `t` — searches tags field
+- `shifts` — searches shift field
+- `items` — searches items field
+- `days` — searches days field
 
 **Examples**:
 - `find John` returns a person named *john* and *John Doe*.
+- `find James Tan` returns a person named *James Tan*, and will not return 2 separate people with names *James* and *Tan*
+- `find Lim Ben` returns a person named *Lim Ben*, and will not return a person named *Ben Lim*.
 - `find n/alex p/12345678` returns a person named *Alex Yeoh* who has phone number `12345678`. <br>
 
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - The search is case-insensitive so don't worry about capitalisation!
-- Persons matching all parameters will be returned (i.e. AND search).
+- Persons matching all stated parameters will be returned (i.e. AND search).
 - If no prefix is specified, find will resort to search by name for the given keyword.
+</div>
+
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
+- Find will search from the list generated by `list all` regardless of what list commands you have used.
 </div>
 
 [Back to Features](#features)
@@ -362,16 +388,20 @@ Finds contacts whose fields contain any of the given keywords.
 ---
 ## Deleting contacts : `delete`
 
-Deletes the specified person or people from the address book.
+Deletes the specified person or people from BrewBook.
 
 ![delete success](images/deleteSuccess.png)
-*Figure: Result from executing `delete 1, 2` to delete Alex and Bernice*
+*Figure: Result from executing `delete 1, 2` to delete Alex and Charlotte*
 
 **Format**: `delete INDEX[, INDEX, ...]`
 
 **Examples**:
-* `list all` followed by `delete 2` deletes the 2nd person in the address book.
-* `find alex` followed by `delete 1, 2` deletes the 1st & 2nd person in the address book following the index of the new list.
+* `list all` followed by `delete 2` deletes the 2nd person in the BrewBook.
+* `find alex` followed by `delete 1, 2` deletes the 1st & 2nd person in the BrewBook following the index of the new list.
+
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+- If you accidentally type the same number (i.e `delete 2, 2`), don't worry! BrewBook will recognise that you only want to delete contact number 2 and only delete 2.
+</div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
   - The index must be a positive integer.
@@ -382,12 +412,12 @@ Deletes the specified person or people from the address book.
 ---
 ### Sorting contacts: `sort`
 
-Sorts your contact list based on a specific field and optional order — for example, by name in ascending order.
+Sorts your contact list based on a specific field and optional order. If no order is given, it will be assumed to be in ascending order.
 
 ![sort success](images/sortSuccess.png)
 *Figure: Result from executing `sort name` such that contacts are now in alphabetical order*
 
-**Format**: `sort FIELD`
+**Format**: `sort FIELD [o/ORDER]`
 
 **Valid options for `FIELD`:**
 - `name` — sorts contacts alphabetically by name.
@@ -396,15 +426,14 @@ Sorts your contact list based on a specific field and optional order — for exa
 - `address` — sorts contacts alphabetically by address.
 - `type` — sorts contacts by their role (customer, staff, or supplier).
 
+**Valid options for `ORDER`:**
+- `asc` — sorts in ascending order.
+- `desc` — sorts in descending order.
+
 **Examples**:
 - `sort name` sorts all contacts by name in ascending order (A–Z).
 - `sort phone o/desc` sorts contacts by phone number in descending order.
 - `sort type o/asc` groups contacts by type (customer → staff → supplier) in ascending order.
-
-<div markdown="1" class="alert alert-success">:bulb: **Tip:**
-- You can specify your sort order by using `o/asc` for ascending and `o/desc` for descending.
-- The default sort order is ascending.
-</div>
 
 [Back to Features](#features)
 
@@ -429,12 +458,12 @@ Displays all staff's shift and supplier's days.
 ![clear](images/clearResult.png)
 *Figure: Result from executing `clear`, deleting all contacts*
 
-Clears all entries from the address book.
+Clears all entries from the BrewBook.
 
 **Format**: `clear`
 
 **Example**:
-- `clear` deletes all entries from the address book.
+- `clear` deletes all entries from the BrewBook.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
 - The clear command deletes all contacts in BrewBook.
@@ -473,6 +502,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 </div>
 
 [Back to Features](#features)
+
 --------------------------------------------------------------------------------------------------------------------
 # FAQ
 
@@ -482,6 +512,13 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 2. Launch it once to generate a fresh data file.
 3. Locate the data file on your old computer (usually in the BrewBook home folder).
 4. Copy that file to the new computer and overwrite the newly created one.
+
+<a id="archive-data"></a>
+**Q**: How do I archive my data since shifts and days get auto-deleted?<br>
+**A**: You can archive your data by following the steps below.
+1. Create an archive folder to place this data file.
+2. Locate the data file called brewbook.json in your computer (usually in the folder called `data` where you placed your BrewBook file).
+3. Copy that file into the archive folder you previously created.
 
 
 **Q**: What happens if I accidentally run `clear`?<br>
@@ -498,8 +535,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 **Q**: Can I undo a delete command?<br>
 **A**: No. Once an entry is deleted using `delete`, it cannot be recovered.
 **To avoid accidental deletes:**
-- Use `list` first to confirm the index.
-- Back up your data file regularly.
+- Back up/archive your data file regularly.
 
 
 **Q**: Why isn’t my command working?<br>
@@ -510,7 +546,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 
 
 **Q**: Can I add multiple tags or items at once?<br>
-**A**: Yes. Please refer to add command to see how to do it.
+**A**: Yes. Please refer to add commands to see how to do it.
 
 
 **Q**: What date format should I use?<br>
@@ -540,14 +576,17 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 
 Action | Format, Examples
 --------|------------------
-**Add customer** | `add customer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTE] [t/TAG]…​` <br> e.g., `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`
-**Add staff** | `add staff n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [notes/NOTE] [shifts/SHIFT[, SHIFT]...] [t/TAG]…` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/4/2025 notes/can only do weekdays t/partTime`
-**Add supplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/28/10/2025`
+**Add customer** | `add customer n/NAME p/PHONE e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTES] [t/TAG]...` <br> e.g., `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`
+**Add staff** | `add staff n/NAME p/PHONE e/EMAIL a/ADDRESS [shifts/SHIFTS[, SHIFTS]...] [notes/NOTES] [t/TAG]...` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/4/2025 notes/can only do weekdays t/partTime`
+**Add supplier** | `add supplier n/NAME p/PHONE e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...` <br> e.g., `add supplier n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/28/10/2025`
 **List** | `list [all/customer/staff/supplier]`
+**Sort** | `sort name o/asc`
+**Summary** | `summary`
 **Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`
 **Clear** | `clear`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [notes/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]...] [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`
 **Help** | `help`
+**Exit** | `exit`
 
 [Back to Table of Contents](#table-of-contents)

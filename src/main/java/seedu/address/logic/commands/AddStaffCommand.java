@@ -23,7 +23,7 @@ public class AddStaffCommand extends AddCommand {
     public static final String COMMAND_WORD = AddCommand.COMMAND_WORD + " staff";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a staff member to the address book.\n\n"
+            + ": Adds a staff member to BrewBook.\n\n"
             + "**Format:**\n"
             + COMMAND_WORD + " "
             + PREFIX_NAME + "NAME "

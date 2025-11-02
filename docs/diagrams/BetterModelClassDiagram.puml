@@ -15,21 +15,21 @@ UniquePersonList -down-> "*" Person
 Person -down-> "*" Tag
 Person .right.> ContactType
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> Note
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
+Person *--> "1" Note
 
 Customer -down-|> Person
 Staff -right-|> Person
 Supplier --|> Person
 
-Customer *-up-> Points
+Customer *-up-> "1" Points
 
-Supplier *-up-> "1..*" Items
-Supplier *-right-> "1..*" Days
+Supplier *-up-> "*" Items
+Supplier *-right-> "*" Days
 
-Staff *-left-> "1..*" Shift
+Staff *-left-> "*" Shift
 
 @enduml

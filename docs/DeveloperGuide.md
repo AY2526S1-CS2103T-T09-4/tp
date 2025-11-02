@@ -5,6 +5,7 @@ title: Developer Guide
 ## Table of Contents
 [Setting up, getting started](#setting-up-getting-started)<br>
 [Design](#design)<br>
+[Design Decisions](#design-decisions)<br>
 [Planned Enhancements](#planned-enhancements)<br>
 [Implementation](#implementation)<br>
 [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)<br>
@@ -36,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -115,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -130,7 +131,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -140,9 +141,42 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
-
 Classes used by multiple components are in the `seedu.address.commons` package. <br> <br>
 [Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+## **Design Decisions**
+
+### Parser Validation
+
+#### Name
+* **Only alphanumeric characters and spaces**: BrewBook restricts names to alphanumeric characters and spaces to suit small café managers’ needs. This simplifies input, reduces potential errors, and streamlines operations in a busy environment.
+* **Maximum length of 48 characters**: The user interface has practical space limits, and 48 characters strikes a balance between allowing detailed names and maintaining readability.
+
+#### Phone
+* **Digits only**: Restricting phone numbers to digits minimizes user confusion and input mistakes, such as accidentally including `+` or other symbols that the system uses differently.
+* **Minimum length of 3 digits**: Phone numbers shorter than three digits are generally invalid, so this prevents erroneous input.
+* **Maximum length of 15 digits**: The maximum length of an international phone number is 15 digits, as specified by the International Telecommunication Union's (ITU) E.164 standard.
+
+#### Email
+* The email validation enforces a stricter, simplified subset of RFC 5322 standards. Although this excludes some rare cases allowed by the RFC, it enhances security and usability without noticeable loss of functionality.  
+
+#### Address
+* No restrictions are applied to allow flexibility in real-world address formats.
+* **Maximum limit of 254 characters**: This limit is a deliberate technical trade-off that balances flexibility with performance, and it adheres to common industry standards for data storage.
+
+#### Points
+* Only positive integers are accepted, reflecting common practice in F&B loyalty programs in Singapore. 
+* BrewBook limits points to a maximum of `Integer.MAX_VALUE` due to Java’s integer size constraints.
+
+#### Shifts / Days
+* Only future days and shifts are tracked to avoid cluttering the system with outdated data. Past shifts no longer require active management and are irrelevant to current planning.
+
+#### Items
+* Alphanumeric characters and all special symbols are accepted except commas (,) and slashes (/). Commas are reserved as separators between items, and slashes serve as prefixes or command indicators. This restriction maintains clear parsing logic while supporting rich item description.
+
+[Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Planned Enhancements**
@@ -155,103 +189,12 @@ Team size: 5
 5. Allow single-word aliases for common commands: BrewBook currently requires full command words like `list all` or `sort name`. We will tweak the command parsing to allow the use of single-letter or short aliases for the most frequent commands to improve CLI speed. For example: `ls all` will be an accepted alias for `list all`.
 6. Improve input feedback for partially correct commands: When a user is typing a command and pauses, the system can be more helpful. We will tweak the command result to provide immediate, context-sensitive suggestions or reminders based on the partially entered command. For instance, if the user types add customer `n/`, a small hint might appear: (Required: `p/`, `e/`, `a/`).
 7. Enhance help to provide command-specific guidance: The current help command opens a windows which link to the user guide. We will tweak the help command parser to accept an optional command name. For example, typing `help list` will display a concise summary of the `list` command's format, parameters and examples directly in the command result box, providing faster, targeted help without external resources.
-8. Highlight matching keywords in find results: After a find command, the GUI displays the list of matching contacts, but it does not show why they matched. We will tweak the contact card display so that when a list is populated from a find result, the matching keyword (e.g., "Lee") is highlighted on the contact card wherever it was found (in the name, notes, etc.), providing immediate visual feedback on search relevance.
+8. Enhance add and edit to support multirole contacts: The application currently forces a contact to be exclusively one type (Customer, Staff, or Supplier). This is a flaw, as a staff member may also be a loyal customer, forcing the user to create duplicate entries. We will tweak the contact model and the add/edit commands to allow a contact to possess multiple roles. The add command will be enhanced to accept multiple types (e.g., add customer staff n/...), and the edit command will be tweaked to add or remove roles from an existing contact (e.g., edit 4 role/add(customer)), allowing a single entry to store all relevant information (like points/ for their customer profile and shifts/ for their staff profile).
 9. Enhance edit command to support additive/subtractive list updates: The current edit command overwrites all data for list-based fields. For example, editing shifts for a staff member who already has shifts scheduled will delete all previous shifts and replace them with the new input. We will tweak the edit command's syntax to allow for adding or removing specific items from lists like shifts, items, or tags. For example, `edit 1 shifts/add(2026-12-10)` will add the new shift without deleting existing ones, and `edit 1 shifts/remove(2026-12-04)` will remove only that specific shift.
-10. Tweak `list` command to default to `list all`: The current list command requires a specific parameter (e.g., `list all`, `list customer`). If a user types just `list` with no arguments, it will result in an "Invalid command format" error. We will tweak the command parser to make the `list` command more intuitive. If the user types only `list`, BrewBook will automatically treat it as an alias for `list all`, immediately displaying all contacts instead of showing an error. <br>
+10. Implement a unified calendar view for upcoming dates: The current system displays staff shifts and supplier days as simple lists of dates, requiring users to manually track upcoming events. We plan to tweak the UI's display panel to include an optional Calendar View toggle. When activated, this view will aggregate and visually display all future shifts and days on a simple, scrollable monthly calendar, making it much easier for cafe managers to spot staffing holes or incoming deliveries at a glance, enhancing the utility of the existing date fields.
+
 [Back to Table of Contents](#table-of-contents)
 
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram displays how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_ <br> <br>
-[Back to Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -273,50 +216,47 @@ _{Explain here how the data archiving feature will be implemented}_ <br> <br>
 **Target user profile**:
 Manager of a small cafe
 
-
 **Value proposition**: BrewBook helps managers of small cafes to manage different stakeholders, including customers, suppliers and employees (full-time/part-time). It helps cafe managers coordinate with customers, suppliers, and staff by linking roles directly to persons—so they don’t need to remember who does what.
-
-
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                | I want to …​                                                               | So that I can…​                          |
-|----------|------------------------|----------------------------------------------------------------------------|------------------------------------------|
-`* *` | potential user who is exploring using the app in the cafe, | see the app populated with sample data, | I can easily see how the app will look like when it is in use.
-`* *` | new user who is ready to start using the app, | interact with the sample data, | I am familiar with the features provided.
-`* * *` | new user who is ready to start using the app, | add my first supplier with name, contact number, what they supply, and when I need the supply | I can test adding people.
-`* * *` | new user who is ready to start using the app, | add my first staff with name, contact number, and when they're on shift | I can test adding people.
-`* * *` | new user who is ready to start using the app, | add my first customer with name, contact number, and their current loyalty points | I can test adding people.
-`* *` | new user who is ready to start using the app, | test the search by category function, | I can test searching people.
-`* *` | new user who is ready to start using the app, | delete the sample data, | I can start fresh with my own records.
-`* *` | new user who is ready to start using the app, | import my contacts via a CSV file, | I can add preexisting contacts in bulk quickly.
-`* * *` | new user who is ready to start using the app, | view all contacts |
-`* *` | semi-experienced user who has been using the app for a short while, | search by name | I can quickly find the contact
-`* *` | semi-experienced user who has been using the app for a short while, | filter the suppliers by what they supply, | I can quickly figure out who to contact.
-`* *` | semi-experienced user who has been using the app for a short while, | filter the staff by when they are on shift, | I can quickly figure out who to contact.
-`* *` | semi-experienced user who has been using the app for a short while, | check which suppliers I need to contact for restocks on which day, | I can be organised and not miss out any supplies
-`* *` | semi-experienced user who has been using the app for a short while, | view notes related to a contact, | I remember important details from past interactions
-`* *` | semi-experienced user who has been using the app for a short while, | check how many loyalty point a certain customer has | I can check if they are eligible for redemptions
-`* *` | semi-experienced user who has been using the app for a short while, | update the loyalty points of a certain customer | I can deduct / add loyalty points with purchases
-`* *` | semi-experienced user who has been using the app for a short while, | add a customer's allergen information | I know what products to avoid
-`* *` | semi-experienced user who has been using the app for a short while, | mark my employees as full-time or part-time | I can plan shift accordingly
-`* * *` | semi-experienced user who has been using the app for a short while, | delete individual contacts | I can remove unwanted contacts
-`* *` | semi-experienced user who has been using the app for a short while, | delete contacts in bulk | I don't have to manually delete them
-`* *` | semi-experienced user who has been using the app for a short while, | add remarks or comments tied to a specific contact | I can retain miscallaneous but important information about them
-`* *` | semi-experienced user who has been using the app for a short while, | add operating days / hours for suppliers | I don't have to search it up each time
-`* * *` | semi-experienced user who has been using the app for a short while, | display an overview of each "person category" on a dashboard | I have a summary of contact information
-`* *` | semi-experienced user who has been using the app for a short while, | store an employee's emergency information | I know who to contact in case of an incident.
-`* *` | long-time user, | able to see which suppliers and staff i need to contact on the current day | I don't have to search it up
-`* *` | long-time user, | able to see which suppliers and staff i need to contact on the next day | I don't have to search it up
-`* *` | long-time user, | have quick access to frequently used contact information | I don't have to search it up
-`* *` | long-time user, | set a reminder to contact a supplier, | I don’t forget to reorder.
-`* *` | long-time user, | export the contacts via a CSV file, | I can use it to import to my phone contacts.
-`* *` | long-time user, | update a contact's phone number and email address, | I can refer to the most up-to-date information.
-`* *` | long-time user, | archive/hide unused contacts, | I am not distracted by irrelevant contact.
-`*` | long-time user, | add a customer's birthday, | I know when to give special rewards.
-`* *` | long-time user, | filter contacts with multiple tags | I can have more specific searches
+| Priority | As a …​                | I want to …​                                                                                  | So that I can…​                          |
+|----------|------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------|
+`* *` | potential user who is exploring using the app in the cafe, | see the app populated with sample data,                                                       | I can easily see how the app will look like when it is in use.
+`* *` | new user who is ready to start using the app, | interact with the sample data,                                                                | I am familiar with the features provided.
+`* * *` | new user who is ready to start using the app, | add my first supplier with name, contact number, what they supply, and when I need the supply | I can test adding customers/staff/supplier.
+`* * *` | new user who is ready to start using the app, | add my first staff with name, contact number, and when they're on shift                       | I can test adding customers/staff/supplier.
+`* * *` | new user who is ready to start using the app, | add my first customer with name, contact number, and their current loyalty points             | I can test adding customers/staff/supplier.
+`* *` | new user who is ready to start using the app, | test the list by category function,                                                           | I can test searching customers/staff/supplier.
+`* *` | new user who is ready to start using the app, | delete the sample data,                                                                       | I can start fresh with my own records.
+`* *` | new user who is ready to start using the app, | import my contacts via a CSV file,                                                            | I can add preexisting contacts in bulk quickly.
+`* * *` | new user who is ready to start using the app, | view all contacts                                                                             | I can immediately begin interacting customers/staff/supplier.
+`* *` | semi-experienced user who has been using the app for a short while, | search by name                                                                                | I can quickly find the contact
+`* *` | semi-experienced user who has been using the app for a short while, | filter the suppliers by what they supply,                                                     | I can quickly figure out who to contact.
+`* *` | semi-experienced user who has been using the app for a short while, | filter the staff by when they are on shift,                                                   | I can quickly figure out who to contact.
+`* *` | semi-experienced user who has been using the app for a short while, | check which suppliers I need to contact for restocks on which day,                            | I can be organised and not miss out any supplies
+`* *` | semi-experienced user who has been using the app for a short while, | view notes related to a contact,                                                              | I remember important details from past interactions
+`* *` | semi-experienced user who has been using the app for a short while, | check how many loyalty point a certain customer has                                           | I can check if they are eligible for redemptions
+`* *` | semi-experienced user who has been using the app for a short while, | update the loyalty points of a certain customer                                               | I can deduct / add loyalty points with purchases
+`* *` | semi-experienced user who has been using the app for a short while, | add a customer's allergen information                                                         | I know what products to avoid
+`* *` | semi-experienced user who has been using the app for a short while, | mark my employees as full-time or part-time                                                   | I can plan shift accordingly
+`* * *` | semi-experienced user who has been using the app for a short while, | delete individual contacts                                                                    | I can remove unwanted contacts
+`* *` | semi-experienced user who has been using the app for a short while, | delete contacts in bulk                                                                       | I don't have to manually delete them
+`* *` | semi-experienced user who has been using the app for a short while, | add remarks or comments tied to a specific contact                                            | I can retain miscallaneous but important information about them
+`* *` | semi-experienced user who has been using the app for a short while, | add operating days / hours for suppliers                                                      | I don't have to search it up each time
+`* * *` | semi-experienced user who has been using the app for a short while, | display an overview of each "person category" on a dashboard                                  | I have a summary of contact information
+`* *` | semi-experienced user who has been using the app for a short while, | store an employee's emergency information                                                     | I know who to contact in case of an incident.
+`* *` | long-time user, | able to see which suppliers and staff i need to contact on the current day                    | I don't have to search it up
+`* *` | long-time user, | able to see which suppliers and staff i need to contact on the next day                       | I don't have to search it up
+`* *` | long-time user, | have quick access to frequently used contact information                                      | I don't have to search it up
+`* *` | long-time user, | set a reminder to contact a supplier,                                                         | I don’t forget to reorder.
+`* *` | long-time user, | export the contacts via a CSV file,                                                           | I can use it to import to my phone contacts.
+`* *` | long-time user, | update a contact's phone number and email address,                                            | I can refer to the most up-to-date information.
+`* *` | long-time user, | archive/hide unused contacts,                                                                 | I am not distracted by irrelevant contact.
+`*` | long-time user, | add a customer's birthday,                                                                    | I know when to give special rewards.
+`* *` | long-time user, | filter contacts with multiple tags                                                            | I can have more specific searches
 
 *{More to be added}*
 
@@ -588,9 +528,9 @@ testers are expected to do more *exploratory* testing.
     1. Test case 1: `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
        Expected: New staff added to the end of the list with the relevant fields above. Details of the added contact is shown in the status message.
     2. Test case 2: `add staff n/Ah Hock p/98765432 e/ahhockexample.com a/123 Clementi Ave 3 shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
-       Expected: No customer is added. Email-specific error message highlighting the correct email format is shown.
+       Expected: No staff is added. Email-specific error message highlighting the correct email format is shown.
     3. Test case 3: `add staff n/Ah Hock p/98765432 e/ahhock@example.com shifts/12/12/2025, 15/12/2025 notes/can only do weekdays t/partTime`<br>
-       Expected: No customer is added as address is missing. Generic error message highlighting the correct command format is shown.
+       Expected: No staff is added as address is missing. Generic error message highlighting the correct command format is shown.
     4. Other incorrect add staff commands to try:
         1. Name not alphanumeric or longer than 48 characters. Shows name-specific error message.
         2. Phone number is shorter than 3 characters or is not purely numeric.
@@ -615,9 +555,6 @@ testers are expected to do more *exploratory* testing.
 ### Finding person(s) by keyword(s)
 
 1. Finding by keywords.
-
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Works similarly for `list (customer | staff | supplier)`
-
     2. Test case 1: `find Alex`
         1. Case 1: If there is are persons with names containing Alex, these persons will be shown. A success message indicating the number of persons listed will be shown.
         2. Case 2: If there are no persons with names containing Alex, the list will be empty. A message saying that 0 persons are listed will be shown.
