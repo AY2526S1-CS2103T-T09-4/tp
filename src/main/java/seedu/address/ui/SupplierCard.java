@@ -27,7 +27,8 @@ public class SupplierCard extends PersonCard {
         String formattedDays = person.getDays().stream()
                 .map(Object::toString)
                 .sorted()
-                .collect(Collectors.joining(", "));
+                .limit(3)
+                .collect(Collectors.joining("\n"));
         String formattedItems = person.getItems().stream()
                 .map(Object::toString)
                 .sorted()
