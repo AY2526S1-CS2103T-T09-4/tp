@@ -5,6 +5,7 @@ title: Developer Guide
 ## Table of Contents
 [Setting up, getting started](#setting-up-getting-started)<br>
 [Design](#design)<br>
+[Design Decisions](#design-decisions)<br>
 [Planned Enhancements](#planned-enhancements)<br>
 [Implementation](#implementation)<br>
 [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)<br>
@@ -143,7 +144,6 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package. <br> <br>
 [Back to Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [points/POINTS] [shifts/SHIFT[, SHIFT]..] [items/ITEM[, ITEM]..] [days/DAY[, DAY]..] [notes/NOTE] [t/TAG]...
 ## **Design Decisions**
 
 ### Parser Validation
