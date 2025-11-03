@@ -360,6 +360,9 @@ Edits an existing person in BrewBook and returns to `list all` view.
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - Existing values will be updated to the input values. Don't worry about needing to update with previous values!
 - You can remove all a person's tags by typing `t/` without specifying any tags after it.
+- You can remove all a staff's shifts by typing `shifts/` without specifying any shifts after it.
+- You can remove all a supplier's days by typing `days/` without specifying any days after it.
+- You can remove all a supplier's items by typing `items/` without specifying any items after it.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
@@ -387,7 +390,7 @@ Finds contacts whose fields contain the given keywords using AND search.
 - `e` — searches email field
 - `a` — searches address field
 - `t` — searches tags field
-- `shifts` — searches shift field
+- `shifts` — searches shifts field
 - `items` — searches items field
 - `days` — searches days field
 
