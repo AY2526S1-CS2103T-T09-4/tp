@@ -426,7 +426,7 @@ Deletes the specified person or people from BrewBook.
 * `list all` followed by `delete 2` deletes the 2nd person in the BrewBook.
 * `find alex` followed by `delete 1, 2` deletes the 1st and 2nd person in the BrewBook of the new list.
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Warning:**
+<div markdown="1" class="alert alert-danger">:exclamation: **Warning:**
 - Real-World Impact: Deleting a contact by mistake means you might lose all your saved data. Always double-check the contact name before deleting. 
 - This action cannot be undone. We recommend that you make frequent backups to guard against accidental deletes (see FAQ Q3).
 </div>
@@ -497,7 +497,7 @@ Clears all entries from the BrewBook.
 **Example**:
 - `clear` deletes all entries from the BrewBook.
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Warning:**
+<div markdown="1" class="alert alert-danger">:exclamation: **Warning:**
 - This Deletes Everything: All your customers' loyalty points, staff schedules, and supplier information will be permanently erased. 
 - This action cannot be undone. Make a backup first if you still want to keep your data(see FAQ Q3).
 </div>
