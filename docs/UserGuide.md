@@ -127,7 +127,7 @@ New to typing commands? Don't worry! This guide will teach you how to use BrewBo
 BrewBook uses a Command Line Interface (CLI) through the command box at the top of the app window. Instead of clicking through menus, you simply type what you want to do and press Enter. If you can type fast, this is much quicker than traditional point-and-click apps!
 
 ## Understanding Command Structure
-_The **command box** is at the top of the BrewBook window. This is where you key in your commands - just click on it, type your command, and press **Enter**!_
+_The **command box** is at the top of the BrewBook window. This is where you key in your commands - just click on it, type your command, and press **Enter**!__
 BrewBook commands follow a simple pattern: `COMMAND PREFIX/VALUE PREFIX/VALUE ...`
 * `COMMAND` = what you want to do (e.g. add a new customer, delete a staff)
 * `PREFIX` = a field type (e.g. name, phone number, email)
@@ -145,22 +145,22 @@ Let's break this down:
 You'll learn more about the allowed prefixes for each person type later on! Also, the order of the `PREFIX/VALUE`s do not matter - the given samples are just a guide. 
 
 ## Understanding Responses
-_The **result display box** is right below the command box. This is where BrewBook replies to your inputs. There are 3 main types of responses that BrewBook can give: _
+_The **result display box** is right below the command box. This is where BrewBook replies to your inputs. There are 3 main types of responses that BrewBook can give:_
 * **Success Message**: "New person added: John Doe..." 
 * **Summary Message**: Shows a breakdown of your important dates and items supplied (e.g. "Important dates summarised: 12/12/2025...") 
 * **Error Message**: "Invalid command format! Format: ..."
 
 ## Sample Commands
-| Action | What to Type                                                                                                                                  | What It Does                                          |
-|--------|-----------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
-| Open help window | `help`                                                                                                                                        | Shows a short guide on using BrewBook                 |
-| View all contacts | `list all`                                                                                                                                    | Displays every contact saved                          |
-| Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                     | Adds a new customer                                   |
+| Action             | What to Type                                                                                                                                  | What It Does                                          |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
+| Open help window   | `help`                                                                                                                                        | Shows a short guide on using BrewBook                 |
+| View all contacts  | `list all`                                                                                                                                    | Displays every contact saved                          |
+| Add a customer     | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                     | Adds a new customer                                   |
 | Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/4/12/2026 notes/can only do weekdays t/partTime`                | Adds a new staff contact with a shift date            |
-| Add a supplier | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/10/10/2026 notes/Halal supplier t/preferred` | Adds a supplier contact                               |
-| Edit a contact | `edit 3 n/John Doe`                                                                                                                           | Edits any field of a contact                          |
-| Delete a contact | `delete 2, 3`                                                                                                                                 | Removes the 2nd and 3rd contact from the current list |
-| Exit the app | `exit`                                                                                                                                        | Closes BrewBook safely                                |
+| Add a supplier     | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/10/10/2026 notes/Halal supplier t/preferred` | Adds a supplier contact                               |
+| Edit a contact     | `edit 3 n/John Doe`                                                                                                                           | Edits any field of a contact                          |
+| Delete a contact   | `delete 2, 3`                                                                                                                                 | Removes the 2nd and 3rd contact from the current list |
+| Exit the app       | `exit`                                                                                                                                        | Closes BrewBook safely                                |
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
 * You can copy and paste commands here directly into BrewBook.
@@ -198,8 +198,8 @@ Explore the [Features](#features) section below for a full list of commands and 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `...` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]...` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -284,7 +284,6 @@ Adds a staff to the BrewBook and returns to `list all` view.
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 * Shifts are not needed if you are unsure when your staff is available to start!
 * Shifts are automatically deleted when the date has passed so you don't need to edit it!
-* If a valid format but incorrect date for shifts is inputted (e.g 29/2/2026, a non-leap year), then BrewBook will automatically find the next nearest valid date to replace it (28/2/2026).
 * If you need to add duplicate numbers for a staff (i.e. Shared Shift Phone), this will be a valid input!
 * If you want to preserve past shifts records, you should make copies of the .json file and archive it before the shift is deleted! See how to do it in FAQ.
 </div>
@@ -313,7 +312,6 @@ Adds a supplier to the BrewBook and returns to `list all` view.
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - Days or items are not needed if you are unsure what and when your supplier will resupply!
 - Days are automatically deleted when the date has passed so you don't need to edit it!
-* If a valid format but incorrect date for Days is inputted (e.g 29/2/2026, a non-leap year), then BrewBook will automatically find the next nearest valid date to replace it (28/2/2026).
 * If you need to add duplicate numbers for a supplier (i.e. Company contact hotline), this will be a valid input!
 * If you want to preserve past days records, you should make copies of the .json file and archive it before the day is deleted! See how to do it in FAQ.
 </div>
@@ -362,6 +360,9 @@ Edits an existing person in BrewBook and returns to `list all` view.
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - Existing values will be updated to the input values. Don't worry about needing to update with previous values!
 - You can remove all a person's tags by typing `t/` without specifying any tags after it.
+- You can remove all a staff's shifts by typing `shifts/` without specifying any shifts after it.
+- You can remove all a supplier's days by typing `days/` without specifying any days after it.
+- You can remove all a supplier's items by typing `items/` without specifying any items after it.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
@@ -389,7 +390,7 @@ Finds contacts whose fields contain the given keywords using AND search.
 - `e` — searches email field
 - `a` — searches address field
 - `t` — searches tags field
-- `shifts` — searches shift field
+- `shifts` — searches shifts field
 - `items` — searches items field
 - `days` — searches days field
 
@@ -425,7 +426,7 @@ Deletes the specified person or people from BrewBook.
 * `list all` followed by `delete 2` deletes the 2nd person in the BrewBook.
 * `find alex` followed by `delete 1, 2` deletes the 1st and 2nd person in the BrewBook of the new list.
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Warning:**
+<div markdown="1" class="alert alert-danger">:exclamation: **Warning:**
 - Real-World Impact: Deleting a contact by mistake means you might lose all your saved data. Always double-check the contact name before deleting. 
 - This action cannot be undone. We recommend that you make frequent backups to guard against accidental deletes (see FAQ Q3).
 </div>
@@ -496,7 +497,7 @@ Clears all entries from the BrewBook.
 **Example**:
 - `clear` deletes all entries from the BrewBook.
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Warning:**
+<div markdown="1" class="alert alert-danger">:exclamation: **Warning:**
 - This Deletes Everything: All your customers' loyalty points, staff schedules, and supplier information will be permanently erased. 
 - This action cannot be undone. Make a backup first if you still want to keep your data(see FAQ Q3).
 </div>
@@ -592,19 +593,19 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 --------------------------------------------------------------------------------------------------------------------
 # Command summary
 
-Action | Format, Examples
---------|------------------
-**Add customer** | `add customer n/NAME p/PHONE e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTES] [t/TAG]...` <br> e.g., `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`
-**Add staff** | `add staff n/NAME p/PHONE e/EMAIL a/ADDRESS [shifts/SHIFTS[, SHIFTS]...] [notes/NOTES] [t/TAG]...` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/4/2025 notes/can only do weekdays t/partTime`
-**Add supplier** | `add supplier n/NAME p/PHONE e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...` <br> e.g., `add supplier n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/28/10/2025`
-**List** | `list <all \| customer \| staff \| supplier>`
-**Sort** | `sort name o/asc`
-**Summary** | `summary`
-**Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`
-**Clear** | `clear`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [notes/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]...] [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`
-**Help** | `help`
-**Exit** | `exit`
+Action | Format, Examples                                                                                                                                                                                                                                        
+--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add customer** | `add customer n/NAME p/PHONE e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTES] [t/TAG]...` <br> e.g., `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`                               
+**Add staff** | `add staff n/NAME p/PHONE e/EMAIL a/ADDRESS [shifts/SHIFTS[, SHIFTS]...] [notes/NOTES] [t/TAG]...` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/4/2025 notes/can only do weekdays t/partTime`         
+**Add supplier** | `add supplier n/NAME p/PHONE e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...` <br> e.g., `add supplier n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/28/10/2025` 
+**List** | `list <all | customer | staff | supplier>`                                                                                                                                                                                                            
+**Sort** | `sort name o/asc`                                                                                                                                                                                                                                       
+**Summary** | `summary`                                                                                                                                                                                                                                               
+**Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`                                                                                                                                                                                                 
+**Clear** | `clear`                                                                                                                                                                                                                                                 
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [notes/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]...] [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [t/TAG]...`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                             
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`                                                                                                                                                                                                   
+**Help** | `help`                                                                                                                                                                                                                                                  
+**Exit** | `exit`                                                                                                                                                                                                                                                  
 
 [Back to Table of Contents](#table-of-contents)

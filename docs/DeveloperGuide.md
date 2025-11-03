@@ -158,7 +158,8 @@ Classes used by multiple components are in the `seedu.address.commons` package. 
 * **Maximum length of 15 digits**: The maximum length of an international phone number is 15 digits, as specified by the International Telecommunication Union's (ITU) E.164 standard.
 
 #### Email
-* The email validation enforces a stricter, simplified subset of RFC 5322 standards. Although this excludes some rare cases allowed by the RFC, it enhances security and usability without noticeable loss of functionality.  
+* **Format**: The email validation enforces a stricter, simplified subset of RFC 5322 standards. Although this excludes some rare cases allowed by the RFC, it enhances security and usability without noticeable loss of functionality.
+* **Maximum length of 254 digits**: To comply with RFC 5322 standards. 
 
 #### Address
 * No restrictions on characters type to allow flexibility in real-world address formats.
