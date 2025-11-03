@@ -127,7 +127,7 @@ New to typing commands? Don't worry! This guide will teach you how to use BrewBo
 BrewBook uses a Command Line Interface (CLI) through the command box at the top of the app window. Instead of clicking through menus, you simply type what you want to do and press Enter. If you can type fast, this is much quicker than traditional point-and-click apps!
 
 ## Understanding Command Structure
-_The **command box** is at the top of the BrewBook window. This is where you key in your commands - just click on it, type your command, and press **Enter**!__
+_The **command box** is at the top of the BrewBook window. This is where you key in your commands - just click on it, type your command, and press **Enter**!_
 BrewBook commands follow a simple pattern: `COMMAND PREFIX/VALUE PREFIX/VALUE ...`
 * `COMMAND` = what you want to do (e.g. add a new customer, delete a staff)
 * `PREFIX` = a field type (e.g. name, phone number, email)
