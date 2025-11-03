@@ -28,7 +28,7 @@ title: User Guide
 This User Guide is designed to help you get the most out of BrewBook. You don't need to read it cover-to-cover,
 instead we recommend you use it like a reference:
 
-- **New users**: Start with the **Quick start** section. It walks you through installation, setup, and your very first commands. It also includes a quick tutorial to the Command-Line Interface (CLI). 
+- **New users**: Start with the **Quick start** section. It walks you through installation, setup, and your very first commands. It also includes a short tutorial to the Command-Line Interface (CLI). 
 - **Everyday use**: Jump to the **Features** section whenever you want to learn a specific command. Each command has:
     - A short description of what it does.
     - The exact format you need to type.
