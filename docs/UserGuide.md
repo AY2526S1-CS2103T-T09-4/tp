@@ -116,7 +116,7 @@ Let’s check whether it’s already installed on your computer.
    > You can also copy the folder path from Step 3 and paste it after `cd`.
 3. Type `java -jar BrewBook.jar` and BrewBook will now open to its' landing page populated with sample data for your easy reference.
 
-![Ui](images/Ui.png)
+![Ui](images/Ui-annotated.png)
 
 Now you’re ready to start managing your café contacts!
 
