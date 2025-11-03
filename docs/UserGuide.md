@@ -17,7 +17,7 @@ title: User Guide
 # Table of Contents
 [How to use this guide](#how-to-use-this-guide)<br>
 [Quick start](#quick-start)<br>
-
+[CLI Tutorial](#cli-tutorial)<br>
 [Features](#features)<br>
 [FAQ](#faq)<br>
 [Known issues / Troubleshooting](#known-issues--troubleshooting)<br>
@@ -412,7 +412,7 @@ Finds contacts whose fields contain the given keywords using AND search.
 [Back to Features](#features)
 
 ---
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Warning:**
 - Real-World Impact: Deleting a contact by mistake means you might lose all your saved data. Always double-check the contact name before deleting. 
 - This action cannot be undone. We recommend that you make frequent backups to guard against accidental deletes (see FAQ Q3).
 </div>
@@ -484,7 +484,7 @@ Displays all staff's shift and supplier's days.
 [Back to Features](#features)
 
 ---
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Warning:**
 - This Deletes Everything: All your customers' loyalty points, staff schedules, and supplier information will be permanently erased. 
 - This action cannot be undone. Make a backup first if you still want to keep your data(see FAQ Q3).
 </div>
