@@ -151,6 +151,7 @@ _The **result display box** is right below the command box. This is where BrewBo
 * **Error Message**: "Invalid command format! Format: ..."
 
 ## Sample Commands
+
  Action             | What to Type                                                                                                                                  | What It Does                                          
 --------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------
  Open help window   | `help`                                                                                                                                        | Shows a short guide on using BrewBook                 
