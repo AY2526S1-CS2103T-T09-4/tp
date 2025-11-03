@@ -109,7 +109,7 @@ Let’s check whether it’s already installed on your computer.
 
 ---
 ## Step 4: Open BrewBook
-![Terminal.png](../../Downloads/Terminal.png)
+![Terminal.png](images/Terminal.png)
 1. Open your **Command Prompt** or **Terminal**. The picture above is what your terminal should look like (though it may differ slightly depending on whether you're using a Mac or a Windows). 
 2. Type `cd` followed by the folder path where you saved the BrewBook app and press **Enter**. You'll know it worked when the folder name appears in your terminal prompt.
    > If you created the folder in Documents, you should type `cd Documents/BrewBook` and press enter. 
