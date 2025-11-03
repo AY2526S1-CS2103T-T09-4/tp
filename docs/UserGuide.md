@@ -10,7 +10,7 @@ title: User Guide
 - **Staff**: Store schedules, roles, and contact info so you can coordinate shifts effortlessly.
 - **Customers**: Record regulars’ preferences, loyalty points or note down catering contacts to strengthen relationships.
 
-**Why BrewBook is different**: Instead of clicking through multiple menus, you simply type short commands (like "add customer" or "list all"). Once you get the hang of it, this is much faster than traditional apps - especially if you're already comfortable typing.
+**Why BrewBook is different**: Instead of clicking through multiple menus, you simply type short commands (like `add customer` or `list all`). Once you get the hang of it, this is much faster than traditional apps - especially if you're already comfortable typing.
 
 ---
 
@@ -28,14 +28,14 @@ title: User Guide
 This User Guide is designed to help you get the most out of BrewBook. You don't need to read it cover-to-cover,
 instead we recommend you use it like a reference:
 
-- **New users**: Start with the **Quick start** section. It walks you through installation, setup, and your very first commands. It also includes a short tutorial to the Command-Line Interface (CLI). 
-- **Everyday use**: Jump to the **Features** section whenever you want to learn a specific command. Each command has:
+- **New users**: Start with the [**Quick start**](#quick-start) section. It walks you through installation, setup, and your very first commands. It also includes a short tutorial to the Command-Line Interface (CLI). 
+- **Everyday use**: Jump to the [**Features**](#features) section whenever you want to learn a specific command. Each command has:
     - A short description of what it does.
     - The exact format you need to type.
     - Examples you can copy and paste.
     - Notes on tips, constraints or special cases.
-- **Troubleshooting**: Check the **FAQ** and **Known issues** sections if something doesn't work as expected.
-- **At a glance**: Use the **Command summary** at the end for a quick reference to all commands in one place.
+- **Troubleshooting**: Check the [**FAQ**](#faq) and [**Known issues**](#known-issues--troubleshooting) sections if something doesn't work as expected.
+- **At a glance**: Use the [**Command summary**](#command-summary) at the end for a quick reference to all commands in one place.
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
 * Use the Table of Contents at the top of this page to jump directly to the section you need.
@@ -220,7 +220,7 @@ Explore the [Features](#features) section below for a full list of commands and 
 - Duplicate dates for Days and Shifts are not allowed.
 - Days and Shifts must follow the format `d/M/yyyy`.
 - Notes must not exceed 200 characters.
-- Points must be a non-negative integer.
+- Points must be a non-negative integer has a maximum value of 2147483647. Values higher than this will not be allowed.
 </div>
 
 [Back to Table of Contents](#table-of-contents)
@@ -260,8 +260,7 @@ Adds a customer to BrewBook and returns to `list all` view.
 * If you need to add duplicate numbers for a customer (i.e. family phone), this will be a valid input!
 </div>
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-- Points has a maximum value of 2147483647. Values higher than this will not be allowed.
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
 - Unable to add a person as multiple types. (i.e. If `John` is added as a customer, you cannot add another person called `John` again as a supplier). 
 </div>
 
@@ -286,7 +285,7 @@ Adds a staff to the BrewBook and returns to `list all` view.
 * Shifts are not needed if you are unsure when your staff is available to start!
 * Shifts are automatically deleted when the date has passed so you don't need to edit it!
 * If you need to add duplicate numbers for a staff (i.e. Shared Shift Phone), this will be a valid input!
-* If you want to preserve past shifts records, you should make copies of the .json file and archive it before the shift is deleted! See how to do it in FAQ.
+* If you want to preserve past shifts records, you should make copies of the .json file and archive it before the shift is deleted! See how to do it in FAQ Q3.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
@@ -396,10 +395,10 @@ Finds contacts whose fields contain the given keywords using AND search.
 - `days` — searches days field
 
 **Examples**:
-- `find John` returns a person named *john* and *John Doe*.
-- `find James Tan` returns a person named *James Tan*, and will not return 2 separate people with names *James* and *Tan*
-- `find Lim Ben` returns a person named *Lim Ben*, and will not return a person named *Ben Lim*.
-- `find n/alex p/12345678` returns a person named *Alex Yeoh* who has phone number `12345678`. <br>
+- `find John` returns a person named `john` and `John Doe`.
+- `find James Tan` returns a person named `James Tan`, and will not return 2 separate people with names `James` and `Tan`
+- `find Lim Ben` returns a person named `Lim Ben`, and will not return a person named `Ben Lim`.
+- `find n/alex p/12345678` returns a person named `Alex Yeoh` who has phone number `12345678`. <br>
 
 <div markdown="1" class="alert alert-success">:bulb: **Tips:**
 - The search is case-insensitive so don't worry about capitalisation!
@@ -407,7 +406,7 @@ Finds contacts whose fields contain the given keywords using AND search.
 - If no prefix is specified, find will resort to search by name for the given keyword.
 </div>
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
 - Find will search from the list generated by `list all` regardless of what list commands you have used.
 </div>
 
@@ -428,7 +427,7 @@ Deletes the specified person or people from BrewBook.
 * `find alex` followed by `delete 1, 2` deletes the 1st and 2nd person in the BrewBook of the new list.
 
 <div markdown="1" class="alert alert-danger">:exclamation: **Warning:**
-- Real-World Impact: Deleting a contact by mistake means you might lose all your saved data. Always double-check the contact name before deleting. 
+- Real-World Impact: Deleting a contact by mistake means it is permanently deleted. Always double-check the contact name before deleting. 
 - This action cannot be undone. We recommend that you make frequent backups to guard against accidental deletes (see FAQ Q3).
 </div>
 
@@ -500,7 +499,7 @@ Clears all entries from the BrewBook.
 
 <div markdown="1" class="alert alert-danger">:exclamation: **Warning:**
 - This Deletes Everything: All your customers' loyalty points, staff schedules, and supplier information will be permanently erased. 
-- This action cannot be undone. Make a backup first if you still want to keep your data(see FAQ Q3).
+- This action cannot be undone. Make a backup first if you still want to keep your data (see FAQ Q3).
 </div>
 
 [Back to Features](#features)
@@ -529,7 +528,7 @@ BrewBook data are saved in the hard disk automatically after any command that ch
 
 BrewBook data are saved automatically as a JSON file `[JAR file location]/data/brewbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="1" class="alert alert-danger">:exclamation: **Warning:**
 - If your changes to the data file makes its format invalid, BrewBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 - Furthermore, certain edits can cause the BrewBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
@@ -605,7 +604,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`                                                                                                                                                                                                 
 **Clear** | `clear`                                                                                                                                                                                                                                                 
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [notes/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]...] [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [t/TAG]...`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                             
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`                                                                                                                                                                                                   
+**Find** | `find KEYWORD [MORE_KEYWORDS] or find [n/NAME_KEYWORD [MORE_KEYWORDS]] [p/PHONE_KEYWORD [MORE_KEYWORDS]] [e/EMAIL_KEYWORD [MORE_KEYWORDS]] [a/ADDRESS_KEYWORD [MORE_KEYWORDS]] [t/TAG_KEYWORD [MORE_KEYWORDS]] [shifts/DATE_KEYWORD [MORE_KEYWORDS]] [items/ITEM_KEYWORD [MORE_KEYWORDS]] [days/DAY_KEYWORD [MORE_KEYWORDS]]` <br> e.g., `find James`                                                                                                                                                                                                   
 **Help** | `help`                                                                                                                                                                                                                                                  
 **Exit** | `exit`                                                                                                                                                                                                                                                  
 
