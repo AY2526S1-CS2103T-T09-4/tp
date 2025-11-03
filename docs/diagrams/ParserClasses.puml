@@ -36,4 +36,5 @@ XYZCommandParser ..> ParserUtil
 XYZCommandParser ..> DateParser
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
+ParserUtil ..> DateParser
 @enduml

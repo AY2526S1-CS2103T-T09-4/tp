@@ -10,7 +10,7 @@ title: Developer Guide
 [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)<br>
 [Appendix: Requirements](#appendix-requirements)<br>
 [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)<br>
-[Appendix: Effort](#appendix-effort)<br>
+[Appendix: Effort](#appendix-effort)<br><br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -413,7 +413,7 @@ For all use cases below, unless otherwise specified:
 * **Items**: Item or goods supplied by one or more suppliers (e.g. milk, coffee bean)
 * **Days**: Scheduled date for supply of items.
 <br> <br>
-[Back to Table of Contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents) <br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
