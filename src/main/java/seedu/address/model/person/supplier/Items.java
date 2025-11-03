@@ -7,11 +7,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Items {
-    public static final String MESSAGE_COMPULSORY = "At least one item must be provided.";
-    public static final String MESSAGE_CONSTRAINTS = "Item must be non empty, and contain only letters and numbers.";
+    public static final String MESSAGE_CONSTRAINTS = "Item name must contain alphanumerical characters, "
+            + "and symbols if necessary.";
     public static final String MESSAGE_DUPLICATE_CONSTRAINTS = "Duplicates items are not allowed: ";
 
-    private static final String VALIDATION_REGEX = "[A-Za-z0-9]+(?: [A-Za-z0-9]+)*";
+    private static final String VALIDATION_REGEX = "^(?=.*[A-Za-z0-9])[A-Za-z0-9 _'\\-&.()#:+%*]+$";
 
     private final String name;
 

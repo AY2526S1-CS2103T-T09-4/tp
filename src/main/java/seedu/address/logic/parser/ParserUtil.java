@@ -180,7 +180,7 @@ public class ParserUtil {
         }
 
         String raw = shiftStrings.get(0);
-        for (String token : raw.split(", ")) {
+        for (String token : raw.split(",")) {
             String trimmed = token.trim();
             if (trimmed.isEmpty()) {
                 continue;
@@ -218,7 +218,7 @@ public class ParserUtil {
         }
 
         String raw = daysStrings.get(0);
-        for (String token : raw.split(", ")) {
+        for (String token : raw.split(",")) {
             String trimmed = token.trim();
             if (trimmed.isEmpty()) {
                 continue;
