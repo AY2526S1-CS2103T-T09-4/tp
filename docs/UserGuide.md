@@ -412,11 +412,6 @@ Finds contacts whose fields contain the given keywords using AND search.
 [Back to Features](#features)
 
 ---
-<div markdown="1" class="alert alert-warning">:exclamation: **Warning:**
-- Real-World Impact: Deleting a contact by mistake means you might lose all your saved data. Always double-check the contact name before deleting. 
-- This action cannot be undone. We recommend that you make frequent backups to guard against accidental deletes (see FAQ Q3).
-</div>
-
 ## Deleting contacts : `delete`
 
 Deletes the specified person or people from BrewBook.
@@ -429,6 +424,11 @@ Deletes the specified person or people from BrewBook.
 **Examples**:
 * `list all` followed by `delete 2` deletes the 2nd person in the BrewBook.
 * `find alex` followed by `delete 1, 2` deletes the 1st and 2nd person in the BrewBook of the new list.
+
+<div markdown="1" class="alert alert-warning">:exclamation: **Warning:**
+- Real-World Impact: Deleting a contact by mistake means you might lose all your saved data. Always double-check the contact name before deleting. 
+- This action cannot be undone. We recommend that you make frequent backups to guard against accidental deletes (see FAQ Q3).
+</div>
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
 - If you accidentally type the same number (i.e `delete 2, 2`), don't worry! BrewBook will recognise that you only want to delete contact number 2 and only delete 2.
@@ -484,10 +484,6 @@ Displays all staff's shift and supplier's days.
 [Back to Features](#features)
 
 ---
-<div markdown="1" class="alert alert-warning">:exclamation: **Warning:**
-- This Deletes Everything: All your customers' loyalty points, staff schedules, and supplier information will be permanently erased. 
-- This action cannot be undone. Make a backup first if you still want to keep your data(see FAQ Q3).
-</div>
 ## Clearing all entries : `clear`
 
 ![clear](images/clearResult.png)
@@ -499,6 +495,11 @@ Clears all entries from the BrewBook.
 
 **Example**:
 - `clear` deletes all entries from the BrewBook.
+
+<div markdown="1" class="alert alert-warning">:exclamation: **Warning:**
+- This Deletes Everything: All your customers' loyalty points, staff schedules, and supplier information will be permanently erased. 
+- This action cannot be undone. Make a backup first if you still want to keep your data(see FAQ Q3).
+</div>
 
 [Back to Features](#features)
 
