@@ -37,7 +37,7 @@
             <Label fx:id="address" styleClass="cell_small_label" text="$address" wrapText="true" maxWidth="200"/>
             <Label fx:id="email" styleClass="cell_small_label" text="$email" wrapText="true" maxWidth="200"/>
         </VBox>
-        <VBox minHeight="105" GridPane.columnIndex="1" spacing="6">
+        <VBox minHeight="105" GridPane.columnIndex="1" spacing="8">
             <padding>
                 <Insets top="10" right="10" bottom="10" left="15"/>
             </padding>
@@ -49,7 +49,7 @@
 
             <VBox spacing="8" alignment="CENTER_LEFT">
                 <Label text="Days:" styleClass="cell_small_label"/>
-                <Label fx:id="days" styleClass="cell_small_label" text="$days"/>
+                <Label fx:id="days" text="$days"/>
             </VBox>
         </VBox>
         <VBox minHeight="105" GridPane.columnIndex="2" spacing="6">

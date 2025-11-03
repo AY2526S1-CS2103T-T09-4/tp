@@ -127,7 +127,7 @@ New to typing commands? Don't worry! This guide will teach you how to use BrewBo
 BrewBook uses a Command Line Interface (CLI) through the command box at the top of the app window. Instead of clicking through menus, you simply type what you want to do and press Enter. If you can type fast, this is much quicker than traditional point-and-click apps!
 
 ## Understanding Command Structure
-_The **command box** is at the top of the BrewBook window. This is where you key in your commands - just click on it, type your command, and press **Enter**!_
+_The **command box** is at the top of the BrewBook window. This is where you key in your commands - just click on it, type your command, and press **Enter**!__
 BrewBook commands follow a simple pattern: `COMMAND PREFIX/VALUE PREFIX/VALUE ...`
 * `COMMAND` = what you want to do (e.g. add a new customer, delete a staff)
 * `PREFIX` = a field type (e.g. name, phone number, email)
@@ -145,22 +145,22 @@ Let's break this down:
 You'll learn more about the allowed prefixes for each person type later on! Also, the order of the `PREFIX/VALUE`s do not matter - the given samples are just a guide. 
 
 ## Understanding Responses
-_The **result display box** is right below the command box. This is where BrewBook replies to your inputs. There are 3 main types of responses that BrewBook can give: _
+_The **result display box** is right below the command box. This is where BrewBook replies to your inputs. There are 3 main types of responses that BrewBook can give:_
 * **Success Message**: "New person added: John Doe..." 
 * **Summary Message**: Shows a breakdown of your important dates and items supplied (e.g. "Important dates summarised: 12/12/2025...") 
 * **Error Message**: "Invalid command format! Format: ..."
 
 ## Sample Commands
-| Action | What to Type                                                                                                                                  | What It Does                                          |
-|--------|-----------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
-| Open help window | `help`                                                                                                                                        | Shows a short guide on using BrewBook                 |
-| View all contacts | `list all`                                                                                                                                    | Displays every contact saved                          |
-| Add a customer | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                     | Adds a new customer                                   |
+| Action             | What to Type                                                                                                                                  | What It Does                                          |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
+| Open help window   | `help`                                                                                                                                        | Shows a short guide on using BrewBook                 |
+| View all contacts  | `list all`                                                                                                                                    | Displays every contact saved                          |
+| Add a customer     | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                     | Adds a new customer                                   |
 | Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/4/12/2026 notes/can only do weekdays t/partTime`                | Adds a new staff contact with a shift date            |
-| Add a supplier | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/10/10/2026 notes/Halal supplier t/preferred` | Adds a supplier contact                               |
-| Edit a contact | `edit 3 n/John Doe`                                                                                                                           | Edits any field of a contact                          |
-| Delete a contact | `delete 2, 3`                                                                                                                                 | Removes the 2nd and 3rd contact from the current list |
-| Exit the app | `exit`                                                                                                                                        | Closes BrewBook safely                                |
+| Add a supplier     | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/10/10/2026 notes/Halal supplier t/preferred` | Adds a supplier contact                               |
+| Edit a contact     | `edit 3 n/John Doe`                                                                                                                           | Edits any field of a contact                          |
+| Delete a contact   | `delete 2, 3`                                                                                                                                 | Removes the 2nd and 3rd contact from the current list |
+| Exit the app       | `exit`                                                                                                                                        | Closes BrewBook safely                                |
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
 * You can copy and paste commands here directly into BrewBook.
@@ -198,8 +198,8 @@ Explore the [Features](#features) section below for a full list of commands and 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `...` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]...` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
