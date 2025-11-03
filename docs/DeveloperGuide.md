@@ -91,7 +91,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1, 2, 3")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -189,7 +189,7 @@ Team size: 5
 5. Allow single-word aliases for common commands: BrewBook currently requires full command words like `list all` or `sort name`. We will tweak the command parsing to allow the use of single-letter or short aliases for the most frequent commands to improve CLI speed. For example: `ls all` will be an accepted alias for `list all`.
 6. Improve input feedback for partially correct commands: When a user is typing a command and pauses, the system can be more helpful. We will tweak the command result to provide immediate, context-sensitive suggestions or reminders based on the partially entered command. For instance, if the user types add customer `n/`, a small hint might appear: (Required: `p/`, `e/`, `a/`).
 7. Enhance help to provide command-specific guidance: The current help command opens a windows which link to the user guide. We will tweak the help command parser to accept an optional command name. For example, typing `help list` will display a concise summary of the `list` command's format, parameters and examples directly in the command result box, providing faster, targeted help without external resources.
-8. Enhance add and edit to support multirole contacts: The application currently forces a contact to be exclusively one type (Customer, Staff, or Supplier). This is a flaw, as a staff member may also be a loyal customer, forcing the user to create duplicate entries. We will tweak the contact model and the add/edit commands to allow a contact to possess multiple roles. The add command will be enhanced to accept multiple types (e.g., add customer staff n/...), and the edit command will be tweaked to add or remove roles from an existing contact (e.g., edit 4 role/add(customer)), allowing a single entry to store all relevant information (like points/ for their customer profile and shifts/ for their staff profile).
+8. Enhance add and edit to support multirole contacts: The application currently forces a contact to be exclusively one type (Customer, Staff, or Supplier). This is a flaw, as a staff member may also be a loyal customer, forcing the user to find workarounds to create a new entry for this person. We will tweak the contact model and the add/edit commands to allow a contact to possess multiple roles. The add command will be enhanced to accept multiple types (e.g., add customer staff n/...), and the edit command will be tweaked to add or remove roles from an existing contact (e.g., edit 4 role/add(customer)), allowing a single entry to store all relevant information (like points/ for their customer profile and shifts/ for their staff profile).
 9. Enhance edit command to support additive/subtractive list updates: The current edit command overwrites all data for list-based fields. For example, editing shifts for a staff member who already has shifts scheduled will delete all previous shifts and replace them with the new input. We will tweak the edit command's syntax to allow for adding or removing specific items from lists like shifts, items, or tags. For example, `edit 1 shifts/add(2026-12-10)` will add the new shift without deleting existing ones, and `edit 1 shifts/remove(2026-12-04)` will remove only that specific shift.
 10. Implement a unified calendar view for upcoming dates: The current system displays staff shifts and supplier days as simple lists of dates, requiring users to manually track upcoming events. We plan to tweak the UI's display panel to include an optional Calendar View toggle. When activated, this view will aggregate and visually display all future shifts and days on a simple, scrollable monthly calendar, making it much easier for cafe managers to spot staffing holes or incoming deliveries at a glance, enhancing the utility of the existing date fields.
 
@@ -222,41 +222,41 @@ Manager of a small cafe
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                | I want to …​                                                                                  | So that I can…​                          |
-|----------|------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------|
-`* *` | potential user who is exploring using the app in the cafe, | see the app populated with sample data,                                                       | I can easily see how the app will look like when it is in use.
-`* *` | new user who is ready to start using the app, | interact with the sample data,                                                                | I am familiar with the features provided.
-`* * *` | new user who is ready to start using the app, | add my first supplier with name, contact number, what they supply, and when I need the supply | I can test adding customers/staff/supplier.
-`* * *` | new user who is ready to start using the app, | add my first staff with name, contact number, and when they're on shift                       | I can test adding customers/staff/supplier.
-`* * *` | new user who is ready to start using the app, | add my first customer with name, contact number, and their current loyalty points             | I can test adding customers/staff/supplier.
-`* *` | new user who is ready to start using the app, | test the list by category function,                                                           | I can test searching customers/staff/supplier.
-`* *` | new user who is ready to start using the app, | delete the sample data,                                                                       | I can start fresh with my own records.
-`* *` | new user who is ready to start using the app, | import my contacts via a CSV file,                                                            | I can add preexisting contacts in bulk quickly.
-`* * *` | new user who is ready to start using the app, | view all contacts                                                                             | I can immediately begin interacting customers/staff/supplier.
-`* *` | semi-experienced user who has been using the app for a short while, | search by name                                                                                | I can quickly find the contact
-`* *` | semi-experienced user who has been using the app for a short while, | filter the suppliers by what they supply,                                                     | I can quickly figure out who to contact.
-`* *` | semi-experienced user who has been using the app for a short while, | filter the staff by when they are on shift,                                                   | I can quickly figure out who to contact.
-`* *` | semi-experienced user who has been using the app for a short while, | check which suppliers I need to contact for restocks on which day,                            | I can be organised and not miss out any supplies
-`* *` | semi-experienced user who has been using the app for a short while, | view notes related to a contact,                                                              | I remember important details from past interactions
-`* *` | semi-experienced user who has been using the app for a short while, | check how many loyalty point a certain customer has                                           | I can check if they are eligible for redemptions
-`* *` | semi-experienced user who has been using the app for a short while, | update the loyalty points of a certain customer                                               | I can deduct / add loyalty points with purchases
-`* *` | semi-experienced user who has been using the app for a short while, | add a customer's allergen information                                                         | I know what products to avoid
-`* *` | semi-experienced user who has been using the app for a short while, | mark my employees as full-time or part-time                                                   | I can plan shift accordingly
-`* * *` | semi-experienced user who has been using the app for a short while, | delete individual contacts                                                                    | I can remove unwanted contacts
-`* *` | semi-experienced user who has been using the app for a short while, | delete contacts in bulk                                                                       | I don't have to manually delete them
-`* *` | semi-experienced user who has been using the app for a short while, | add remarks or comments tied to a specific contact                                            | I can retain miscallaneous but important information about them
-`* *` | semi-experienced user who has been using the app for a short while, | add operating days / hours for suppliers                                                      | I don't have to search it up each time
-`* * *` | semi-experienced user who has been using the app for a short while, | display an overview of each "person category" on a dashboard                                  | I have a summary of contact information
-`* *` | semi-experienced user who has been using the app for a short while, | store an employee's emergency information                                                     | I know who to contact in case of an incident.
-`* *` | long-time user, | able to see which suppliers and staff i need to contact on the current day                    | I don't have to search it up
-`* *` | long-time user, | able to see which suppliers and staff i need to contact on the next day                       | I don't have to search it up
-`* *` | long-time user, | have quick access to frequently used contact information                                      | I don't have to search it up
-`* *` | long-time user, | set a reminder to contact a supplier,                                                         | I don’t forget to reorder.
-`* *` | long-time user, | export the contacts via a CSV file,                                                           | I can use it to import to my phone contacts.
-`* *` | long-time user, | update a contact's phone number and email address,                                            | I can refer to the most up-to-date information.
-`* *` | long-time user, | archive/hide unused contacts,                                                                 | I am not distracted by irrelevant contact.
-`*` | long-time user, | add a customer's birthday,                                                                    | I know when to give special rewards.
-`* *` | long-time user, | filter contacts with multiple tags                                                            | I can have more specific searches
+| Priority | As a/an ___,                                                        | I want to ___,                                                                                | so that ___.                                                    |
+|----------|---------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+`* *` | potential user who is exploring using the app in the cafe,          | see the app populated with sample data,                                                       | I can easily see how the app will look like when it is in use.  
+`* *` | new user who is ready to start using the app,                       | interact with the sample data,                                                                | I am familiar with the features provided.                       
+`* * *` | new user who is ready to start using the app,                       | add my first supplier with name, contact number, what they supply, and when I need the supply | I can test adding customers/staff/supplier.                     
+`* * *` | new user who is ready to start using the app,                       | add my first staff with name, contact number, and when they're on shift                       | I can test adding customers/staff/supplier.                     
+`* * *` | new user who is ready to start using the app,                       | add my first customer with name, contact number, and their current loyalty points             | I can test adding customers/staff/supplier.                     
+`* *` | new user who is ready to start using the app,                       | test the list by category function,                                                           | I can test searching customers/staff/supplier.                  
+`* *` | new user who is ready to start using the app,                       | delete the sample data,                                                                       | I can start fresh with my own records.                          
+`* *` | new user who is ready to start using the app,                       | import my contacts via a CSV file,                                                            | I can add preexisting contacts in bulk quickly.                 
+`* * *` | new user who is ready to start using the app,                       | view all contacts                                                                             | I can immediately begin interacting customers/staff/supplier.   
+`* *` | semi-experienced user who has been using the app for a short while, | search by name                                                                                | I can quickly find the contact                                  
+`* *` | semi-experienced user who has been using the app for a short while, | filter the suppliers by what they supply,                                                     | I can quickly figure out who to contact.                        
+`* *` | semi-experienced user who has been using the app for a short while, | filter the staff by when they are on shift,                                                   | I can quickly figure out who to contact.                        
+`* *` | semi-experienced user who has been using the app for a short while, | check which suppliers I need to contact for restocks on which day,                            | I can be organised and not miss out any supplies                
+`* *` | semi-experienced user who has been using the app for a short while, | view notes related to a contact,                                                              | I remember important details from past interactions             
+`* *` | semi-experienced user who has been using the app for a short while, | check how many loyalty point a certain customer has                                           | I can check if they are eligible for redemptions                
+`* *` | semi-experienced user who has been using the app for a short while, | update the loyalty points of a certain customer                                               | I can deduct / add loyalty points with purchases                
+`* *` | semi-experienced user who has been using the app for a short while, | add a customer's allergen information                                                         | I know what products to avoid                                   
+`* *` | semi-experienced user who has been using the app for a short while, | mark my employees as full-time or part-time                                                   | I can plan shift accordingly                                    
+`* * *` | semi-experienced user who has been using the app for a short while, | delete individual contacts                                                                    | I can remove unwanted contacts                                  
+`* *` | semi-experienced user who has been using the app for a short while, | delete contacts in bulk                                                                       | I don't have to manually delete them                            
+`* *` | semi-experienced user who has been using the app for a short while, | add remarks or comments tied to a specific contact                                            | I can retain miscallaneous but important information about them 
+`* *` | semi-experienced user who has been using the app for a short while, | add operating days / hours for suppliers                                                      | I don't have to search it up each time                          
+`* * *` | semi-experienced user who has been using the app for a short while, | display an overview of each "person category" on a dashboard                                  | I have a summary of contact information                         
+`* *` | semi-experienced user who has been using the app for a short while, | store an employee's emergency information                                                     | I know who to contact in case of an incident.                   
+`* *` | long-time user,                                                     | able to see which suppliers and staff i need to contact on the current day                    | I don't have to search it up                                    
+`* *` | long-time user,                                                     | able to see which suppliers and staff i need to contact on the next day                       | I don't have to search it up                                    
+`* *` | long-time user,                                                     | have quick access to frequently used contact information                                      | I don't have to search it up                                    
+`* *` | long-time user,                                                     | set a reminder to contact a supplier,                                                         | I don’t forget to reorder.                                      
+`* *` | long-time user,                                                     | export the contacts via a CSV file,                                                           | I can use it to import to my phone contacts.                    
+`* *` | long-time user,                                                     | update a contact's phone number and email address,                                            | I can refer to the most up-to-date information.                 
+`* *` | long-time user,                                                     | archive/hide unused contacts,                                                                 | I am not distracted by irrelevant contact.                      
+`*` | long-time user,                                                     | add a customer's birthday,                                                                    | I know when to give special rewards.                            
+`* *` | long-time user,                                                     | filter contacts with multiple tags                                                            | I can have more specific searches                               
 
 *{More to be added}*
 
@@ -361,11 +361,11 @@ For all use cases below, unless otherwise specified:
 
 #### UC8 - Summarise all staff's shift and suppliers' items and days
 
-**Guarantee**: Summarise all staffs' shift and suppliers' items and days.
+**Guarantee**: Summarise all staff's shift and suppliers' items and days.
 
 **MSS**
-1. User requests to summarise all staffs' shift and suppliers' items and days.
-2. BrewBook displays a summary of all staffs' shift and suppliers' items and days. Use case ends.
+1. User requests to summarise all staff's shift and suppliers' items and days.
+2. BrewBook displays a summary of all staff's shift and suppliers' items and days. Use case ends.
 
 #### UC9 - Clear all persons
 
@@ -402,7 +402,7 @@ For all use cases below, unless otherwise specified:
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: The widely used, actively supported, and industry-standard OS platforms such as Windows, Linux, Unix and MacOS.
 * **Customer**: A contact who interacts with the café as a buyer or loyalty program member.
 * **Supplier**: A contact who provides goods or services to the café (e.g. milk supplier, coffee bean supplier).
 * **Staff**: A contact employed by the café, either full-time or part-time.
@@ -431,13 +431,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample persons. The window size may not be optimum.
+    2. Double-click the jar file Expected: Shows the GUI with a set of sample persons. The window size may not be optimum.
 
 1. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. Multi-instance handling
@@ -490,7 +490,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Invalid index for x and deletion of multiple persons in the list.
 
 3. Deleting from sub-list
-    1. Prerequisites: Multiple persons in the list. Filtered the list using `list x` or `find` command.
+    1. Prerequisites: Multiple persons in the list. Filtered the list using `list <customer | staff | supplier>` or `find` command.
     2. Test case: `delete 1` <br>
        Expected: First contact in filtered list is deleted. Details of the deleted contact shown in the status. Running `list all` should bring back all unfiltered entries in original index of list.
 
@@ -607,18 +607,16 @@ Compared to AB3, BrewBook was more demanding because:
 
 #### Technical
 - **Model Redesign:**
-  Refactoring `Person` into an abstract superclass required deep changes across `Logic`, `Storage`, and `UI` as they `Person` was heavily utilised and embedded in the design of AB3.
+  Refactoring `Person` into an abstract superclass required deep changes across `Logic`, `Storage`, and `UI` as `Person` was heavily utilised and embedded in the design of AB3.
 
 - **Parser and Command Handling:**
-  Building a parser that could distinguish extending from the original parser and command handling because of these new entity types was also non-trivial. It caused frequent test failures due to dependencies and considerable time was spent understanding an debugging code.
+  Building a parser that could extend the original parser and handle new entity types was non-trivial. It frequently caused test failures due to dependencies, and considerable time was spent understanding and debugging the code.
 
 #### Collaboration
 - **Cross‑team Coordination:**
   Model changes cascaded into multiple layers, requiring synchronized updates across contributors.
 - **Merge Conflicts:**
   Refactoring shared components (e.g., `Person`, `AddressBook`, `Parser`) led to frequent conflicts and integration delays.
-- **Onboarding Overhead:**
-  New contributors needed extra time to understand the redesigned architecture before contributing effectively.
 
 Despite these hurdles, the team mitigated risks through issue tracking, code reviews, and weekly syncs, ensuring architectural and design decisions were well‑documented and consensus‑driven.
 
@@ -651,6 +649,6 @@ While reuse provided a foundation, adapting these components to BrewBook’s mul
 - Maintained **team cohesion** despite architectural complexity and differing individual schedules, ensuring smooth integration of features.
 
 
-**In summary:** BrewBook represents a meaningful evolution from AB3. It demanded deeper architectural thinking, more rigorous testing, and stronger collaboration practices, but ultimately resulted in a more powerful and user‑friendly product.
+**In summary:** BrewBook represents a meaningful evolution from AB3. It demanded deeper architectural thinking, more rigorous testing, and stronger collaboration practices, but ultimately resulted in a more powerful and user‑friendly product for our target audience.
 <br> <br>
 [Back to Table of Contents](#table-of-contents)
