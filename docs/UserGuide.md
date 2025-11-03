@@ -133,7 +133,7 @@ BrewBook commands follow a simple pattern: `COMMAND PREFIX/VALUE PREFIX/VALUE ..
 * `PREFIX` = a field type (e.g. name, phone number, email)
 * `VALUE` = the value of the field indicated by the prefix just before it
 
-For example, to add a customer, you would use `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+For example, to add a customer, you can use `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
 
 Let's break this down: 
 * `add customer` = COMMAND
@@ -151,16 +151,17 @@ _The **result display box** is right below the command box. This is where BrewBo
 * **Error Message**: "Invalid command format! Format: ..."
 
 ## Sample Commands
-| Action             | What to Type                                                                                                                                  | What It Does                                          |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
-| Open help window   | `help`                                                                                                                                        | Shows a short guide on using BrewBook                 |
-| View all contacts  | `list all`                                                                                                                                    | Displays every contact saved                          |
-| Add a customer     | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                     | Adds a new customer                                   |
-| Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/4/12/2026 notes/can only do weekdays t/partTime`                | Adds a new staff contact with a shift date            |
-| Add a supplier     | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/10/10/2026 notes/Halal supplier t/preferred` | Adds a supplier contact                               |
-| Edit a contact     | `edit 3 n/John Doe`                                                                                                                           | Edits any field of a contact                          |
-| Delete a contact   | `delete 2, 3`                                                                                                                                 | Removes the 2nd and 3rd contact from the current list |
-| Exit the app       | `exit`                                                                                                                                        | Closes BrewBook safely                                |
+
+ Action             | What to Type                                                                                                                                  | What It Does                                          
+--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------
+ Open help window   | `help`                                                                                                                                        | Shows a short guide on using BrewBook                 
+ View all contacts  | `list all`                                                                                                                                    | Displays every contact saved                          
+ Add a customer     | `add customer n/Ipum p/87122841 e/ipsum@example.com a/311, Bayfront 2, #02-25 points/3 notes/allergic to nuts t/frequent`                     | Adds a new customer                                   
+ Add a staff member | `add staff n/Lorem p/98765432 e/lorem@example.com a/123 Clementi Ave 3 shifts/4/12/2026 notes/can only do weekdays t/partTime`                | Adds a new staff contact with a shift date            
+ Add a supplier     | `add supplier n/Dolor p/93376152 e/dolor@example.com a/123 Sengkang Ave 8 items/Flour, Eggs days/10/10/2026 notes/Halal supplier t/preferred` | Adds a supplier contact                               
+ Edit a contact     | `edit 3 n/John Doe`                                                                                                                           | Edits any field of a contact                          
+ Delete a contact   | `delete 2, 3`                                                                                                                                 | Removes the 2nd and 3rd contact from the current list 
+ Exit the app       | `exit`                                                                                                                                        | Closes BrewBook safely                                
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
 * You can copy and paste commands here directly into BrewBook.
