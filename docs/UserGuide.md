@@ -4,19 +4,20 @@ title: User Guide
 ---
 
 **Welcome to BrewBook! Your café’s command center.**
-<br>Running a small café means juggling suppliers, staff, and loyal customers. BrewBook helps you keep all these relationships organized in one place.
+<br>Running a small café means juggling suppliers, staff, and loyal customers. BrewBook helps you keep all these relationships organized in one place - no complex menus to click through, just type what you need.
 
 - **Suppliers**: Track who provides your beans, pastries, or equipment, and keep their details handy for quick reorders.
 - **Staff**: Store schedules, roles, and contact info so you can coordinate shifts effortlessly.
 - **Customers**: Record regulars’ preferences, loyalty points or note down catering contacts to strengthen relationships.
 
-Optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BrewBook can get your contact management tasks done faster than traditional GUI apps.
+**Why BrewBook is different**: Instead of clicking through multiple menus, you simply type short commands (like "add customer" or "list all"). Once you get the hang of it, this is much faster than traditional apps - especially if you're already comfortable typing.
 
 ---
 
 # Table of Contents
 [How to use this guide](#how-to-use-this-guide)<br>
 [Quick start](#quick-start)<br>
+[CLI Tutorial](#cli-tutorial)<br>
 [Features](#features)<br>
 [FAQ](#faq)<br>
 [Known issues / Troubleshooting](#known-issues--troubleshooting)<br>
@@ -27,7 +28,7 @@ Optimized for use via a Command Line Interface (CLI) while still having the bene
 This User Guide is designed to help you get the most out of BrewBook. You don't need to read it cover-to-cover,
 instead we recommend you use it like a reference:
 
-- **New users**: Start with the **Quick start** section. It walks you through installation, setup, and your very first commands.
+- **New users**: Start with the **Quick start** section. It walks you through installation, setup, and your very first commands. It also includes a short tutorial to the Command-Line Interface (CLI). 
 - **Everyday use**: Jump to the **Features** section whenever you want to learn a specific command. Each command has:
     - A short description of what it does.
     - The exact format you need to type.
@@ -98,32 +99,58 @@ Let’s check whether it’s already installed on your computer.
 ---
 ## Step 3: Set up your BrewBook folder
 
-1. Create a new folder anywhere you like — for example:
+1. Create a new folder somehwere easy to remember — for example:
     - **Windows:** `C:\Users\Jean\Documents\BrewBook`
     - **macOS:** `/Users/Jean/Documents/BrewBook` or `~/Documents/BrewBook`
     - **Linux:** `/home/Jean/Documents/BrewBook`
+    - The above is the folder path if you go to your `Documents` folder and create a new folder called `BrewBook`. 
 2. Move the downloaded **`BrewBook.jar`** file into that folder.
    BrewBook will automatically save your data there each time you use it.
 
 ---
 ## Step 4: Open BrewBook
-
-1. Open your **Command Prompt** or **Terminal**
-2. Type `cd [folderpath]` to navigate to where your BrewBook.jar file exists.
-   > If your .jar file is in the`Users\(name)\Downloads` directory and you are currently in `Users\(name)`,
-   > you should type `cd Downloads` in the **Command Prompt** or **Terminal**.
+![Terminal.png](../../Downloads/Terminal.png)
+1. Open your **Command Prompt** or **Terminal**. The picture above is what your terminal should look like (though it may differ slightly depending on whether you're using a Mac or a Windows). 
+2. Type `cd` followed by the folder path where you saved the BrewBook app and press **Enter**. You'll know it worked when the folder name appears in your terminal prompt.
+   > If you created the folder in Documents, you should type `cd Documents/BrewBook` and press enter. 
+   > You can also copy the folder path from Step 3 and paste it after `cd`.
 3. Type `java -jar BrewBook.jar` and BrewBook will now open to its' landing page populated with sample data for your easy reference.
 
 ![Ui](images/Ui.png)
 
 Now you’re ready to start managing your café contacts!
 
----
-## Step 5: Try out a few simple commands
+# CLI Tutorial
+New to typing commands? Don't worry! This guide will teach you how to use BrewBook's command box. Once you learn these basics, you'll be able to manage contacts in seconds instead of minutes.
 
-BrewBook uses a **command box** — just type a command exactly as shown below and press **Enter**.
-Here are a few examples you can try:
+## What is BrewBook's CLI?
+BrewBook uses a Command Line Interface (CLI) through the command box at the top of the app window. Instead of clicking through menus, you simply type what you want to do and press Enter. If you can type fast, this is much quicker than traditional point-and-click apps!
 
+## Understanding Command Structure
+_The **command box** is at the top of the BrewBook window. This is where you key in your commands - just click on it, type your command, and press **Enter**!_
+BrewBook commands follow a simple pattern: `COMMAND PREFIX/VALUE PREFIX/VALUE ...`
+* `COMMAND` = what you want to do (e.g. add a new customer, delete a staff)
+* `PREFIX` = a field type (e.g. name, phone number, email)
+* `VALUE` = the value of the field indicated by the prefix just before it
+
+For example, to add a customer, you would use `add customer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+
+Let's break this down: 
+* `add customer` = COMMAND
+* `n/` = PREFIX for name
+* `John Doe` = VALUE for name
+* `p/` = PREFIX for phone
+* `98765432` = VALUE for phone
+
+You'll learn more about the allowed prefixes for each person type later on! Also, the order of the `PREFIX/VALUE`s do not matter - the given samples are just a guide. 
+
+## Understanding Responses
+_The **result display box** is right below the command box. This is where BrewBook replies to your inputs. There are 3 main types of responses that BrewBook can give: _
+* **Success Message**: "New person added: John Doe..." 
+* **Summary Message**: Shows a breakdown of your important dates and items supplied (e.g. "Important dates summarised: 12/12/2025...") 
+* **Error Message**: "Invalid command format! Format: ..."
+
+## Sample Commands
 | Action | What to Type                                                                                                                                  | What It Does                                          |
 |--------|-----------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
 | Open help window | `help`                                                                                                                                        | Shows a short guide on using BrewBook                 |
@@ -180,12 +207,12 @@ Explore the [Features](#features) section below for a full list of commands and 
 * Command words are case-insensitive.
   e.g `list all` and `LIST all` are both valid ways to use the list command and will work successfully.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that 1 multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Generic constraints for fields:**
 - Name must not exceed 48 characters.
-- Name does not allow special characters. You may spell them in full instead (i.e s/o -> son of)
+- Name does not allow special characters. You may spell them in full instead (e.g., s/o → son of, & → and).
 - Name must not be a duplicate (i.e must not already exist in BrewBook).
 - Phone number must not be less than 3 digits.
 - Days and Shifts date must be in the future.
@@ -233,8 +260,8 @@ Adds a customer to BrewBook and returns to `list all` view.
 </div>
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-- Points has a maximum value of 2147483647. Values higher than this will be interpreted as an invalid negative number.
-- Unable to add a person as multiple types. (i.e. If John is added as a customer, you cannot add him again as a supplier)
+- Points has a maximum value of 2147483647. Values higher than this will not be allowed.
+- Unable to add a person as multiple types. (i.e. If `John` is added as a customer, you cannot add another person called `John` again as a supplier). 
 </div>
 
 [Back to Features](#features)
@@ -250,7 +277,7 @@ Adds a staff to the BrewBook and returns to `list all` view.
 **Format**: `add staff n/NAME p/PHONE e/EMAIL a/ADDRESS [shifts/SHIFTS[, SHIFTS]...] [notes/NOTES] [t/TAG]...`
 
 **Examples:**
-- `add staff n/Amy Lok p/98765431 e/amyl@example.com a/Amy street, block 123, #02-05 notes/only weekends` adds a staff member named *Amy Lok* with phone `98765431`, email `amyl@example.com`, address `Amy street, block 123, #01-01`, and notes `only weekends`.
+- `add staff n/Amy Lok p/98765431 e/amyl@example.com a/Amy street, block 123, #02-05 notes/only weekends` adds a staff member named *Amy Lok* with phone `98765431`, email `amyl@example.com`, address `Amy street, block 123, #02-05`, and notes `only weekends`.
 - `add staff n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 shifts/11/11/2026 notes/only weekends` adds a staff member named *John Doe* with phone `98765432`, email `johnd@example.com`, address `John street, block 123, #01-01`, a single shift on `11/11/2026`, and notes `only weekends`.
 - `add staff n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Rd p/1234567 t/intern shifts/13/11/2026, 12/11/2026 notes/only weekends` adds a staff member named *Betsy Crowe* with phone `1234567`, email `betsycrowe@example.com`, address `Newgate Rd`, tags `friend` and `intern`, shifts on `13/11/2026` and `12/11/2026`, and notes `only weekends`.
 
@@ -290,7 +317,6 @@ Adds a supplier to the BrewBook and returns to `list all` view.
 * If you need to add duplicate numbers for a supplier (i.e. Company contact hotline), this will be a valid input!
 * If you want to preserve past days records, you should make copies of the .json file and archive it before the day is deleted! See how to do it in FAQ.
 </div>
-
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraint:**
 - Unable to add a person as multiple types. (i.e. If John is added as a supplier, you cannot add him again as a customer).
 </div>
@@ -327,7 +353,7 @@ Edits an existing person in BrewBook and returns to `list all` view.
 ![edit customer success](images/editResult.png)
 *Figure: Result from executing `edit 1 n/Alex` when the name was originally Alex Yeoh*
 
-**Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [notes/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]..] [items/ITEM[, ITEM]...] [days/DAY[, DAY]...] [t/TAG]…​`
+**Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [notes/NOTE] [points/POINTS] [shifts/SHIFT[, SHIFT]...] [items/ITEM[, ITEM]...] [days/DAY[, DAY]...] [t/TAG]...`
 
 **Examples**:
 *  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -340,9 +366,9 @@ Edits an existing person in BrewBook and returns to `list all` view.
 
 <div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
 - The index must be a positive integer.
-- At least one optional fields must be provided.
+- At least one optional field must be provided.
 - Editing `tags`/`shifts`/`items`/`days`, the existing fields of the person will be removed (i.e adding is not cumulative).
-- For type specific tags like `shifts`, `items`, `days`, and `points`, you can only edit them if the person type corresponds to these tags. (i.e You can only edit `points` for a person of type customer, if person is of type staff it will not work)
+- For type specific tags like `shifts`, `items`, `days`, and `points`, you can only edit them if the person type corresponds to these tags (i.e You can only edit `points` for a person of type customer, if person is of type staff it will throw an error message telling you that `/points` is invalid for this contact type).
 </div>
 
 [Back to Features](#features)
@@ -397,7 +423,12 @@ Deletes the specified person or people from BrewBook.
 
 **Examples**:
 * `list all` followed by `delete 2` deletes the 2nd person in the BrewBook.
-* `find alex` followed by `delete 1, 2` deletes the 1st & 2nd person in the BrewBook following the index of the new list.
+* `find alex` followed by `delete 1, 2` deletes the 1st and 2nd person in the BrewBook of the new list.
+
+<div markdown="1" class="alert alert-warning">:exclamation: **Warning:**
+- Real-World Impact: Deleting a contact by mistake means you might lose all your saved data. Always double-check the contact name before deleting. 
+- This action cannot be undone. We recommend that you make frequent backups to guard against accidental deletes (see FAQ Q3).
+</div>
 
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
 - If you accidentally type the same number (i.e `delete 2, 2`), don't worry! BrewBook will recognise that you only want to delete contact number 2 and only delete 2.
@@ -465,9 +496,9 @@ Clears all entries from the BrewBook.
 **Example**:
 - `clear` deletes all entries from the BrewBook.
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Constraints:**
-- The clear command deletes all contacts in BrewBook.
-- This action cannot be undone.
+<div markdown="1" class="alert alert-warning">:exclamation: **Warning:**
+- This Deletes Everything: All your customers' loyalty points, staff schedules, and supplier information will be permanently erased. 
+- This action cannot be undone. Make a backup first if you still want to keep your data(see FAQ Q3).
 </div>
 
 [Back to Features](#features)
@@ -506,58 +537,45 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 --------------------------------------------------------------------------------------------------------------------
 # FAQ
 
-**Q**: How do I transfer my data to another computer?<br>
-**A**: You can transfer your data by following the steps below.
+**Q1**: Where is my data stored?<br>
+**Ans**: BrewBook stores data in a file called `brewbook.json`. This is located in the folder called `data`, in the same folder where you placed your `BrewBook.jar` file while setting up.
+![DataFile.png](images/DataFile.png)
+
+**Q2**: How do I transfer my data to another computer?<br>
+**Ans**: You can transfer your data by following the steps below.
 1. Install BrewBook on the new computer.
 2. Launch it once to generate a fresh data file.
-3. Locate the data file on your old computer (usually in the BrewBook home folder).
-4. Copy that file to the new computer and overwrite the newly created one.
+3. Locate `brewbook.json` on your old computer (refer to _Q1_ for more details on how to find it).
+4. Copy that file to the new computer in the `data` folder.
 
-<a id="archive-data"></a>
-**Q**: How do I archive my data since shifts and days get auto-deleted?<br>
-**A**: You can archive your data by following the steps below.
-1. Create an archive folder to place this data file.
-2. Locate the data file called brewbook.json in your computer (usually in the folder called `data` where you placed your BrewBook file).
-3. Copy that file into the archive folder you previously created.
+**Q3**: How do I backup/archive my data since shifts and days get auto-deleted?<br>
+**Ans**: You can archive your data by following the steps below.
+1. Locate `brewbook.json` (refer to _Q1_ for more details on how to find it).
+2. Create an archive folder to place `brewbook.json`. Copy `brewbook.json` into the folder. **OR** Save `brewbook.json` to a cloud drive.
 
+**Q4**: What happens if I accidentally run `clear`?<br>
+**Ans**: All data will be permanently deleted. There is no undo. To prevent data loss, backup your data regularly (refer to _Q3_ for more details).
 
-**Q**: What happens if I accidentally run `clear`?<br>
-**A**: All data will be permanently deleted. There is no undo.
-**To prevent data loss:**
-- Before using `clear`, locate your data file and make a backup copy.
-- Store the backup in a safe folder or cloud drive.
+**Q5**: Can I undo a delete command?<br>
+**Ans**: No. Once an entry is deleted using `delete`, it cannot be recovered. To prevent data loss, backup your data regularly (refer to _Q3_ for more details).
 
-
-**Q**: Where is my data stored?<br>
-**A**: BrewBook stores data in a local file inside the same folder as your BrewBook.jar.
-
-
-**Q**: Can I undo a delete command?<br>
-**A**: No. Once an entry is deleted using `delete`, it cannot be recovered.
-**To avoid accidental deletes:**
-- Back up/archive your data file regularly.
-
-
-**Q**: Why isn’t my command working?<br>
-**A**: Please check the following.
+**Q6**: Why isn’t my command working?<br>
+**Ans**: Please check the following.
 - Check that your command follows the correct format.
 - Make sure required fields like `n/`, `p/`, or `e/` are included.
 - Use `help` to view all available commands and examples on how to use them along with their constraints.
 
+**Q7**: Can I add multiple tags or items at once?<br>
+**Ans**: Yes. Please refer to the [Add Command](#adding-a-customer-add-customer) sections to see how to do it.
 
-**Q**: Can I add multiple tags or items at once?<br>
-**A**: Yes. Please refer to add commands to see how to do it.
-
-
-**Q**: What date format should I use?<br>
-**A**: Use `d/M/yyyy` for all date inputs.
+**Q8**: What date format should I use?<br>
+**Ans**: Use `d/M/yyyy` for all date inputs.
 **Examples:**
 - `shifts/11/12/2025`
 - `days/9/12/2025, 16/12/2025`
 
-
-**Q**: Can I use BrewBook on mobile?<br>
-**A**: No. BrewBook is currently designed for desktop use only.
+**Q9**: Can I use BrewBook on mobile?<br>
+**Ans**: No. BrewBook is currently designed for desktop use only.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -567,7 +585,7 @@ BrewBook data are saved automatically as a JSON file `[JAR file location]/data/b
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file (located in same folder as BrewBook.jar) created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **Once you select a contact card**, you will not be able to unselect it.
-4. **BrewBook does not accept names with special symbols** such as '/', if you require, you may spell out the name in full as we allow a maximum of 48 number of character for name.
+4. **BrewBook does not accept names with special symbols** such as '/', if you require, you may spell out the name in full as we allow a maximum of 48 characters for `name` fields.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -579,7 +597,7 @@ Action | Format, Examples
 **Add customer** | `add customer n/NAME p/PHONE e/EMAIL a/ADDRESS [points/POINTS] [notes/NOTES] [t/TAG]...` <br> e.g., `add customer n/Betsy Crowe e/betsycrowe@example.com a/Newgate Rd p/1234567 notes/Loves chocolate points/3 t/allergy`
 **Add staff** | `add staff n/NAME p/PHONE e/EMAIL a/ADDRESS [shifts/SHIFTS[, SHIFTS]...] [notes/NOTES] [t/TAG]...` <br> e.g., `add staff n/Ah Hock p/98765432 e/ahhock@example.com a/123 Clementi Ave 3 shifts/12/4/2025 notes/can only do weekdays t/partTime`
 **Add supplier** | `add supplier n/NAME p/PHONE e/EMAIL a/ADDRESS [items/ITEMS[, ITEMS]...] [days/DAYS[, DAYS]...] [notes/NOTES] [t/TAG]...` <br> e.g., `add supplier n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 items/Coffee days/28/10/2025`
-**List** | `list [all/customer/staff/supplier]`
+**List** | `list <all \| customer \| staff \| supplier>`
 **Sort** | `sort name o/asc`
 **Summary** | `summary`
 **Delete** | `delete INDEX[, INDEX, ...]`<br> e.g., `delete 3, 2, 1`
